@@ -83,6 +83,37 @@ The New Relic managed rules normalize the error data, identifying and ignoring u
   </Collapser>
 </CollapserGroup>
 
+### Create your own error groups  [#custom-groups]
+
+Do any of the following apply to your errors inbox today?
+Errors are not being grouped in a way that makes the most sense for your application
+There are multiple groups you would like to see merged
+It is “noisy” due to poor grouping and pushing you to exceed the daily limit of unique error groups
+Does your inbox have an error group that contains unrelated errors?
+
+Having well grouped errors will make errors inbox much more useful to triage and diagnose problems in your system. While errors inbox provides a set of default grouping, there are limitations so sometimes it will be necessary to make adjustments.
+
+To that end, there are two options: Update the error message and use custom attributes (covered under Best Practices) or create your own error groups.
+
+How to create your own error groups? 
+Many of our agents now have a feature that lets your code look at an error and designate an error group before it is submitted to New Relic.  The designated group is then added as the error.group.name attribute on the error event.
+
+Many of our agents now have a feature that lets your code look at an error before it is submitted to New Relic and designate the error group you want it to belong to.  The group you designate is then added as the error.group.name attribute on the error event. To get started, check out the APM or Browser agent docs on how to specify a custom error group.  This will ensure errors and attributes collected by the agents are preserved and grouped to your liking. 
+
+Don’t see your agent language supported? You can still set error.group.name as a custom attribute. This will signal to us that the event belongs to a custom group.  However, the events captured will not have other agent attributes.
+
+APM agents
+
+Go = released in 3.21.0
+Java = released in  v8.1.0
+Node.js = released in v9.14.0
+.Net = released in v10.9.0
+Python = released in v8.8.0   
+Ruby = released in v9.1.0
+
+Browser agent = released in v1.232.0
+
+
 ### Best practices for meaningful error group creation [#best-practices]
 
 While our managed rules are able to provide automatic error grouping based on a predefined set of patterns, it is impossible to recognize every possible combination. Thus, removing high variability values from error messages will guarantee that your errors are grouped correctly.
