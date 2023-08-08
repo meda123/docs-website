@@ -8,31 +8,23 @@ metaDescription: You can view a summary of your monitors' uptime and average per
 translationType: machine
 ---
 
-シンセティックモニタリングツールのモニターインデックスには、お客様の New Relic アカウントに関連付けられているすべてのモニターがリストアップされており、各モニターの過去 24 時間のパフォーマンスのスナップショットが表示されます。個々のモニターを選択すると、 [**Summary** page](/docs/synthetics/new-relic-synthetics/dashboards/synthetics-overview-dashboard-view-monitors-performance) を表示し、時系列でのパフォーマンスをより深く理解することができます。また、 [リストをフィルタリング](#search-monitors) して、類似したモニターのパフォーマンスを素早く比較することもできます。
+import syntheticIndexPage from 'images/synthetic_screenshot-full_index-page.webp'
+
+当社の合成監視ツールでは、モニター インデックスに合成モニターがリストされ、過去 24 時間の各モニターのパフォーマンスのスナップショットが提供されます。特定のモニターを選択して [**Summary** \[概要\] ページ](/docs/synthetics/new-relic-synthetics/dashboards/synthetics-overview-dashboard-view-monitors-performance) を表示し、そのパフォーマンスに関するより深い洞察を取得します。または、 [リストをフィルターして](#search-monitors) 、同様のモニターのパフォーマンスをすばやく比較します。
 
 ## モニターインデックスを見る [#viewing]
 
-モニターのインデックス（リスト）にアクセスするには、 **[one.newrelic.com](https://one.newrelic.com) > エクスプローラー> シンセティックモニター** にアクセスしてください。 [エクスプローラー](/docs/new-relic-one/use-new-relic-one/core-concepts/new-relic-explorer-view-performance-across-apps-services-hosts/) を使用して、すべての [エンティティ](/docs/new-relic-one/use-new-relic-one/core-concepts/what-entity-new-relic/) 、つまり、合成モニターからアプリケーション、ホスト、あらゆる要素のカスタムグルーピングまで、データを報告していると特定できるものすべてにアクセスできます。
+合成モニターのリストを表示するには、 **[one.newrelic.com > Synthetic monitoring](https://one.newrelic.com/synthetics-nerdlets)**に移動します。
 
-あるいは、 [**one.newrelic.com**](http://one.newrelic.com/) **> Synthetics**.
-
-![シンセティック・モニタリング - モニタリング・インデックス](./images/monitor-index.png "シンセティック・モニタリング - モニタリング・インデックス")
-
-<figcaption>
-  モニターインデックスにより、合成モニターの状態や主要な指標を一目で確認することができます。
-</figcaption>
-
-また、 [エクスプローラー](/docs/new-relic-one/use-new-relic-one/ui-data/new-relic-one-entity-explorer-view-performance-across-apps-services-hosts) を使用すると、New Relic アカウントに関連付けられているすべてのモニターのリストと、各モニターのパフォーマンスのクイックスナップショットを表示することができます。モニターのインデックス(リスト)にアクセスするには。Go to **[one.newrelic.com](https://one.newrelic.com) > Explorer> Synthetic monitors**.
-
-![エンティティ\_ping_monitor_page.png](./images/entitiy_ping_monitor_page_0.png "エンティティ・モニター・リスト")
-
-<figcaption>
-  **[one.newrelic.com](https://one.newrelic.com) > Explorer> シンセティックモニター**: モニターインデックスを使って、お持ちのシンセティックモニターにアクセスし、そのパフォーマンスのクイックスナップショットを見ることができます。
-</figcaption>
+<img
+  title="Entitiy monitor list"
+  alt="entitiy_ping_monitor_page.png"
+  src={syntheticIndexPage}
+/>
 
 ## モニタリング・メトリクスの理解 [#understanding]
 
-モニターインデックスを使用して、モニターにアクセスし、モニターのパフォーマンスのクイックスナップショットを表示します。このインデックスには、以下のメトリクスが含まれます。
+モニター インデックスを使用してモニターにアクセスし、モニターのパフォーマンスのスナップショットを表示します。インデックスには次のメトリックが含まれます。
 
 * [**Alert status**](/docs/alerts/new-relic-alerts/configuring-alert-policies/identify-entities-without-alert-policies) : モニターに発生しているアラートの状態を示します。
 
@@ -58,11 +50,11 @@ translationType: machine
   <thead>
     <tr>
       <th width={200}>
-        **以下を行う場合...**
+        **あなたがしたい場合は...**
       </th>
 
       <th>
-        **操作...**
+        **これを行う...**
       </th>
     </tr>
   </thead>

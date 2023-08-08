@@ -9,15 +9,23 @@ metaDescription: How to get scraper metrics for your Prometheus OpenMetrics inte
 translationType: machine
 ---
 
+import osDocker from 'images/os_icon_docker.webp'
+
+import osk8 from 'images/os_icon_k8.webp'
+
 ## 問題
 
 Prometheus OpenMetricsとNew Relic for DockerやKubernetesとの統合のためにスクレーパーメトリクスを取得したい。
 
-![Docker アイコン](./images/docker-logo-crop.png "Docker アイコン") **Docker:** `http://localhost:8080/metrics` エンドポイントを設定した場合、統合は自身のメトリクスもスクレイピングします。
+<img title="Docker icon" alt="Docker icon" src={osDocker}/>
 
-![img-integration-k8s@2x.png](./images/img-integration-k8.png "img-integration-k8s@2x.png") **Kubernetes:** デフォルトでは、スクレーパーは自身のメトリクスもスクレイピングします。
+**Docker: **`http://localhost:8080/metrics`エンドポイントを構成すると、統合によって独自のメトリックも収集されます。
 
-## 解決策
+<img title="img-integration-k8s@2x.png" alt="img-integration-k8s@2x.png" src={osk8}/>
+
+**Kubernetes： **デフォルトでは、スクレーパーは独自のメトリックもスクレイプします。
+
+## 解決
 
 スクレーパーの内部で何が起こっているかを知るために、New RelicとのDockerまたはKubernetesの統合に以下のメトリクスを使用します。
 

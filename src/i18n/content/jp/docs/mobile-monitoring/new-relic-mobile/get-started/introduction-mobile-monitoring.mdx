@@ -8,17 +8,31 @@ metaDescription: Use New Relic's mobile monitoring capabilities to manage the pe
 translationType: human
 ---
 
+import mobileCrashAnalysisWorkflow from 'images/mobile_diagram_crash-analysis-workflow.webp'
+
+import mobileSummary from 'images/mobile_screenshot-full_summary.webp'
+
+import mobileCrashAnalysis from 'images/mobile_screenshot-full_crash-analysis.webp'
+
+import mobileNextSteps from 'images/mobile_diagram_next-steps.webp'
+
 New Relicのモバイルモニタリング機能により、[Android](/docs/mobile-monitoring/new-relic-mobile-android/get-started/introduction-new-relic-mobile-android)と[iOS](/docs/mobile-monitoring/new-relic-mobile-ios/get-started/introduction-new-relic-mobile-ios)アプリケーションのパフォーマンス分析とクラッシュのトラブルシューティングをする方法に関する可視性を向上させることができます。さらに予想外の遅延に関して、HTTPとその他のネットワークパフォーマンスを調査することもでき、その結果、バックエンドチームとの連携の効率化が図れます。
 
-[New Relicアカウントを作成](https://newrelic.com/signup)（永久無料)し、Android、iOS、Cordova環境用の[モバイルモニタリングをインストール](#new_users)した後、環境に合わせてモバイルモニタリングを設定できます。
+New Relicアカウントを作成（永久無料）し、Android、iOS、Cordova環境用の[モバイルモニタリングをインストール](#new_users)した後、環境に合わせてモバイルモニタリングを設定できます。
+
+<InlineSignup/>
 
 ## モバイルモニタリングの使用法 [#features]
 
 New Relicでは、お客様がモバイルデバイスからNew Relicを使用できるように、iOSとAndroidアプリの構築に取り組む当社独自のモバイル開発者を配置しています。機能のデプロイ中に、当社のAndroidアプリでエッジケースのクラッシュを引き起こした小規模のバグが発見されました。クラッシュは、新機能が構築、テスト、さらにデプロイされた後に発生しました。
 
-New Relicに勤めている私たちは、当社のモバイルアプリの分析とトラブルシューティングにもNew Relic Oneを使用しています。モバイルモニタリングのパワーを探る方法について参考になるように、当社独自のモバイルエンジニアがこの小規模のバグの追跡に、モバイルモニタリングを活用した具体例を挙げて説明しましょう。
+New Relicに勤めている私たちは、当社のモバイルアプリの分析とトラブルシューティングにもモニタリングツールを使用しています。モバイルモニタリングのパワーを探る方法について参考になるように、当社独自のモバイルエンジニアがこの小規模のバグの追跡に、モバイルモニタリングを活用した具体例を挙げて説明しましょう。
 
-![モバイルモニタリングを使用したクラッシュ分析のワークフロー](./images/crash-analysis-workflow.jpg "モバイルモニタリングを使用したクラッシュ分析のワークフロー")
+<img
+  title="Crash analysis workflow with mobile monitoring"
+  alt="Crash analysis workflow with mobile monitoring"
+  src={mobileCrashAnalysisWorkflow}
+/>
 
 <figcaption>
   New Relicを使用して、モバイルアプリのクラッシュを特定し解決するためのワークフロー。
@@ -31,9 +45,13 @@ New Relicに勤めている私たちは、当社のモバイルアプリの分�
   >
     新しいリリース後の夜、当社のオンコール開発者が[携帯電話でアラート通知](/docs/mobile-apps/new-relic-mobile-apps/authentication-alerts/alerting-new-relic-mobile-apps)を受信しました。[**アラート**ページ](/docs/mobile-monitoring/new-relic-mobile/getting-started/alert-information-new-relic-mobile)には、一部の顧客が当社のAndroidアプリの新バージョンでクラッシュを経験していることが示されました。
 
-    デスクトップブラウザに移り、[**概要**ページ](/docs/mobile-monitoring/mobile-monitoring-ui/mobile-app-pages/mobile-apps-overview-page)をチェックします。概要ページには、最新バージョンでクラッシュの発生回数が増加していることが表示されます。最新バージョン用にフィルタリングし、[タイムピッカー](/docs/using-new-relic/user-interface-functions/view-your-data/time-picker-set-time-periods-view-data)を過去24時間に設定することで、クラッシュ分析を開始する準備が整いました。
+    デスクトップブラウザに移り、[**概要**ページ](/docs/mobile-monitoring/mobile-monitoring-ui/mobile-app-pages/mobile-apps-overview-page)をチェックします。概要ページには、最新バージョンでクラッシュの発生回数が増加していることが表示されます。最新バージョン用にフィルタリングし、[タイムピッカー](/docs/query-your-data/explore-query-data/dashboards/manage-your-dashboard/#dash-time-picker)を過去24時間に設定することで、クラッシュ分析を開始する準備が整いました。
 
-    ![New Relic One：モバイルの概要](./images/mobile-nrOne-summary072820.png "New Relic One：モバイルの概要")
+    <img
+      title="New Relic: Mobile summary"
+      alt="New Relic: Mobile summary"
+      src={mobileSummary}
+    />
 
     <figcaption>
       モバイル**概要**ページを使用して、クラッシュしたAndroidバージョンにフィルタを適用する例。
@@ -48,7 +66,11 @@ New Relicに勤めている私たちは、当社のモバイルアプリの分�
 
     開発者は、クラッシュタイプのリンクをクリックし、例外、ロケーション、エラーメッセージを調べました。また、スタックトレース、インタラクショントレイル、イベントトレイルを調査して、ユーザーが影響を受けている場所をすばやく把握します。
 
-    ![New Relic One：モバイルクラッシュ分析](./images/mobile-nrOne-crash.png "New Relic One：モバイルクラッシュ分析")
+    <img
+      title="New Relic: Mobile crash analysis"
+      alt="New Relic: Mobile crash analysis"
+      src={mobileCrashAnalysis}
+    />
 
     <figcaption>
       **Crash analysis**ページを使用して、例外、ロケーション、エラーメッセージを調査し、新しいリリースのクラッシュの原因を追跡する例。
@@ -77,7 +99,11 @@ New Relicに勤めている私たちは、当社のモバイルアプリの分�
 
 これ以外にも！
 
-![New Relic Mobileをさらに活用する　](./images/next-steps_2.jpg "New Relic Mobileをさらに活用する　")
+<img
+  title="Do more with New Relic Mobile"
+  alt="Do more with New Relic Mobile"
+  src={mobileNextSteps}
+/>
 
 <figcaption>
   クラッシュ分析に加えて、モバイルアプリのパフォーマンスを微調整します。
@@ -90,7 +116,7 @@ New Relicに勤めている私たちは、当社のモバイルアプリの分�
 * APIのタイムアウト
 * APIエンドポイントの遅延または廃止
 
-モバイルモニタリングUIの[ネットワークページ](/docs/mobile-monitoring/mobile-monitoring-ui/network-pages)を使用すると、HTTPリクエスト、エラー、その他のネットワークの問題から浮上する問題を特定できます。[データのクエリ](/docs/using-new-relic/data/understand-data/query-new-relic-data)もできます。次に、ダッシュボードを構築し、この情報をバックエンドAPI開発チームや組織内のその他のユーザーと共有して、モバイルアプリに対するエンドユーザーエクスペリエンスの全体的な向上を図ることができます。
+モバイルモニタリングUIの[ネットワークページ](/docs/mobile-monitoring/mobile-monitoring-ui/network-pages)を使用すると、HTTPリクエスト、エラー、その他のネットワークの問題から浮上する問題を特定できます。[データのクエリ](/docs/using-new-relic/data/understand-data/query-new-relic-data)もできます。次に、<InlinePopover type="dashboards"/>を構築し、この情報をバックエンドAPI開発チームや組織内のその他のユーザーと共有して、モバイルアプリに対するエンドユーザーエクスペリエンスの全体的な向上を図ることができます。
 
 また、顧客の全般的なデジタル体験も改善できます。
 
@@ -99,9 +125,11 @@ New Relicに勤めている私たちは、当社のモバイルアプリの分�
 
 ## モバイルモニタリングを開始 [#new_users]
 
-モバイルアプリケーションで、New Relicの機能をインストールして設定する前に、以下のガイドラインに従って互換性やその他の要件を確認してください。
+開始するには、以下のプラットフォーム固有のページを確認してください。
 
-* [Androidの互換性と要件](/docs/mobile-monitoring/new-relic-mobile-android/get-started/new-relic-android-compatibility-requirements)
-* [iOSの互換性と要件](/docs/mobile-monitoring/new-relic-mobile-ios/get-started/new-relic-ios-compatibility-requirements)
-
-[Android](/docs/mobile-monitoring/new-relic-mobile-android/get-started/android-installation-configuration)、[iOS](/docs/mobile-monitoring/new-relic-mobile-ios/get-started/ios-installation-configuration)、[tvOS](/docs/mobile-monitoring/new-relic-mobile-ios/tvos/tvos-installation-configuration)、または[Cordova](/docs/mobile-monitoring/new-relic-mobile-cordova-phonegap/get-started/introduction-new-relic-cordova)アプリケーションのインストレーションと設定手順を続行します。
+* [Android](/docs/mobile-monitoring/new-relic-mobile-android/get-started/introduction-new-relic-mobile-android)
+* [iOS](/docs/mobile-monitoring/new-relic-mobile-ios/get-started/introduction-new-relic-mobile-ios)
+* [React Native](/docs/mobile-monitoring/new-relic-monitoring-react-native/monitor-your-react-native-application)
+* [Capacitor](/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/)
+* [Cordova](/docs/mobile-monitoring/new-relic-mobile-cordova-phonegap/get-started-with-cordova-monitoring/)
+* [Flutter](/docs/mobile-monitoring/new-relic-mobile-flutter/monitor-your-flutter-application/)

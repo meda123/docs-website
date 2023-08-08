@@ -25,30 +25,29 @@ Metric data is submitted to New Relic through an HTTP POST request. Each request
 
 Follow this example to send your first metric data points to New Relic:
 
-1. Get the [license key](/docs/apis/intro-apis/new-relic-api-keys/#ingest-license-key) for the account you want to report data to.
+1. Get the <InlinePopover type="licenseKey" /> for the account you want to report data to.
 2. Insert the license key into the following JSON, and then send the JSON to our [endpoint](#api-endpoint).
 3. Update the `timestamp` with a valid epoch timestamp.
-fix(Metric API): Remove unnecessary indentation
-This example creates a single metric data point for a metric named `memory.heap`, but you can create additional attributes or data points by specifying [metric types](/docs/telemetry-data-platform/ingest-manage-data/understand-data/metric-data-type) or adding [optional `common` blocks](#optional-map-attributes).
+   This example creates a single metric data point for a metric named `memory.heap`, but you can create additional attributes or data points by specifying [metric types](/docs/telemetry-data-platform/ingest-manage-data/understand-data/metric-data-type) or adding [optional `common` blocks](#optional-map-attributes).
 
-   ```
+   ```bash
    curl -vvv -k -H "Content-Type: application/json" \
-   -H "Api-Key: <var>NEW_RELIC_LICENSE_KEY</var>" \
+   -H "Api-Key: NEW_RELIC_LICENSE_KEY" \
    -X POST https://metric-api.newrelic.com/metric/v1 \
    --data '[{ 
            "metrics":[{ 
-              "name":"memory.heap", 
-              "type":"gauge", 
-              "value":2.3, 
-              "timestamp":<var>CURRENT_TIME</var>, 
-              "attributes":{"host.name":"dev.server.com"} 
-              }] 
+               "name":"memory.heap", 
+               "type":"gauge", 
+               "value":2.3, 
+               "timestamp":CURRENT_TIME, 
+               "attributes":{"host.name":"dev.server.com"} 
+           }] 
        }]'
    ```
 
 The metric should be available in New Relic in a few seconds. You can query the data from any [NRQL interface](/docs/query-data/nrql-new-relic-query-language/getting-started/introduction-nrql#where) using this query:
 
-```
+```sql
 FROM Metric SELECT max(memory.heap) TIMESERIES
 ```
 
@@ -63,7 +62,7 @@ https://metric-api.newrelic.com/metric/v1
 ```
 
 <Callout variant="tip">
-  If your account hosts data in the EU data center, ensure you're using the proper [API endpoints for EU region accounts](/docs/using-new-relic/welcome-new-relic/getting-started/introduction-eu-region-data-center#endpoints).
+  If your organization hosts data in the EU data center, ensure you're using the [EU region endpoints](/docs/using-new-relic/welcome-new-relic/getting-started/introduction-eu-region-data-center#endpoints).
 </Callout>
 
 ## HTTP request headers [#headers-query-parameters]
@@ -126,7 +125,7 @@ Include the following HTTP request headers with the POST request. You can send s
       </td>
 
       <td>
-        **Required.** A [license key](/docs/apis/intro-apis/new-relic-api-keys/#ingest-license-key) for the account you want to report data to. If this is provided as both a header and a query parameter, the values must match.
+        **Required.** A <InlinePopover type="licenseKey" /> for the account you want to report data to. If this is provided as both a header and a query parameter, the values must match.
       </td>
     </tr>
 
@@ -181,7 +180,7 @@ The JSON payload uses this structure:
   >
     This example payload creates two metrics. `service.errors.all` is a count metric with three attributes and `service.memory` is a gauge metric with two attributes.
 
-    ```
+    ```json
     [
       {
         "metrics": [
@@ -189,7 +188,7 @@ The JSON payload uses this structure:
             "name": "service.errors.all",
             "type": "count",
             "value": 15,
-            "timestamp": [<var>CURRENT_TIME</var>](#optional-map-attributes),
+            "timestamp": CURRENT_TIME,
             "interval.ms": 10000,
             "attributes": {
               "service.response.statuscode": "400",
@@ -201,7 +200,7 @@ The JSON payload uses this structure:
             "name": "service.memory",
             "type": "gauge",
             "value": 2.7,
-            "timestamp": <var>CURRENT_TIME</var>,
+            "timestamp": CURRENT_TIME,
             "attributes": {
               "host.name": "dev.server.com",
               "app.name": "foo"
@@ -311,7 +310,7 @@ Each metric data point map in the `metrics` array uses the following key-value s
   >
     Here's an example payload containing one metric data point for each metric type:
 
-    ```
+    ```json
     [
       {
         "metrics": [
@@ -319,7 +318,7 @@ Each metric data point map in the `metrics` array uses the following key-value s
             "name": "cache.misses",
             "type": "count",
             "value": 15,
-            "timestamp": [<var>CURRENT_TIME</var>](#optional-map-attributes),
+            "timestamp": CURRENT_TIME,
             "interval.ms": 10000,
             "attributes": {
               "cache.name": "myCache",
@@ -330,7 +329,7 @@ Each metric data point map in the `metrics` array uses the following key-value s
             "name": "temperature", 
             "type": "gauge", 
             "value": 15, 
-            "timestamp": <var>CURRENT_TIME</var>, 
+            "timestamp": CURRENT_TIME, 
             "attributes": { 
               "city": "Portland", 
               "state": "Oregon" 
@@ -346,7 +345,7 @@ Each metric data point map in the `metrics` array uses the following key-value s
               "max": 0.001708826
             },
             "interval.ms": 10000, 
-            "timestamp": <var>CURRENT_TIME</var>,
+            "timestamp": CURRENT_TIME,
             "attributes": {
               "host.name": "dev.server.com",
               "app.name": "foo"
@@ -424,7 +423,7 @@ The block can include:
   >
     In the following example payload, three metrics are sent. All three metrics share `app.name` and `host.name` attributes, specified in the `common` block. Each metric also has a unique value for another attribute, `server.response.statuscode`.
 
-    ```
+    ```json
     [
       {
         "common" : {

@@ -1,5 +1,5 @@
 ---
-title: Introduction to the Log API
+title: Send your logging data with our Log API
 tags:
   - Logs
   - Log management
@@ -17,11 +17,15 @@ redirects:
   - /docs/telemetry-data-platform/get-data/apis/introduction-log-api
   - /docs/logs/log-management/log-api
   - /docs/logs/log-management/log-api/introduction-log-api
+signupBanner:
+  text: Monitor and improve your entire stack. 100GB free. Forever.
 ---
 
 If our [log forwarding solutions](/docs/logs/forward-logs/) don't meet your needs, you can use our Log API to send log data directly to New Relic via an HTTP endpoint.
 
-Want to try out our Log API? [Create a New Relic account](https://newrelic.com/signup) for free! No credit card required.
+Want to try out our Log API? If you haven't already, create your free New Relic account below to start monitoring your data today.
+
+<InlineSignup/>
 
 ## HTTP endpoint [#endpoint]
 
@@ -39,17 +43,25 @@ https://log-api.newrelic.com/log/v1
 https://log-api.eu.newrelic.com/log/v1
 ```
 
+FedRAMP endpoint:
+
+```
+https://gov-log-api.newrelic.com/log/v1
+```
+
 ## HTTP setup [#setup]
 
 To send log data to your New Relic account via the Log API:
 
-1. Get your [New Relic license key](/docs/apis/intro-apis/new-relic-api-keys/#ingest-license-key).
+1. Get your <InlinePopover type="licenseKey" />.
 2. Review the [limits and restricted characters](#limits) for your JSON payload.
 3. Generate the JSON message using the required [headers](#json-headers) and [body](#json-body) fields.
 4. Ensure that your `Api-Key` or `License-Key` is included in your [headers](#auth-headers) or [query parameters](#query-parameters). Refer to the [log JSON examples](#log-attribute-examples).
 5. Send your JSON message to the appropriate HTTP endpoint for your New Relic account in a `POST` request.
-  * US: `https://log-api.newrelic.com/log/v1`
-  * EU: `https://log-api.eu.newrelic.com/log/v1`
+
+* US: `https://log-api.newrelic.com/log/v1`
+* EU: `https://log-api.eu.newrelic.com/log/v1`
+* FedRAMP: `https://gov-log-api.newrelic.com/log/v1`
 
 6. Generate some traffic and wait a few minutes, then [check your account](#what-next) for data.
 
@@ -70,7 +82,6 @@ When creating your HTTP headers, use these guidelines:
         Supported values
       </th>
     </tr>
-
   </thead>
 
   <tbody>
@@ -88,7 +99,6 @@ When creating your HTTP headers, use these guidelines:
         * `gzip`
       </td>
     </tr>
-
   </tbody>
 </table>
 
@@ -96,7 +106,7 @@ Gzipped JSON formatting is accepted. If sending compressed JSON, please include 
 
 ## Authentication [#authentication]
 
-Your [license key](/docs/apis/intro-apis/new-relic-api-keys/#ingest-license-key) serves to authenticate your request to the Log API, and determines the New Relic account where your submitted log message(s) will be written. It needs to be passed as either an HTTP header or a query string parameter.
+Your <InlinePopover type="licenseKey" /> serves to authenticate your request to the Log API, and determines the New Relic account where your submitted log message(s) will be written. It needs to be passed as either an HTTP header or a query string parameter.
 
 ### Option 1: Authenticate using HTTP header [#auth-header]
 
@@ -113,21 +123,18 @@ Pass your license key by adding a custom HTTP header as described below:
         Supported values
       </th>
     </tr>
-
   </thead>
 
   <tbody>
-
     <tr>
       <td>
         `Api-Key`
       </td>
 
       <td>
-        A New Relic [license key](/docs/apis/intro-apis/new-relic-api-keys/#ingest-license-key). You can also [send this via query parameter](#query-parameters).
+        A New Relic <InlinePopover type="licenseKey" />. You can also [send this via query parameter](#query-parameters).
       </td>
     </tr>
-
   </tbody>
 </table>
 
@@ -143,6 +150,7 @@ Example: `https://LOG_API_ENDPOINT/log/v1?Api-Key=YOUR_API_KEY_HERE`
       <th style={{ width: "200px" }}>
         Query parameter
       </th>
+
       <th>
         Value
       </th>
@@ -156,10 +164,9 @@ Example: `https://LOG_API_ENDPOINT/log/v1?Api-Key=YOUR_API_KEY_HERE`
       </td>
 
       <td>
-        Your [license key](/docs/apis/intro-apis/new-relic-api-keys/#ingest-license-key). You can also [send this via HTTP header](#auth-header).
+        Your <InlinePopover type="licenseKey" />. You can also [send this via HTTP header](#auth-header).
       </td>
     </tr>
-
   </tbody>
 </table>
 
@@ -206,11 +213,11 @@ You can send your JSON message using either a simplified or detailed set of attr
           </td>
 
           <td>
-            Integer
+            Integer, String
           </td>
 
           <td>
-            Either milliseconds or seconds since epoch
+            Milliseconds or seconds since epoch (when set as an integer), or ISO8601-formatted timestamp (when set as a string)
           </td>
 
           <td>
@@ -218,7 +225,7 @@ You can send your JSON message using either a simplified or detailed set of attr
           </td>
 
           <td>
-            If the field is not specific as millisecond or seconds since epoch, the message will be timestamped using the ingest time
+            If this field is not present or incorrectly specified, the message will be timestamped using the ingest time
           </td>
         </tr>
 
@@ -289,7 +296,6 @@ You can send your JSON message using either a simplified or detailed set of attr
         </tr>
       </tbody>
     </table>
-
   </Collapser>
 
   <Collapser
@@ -369,7 +375,6 @@ You can send your JSON message using either a simplified or detailed set of attr
         </tr>
       </tbody>
     </table>
-
   </Collapser>
 </CollapserGroup>
 
@@ -383,6 +388,7 @@ Attributes may be of any of the following types:
       <th>
         Type in the JSON request
       </th>
+
       <th>
         Type stored in the New Relic database
       </th>
@@ -394,62 +400,74 @@ Attributes may be of any of the following types:
       <td>
         `boolean`
       </td>
+
       <td>
         `boolean`
       </td>
     </tr>
+
     <tr>
       <td>
         `integer`
       </td>
+
       <td>
         `integer`
       </td>
     </tr>
+
     <tr>
       <td>
         `long`
       </td>
+
       <td>
         `long`
       </td>
     </tr>
+
     <tr>
       <td>
         `float`
       </td>
+
       <td>
         `float`
       </td>
     </tr>
+
     <tr>
       <td>
         `double`
       </td>
+
       <td>
         `double`
       </td>
     </tr>
+
     <tr>
       <td>
         `string`
       </td>
+
       <td>
         `string` (Note that if a string value is stringified JSON, it will be parsed and its fields
-         extracted as variables. See [JSON message attribute parsing](#message-attribute-parsin))
+        extracted as variables. See [JSON message attribute parsing](#message-attribute-parsin))
       </td>
     </tr>
+
     <tr>
       <td>
         Array
       </td>
+
       <td>
         (unsupported)
       </td>
     </tr>
   </tbody>
 </table>
-
 
 ## Limits and restricted characters [#limits]
 
@@ -468,9 +486,10 @@ Restrictions on logs sent to the Log API:
 Some specific attributes have additional restrictions:
 
 * `accountId`: This is a reserved attribute name. If it is included, it will be dropped during ingest.
+* `appId`: Must be an integer. When using a non-integer data type, the data will be ingested but becomes unqueryable.
 * `entity.guid`, `entity.name`, and `entity.type`: These attributes are used internally to identify entities. Any values submitted with these keys in the attributes section of a metric data point may cause undefined behavior such as missing entities in the UI or telemetry not associating with the expected entities. For more information please refer to [Entity synthesis](/docs/new-relic-one/use-new-relic-one/core-concepts/what-entity-new-relic/#entity-synthesis).
 * `eventType`: This is a reserved attribute name. If it is included, it will be dropped during ingest.
-* `timestamp`: Must be a Unix epoch timestamp. You can define timestamps either in seconds or in milliseconds.
+* `timestamp`: Must be a Unix epoch timestamp (either in seconds or in milliseconds) or an ISO8601-formatted timestamp.
 
 <Callout variant="important">
   Payloads with timestamps older than 48 hours may be dropped.
@@ -495,7 +514,6 @@ Exceeding rate limits affects how the Log API behaves. Follow these instructions
     To resolve this issue, either reduce the number of data points you are sending, or request a rate limit change. Subsequent subscription changes do not impact modified rate limits. If an account change impacts your rate limit, you must notify us to adjust your rate limit.
 
     To request rate limit changes, contact your New Relic account representative, or visit our [Support portal](http://support.newrelic.com).
-
   </Collapser>
 
   <Collapser
@@ -507,7 +525,6 @@ Exceeding rate limits affects how the Log API behaves. Follow these instructions
     To resolve this issue, try to reduce the amount of log data you are sending, or spread it out over a larger period of time.
 
     To request rate limit changes, contact your New Relic account representative, or visit our [Support portal](http://support.newrelic.com).
-
   </Collapser>
 </CollapserGroup>
 
@@ -556,11 +573,11 @@ We accept any valid JSON payload. The payload must encoded as **UTF-8**.
           </td>
 
           <td>
-            Integer
+            Integer, String
           </td>
 
           <td>
-            Milliseconds or seconds since epoch
+            Milliseconds or seconds since epoch (when set as an integer), or ISO8601-formatted timestamp (when set as a string)
           </td>
 
           <td>
@@ -595,7 +612,6 @@ We accept any valid JSON payload. The payload must encoded as **UTF-8**.
         </tr>
       </tbody>
     </table>
-
   </Collapser>
 
   <Collapser
@@ -636,11 +652,11 @@ We accept any valid JSON payload. The payload must encoded as **UTF-8**.
           </td>
 
           <td>
-            Integer
+            Integer, String
           </td>
 
           <td>
-            Milliseconds or seconds since epoch
+            Milliseconds or seconds since epoch (when set as an integer), or ISO8601-formatted timestamp (when set as a string)
           </td>
 
           <td>
@@ -763,7 +779,6 @@ We accept any valid JSON payload. The payload must encoded as **UTF-8**.
         </tr>
       </tbody>
     </table>
-
   </Collapser>
 </CollapserGroup>
 
@@ -773,7 +788,7 @@ Our log management capabilities will parse any `message` attribute as JSON. The 
 
 Here is an example `message` attribute:
 
-```
+```json
 {
     "timestamp": 1562767499238,
     "message": "{\"service-name\": \"login-service\", \"user\": {\"id\": 123, \"name\": \"alice\"}}"
@@ -782,11 +797,10 @@ Here is an example `message` attribute:
 
 This will be treated as:
 
-```
+```json
 {
   "timestamp": 1562767499238,
-  "message": "{\"service-name\": \"my-service\", \"user\": {\"id\": 123, \"name\": \"alice\"}}",
-  "service-name": "my-service",
+  "service-name": "login-service",
   "user": {
     "id": 123,
     "name": "alice"
@@ -800,7 +814,7 @@ Attributes can be scalar JSON types like string and number. They can also be com
 
 For example, here is a compound `user` attribute in a log entry's attributes:
 
-```
+```json
 "attributes": {
     "action": "login",
     "user": {
@@ -823,7 +837,6 @@ This will result in the following attributes being stored with the log event:
         Value
       </th>
     </tr>
-
   </thead>
 
   <tbody>
@@ -856,7 +869,6 @@ This will result in the following attributes being stored with the log event:
         `"alice"`
       </td>
     </tr>
-
   </tbody>
 </table>
 
@@ -864,11 +876,11 @@ This will result in the following attributes being stored with the log event:
 
 Log `POST` message example:
 
-```
+```bash
 POST /log/v1 HTTP/1.1
 Host: log-api.newrelic.com
 Content-Type: application/json
-Api-Key: <var><YOUR_LICENSE_KEY></var>
+Api-Key: <YOUR_LICENSE_KEY>
 Accept: */*
 Content-Length: 319
 [{
@@ -880,10 +892,10 @@ Content-Length: 319
      }
    },
    "logs": [{
-       "timestamp": <var><TIMESTAMP_IN_UNIX_EPOCH></var>,
+       "timestamp": <TIMESTAMP_IN_UNIX_EPOCH_OR_IS08601_FORMAT>,
        "message": "User 'xyz' logged in"
      },{
-       "timestamp": <var><TIMESTAMP_IN_UNIX_EPOCH</var><var>></var>,
+       "timestamp": <TIMESTAMP_IN_UNIX_EPOCH_OR_IS08601_FORMAT>,
        "message": "User 'xyz' logged out",
        "attributes": {
          "auditId": 123
@@ -905,7 +917,6 @@ This `POST` message would result in the following log messages being stored in N
         Value
       </th>
     </tr>
-
   </thead>
 
   <tbody>
@@ -938,7 +949,6 @@ This `POST` message would result in the following log messages being stored in N
         `"login.example.com"`
       </td>
     </tr>
-
   </tbody>
 </table>
 
@@ -955,7 +965,6 @@ Here's an example of stored logs block attributes:
         Value
       </th>
     </tr>
-
   </thead>
 
   <tbody>
@@ -988,7 +997,6 @@ Here's an example of stored logs block attributes:
         `123`
       </td>
     </tr>
-
   </tbody>
 </table>
 
@@ -996,25 +1004,25 @@ Here's an example of stored logs block attributes:
 
 Here's an example of a JSON POST request:
 
-```
+```bash
 POST /log/v1 HTTP/1.1
-   Host: log-api.newrelic.com
-   Content-Type: application/json
-   Api-Key: <var><YOUR_LICENSE_KEY></var>
-   Accept: */*
-   Content-Length: 133
-   {
-     "timestamp": <var><TIMESTAMP_IN_UNIX_EPOCH></var>,
-     "message": "User '<var>xyz</var>' logged in",
-     "logtype": "accesslogs",
-     "service": "login-service",
-     "hostname": "<var>login.example.com</var>"
-   }
+Host: log-api.newrelic.com
+Content-Type: application/json
+Api-Key: <YOUR_LICENSE_KEY>
+Accept: */*
+Content-Length: 133
+{
+    "timestamp": <TIMESTAMP_IN_UNIX_EPOCH_OR_IS08601_FORMAT>,
+    "message": "User 'xyz' logged in",
+    "logtype": "accesslogs",
+    "service": "login-service",
+    "hostname": "login.example.com"
+}
 ```
 
 ## What's next? [#what-next]
 
-Explore logging data across your platform with the [New Relic One UI](/docs/logs/ui-data/use-logs-ui/).
+Explore [logging data across your platform](/docs/logs/ui-data/use-logs-ui/).
 
 * Get deeper visibility into both your application and your platform performance data by forwarding your logs with our [logs in context](/docs/logs/logs-context/configure-logs-context-apm-agents/) capabilities.
 * Set up [alerts](/docs/alerts-applied-intelligence/new-relic-alerts/alert-conditions/create-alert-conditions/).

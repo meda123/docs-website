@@ -1,78 +1,100 @@
 ---
-title: Rate limits for NRQL queries
+title: NRQL query limits
 metaDescription: "An explanation of rate limits for NRQL, the New Relic query language"
 redirects:
   - /docs/insights/use-insights-ui/manage-account-data/rate-limits-insights-requests
   - /docs/insights/use-insights-ui/manage-account-data/rate-limits-insights
 ---
 
-New Relic's query language, NRQL, has rate limits in place to ensure a high level of availability and reliability for all users. To understand the places NRQL can be used, see [Where is NRQL used?](/docs/query-data/nrql-new-relic-query-language/getting-started/introduction-nrql#where).
+import queriesnrqlEventCountinQueryBuilder from 'images/queries-nrql_screenshot-crop_event-count-in-query-builder.webp'
 
-You will rarely encounter rate limiting, especially if you follow these general guidelines:
+Our New Relic query language, NRQL, has rate limits in place to ensure a high level of availability and reliability for all users. 
 
-* Limit the amount of requests with complex queries (for example, queries with `FACET` or `TIMESERIES` clauses, or queries of over a million events) that run at the same time.
-* Limit the amount of requests run concurrently over extended periods of time to a maximum of 5, especially if they include complex queries.
+## Understand query limit violations [#limit-violations]
 
-## Limits on queried events [#inspected-count-limits]
+To see if you're hitting query-related limits, use the [Limits UI](/docs/data-apis/manage-data/view-system-limits/). 
 
-When you run a [NRQL query](/docs/query-data/nrql-new-relic-query-language/getting-started/introduction-nrql#what-is-nrql), it will display the number of events inspected, as shown below:
+You should rarely encounter rate limiting. Here are some guidelines to follow to ensure query limiting will be rare:
 
-![New Relic inspected event count](./images/event-count-modal.png "New Relic inspected event count")
+* Limit the number complex queries (for example, queries with `FACET` or `TIMESERIES` clauses, or queries of over a million events) that run at the same time.
+* Limit the number of queries running concurrently over extended periods of time to a maximum of five, especially if they include complex queries.
 
-In this context, "events" is used in a general sense to refer to all [NRQL-available objects](/docs/query-data/nrql-new-relic-query-language/getting-started/introduction-nrql#what-you-can-query); this includes events, metrics, logs, and distributed tracing (span) data.
+## NRQL query limits [#query-limits]
 
-Each New Relic account has limits on the total number of events that can be inspected. There are limits that apply over two different time frames:
+There are a few different NRQL query limits: 
 
-* A rolling 30-minute time window
-* A 24-hour period
+* Number of queries an account can make in a given time range
+* Number of data points an account can query (inspect) in a given time range
+* How long a query can run for before being considered an error and stopping 
 
-These limits are as follows:
+Note that these limits apply only to customer-initiated NRQL queries, such as queries using the query builder, queries used in custom charts and dashboards, and NRQL queries done with our NerdGraph API. These limits don't apply to queries used in pre-built, "out-of-the-box" New Relic charts and dashboards. 
 
-<table>
-  <thead>
-    <tr>
-      <th style={{ width: "200px" }}>
-        **Time period**
-      </th>
+### Limits on number of queries [#query-count-limits]
 
-      <th>
-        **Limit**
-      </th>
-    </tr>
-  </thead>
+The limit on NRQL queries is 3,000 queries per account per minute. When this limit is exceeded, queries may be rejected until the number of queries sent per minute no longer exceeds the limit. 
 
-  <tbody>
-    <tr>
-      <td>
-        Rolling 30 minutes
-      </td>
+This limit is only applicable to the NRQL Query API requests and not the queries run from the query builder, New Relic UI, or custom dashboards. The limits that govern the rate of resource consumption for this category of queries run on the New Relic UI, query builder, or customer dashboards are only the Inspected count limits.
 
-      <td>
-        300 billion events inspected (equivalent to a sustained rate of 10 billion events inspected per minute)
-      </td>
-    </tr>
+### Limits on number of data points inspected [#inspected-count-limits]
 
-    <tr>
-      <td>
-        24 hours
-      </td>
+When you run a NRQL query, it displays the number of data points inspected, as shown below:
 
-      <td>
-        7.2 trillion events inspected
-      </td>
-    </tr>
-  </tbody>
-</table>
+<img
+  title="New Relic inspected event count"
+  alt="New Relic inspected event count"
+  src={queriesnrqlEventCountinQueryBuilder}
+/>
 
-Once the limit has been reached for a given time period, limiting will be imposed and some queries may be impacted. After the time period has passed, if query volume drops below the limit, restrictions will be removed automatically.
+In this context, the "events" term is used in a general sense to refer to all [NRQL-available data points](/docs/query-data/nrql-new-relic-query-language/getting-started/introduction-nrql#what-you-can-query) that are inspected in a query.
 
-## NRQL query rate limits [#query-limits]
+Every New Relic account has limits on the total number of data points that can be inspected in a given time range. These limits vary depending on which [data option](/docs/accounts/accounts-billing/new-relic-one-pricing-billing/data-ingest-billing#data-prices) you have: 
 
-The limit on NRQL queries is 3,000 queries per account per minute. When this limit is exceeded, queries may be rejected until the number of queries sent per minute no longer exceed the limit. To learn more about how to view your limits, see our [query system limits](/docs/telemetry-data-platform/manage-data/query-limits/).
+<CollapserGroup>
+  <Collapser
+    id="data-plus"
+    title="Data Plus"
+  >
 
-## Limits on count of data types [#event-limits]
+The [Data Plus](/docs/accounts/accounts-billing/new-relic-one-pricing-billing/data-ingest-billing#data-prices) option includes these limits on inspected data points: 
 
-The limit for total number of reported data types is 250 per account over a given 24-hour time period. If a user exceeds this limit, New Relic may filter or drop data.
+* 34B per minute
+* 500B per 15 minutes
+* 1T per 30 minutes
 
-This limit applies to all [NRQL-queryable data types](/docs/query-data/nrql-new-relic-query-language/getting-started/introduction-nrql#what-you-can-query). Because there aren't that many different data types reported by New Relic products and integrations, this will mainly be a limit on [custom events](/docs/insights/insights-data-sources/custom-data/send-custom-data-insights).
+</Collapser>
+
+  <Collapser
+    id="original-data"
+    title="Original data option"
+  >
+
+Limits on inspected data points for our [original data option](/docs/accounts/accounts-billing/new-relic-one-pricing-billing/data-ingest-billing#data-prices):
+
+* 10B per minutes
+* 150B per 15 minutes
+* 300B per 30 minutes
+    
+</Collapser>
+</CollapserGroup>
+
+### What counts towards the inspected event limit? [#define-inspected-count]
+
+The following are features and actions that count towards the inspected count limit and that are impacted when the limit is reached. When the count drops below the limit in the next time period, restrictions are removed.
+
+* Loads of curated views initiated by a user (for example, when you load an <InlinePopover type="apm" /> UI page, the distributed tracing UI, a browser monitoring UI page, or any UI that returns data about your organization).
+* Custom queries run by a New Relic user (NRQL or NerdGraph).
+* Widgets on custom dashboards that run queries.
+* Alert condition evaluation and notifications do **not** count towards the limit but the links to New Relic that are included in an alert notification do.
+
+### Query duration limit [#query-duration]
+
+The query duration limit is how long a NRQL query can run before it stops running. This limit depends on your [data option](/docs/accounts/accounts-billing/new-relic-one-pricing-billing/data-ingest-billing#data-prices): 
+
+* Original data option: 1 minute
+* Data Plus: 
+  * 2 minutes with regular NRQL query
+  * 10 minutes using [asynchronous query](/docs/apis/nerdgraph/examples/async-queries-nrql-tutorial)
+
+
+
 

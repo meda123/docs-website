@@ -8,6 +8,10 @@ metaDescription: 'In APM, transaction traces can include database query data, wh
 translationType: machine
 ---
 
+import apmTransactionTraceDbQuery from 'images/apm_screenshot-crop_transaction-trace-db-query.webp'
+
+import accountsFastCalls from 'images/apm_screenshot-full_fast-queries.webp'
+
 [APM](/docs/apm/new-relic-apm/getting-started/welcome-new-relic-apm) では、トランザクショントレースにデータベースクエリデータが含まれることがあります。 **データベースクエリ** ページを使用して、低速トランザクションの分析やデータベースクエリの収集設定の変更を行います。
 
 ## データベースクエリの検索 [#view-sql]
@@ -16,10 +20,14 @@ translationType: machine
 
 トランザクショントレースのデータベースデータが表示されるはずなのに表示されない場合は、 [Database query settings](#settings) を変更する必要があるかもしれません。
 
-![APM - トランザクショントレース - データベースクエリタブ](./images/APM-transaction-trace-database-queries.png "APM-transaction-trace-database-queries.png")
+<img
+  title="APM-transaction-trace-database-queries.png"
+  alt="APM - Transaction trace - Database queries tab"
+  src={apmTransactionTraceDbQuery}
+/>
 
 <figcaption>
-  Go to **[one.newrelic.com](https://one.newrelic.com) > APM> （アプリを選択）> Monitor> Transactions> （トランザクショントレースを選択）> Database queries**.
+  **[one.newrelic.com](https://one.newrelic.com/all-capabilities) > APM & services > (アプリを選択) > Monitor > Transactions > (トランザクション追跡を選択) > Database queries**に移動します。
 </figcaption>
 
 ## データベースクエリの使用 [#use]
@@ -36,11 +44,11 @@ translationType: machine
   <thead>
     <tr>
       <th style={{ width: "200px" }}>
-        以下を行う場合...
+        あなたがしたい場合は...
       </th>
 
       <th>
-        操作...
+        これを行う...
       </th>
     </tr>
   </thead>
@@ -48,11 +56,17 @@ translationType: machine
   <tbody>
     <tr>
       <td>
-        隠されたクエリを見る
+        ファースト コールを非表示にする
       </td>
 
       <td>
-        デフォルトでは、New Relic は 5 ミリ秒未満のクエリを隠します。これらの隠されたクエリを表示するには、 **Show fast queries** のチェックボックスを選択します。
+        デフォルトでは、New Relic は高速呼び出し ( `averageDuration` 5 ミリ秒未満) を含むすべてのクエリを表示します。これらのファスト コールを非表示にするには、\[ **ファスト コールを非表示]** トグルを選択します。
+
+        <img
+          title="Screenshot showing how to toggle to hide fast calls."
+          alt="Screenshot showing how to toggle to hide fast calls."
+          src={accountsFastCalls}
+        />
       </td>
     </tr>
 
@@ -90,7 +104,7 @@ translationType: machine
       </th>
 
       <th>
-        **コメント**
+        **コメントコメント**
       </th>
     </tr>
   </thead>
@@ -102,7 +116,7 @@ translationType: machine
       </td>
 
       <td>
-        `TOTAL DURATION` がトランザクション全体の時間に大きく貢献しているクエリを探してください。これは、インデックスやその他の最適化によってデータベースクエリを強化するのに適した場所を示しています。
+        `TOTAL DURATION`がトランザクション時間全体に占める割合が大きいクエリを探します。これは、インデックスまたはその他の最適化を使用してデータベース クエリを強化するのに適した場所であることを示しています。
       </td>
     </tr>
 
@@ -112,7 +126,7 @@ translationType: machine
       </td>
 
       <td>
-        同じ種類の情報を繰り返し照会しているクエリに注目してください。たとえば、個々のアカウントIDを調べる複数のクエリがあります。 `INCLUDE` 特定の値（アカウントID 1、2、10、14、17など）にクエリを書き換え、1回のクエリで関連するすべての項目を取得できるようにしてみてください。
+        同じ種類の情報を繰り返しクエリするクエリを探します。たとえば、個々のアカウント ID を検索するための複数のクエリです。クエリを`INCLUDE`特定の値 (アカウント ID 1、2、10、14、17 など) に書き換えて、1 つのクエリですべての関連アイテムを取得できるようにしてください。
       </td>
     </tr>
 

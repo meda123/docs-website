@@ -1,51 +1,71 @@
 ---
-title: New Relic のサービスレベル管理を始めよう
+title: NewRelicサービスレベルを始めましょう
 tags:
   - Full-Stack Observability
   - Observe everything
   - Get started
-  - Service levels management
-metaDescription: Our new offer to create and consume SLI/SLOs.
+  - Service levels
+metaDescription: How to create and consume SLIs and SLOs with service level management in New Relic.
 translationType: machine
 ---
 
-<Callout title="ベータ版機能">
-  この機能は現在 [ベータ版](/docs/licenses/license-information/referenced-policies/new-relic-pre-release-policy/) です。
-</Callout>
+import slmServiceLevelsOverview from 'images/slm_screenshot-full_service-levels-overview.webp'
 
-New Relicでは、アプリケーションのサービスレベル指標やサービスレベル目標を定義し、消費することができます。
+サービス レベルは Google によって普及され、業界のベスト プラクティスになりました。サービス レベルは、ビジネスとユーザー エクスペリエンスにより重点を置いた視点を追加することで、既存の監視を補完します。
+
+New Relic を使用すると、アプリケーションのサービス レベル インジケーター (SLI) とサービス レベル目標 (SLO) を定義して使用できます。New Relic サービス レベルを構成して従うべきいくつかの関連する理由があります。
+
+* 簡単な作成: ワンクリックから高度なユーザー向けに完全にカスタマイズ可能な高度なモードまで、さまざまな複雑なモードでサービス レベルの作成を容易にします。
+* New Relic エクスペリエンスとの統合: ナビゲーター、ワークロード、ミニ概要、およびほとんどの New Relic オブザーバビリティ ツールでサービス レベルを視覚化して操作します。
+* アラートのサポート: 注意を払う必要がある劣化を警告するアラートを作成します。
+* 分析ツール: すべてのシステムの信頼性ステータスを一貫した方法で分析します。期間ごとのビュー モードでは、任意のサービス レベルの傾向の変化を見つけることができます。さらに、サービス レベルが違反されるたびに、概要ビューで問題の潜在的な原因を確認できます。
+* [キャパシティ プランニング](/docs/journey-demand/get-started): サービス レベルを作成して、アプリのベースラインを見つけます。ピーク需要のイベントに備えている場合、サービス レベルはチームの成功に役立ちます。
 
 ## SLIとSLOとは？ [#what-sli-slo]
 
-サービスレベルは、エンドユーザー（またはクライアントアプリケーション）の視点から、サービスのパフォーマンスを測定するために使用されます。例えば、サービスレベルとは、ビデオの読み込みが十分に速いかどうかや、道案内サービスが2地点間の可能なルートを少なくとも1つ返してくれるかどうかなどを表します。
+サービスレベルは、エンドユーザー（またはクライアントアプリケーション）の観点からサービスのパフォーマンスを測定するために使用されます。たとえば、サービスレベルは、動画が十分に速く読み込まれたかどうか、またはルートサービスが2つのポイント間の少なくとも1つの可能なルートを返したかどうかを表すことができます。
 
-**サービスレベル指標（SLI）は、サービスレベルによって記述されるユーザーエクスペリエンス** の正確な定量的測定値です。SLI は、成功したアウトプットの割合を示すもので、したがって、パーセンテージ（％）で表されます。例えば、SLI は、ある閾値よりも速いリクエストの割合や、正しい値を出力したパイプラインに入るレコードの割合などを測定することができます。
+**サービス レベル インジケーターは、サービス レベルで表されるユーザー エクスペリエンスの正確な定量的尺度です** 。これらは成功した出力の割合を表すため、パーセンテージ (%) で表されます。たとえば、SLI は、特定のしきい値よりも高速だったリクエストの割合や、パイプラインに入って正しい値が出力されたレコードの割合を測定できます。
 
-また、ユーザーは、動画の読み込みに数秒かかることや、アプリケーションが時々エラーを返すことを理解していますが、ユーザーの信頼を失いたくないのであれば、このようなことが頻繁に起こるべきではありません。したがって、サービスを利用するエンドユーザーにとって最も関連性の高いパフォーマンス面のSLIを定義したら、サービスがエンドユーザーの期待に応えているかどうかを追跡するためにSLOを設定する必要があります。 **サービスレベル目標（SLO）は、SLIが一定期間に** を満たすべき目標値として定義されています。例えば、1週間の間に99％の確率で動画が2秒以内に再生されなければなりません。
+ユーザーは、ビデオの読み込みにさらに数秒かかる場合があることや、アプリケーションが時々エラーを返す可能性があることを理解していますが、ユーザーの信頼を失いたくない場合は、これは頻繁に発生するべきではありません.したがって、サービスのエンド ユーザーに最も関連するパフォーマンス面の SLI を定義したら、SLO を設定して、サービスがエンド ユーザーの期待に応えていることを追跡する必要があります。**サービス レベル目標は、SLI が一定期間にわたって満たす必要がある目標値として定義されます** 。たとえば、動画は 1 週間にわたって 99% の時間で 2 秒未満で再生を開始する必要があります。
 
-![SLOの例](./images/slm1_1.png "SLOの例.png")
+<img
+  title="Example of several service levels.png"
+  alt="Example of several service levels"
+  src={slmServiceLevelsOverview}
+/>
 
 サービスの境界を特定し、サービスレベルの基準となる計測器を導入する方法については、 [Service Level Management Use Case Implementation Guide](/docs/new-relic-solutions/observability-maturity/uptime-performance-reliability/slm-implementation-guide/) を参照してください。
 
 ## サービスレベルとAPM SLAレポート [#slm-sla]
 
-New Relic では、以前から APM サービス 向けに [SLA レポートを自動で提供しています。毎週月曜日にメールの受信箱に届くApdexベースのレポートは、ウェブトランザクションを生成するサービスを対象に自動生成され、時系列での傾向を確認するのに便利です。](/docs/apm/reports/service-level-agreements/apm-sla-reports/)
+New Relicは[、APMサービスの自動サービスレベルアグリーメント（SLA）レポートを](/docs/apm/reports/service-level-agreements/apm-sla-reports/)長い間提供してきました。月曜日に電子メールの受信トレイに届くApdexベースのレポートは、Webトランザクションを生成するサービスに対して自動的に生成され、時間の経過に伴う傾向を確認するのに役立ちます。
 
-[](/docs/apm/reports/service-level-agreements/apm-sla-reports/)
+SLAに加えて、Googleのサービスレベル機能は、 [Google SREハンドブック](https://sre.google/books/)で宣伝されているような最新のサービスレベルのベストプラクティスとより適切に連携し、新しく改善された機能を提供します。
 
-[SLAに加えて、当社の新しいSLMレベルの能力は、 ](/docs/apm/reports/service-level-agreements/apm-sla-reports/)[Google SRE Handbook](https://sre.google/books/) で推進されているような、最新のサービスレベルのベストプラクティスに沿ったものであり、新たに改善された機能を提供しています」と述べています。
+* SLI は、New Relic に報告される NRDB イベントで定義できます。
 
-* SLI は、APM トランザクションに限らず、New Relic に報告されるあらゆる NRDB イベントに定義することができます。そのため、独自のカスタムイベントをベースにSLIを設定することも可能です。
+  <InlinePopover type="apm"/>
+
+  トランザクション。したがって、独自のカスタム イベントに基づいて SLI を作成することもできます。
+
 * どのサービス境界線とどの指標がサービスレベルに関連するかを決定し、独自の目標を設定することができます。
+
 * SLOの結果は、アカウント全体、および [ワークロード内で見ることができます](/docs/new-relic-one/use-new-relic-one/workloads/workloads-isolate-resolve-incidents-faster/) 。
 
-## 次のステップ [#next]
+## 次は何ですか？ [#next]
 
-始める準備はできましたか？まだお持ちでない方は、 [無料のNew Relicアカウントにサインアップしてください](https://newrelic.com/signup) 。サービスレベルは、 [New Relic One](https://one.newrelic.com/) のいくつかの場所で確認できます。
+始める準備はできましたか？まだお持ちでない場合は、以下で無料の New Relic アカウントを作成して、今すぐデータの監視を開始してください。
 
-* 上部のナビバーで、 **More** メニュー（カスタマイズ可能）の下にあります。
+<InlineSignup/>
+
+[UI](https://one.newrelic.com)のいくつかの場所でサービス レベルを確認できます。
+
+* **[one.newrelic.comで](https://one.newrelic.com/all-capabilities)**
 * SLIが定義されている [エンティティ](/docs/new-relic-one/use-new-relic-one/core-concepts/what-entity-new-relic/) のプレビューで。
-* **APM** サービスで、レポートの項目で。
+* **APM**サービス、**ブラウザ**アプリケーション、またはレポートセクションの**合成**モニター。
 * **ワークロード内** 、「サービスレベル」タブで。
 
-続けて、 [](/docs/service-level-management/create-slm)を作成する方法と [](/docs/service-level-management/consume-slm)SLI と SLO を利用する方法についてのドキュメントをお読みください。また、 [APIを使ってSLMを管理する方法については、](/docs/apis/nerdgraph/examples/nerdgraph-slm/) をご覧ください。
+SLIとSLOを[作成](/docs/service-level-management/create-slm)して[使用する](/docs/service-level-management/consume-slm)方法については、ドキュメントを続けて読んでください。 [NerdGraphAPIを介してサービスレベルを構成](/docs/apis/nerdgraph/examples/nerdgraph-slm/)する方法を確認することもできます。
+
+SLM の設定と使用に関するヒントとベスト プラクティスについては、 [SLM の最適化に関する可観測性成熟度ガイドを](/docs/new-relic-solutions/observability-maturity/uptime-performance-reliability/optimize-slm-guide)参照してください。

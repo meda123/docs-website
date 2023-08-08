@@ -4,28 +4,21 @@ tags:
   - Mobile monitoring
   - New Relic Mobile iOS
   - tvOS
-metaDescription: 'Follow these instructions to upgrade the tvOS SDK and get the latest in mobile monitoring functionality'
+metaDescription: 'Follow these instructions to upgrade the iOS agent and get the latest in mobile monitoring functionality.'
 redirects:
   - /docs/mobile-monitoring/new-relic-mobile-ios/install-configure/upgrading-new-relic-mobiles-tvos-sdk
 ---
 
-You must be the account Admin to install, configure, and upgrade the tvOS agent. For information about the latest version, refer to the [release notes](/docs/releases/ios).
-
-## Contents [#qiklinks]
+You must be the account Admin to install, configure, and upgrade the iOS agent. For information about the latest version, refer to the [release notes](/docs/releases/ios).
 
 ## Replacing your tvOS framework [#v1]
 
-Admins: You must replace the earlier version of your tvOS agent framework before upgrading to a newer version of the tvOS SDK.
-
-![Workflow for replacing your tvOS framework.](./images/Mobile_tvOS_replace-framework_1.png "Mobile_tvOS_replace-framework.png")
-
-<figcaption>
-  Here is an example of the workflow to remove your existing tvOS agent framework so you can replace it with a newer version.
-</figcaption>
+First, you'll need to replace the earlier version of your iOS agent in your Xcode project:
 
 1. From the Project Navigator (**CMD 1**) in Xcode, search for **NewRelicAgentTVOS.framework**.
 2. Right-click or control-click **NewRelicAgentTVOS.framework**, and select **Show in Finder**.
 3. Drag **NewRelicAgentTVOS.framework** to the trash.
 4. Verify that the Xcode project highlights the reference to **NewRelicAgentTVOS.framework** in red.
 5. Right-click or control-click **NewRelicAgentTVOS.framework**, and select **Delete** to remove the obsolete reference from the project.
-6. Follow standard installation procedures for tvOS app monitoring.
+
+Then, continue with the installation process in the UI at **[one.newrelic.com](https://one.newrelic.com/all-capabilities) > Mobile > (select an app) > Settings > Installation**.

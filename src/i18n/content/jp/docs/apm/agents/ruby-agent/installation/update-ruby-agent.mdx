@@ -14,7 +14,7 @@ New Relic の最新機能、拡張機能、重要なセキュリティパッチ�
 
 アプリが現在使用しているRubyエージェントのバージョンを確認します。
 
-1. New Relic では、 [アカウントのドロップダウン](/docs/accounts-partnerships/education/getting-started-new-relic/glossary#account-dropdown) から、 **アカウント設定> Connected agents** を選択します。
+1. New Relic の[ユーザー メニュー](/docs/accounts/accounts-billing/general-account-settings/intro-account-settings)から、\[**アカウント設定] > \[接続済みエージェント**] を選択します。
 2. 任意です。Sort by **古いエージェントのバージョン**.
 
 ## エージェントの更新 [#Updating_the_Agent]
@@ -33,21 +33,6 @@ Rubyエージェントをアップデートするには
   gem update newrelic_rpm
   ```
 
-## 楽器 JRuby [#jruby]
-
-正しいインストルメントのために
-
-* JRuby のバージョンが 1.7 以上の場合、New Relic Ruby エージェントのバージョン [3.6.8.164 から 3.18.1](/docs/releases/ruby) を使用してください。
-* JRuby のバージョン 9 以降では、New Relic Ruby エージェントのバージョン [3.6.8.164 以降を使用してください](/docs/releases/ruby) 。
-
-そうしないと、アプリケーションにトランザクションがなく、JRuby を使用している場合、CPU メトリクスを見ることができません。これはJRubyのバグによるもので、 `Process.times` は経過したCPU時間ではなく、壁時計の時間を返していました。このバグは、New Relic の Ruby エージェント 3.6.8.164 および JRuby 1.7.0 で修正されました。
-
-## 対応していないRubyエージェントのバージョン [#eol-versions]
-
-**End of life notification:** 2015 年 1 月 26 日より、New Relic は Ruby エージェントのバージョンが **3.9.6 より前のものからのデータを受け付けなくなりました** 。
-
-これらのエージェントのバージョンは、New Relicのデータ収集サービスと通信する際に期限切れプロトコルを使用しています。また、こうしたバージョンの多くは、重要なデータを誤ってNew Relicコレクターに送信するという、潜在的なセキュリティ上の問題も抱えています。
-
 ## サポート対象外のバージョンのエージェントのアップデート [#eol-update]
 
 <Callout variant="important">
@@ -62,12 +47,29 @@ Rubyエージェントをアップデートするには
       </th>
 
       <th>
-        コメント
+        コメントコメント
       </th>
     </tr>
   </thead>
 
   <tbody>
+    <tr>
+      <td id="migration-7-8">
+        バージョン 7 から 8 へ
+      </td>
+
+      <td>
+        リリース ノート: [Ruby エージェント 8.0.0](/docs/release-notes/agent-release-notes/ruby-release-notes/ruby-agent-800)
+
+        以前のバージョンの Ruby エージェントから 8.0.0 に移行するための役立つ戦略とヒントについては、 [Ruby エージェント 7.x から 8.x への移行ガイド](/docs/apm/agents/ruby-agent/getting-started/migration-8x-guide/)を参照してください。このガイドでは、新しい設定のデフォルト、 `add_method_tracer` API の変更、廃止されたアイテムとその代替品について説明します。
+
+        * `add_method_tracer` API メソッドの変更
+        * Distributed Tracingはデフォルトで有効です。
+        * クロスアプリケーショントレースは非推奨
+        * 非推奨のAPIメソッドとレガシー・インスツルメンテーションの削除
+      </td>
+    </tr>
+
     <tr>
       <td id="migration-6-7">
         バージョン6から7へ
@@ -76,7 +78,7 @@ Rubyエージェントをアップデートするには
       <td>
         リリースノート： [Ruby agent 7.0.0](/docs/release-notes/agent-release-notes/ruby-release-notes/ruby-agent-700)
 
-        [Ruby Agent 6.x to 7.x migration guide](/docs/agents/ruby-agent/getting-started/migration-7x-guide/) には、以前のバージョンの Ruby Agent から 7.0.0 への移行に役立つ戦略やヒントが記載されています。このガイドでは、新しい構成設定、SSL CA 証明書の診断とインストール、廃止された項目とその代替品について説明しています。
+        以前のバージョンの Ruby エージェントから 7.0.0 に移行するための役立つ戦略とヒントについては、 [Ruby エージェント 6.x から 7.x への移行ガイド](/docs/agents/ruby-agent/getting-started/migration-7x-guide/)を参照してください。このガイドでは、新しい構成設定、SSL CA 証明書の診断とインストール、および廃止されたアイテムとその代替品について説明します。
 
         * Ruby 2.0と2.1のドロップ
         * ほとんどのRubyのgem/ライブラリにprefendの自動挿入ストラテジーを実装。

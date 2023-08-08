@@ -9,12 +9,16 @@ translationType: machine
 ---
 
 <Callout variant="important">
-  이 문서는 [원래 가격 책정 모델](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing) 을 사용하는 조직을 위한 것입니다. [New Relic One 가격 책정 모델](/docs/accounts/accounts-billing/new-relic-one-pricing-users/pricing-billing) 을 사용 중이 [라면 데이터 관리](/docs/telemetry-data-platform/get-data-new-relic/manage-data/manage-your-data) 를 참조하십시오. 어느 쪽을 사용 중인지 확실하지 않습니까? [가격 책정 모델 개요 를](/docs/accounts/original-accounts-billing/original-product-based-pricing/overview-pricing-models) 참조하십시오.
-
-  원래 가격 모델을 사용하는 경우 기존 구독 및 데이터 보존 값을 유지합니다. New Relic One의 **데이터 관리 허브** 에서 이러한 기존 보존 설정을 관리합니다. 보관 설정을 관리하려면 [데이터 관리 UI](/docs/telemetry-data-platform/manage-data/manage-your-data/#where-to-find-the-data-management-hub) 로 이동하세요. 기존 보관 설정이 표시됩니다. 보존 **편집** 을 클릭하여 보존 값을 조정합니다.
+  이 문서는 [원래 가격 책정 모델](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing) 을 사용하는 조직에 적용됩니다. [사용량 기반 가격 책정 모델](/docs/accounts/accounts-billing/new-relic-one-pricing-users/pricing-billing) 을 사용 중인 경우 [데이터 관리](/docs/telemetry-data-platform/get-data-new-relic/manage-data/manage-your-data) 를 참조하십시오. 어느 쪽을 사용 중인지 확실하지 않습니까? [가격 책정 모델 개요 를](/docs/accounts/original-accounts-billing/original-product-based-pricing/overview-pricing-models) 참조하십시오.
 </Callout>
 
 New Relic은 다양한 기간 동안 다양한 유형의 데이터를 저장합니다. 데이터 유형의 보존 기간은 제품, 구독 수준 및 기능에 따라 다릅니다.
+
+## 데이터 보존 UI [#find]
+
+데이터 보존을 이해하고 사용 가능한 옵션을 확인하는 가장 좋은 방법은 UI로 이동하는 것입니다. 이것이 권장되는 한 가지 이유는 조직에서 설정을 편집했으며 더 이상 여기에 설명된 기본 설정이 아닐 수 있기 때문입니다.
+
+**데이터 보존** UI 페이지는 [데이터 관리 허브](/docs/data-apis/manage-data/manage-your-data) 에 있습니다. 보존 **편집** 을 클릭하여 보존 값을 조정합니다.
 
 ## 데이터 편집 및 삭제 제한 [#edit-limits]
 
@@ -31,7 +35,7 @@ New Relic은 다양한 기간 동안 다양한 유형의 데이터를 저장합�
     id="apm"
     title="APM"
   >
-    Lite, Essentials, Pro 및 Enterprise를 비롯한 각 APM 구독 수준에는 특정 보존 정책이 적용됩니다. 여기에는 [메트릭 타임슬라이스 데이터](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-metric-data) , [주요 메트릭](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-key-metrics) , [추적 데이터](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-trace-data) 및 [이벤트 데이터](/docs/accounts/accounts/data-management/event-data-retention) 가 포함됩니다. 보존 제한 외에도 데이터는 특정 경과 시간이 지나면 집계(평균)됩니다. 자세한 내용은 [집계 메트릭 데이터](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention-components#components-aggregate-metrics) 설명을 참조하세요.
+    각각에 특정 보존 정책이 적용됩니다. <InlinePopover type="apm"/>Lite, Essentials, Pro 및 Enterprise를 포함한 구독 수준. 여기에는 [메트릭 타임슬라이스 데이터](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-metric-data), [키 메트릭](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-key-metrics), [추적 데이터](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-trace-data)및 [이벤트 데이터](/docs/accounts/accounts/data-management/event-data-retention)가 포함됩니다. 보존 제한 외에도 데이터는 특정 경과 기간 후에 집계(평균화)될 수 있습니다. 자세한 내용은 [집계 메트릭 데이터](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention-components#components-aggregate-metrics) 설명을 참조하세요.
 
     ## APM 데이터 보존 정책 [#policies]
 
@@ -467,7 +471,7 @@ New Relic은 다양한 기간 동안 다양한 유형의 데이터를 저장합�
       </tbody>
     </table>
 
-    또한 Infrastructure는 데이터가 생성되는 즉시 다운샘플링합니다. 모든 인프라 메트릭 데이터 유형( [호스트 내 통합](/docs/integrations/host-integrations/getting-started/introduction-host-integrations) 메트릭 포함)은 데이터의 기간과 기간의 크기에 따라 다른 세분성을 표시합니다. 다음 표는 인프라 UI와 쿼리 모두에서 서로 다른 다운샘플링된 버킷이 사용되는 시기를 보여줍니다.
+    또한 인프라 모니터링은 수집되는 데이터를 다운샘플링합니다. 모든 인프라 메트릭 데이터 유형( [호스트 통합](/docs/integrations/host-integrations/getting-started/introduction-host-integrations) 메트릭 포함)은 데이터의 수명 및 기간 크기에 따라 다른 세분성을 표시합니다. 다음 표는 인프라 UI와 쿼리 모두에서 서로 다른 다운샘플링된 버킷이 사용되는 경우를 보여줍니다.
 
     <table>
       <thead>
@@ -507,7 +511,7 @@ New Relic은 다양한 기간 동안 다양한 유형의 데이터를 저장합�
           </td>
 
           <td>
-            60분-6시간
+            60분 - 6시간
           </td>
 
           <td>
@@ -521,7 +525,7 @@ New Relic은 다양한 기간 동안 다양한 유형의 데이터를 저장합�
           </td>
 
           <td>
-            6시간-3일
+            6시간 - 3일
           </td>
 
           <td>
@@ -535,7 +539,7 @@ New Relic은 다양한 기간 동안 다양한 유형의 데이터를 저장합�
           </td>
 
           <td>
-            3일-14일
+            3일 - 14일
           </td>
 
           <td>
@@ -574,7 +578,52 @@ New Relic은 다양한 기간 동안 다양한 유형의 데이터를 저장합�
     id="insights"
     title="인사이트"
   >
-    [원래 가격 모델](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing) 을 사용하는 조직의 경우 Insights 구독 [은 이벤트 데이터 보존 기간을 연장합니다](/docs/accounts/accounts/data-management/event-data-retention) . Insights Pro 구독을 사용하면 [이벤트 데이터 보존 기간을 사용자 지정할](/docs/accounts/accounts/data-management/event-data-retention#flex-retention) 수 있습니다.
+    원래 가격 모델을 사용하는 조직의 경우 유료 Insights 구독은 다음에 대한 이벤트 데이터 보존 연장을 관리합니다.
+
+    * APM, 브라우저, 모바일 및 서버리스 제품
+    * 에이전트 API 또는 [이벤트 API](/docs/insights/insights-data-sources/custom-data/introduction-event-api) 에서 가져온 [사용자 지정 이벤트](/docs/insights/insights-data-sources/custom-data/report-custom-event-data)
+
+    Insights 구독이 관리하는 데이터 보존을 보려면 [사용량 UI](/docs/accounts/accounts-billing/new-relic-one-pricing-billing/new-relic-one-pricing-billing#usage-ui) 로 이동하여 **Insights usage** \[nsights 사용량을] 선택합니다.
+
+    Insights Pro 구독을 사용하면 [유연한 보관을 사용하여 이벤트 데이터가 보관되는 기간을 사용자 지정할](/docs/accounts/accounts/subscription-pricing/flexible-retention-define-how-long-new-relic-retains-event-data) 수 있습니다. 이렇게 하면 필요한 기간 동안 필요한 데이터만 보관할 수 있습니다.
+
+    <CollapserGroup>
+      <Collapser
+        id="retention-calculation"
+        title="저장된 이벤트 수 계산 방법"
+      >
+        Insights Pro 구독에 대해 기본적으로 저장된 이벤트 수가 어떻게 계산되는지에 대한 설명입니다. ( [유연한 보관](/docs/accounts/accounts/subscription-pricing/flexible-retention-define-how-long-new-relic-retains-event-data) 기능을 사용하면 보관 기간을 보다 세부적으로 제어할 수 있습니다.)
+
+        저장된 이벤트는 1) 시간 경과에 따라 저장된 총 이벤트(주당 생성된 이벤트를 기반으로 계산) 및 2) 사용 가능한 데이터 보존 기간을 기반으로 계산됩니다. 이 방정식은 다음과 같이 나타낼 수 있습니다.
+
+        ```
+        events stored = (events generated per week) * (weeks of retention)
+        ```
+
+        Insights Pro 구독은 주어진 데이터 보존 기간과 해당 보존 기간 동안 주어진 이벤트 수를 제공합니다.
+
+        예를 들어:
+
+        * (주당 트랜잭션 2억 개) \* (보존 기간 4주) = Insights에 저장된 이벤트 8억 개
+        * (주당 1,600만 트랜잭션) \* (50주 보존) = Insights에 저장된 8억 이벤트
+
+        Insights Pro 구독의 경우 데이터는 볼륨이 아닌 보존 기간에 따라 제거됩니다. 보존 기간이 지나면 시스템에서 삭제됩니다.
+
+        예: Insights 라이선스가 4주 보존 기간의 8억 이벤트에 대한 것인 경우 데이터는 4주가 지난 후에 제거되기 시작합니다. 구독 수준을 초과하는 데이터의 일시적인 급증은 계속 기록되지만 일관된 초과분은 구독 수준을 업그레이드하거나 수집된 데이터를 줄여 해결해야 합니다.
+
+        [Insights Pro 구독](#insights-pro) 이 없는 고객의 경우 New Relic은 분당 호스트당 4,000개 이하의 이벤트로 이벤트를 조절하거나 다운샘플링할 수 있습니다.
+      </Collapser>
+
+      <Collapser
+        id="usage-overage"
+        title="Insights Pro 이벤트 초과분 예시"
+      >
+        이 예에서는 4주 동안 8억 개의 이벤트(주당 2억 개의 이벤트 비율)에 대한 라이선스가 있는 Insights Pro 구독이 있습니다. APM Pro, Browser Pro 및 Mobile Enterprise가 있습니다. 구독을 통해 다섯 번째 주의 데이터가 추가되어 계획에 저장된 총 10억 개의 이벤트가 발생합니다.
+
+        * 9억 7,500만 이벤트를 사용하고 있다면 보유 기간 **이 끝나지 않았습니다** .
+        * 12억 5천만 개의 이벤트를 사용하고 있다면 보유 기간 **을** 초과한 것입니다.
+      </Collapser>
+    </CollapserGroup>
   </Collapser>
 
   <Collapser
@@ -583,9 +632,9 @@ New Relic은 다양한 기간 동안 다양한 유형의 데이터를 저장합�
   >
     [원래 가격 책정 모델](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing) 을 사용하는 조직의 경우 로그 데이터는 New Relic에서 최대 30일 동안 보관할 수 있습니다. 8일 또는 15일의 더 짧은 보존 기간도 사용할 수 있습니다.
 
-    ### 컨텍스트 데이터 보존에 로그인 [#logs-in-context-retention]
+    ### 상황에 맞는 로그인 데이터 보존 [#logs-in-context-retention]
 
-    컨텍스트 데이터 보존 정책의 New Relic Logs 로그는 현재 APM 제품 구독 수준을 기반으로 합니다. 자세한 내용은 [APM 데이터 보존](/docs/apm/new-relic-apm/maintenance/apm-data-retention) 을 참조하십시오.
+    상황에 맞는 로그인 데이터 보존 정책은 현재 APM 제품 구독 수준을 기반으로 합니다. 자세한 내용은 [APM 데이터 보존](/docs/apm/new-relic-apm/maintenance/apm-data-retention) 을 참조하십시오.
   </Collapser>
 
   <Collapser
@@ -758,7 +807,7 @@ New Relic은 다양한 기간 동안 다양한 유형의 데이터를 저장합�
 
         <tr>
           <td>
-            MobileJSError 이벤트 [(React 네이티브 베타)](/docs/mobile-monitoring/new-relic-mobile-react-native/customize/customize-query-mobile-app-data-react-native) \*
+            MobileJSError 이벤트 [(React Native 미리보기)](/docs/mobile-monitoring/new-relic-mobile-react-native/customize/customize-query-mobile-app-data-react-native) \*
           </td>
 
           <td>
@@ -914,10 +963,10 @@ New Relic은 다양한 기간 동안 다양한 유형의 데이터를 저장합�
     [원래 가격 모델](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing) 을 사용하는 조직의 경우 [Synthetics](/docs/synthetics/new-relic-synthetics) 데이터 보존 정책은 Synthetics 제품 구독 수준에 따라 다릅니다. 여기에는 메트릭 데이터, 집계 메트릭, 주요 메트릭, 추적 데이터 및 Insights 이벤트와 같은 [데이터 구성 요소](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention) 가 포함됩니다.
 
     <Callout variant="tip">
-      합성 이벤트는 [Insights Pro 구독](/docs/accounts/accounts/data-management/event-data-retention#insights-pro) 에 포함되지 않습니다.
+      종합 모니터링 이벤트는 [Insights Pro 구독](/docs/accounts/accounts/data-management/event-data-retention#insights-pro) 에 포함되지 않습니다.
     </Callout>
 
-    현재 구독 수준은 **계정 요약** 페이지의 오른쪽 열에 나타납니다. **[합성s.newrelic.com](https://synthetics.newrelic.com) > ([계정 드롭다운](/docs/accounts-partnerships/education/getting-started-new-relic/glossary#account-dropdown) ) > 계정 설정 > 계정 > 요약** 으로 이동합니다.
+    현재 구독 수준은 **계정 요약** 페이지의 오른쪽 열에 나타납니다. **[합성s.newrelic.com](https://synthetics.newrelic.com) > ( [사용자 메뉴](/docs/accounts/accounts-billing/general-account-settings/intro-account-settings) ) > Account settings > Account > Summary** 으로 이동합니다.
 
     ## 합성 데이터 보존 정책
 
@@ -941,7 +990,7 @@ New Relic은 다양한 기간 동안 다양한 유형의 데이터를 저장합�
       <tbody>
         <tr>
           <td>
-            합성 모니터 데이터
+            종합 모니터링 데이터
           </td>
 
           <td>

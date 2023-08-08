@@ -1,12 +1,19 @@
 ---
-title: インフラストラクチャのためのAzureエクステンション
+title: インフラストラクチャの Azure 拡張機能
 tags:
   - Infrastructure
   - Install the infrastructure agent
   - Linux installation
+  - Windows installation
 metaDescription: New Relic's infrastructure agent automatically instruments Docker to collect container metrics and metadata.
 translationType: machine
 ---
+
+import infrastructureAzureExtensionsTab from 'images/infrastructure_screenshot-crop_azure-extensions-tab.webp'
+
+import infrastructureAzureNrInfrastructureExtension from 'images/infrastructure_screenshot-crop_azure-nr-infrastructure-extension.webp'
+
+import infrastructureAzureNrLicenseKey from 'images/infrastructure_screenshot-crop_azure-nr-license-key.webp'
 
 当社の [インフラストラクチャ](/docs/welcome-new-relic-infrastructure) エージェントは、 [Microsoft Azure の拡張機能](https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/overview) を使ってインストールできます。
 
@@ -19,22 +26,40 @@ translationType: machine
   </Collapser>
 </CollapserGroup>
 
-New Relic ではこれらの拡張機能を使用して、Infrastructure エージェントのインストールを容易にしています。これにより、エージェントを手動で更新する必要がなくなり、さらに重要なことに、 [Azure スケールセット](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview) に合わせてエージェントを自動的にスケールさせることができます。
+New Relic はこれらの拡張機能を使用して、インフラストラクチャ エージェントのインストールを容易にします。これにより、エージェントを手動で更新する必要がなくなり、さらに重要なことに、エージェントは [Azure スケール セット](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview)で自動的にスケーリングされます。
 
-## Azureの拡張機能を使ってLinux用のインフラをインストール [#install-infra-azure-extensions]
+## Azure 拡張機能を使用してインフラストラクチャをインストールする [#install-infra-azure-extensions]
 
-Azure 拡張機能を使ってエージェントをインストールするには、次のようにします。
+サポートされている [オペレーティング システム](/docs/infrastructure/install-infrastructure-agent/get-started/requirements-infrastructure-agent/)で Azure 拡張機能を使用してエージェントをインストールするには。
 
 1. 任意のAzure VM、Azureスケールセット、またはスケールセットを使用するAzure Service Fabricに移動し、 **Extensions** タブを選択します。
 
-   ![azure_ext01.png](./images/azure_ext01.png "azure_ext01.png")
+   <img
+     title="azure_ext01.png"
+     alt="azure_ext01.png"
+     src={infrastructureAzureExtensionsTab}
+   />
 
-2. **New Relic Infrastructure** のエクステンションを選択します。
+2. **New Relic infrastructure** \[New Relic インフラ] ストラクチャ拡張機能を選択します。
 
-   ![azure_ext02.png](./images/azure_ext02.png "azure_ext02.png")
+   <img
+     title="azure_ext02.png"
+     alt="azure_ext02.png"
+     src={infrastructureAzureNrInfrastructureExtension}
+   />
 
-3. 指示に従って、 [New Relic のライセンスキーを追加してください。](/docs/accounts/accounts-billing/account-setup/new-relic-license-key)
+3. 指示に従い、 <InlinePopover type="licenseKey"/>.
 
-   ![azure_ext03.png](./images/azure_ext03.png "azure_ext03.png")
+   <img
+     title="azure_ext03.png"
+     alt="azure_ext03.png"
+     src={infrastructureAzureNrLicenseKey}
+   />
+
+   <Callout variant="tip">
+     インストールを自動化する場合は、忘れずに <InlinePopover type="licenseKey"/>`NR_LICENSE_KEY` 変数を使用します。 [環境変数](/docs/infrastructure/install-infrastructure-agent/configuration/configure-infrastructure-agent/#precedence) (`NRIA_` 形式) を介して構成を使用して、エージェント構成をカスタマイズできます。
+   </Callout>
 
 4. これでいいんだ！」と。
+
+<InstallFeedback/>

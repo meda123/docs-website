@@ -1,5 +1,5 @@
 ---
-title: Azureの統合メトリクス
+title: Azure統合メトリクス
 tags:
   - Integrations
   - Microsoft Azure integrations
@@ -7,15 +7,35 @@ tags:
 translationType: machine
 ---
 
-## Azure メトリクス [#azure-metrics-table]
+## ディメンション メトリックの命名規則 [#metric-naming-convention]
 
-次の表は、私たちがAzureについて収集しているメトリクスです。
+Azure Monitor API から取得されたメトリックは、次の規則に従って [ディメンション メトリック](/docs/telemetry-data-platform/ingest-manage-data/understand-data/new-relic-data-types/#dimensional-metrics) として New Relic に保存されます。
+
+* メトリックには、Azure リソース タイプのプレフィックスがすべて小文字で付けられます。ここで、 `/` `.`に置き換えられ、 `Microsoft.` は `azure.`に置き換えられます。
+
+  * `Microsoft.Compute/virtualMachines -> azure.compute.virtualmachines`
+  * `Microsoft.Network/loadBalancers -> azure.network.loadbalancers`
+
+* 元の Azure メトリック名は、元の大文字と小文字が保持され、すべての空白が取り除かれ、上記のようにリソース タイプの接頭辞が付けられます。
+
+  * `Microsoft.Compute/virtualMachines + Percentage CPU -> azure.compute.virtualmachines.PercentageCPU`
+  * `Microsoft.Network/loadBalancers + ByteCount -> azure.network.loadbalancers.ByteCount`
+
+これらの変換後に結果のメトリック名が `azure.` で始まらない場合は、接頭辞が追加で付加されます。
+
+サポートされている Azure リソースの種類の詳細については、 [Azure Monitor メトリクスのドキュメント Web サイトを](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-metrics/metrics-index)参照してください。
+
+## APIポーリングメトリクス [#azure-metrics-table]
+
+各ポーリング統合からどのようなメトリックが利用できるか、およびその名前については、 [個々の統合のドキュメントを確認してください](https://docs.newrelic.com/docs/infrastructure/microsoft-azure-integrations/get-started/activate-azure-integrations/)。
+
+次の表は、Azure ポーリング統合によって収集されるメトリックとその [ディメンション メトリックの](/docs/telemetry-data-platform/ingest-manage-data/understand-data/new-relic-data-types/#dimensional-metrics) 変換の非包括的なリストです。
 
 <table>
   <tbody>
     <tr>
       <th style={{ width: "100px" }}>
-        インテグレーション
+        統合
       </th>
 
       <th style={{ width: "275px" }}>
@@ -65,7 +85,7 @@ translationType: machine
       </td>
 
       <td>
-        `イベントHubDroppedEvents`
+        `eventHubDroppedEvents`
       </td>
     </tr>
 
@@ -107,7 +127,7 @@ translationType: machine
       </td>
 
       <td>
-        `イベントHubThrottledEvents`
+        `eventHubThrottledEvents`
       </td>
     </tr>
 
@@ -257,7 +277,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.network.applicationgateways.AbgRequestCountPerHealthyHost`
+        `azure.network.applicationgateways.AvgRequestCountPerHealthyHost`
       </td>
 
       <td>
@@ -443,7 +463,7 @@ translationType: machine
       </td>
 
       <td>
-        `現在の接続数`
+        `currentConnections`
       </td>
     </tr>
 
@@ -457,7 +477,7 @@ translationType: machine
       </td>
 
       <td>
-        `推定請求容量単位`
+        `estimatedBilledCapacityUnits`
       </td>
     </tr>
 
@@ -513,7 +533,7 @@ translationType: machine
       </td>
 
       <td>
-        `マッチドカウント`
+        `matchedCount`
       </td>
     </tr>
 
@@ -541,7 +561,7 @@ translationType: machine
       </td>
 
       <td>
-        `レスポンスステータス`
+        `responseStatus`
       </td>
     </tr>
 
@@ -555,7 +575,7 @@ translationType: machine
       </td>
 
       <td>
-        `スループットBytesPerSecond`
+        `throughputBytesPerSecond`
       </td>
     </tr>
 
@@ -681,7 +701,7 @@ translationType: machine
       </td>
 
       <td>
-        `メモリパーセンテージ`
+        `memoryPercent`
       </td>
     </tr>
 
@@ -737,7 +757,7 @@ translationType: machine
       </td>
 
       <td>
-        `受信バイト`
+        `receivedBytes`
       </td>
     </tr>
 
@@ -793,7 +813,7 @@ translationType: machine
       </td>
 
       <td>
-        `ジェン0コレクション`
+        `gen0Collections`
       </td>
     </tr>
 
@@ -807,7 +827,7 @@ translationType: machine
       </td>
 
       <td>
-        `ゲンワンコレクション`
+        `gen1Collections`
       </td>
     </tr>
 
@@ -821,7 +841,7 @@ translationType: machine
       </td>
 
       <td>
-        `ジェンツーコレクション`
+        `gen2Collections`
       </td>
     </tr>
 
@@ -835,7 +855,7 @@ translationType: machine
       </td>
 
       <td>
-        `ハンドル`
+        `handles`
       </td>
     </tr>
 
@@ -975,7 +995,7 @@ translationType: machine
       </td>
 
       <td>
-        `メモリワーキングセットバイト`
+        `memoryWorkingSetBytes`
       </td>
     </tr>
 
@@ -989,7 +1009,7 @@ translationType: machine
       </td>
 
       <td>
-        `リクエスト`
+        `requests`
       </td>
     </tr>
 
@@ -1003,7 +1023,7 @@ translationType: machine
       </td>
 
       <td>
-        `スレッド`
+        `threads`
       </td>
     </tr>
 
@@ -1045,7 +1065,7 @@ translationType: machine
       </td>
 
       <td>
-        `cpuUage`
+        `cpuUsage`
       </td>
     </tr>
 
@@ -1059,7 +1079,7 @@ translationType: machine
       </td>
 
       <td>
-        `メモリ使用量バイト`
+        `memoryUsageBytes`
       </td>
     </tr>
 
@@ -1171,7 +1191,7 @@ translationType: machine
       </td>
 
       <td>
-        `kuveNodeStatusAllocatableCpuCores`
+        `kubeNodeStatusAllocatableCpuCores`
       </td>
     </tr>
 
@@ -1181,11 +1201,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.containerervice.managedclusters.kube_node_status_allocatable_memory_bytes`
+        `azure.containerservice.managedclusters.kube_node_status_allocatable_memory_bytes`
       </td>
 
       <td>
-        `kuveNodeStatusAllocatableMemoryBytes`
+        `kubeNodeStatusAllocatableMemoryBytes`
       </td>
     </tr>
 
@@ -1241,7 +1261,7 @@ translationType: machine
       </td>
 
       <td>
-        `AvailableStorageBytes`
+        `availableStorageBytes`
       </td>
     </tr>
 
@@ -1297,7 +1317,7 @@ translationType: machine
       </td>
 
       <td>
-        `データ使用量バイト`
+        `dataUsageBytes`
       </td>
     </tr>
 
@@ -1311,7 +1331,7 @@ translationType: machine
       </td>
 
       <td>
-        `ドキュメントカウント`
+        `documentCount`
       </td>
     </tr>
 
@@ -1325,7 +1345,7 @@ translationType: machine
       </td>
 
       <td>
-        `ドキュメントクオータバイト`
+        `documentQuotaBytes`
       </td>
     </tr>
 
@@ -1395,7 +1415,7 @@ translationType: machine
       </td>
 
       <td>
-        `プロビジョンドースループット`
+        `provisionedThroughput`
       </td>
     </tr>
 
@@ -1465,7 +1485,7 @@ translationType: machine
       </td>
 
       <td>
-        `AvailableStorageBytes`
+        `availableStorageBytes`
       </td>
     </tr>
 
@@ -1521,7 +1541,7 @@ translationType: machine
       </td>
 
       <td>
-        `データ使用量バイト`
+        `dataUsageBytes`
       </td>
     </tr>
 
@@ -1535,7 +1555,7 @@ translationType: machine
       </td>
 
       <td>
-        `ドキュメントカウント`
+        `documentCount`
       </td>
     </tr>
 
@@ -1549,7 +1569,7 @@ translationType: machine
       </td>
 
       <td>
-        `ドキュメントクオータバイト`
+        `documentQuotaBytes`
       </td>
     </tr>
 
@@ -1619,7 +1639,7 @@ translationType: machine
       </td>
 
       <td>
-        `プロビジョンドースループット`
+        `provisionedThroughput`
       </td>
     </tr>
 
@@ -1689,7 +1709,7 @@ translationType: machine
       </td>
 
       <td>
-        `AvailableStorageBytes`
+        `availableStorageBytes`
       </td>
     </tr>
 
@@ -1745,7 +1765,7 @@ translationType: machine
       </td>
 
       <td>
-        `データ使用量バイト`
+        `dataUsageBytes`
       </td>
     </tr>
 
@@ -1759,7 +1779,7 @@ translationType: machine
       </td>
 
       <td>
-        `ドキュメントカウント`
+        `documentCount`
       </td>
     </tr>
 
@@ -1773,7 +1793,7 @@ translationType: machine
       </td>
 
       <td>
-        `ドキュメントクオータバイト`
+        `documentQuotaBytes`
       </td>
     </tr>
 
@@ -1843,7 +1863,7 @@ translationType: machine
       </td>
 
       <td>
-        `プロビジョンドースループット`
+        `provisionedThroughput`
       </td>
     </tr>
 
@@ -1913,7 +1933,7 @@ translationType: machine
       </td>
 
       <td>
-        `コスト`
+        `cost`
       </td>
     </tr>
 
@@ -1927,7 +1947,7 @@ translationType: machine
       </td>
 
       <td>
-        `コスト`
+        `cost`
       </td>
     </tr>
 
@@ -1941,7 +1961,7 @@ translationType: machine
       </td>
 
       <td>
-        `コスト`
+        `cost`
       </td>
     </tr>
 
@@ -1955,7 +1975,7 @@ translationType: machine
       </td>
 
       <td>
-        `コスト`
+        `cost`
       </td>
     </tr>
 
@@ -1969,7 +1989,7 @@ translationType: machine
       </td>
 
       <td>
-        `FailedRuns`
+        `failedRuns`
       </td>
     </tr>
 
@@ -1993,7 +2013,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factory.ActivityCancelledRuns`
+        `azure.datafactory.factories.ActivityCancelledRuns`
       </td>
 
       <td>
@@ -2007,25 +2027,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factorys.ActivityFailedRuns`
+        `azure.datafactory.factories.ActivityFailedRuns`
       </td>
 
       <td>
-        `アクティビティ失敗ラン`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Data Factory
-      </td>
-
-      <td>
-        `azure.datafactory.factory.ActivitySucceededRuns`
-      </td>
-
-      <td>
-        `アクティビティ成功ラン`
+        `activityFailedRuns`
       </td>
     </tr>
 
@@ -2035,11 +2041,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factory.FactorySizeInGbUnits`
+        `azure.datafactory.factories.ActivitySucceededRuns`
       </td>
 
       <td>
-        `ファクトリーサイズインギガビット`
+        `activitySucceededRuns`
       </td>
     </tr>
 
@@ -2049,7 +2055,21 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factorys.IntegrationRuntimeAvailableMemory`
+        `azure.datafactory.factories.FactorySizeInGbUnits`
+      </td>
+
+      <td>
+        `factorySizeInGbUnits`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Azure Data Factory
+      </td>
+
+      <td>
+        `azure.datafactory.factories.IntegrationRuntimeAvailableMemory`
       </td>
 
       <td>
@@ -2063,7 +2083,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factoryents.IntegrationRuntimeAvailableNodeNumber`
+        `azure.datafactory.factories.IntegrationRuntimeAvailableNodeNumber`
       </td>
 
       <td>
@@ -2077,7 +2097,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factoryents.IntegrationRuntimeAverageTaskPickupDelay`
+        `azure.datafactory.factories.IntegrationRuntimeAverageTaskPickupDelay`
       </td>
 
       <td>
@@ -2091,7 +2111,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factoryents.IntegrationRuntimeCpuPercentage`
+        `azure.datafactory.factories.IntegrationRuntimeCpuPercentage`
       </td>
 
       <td>
@@ -2105,7 +2125,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factory.IntegrationRuntimeQueueLength`
+        `azure.datafactory.factories.IntegrationRuntimeQueueLength`
       </td>
 
       <td>
@@ -2119,7 +2139,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factoryents.MaxAllowedFactorySizeInGbUnits`
+        `azure.datafactory.factories.MaxAllowedFactorySizeInGbUnits`
       </td>
 
       <td>
@@ -2133,7 +2153,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factory.MaxAllowedResourceCount`
+        `azure.datafactory.factories.MaxAllowedResourceCount`
       </td>
 
       <td>
@@ -2147,7 +2167,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factory.PipelineCancelledRuns`
+        `azure.datafactory.factories.PipelineCancelledRuns`
       </td>
 
       <td>
@@ -2161,7 +2181,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factory.PipelineFailedRuns`
+        `azure.datafactory.factories.PipelineFailedRuns`
       </td>
 
       <td>
@@ -2175,7 +2195,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factory.PipelineSucceededRuns`
+        `azure.datafactory.factories.PipelineSucceededRuns`
       </td>
 
       <td>
@@ -2189,11 +2209,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factory.ResourceCount`
+        `azure.datafactory.factories.ResourceCount`
       </td>
 
       <td>
-        `リソースカウント`
+        `resourceCount`
       </td>
     </tr>
 
@@ -2203,7 +2223,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factory.TriggerCancelledRuns`
+        `azure.datafactory.factories.TriggerCancelledRuns`
       </td>
 
       <td>
@@ -2217,7 +2237,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factory.TriggerFailedRuns`
+        `azure.datafactory.factories.TriggerFailedRuns`
       </td>
 
       <td>
@@ -2231,7 +2251,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.datafactory.factory.TriggerSucceededRuns`
+        `azure.datafactory.factories.TriggerSucceededRuns`
       </td>
 
       <td>
@@ -2249,7 +2269,7 @@ translationType: machine
       </td>
 
       <td>
-        `アクティブ・コネクションズ`
+        `activeConnections`
       </td>
     </tr>
 
@@ -2277,7 +2297,7 @@ translationType: machine
       </td>
 
       <td>
-        `接続失敗`
+        `connectionsFailed`
       </td>
     </tr>
 
@@ -2319,7 +2339,7 @@ translationType: machine
       </td>
 
       <td>
-        `メモリパーセンテージ`
+        `memoryPercent`
       </td>
     </tr>
 
@@ -2347,7 +2367,7 @@ translationType: machine
       </td>
 
       <td>
-        `ネットワークIngressBytes`
+        `networkIngressBytes`
       </td>
     </tr>
 
@@ -2403,7 +2423,7 @@ translationType: machine
       </td>
 
       <td>
-        `ストレージリミットバイト`
+        `storageLimitBytes`
       </td>
     </tr>
 
@@ -2417,7 +2437,7 @@ translationType: machine
       </td>
 
       <td>
-        `ストレージパーセンテージ`
+        `storagePercent`
       </td>
     </tr>
 
@@ -2431,7 +2451,7 @@ translationType: machine
       </td>
 
       <td>
-        `ストレージ使用バイト`
+        `storageUsedBytes`
       </td>
     </tr>
 
@@ -2445,7 +2465,7 @@ translationType: machine
       </td>
 
       <td>
-        `アクティブ・コネクションズ`
+        `activeConnections`
       </td>
     </tr>
 
@@ -2473,7 +2493,7 @@ translationType: machine
       </td>
 
       <td>
-        `接続失敗`
+        `connectionsFailed`
       </td>
     </tr>
 
@@ -2515,7 +2535,7 @@ translationType: machine
       </td>
 
       <td>
-        `メモリパーセンテージ`
+        `memoryPercent`
       </td>
     </tr>
 
@@ -2543,7 +2563,7 @@ translationType: machine
       </td>
 
       <td>
-        `ネットワークIngressBytes`
+        `networkIngressBytes`
       </td>
     </tr>
 
@@ -2557,7 +2577,7 @@ translationType: machine
       </td>
 
       <td>
-        `秒単位のマスター`
+        `secondsBehindMaster`
       </td>
     </tr>
 
@@ -2581,7 +2601,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.dbformysql.servers.serverslog_storage_percent`
+        `azure.dbformysql.servers.serverlog_storage_percent`
       </td>
 
       <td>
@@ -2613,7 +2633,7 @@ translationType: machine
       </td>
 
       <td>
-        `ストレージリミットバイト`
+        `storageLimitBytes`
       </td>
     </tr>
 
@@ -2627,7 +2647,7 @@ translationType: machine
       </td>
 
       <td>
-        `ストレージパーセンテージ`
+        `storagePercent`
       </td>
     </tr>
 
@@ -2641,7 +2661,7 @@ translationType: machine
       </td>
 
       <td>
-        `ストレージ使用バイト`
+        `storageUsedBytes`
       </td>
     </tr>
 
@@ -2655,7 +2675,7 @@ translationType: machine
       </td>
 
       <td>
-        `アクティブ・コネクションズ`
+        `activeConnections`
       </td>
     </tr>
 
@@ -2683,7 +2703,7 @@ translationType: machine
       </td>
 
       <td>
-        `接続失敗`
+        `connectionsFailed`
       </td>
     </tr>
 
@@ -2725,7 +2745,7 @@ translationType: machine
       </td>
 
       <td>
-        `メモリパーセンテージ`
+        `memoryPercent`
       </td>
     </tr>
 
@@ -2753,7 +2773,7 @@ translationType: machine
       </td>
 
       <td>
-        `ネットワークIngressBytes`
+        `networkIngressBytes`
       </td>
     </tr>
 
@@ -2837,7 +2857,7 @@ translationType: machine
       </td>
 
       <td>
-        `ストレージリミットバイト`
+        `storageLimitBytes`
       </td>
     </tr>
 
@@ -2851,7 +2871,7 @@ translationType: machine
       </td>
 
       <td>
-        `ストレージパーセンテージ`
+        `storagePercent`
       </td>
     </tr>
 
@@ -2865,7 +2885,7 @@ translationType: machine
       </td>
 
       <td>
-        `ストレージ使用バイト`
+        `storageUsedBytes`
       </td>
     </tr>
 
@@ -2875,11 +2895,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.namespaces.ActiveConnections`
+        `azure.eventhub.namespaces.ActiveConnections`
       </td>
 
       <td>
-        `アクティブ・コネクションズ`
+        `activeConnections`
       </td>
     </tr>
 
@@ -2889,7 +2909,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.namespaces.CaptureBacklog`
+        `azure.eventhub.namespaces.CaptureBacklog`
       </td>
 
       <td>
@@ -2903,25 +2923,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.namespaces.CapturedBytes`
+        `azure.eventhub.namespaces.CapturedBytes`
       </td>
 
       <td>
-        `キャプチャーバイト`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Event Hub
-      </td>
-
-      <td>
-        `azure.everythub.namespaces.CapturedMessages`
-      </td>
-
-      <td>
-        `キャプチャされたメッセージ`
+        `capturedBytes`
       </td>
     </tr>
 
@@ -2931,25 +2937,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.namespaces.ConnectionsClosed`
+        `azure.eventhub.namespaces.CapturedMessages`
       </td>
 
       <td>
-        `コネクション クローズド`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Event Hub
-      </td>
-
-      <td>
-        `azure.everythub.namespaces.ConnectionsOpened`
-      </td>
-
-      <td>
-        `コネクションズオープン`
+        `capturedMessages`
       </td>
     </tr>
 
@@ -2959,7 +2951,35 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.namespaces.IncomingBytes`
+        `azure.eventhub.namespaces.ConnectionsClosed`
+      </td>
+
+      <td>
+        `connectionsClosed`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Azure Event Hub
+      </td>
+
+      <td>
+        `azure.eventhub.namespaces.ConnectionsOpened`
+      </td>
+
+      <td>
+        `connectionsOpened`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Azure Event Hub
+      </td>
+
+      <td>
+        `azure.eventhub.namespaces.IncomingBytes`
       </td>
 
       <td>
@@ -2973,7 +2993,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.namespaces.IncomingMessages`
+        `azure.eventhub.namespaces.IncomingMessages`
       </td>
 
       <td>
@@ -2987,7 +3007,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.namespaces.IncomingRequests`
+        `azure.eventhub.namespaces.IncomingRequests`
       </td>
 
       <td>
@@ -3001,25 +3021,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.namespaces.OutgoingBytes`
+        `azure.eventhub.namespaces.OutgoingBytes`
       </td>
 
       <td>
-        `アウトゴーイングバイト`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Event Hub
-      </td>
-
-      <td>
-        `azure.everythub.namespaces.OutgoingMessages`
-      </td>
-
-      <td>
-        `アウトゴーイングメッセージ`
+        `outgoingBytes`
       </td>
     </tr>
 
@@ -3029,7 +3035,21 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.namespaces.QuotaExceededErrors`
+        `azure.eventhub.namespaces.OutgoingMessages`
+      </td>
+
+      <td>
+        `outgoingMessages`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Azure Event Hub
+      </td>
+
+      <td>
+        `azure.eventhub.namespaces.QuotaExceededErrors`
       </td>
 
       <td>
@@ -3043,25 +3063,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.namespaces.ServerErrors`
+        `azure.eventhub.namespaces.ServerErrors`
       </td>
 
       <td>
-        `サーバーエラー`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Event Hub
-      </td>
-
-      <td>
-        `azure.everythub.namespaces.Size`
-      </td>
-
-      <td>
-        `サイズバイト`
+        `serverErrors`
       </td>
     </tr>
 
@@ -3071,7 +3077,21 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.namespaces.SuccessfulRequests`
+        `azure.eventhub.namespaces.Size`
+      </td>
+
+      <td>
+        `sizeBytes`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Azure Event Hub
+      </td>
+
+      <td>
+        `azure.eventhub.namespaces.SuccessfulRequests`
       </td>
 
       <td>
@@ -3085,25 +3105,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.namespaces.ThrottledRequests`
+        `azure.eventhub.namespaces.ThrottledRequests`
       </td>
 
       <td>
-        `スロットル付きリクエスト`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Event Hub
-      </td>
-
-      <td>
-        `azure.everythub.namespaces.UserErrors`
-      </td>
-
-      <td>
-        `ユーザーエラー`
+        `throttledRequests`
       </td>
     </tr>
 
@@ -3113,25 +3119,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.clusters.ActiveConnections`
+        `azure.eventhub.namespaces.UserErrors`
       </td>
 
       <td>
-        `アクティブ・コネクションズ`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Event Hub
-      </td>
-
-      <td>
-        `azure.everythub.clsters.AvailableMemory`
-      </td>
-
-      <td>
-        `利用可能なメモリの割合（AvailableMemoryPercent`
+        `userErrors`
       </td>
     </tr>
 
@@ -3141,7 +3133,35 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.cluster.CaptureBacklog`
+        `azure.eventhub.clusters.ActiveConnections`
+      </td>
+
+      <td>
+        `activeConnections`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Azure Event Hub
+      </td>
+
+      <td>
+        `azure.eventhub.clusters.AvailableMemory`
+      </td>
+
+      <td>
+        `availableMemoryPercent`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Azure Event Hub
+      </td>
+
+      <td>
+        `azure.eventhub.clusters.CaptureBacklog`
       </td>
 
       <td>
@@ -3155,25 +3175,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.clusters.CapturedBytes`
+        `azure.eventhub.clusters.CapturedBytes`
       </td>
 
       <td>
-        `キャプチャーバイト`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Event Hub
-      </td>
-
-      <td>
-        `azure.everythub.clusters.CapturedMessages`
-      </td>
-
-      <td>
-        `キャプチャされたメッセージ`
+        `capturedBytes`
       </td>
     </tr>
 
@@ -3183,25 +3189,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.eventhub.cluster.ConnectionsClosed`
+        `azure.eventhub.clusters.CapturedMessages`
       </td>
 
       <td>
-        `コネクション クローズド`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Event Hub
-      </td>
-
-      <td>
-        `azure.everythub.clusters.ConnectionsOpened`
-      </td>
-
-      <td>
-        `コネクションズオープン`
+        `capturedMessages`
       </td>
     </tr>
 
@@ -3211,7 +3203,35 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.clsters.CPU`
+        `azure.eventhub.clusters.ConnectionsClosed`
+      </td>
+
+      <td>
+        `connectionsClosed`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Azure Event Hub
+      </td>
+
+      <td>
+        `azure.eventhub.clusters.ConnectionsOpened`
+      </td>
+
+      <td>
+        `connectionsOpened`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Azure Event Hub
+      </td>
+
+      <td>
+        `azure.eventhub.clusters.CPU`
       </td>
 
       <td>
@@ -3225,7 +3245,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.cluster.IncomingBytes`
+        `azure.eventhub.clusters.IncomingBytes`
       </td>
 
       <td>
@@ -3239,7 +3259,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.clusters.IncomingMessages`
+        `azure.eventhub.clusters.IncomingMessages`
       </td>
 
       <td>
@@ -3253,7 +3273,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.cluster.IncomingRequests`
+        `azure.eventhub.clusters.IncomingRequests`
       </td>
 
       <td>
@@ -3267,25 +3287,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.clusters.OutgoingBytes`
+        `azure.eventhub.clusters.OutgoingBytes`
       </td>
 
       <td>
-        `アウトゴーイングバイト`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Event Hub
-      </td>
-
-      <td>
-        `azure.everythub.clusters.OutgoingMessages`
-      </td>
-
-      <td>
-        `アウトゴーイングメッセージ`
+        `outgoingBytes`
       </td>
     </tr>
 
@@ -3295,7 +3301,21 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.cloudssters.QuotaExceededErrors`
+        `azure.eventhub.clusters.OutgoingMessages`
+      </td>
+
+      <td>
+        `outgoingMessages`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Azure Event Hub
+      </td>
+
+      <td>
+        `azure.eventhub.clusters.QuotaExceededErrors`
       </td>
 
       <td>
@@ -3309,25 +3329,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.clusters.ServerErrors`
+        `azure.eventhub.clusters.ServerErrors`
       </td>
 
       <td>
-        `サーバーエラー`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Event Hub
-      </td>
-
-      <td>
-        `azure.eventhub.cluster.Size`
-      </td>
-
-      <td>
-        `サイズバイト`
+        `serverErrors`
       </td>
     </tr>
 
@@ -3337,7 +3343,21 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.cloudssters.SuccessfulRequests`
+        `azure.eventhub.clusters.Size`
+      </td>
+
+      <td>
+        `sizeBytes`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Azure Event Hub
+      </td>
+
+      <td>
+        `azure.eventhub.clusters.SuccessfulRequests`
       </td>
 
       <td>
@@ -3351,11 +3371,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.clusters.ThrottledRequests`
+        `azure.eventhub.clusters.ThrottledRequests`
       </td>
 
       <td>
-        `スロットル付きリクエスト`
+        `throttledRequests`
       </td>
     </tr>
 
@@ -3365,11 +3385,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.everythub.clusters.UserErrors`
+        `azure.eventhub.clusters.UserErrors`
       </td>
 
       <td>
-        `ユーザーエラー`
+        `userErrors`
       </td>
     </tr>
 
@@ -3397,7 +3417,7 @@ translationType: machine
       </td>
 
       <td>
-        `ラインプロトコル`
+        `lineProtocol`
       </td>
     </tr>
 
@@ -3603,7 +3623,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.network.connection.BitsInPerSecond`
+        `azure.network.connections.BitsInPerSecond`
       </td>
 
       <td>
@@ -3617,7 +3637,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.network.connection.BitsOutPerSecond`
+        `azure.network.connections.BitsOutPerSecond`
       </td>
 
       <td>
@@ -3635,7 +3655,7 @@ translationType: machine
       </td>
 
       <td>
-        `ErGatewayConnectionBitsInPerSecondCountPerSecond`
+        `erGatewayConnectionBitsInPerSecondCountPerSecond`
       </td>
     </tr>
 
@@ -3649,7 +3669,7 @@ translationType: machine
       </td>
 
       <td>
-        `ErGatewayConnectionBitsOutPerSecondCountPerSecond`
+        `erGatewayConnectionBitsOutPerSecondCountPerSecond`
       </td>
     </tr>
 
@@ -3663,7 +3683,7 @@ translationType: machine
       </td>
 
       <td>
-        `ApplicationRuleHit`
+        `applicationRuleHit`
       </td>
     </tr>
 
@@ -3677,7 +3697,7 @@ translationType: machine
       </td>
 
       <td>
-        `データ処理されたバイト`
+        `dataProcessedBytes`
       </td>
     </tr>
 
@@ -3705,7 +3725,7 @@ translationType: machine
       </td>
 
       <td>
-        `ネットワークルールヒット`
+        `networkRuleHit`
       </td>
     </tr>
 
@@ -3733,7 +3753,7 @@ translationType: machine
       </td>
 
       <td>
-        `スループットBitsPerSecond`
+        `throughputBitsPerSecond`
       </td>
     </tr>
 
@@ -3743,7 +3763,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.network.frentdoors.BackendHealthPercentage`
+        `azure.network.frontdoors.BackendHealthPercentage`
       </td>
 
       <td>
@@ -3757,7 +3777,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.network.frentdoors.BackendRequestCount`
+        `azure.network.frontdoors.BackendRequestCount`
       </td>
 
       <td>
@@ -3771,7 +3791,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.network.frentdoors.BackendRequestLatency`
+        `azure.network.frontdoors.BackendRequestLatency`
       </td>
 
       <td>
@@ -3785,7 +3805,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.network.frentdoors.BillableResponseSize`
+        `azure.network.frontdoors.BillableResponseSize`
       </td>
 
       <td>
@@ -3803,7 +3823,7 @@ translationType: machine
       </td>
 
       <td>
-        `リクエストカウント`
+        `requestCount`
       </td>
     </tr>
 
@@ -3813,11 +3833,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.network.frentdoors.RequestSize`
+        `azure.network.frontdoors.RequestSize`
       </td>
 
       <td>
-        `リクエストサイズバイト`
+        `requestSizeBytes`
       </td>
     </tr>
 
@@ -3827,11 +3847,11 @@ translationType: machine
       </td>
 
       <td>
-        `azure.network.frentdoors.ResponseSize`
+        `azure.network.frontdoors.ResponseSize`
       </td>
 
       <td>
-        `レスポンスサイズバイト`
+        `responseSizeBytes`
       </td>
     </tr>
 
@@ -3855,7 +3875,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.network.frentdoors.WebApplicationFirewallRequestCount`
+        `azure.network.frontdoors.WebApplicationFirewallRequestCount`
       </td>
 
       <td>
@@ -3887,7 +3907,7 @@ translationType: machine
       </td>
 
       <td>
-        `受信バイト`
+        `receivedBytes`
       </td>
     </tr>
 
@@ -3957,7 +3977,7 @@ translationType: machine
       </td>
 
       <td>
-        `メモリワーキングセットバイト`
+        `memoryWorkingSetBytes`
       </td>
     </tr>
 
@@ -3971,7 +3991,7 @@ translationType: machine
       </td>
 
       <td>
-        `アベイラビリティパーセンテージ`
+        `availabilityPercent`
       </td>
     </tr>
 
@@ -4023,7 +4043,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.keyvault.vaults.ServiceApiResult。`
+        `azure.keyvault.vaults.ServiceApiResult`
       </td>
 
       <td>
@@ -4041,7 +4061,7 @@ translationType: machine
       </td>
 
       <td>
-        `割り当てられたSnatPorts`
+        `allocatedSnatPorts`
       </td>
     </tr>
 
@@ -4083,7 +4103,7 @@ translationType: machine
       </td>
 
       <td>
-        `パケットカウント`
+        `packetCount`
       </td>
     </tr>
 
@@ -4111,7 +4131,7 @@ translationType: machine
       </td>
 
       <td>
-        `シンカウント`
+        `synCount`
       </td>
     </tr>
 
@@ -4125,7 +4145,7 @@ translationType: machine
       </td>
 
       <td>
-        `使用済みSnatPorts`
+        `usedSnatPorts`
       </td>
     </tr>
 
@@ -4181,7 +4201,7 @@ translationType: machine
       </td>
 
       <td>
-        `アクションの失敗`
+        `actionsFailed`
       </td>
     </tr>
 
@@ -4265,7 +4285,7 @@ translationType: machine
       </td>
 
       <td>
-        `BILLABLE ACTIVE EXECUTIONS`
+        `billableActionExecutions`
       </td>
     </tr>
 
@@ -4279,7 +4299,7 @@ translationType: machine
       </td>
 
       <td>
-        `BILLABLETRIGGEREXECTIONS`
+        `billableTriggerExecutions`
       </td>
     </tr>
 
@@ -4321,7 +4341,7 @@ translationType: machine
       </td>
 
       <td>
-        `BillingUsageStorageConsumption`
+        `billingUsageStorageConsumption`
       </td>
     </tr>
 
@@ -4363,7 +4383,7 @@ translationType: machine
       </td>
 
       <td>
-        `runCancelled`
+        `runsCancelled`
       </td>
     </tr>
 
@@ -4391,7 +4411,7 @@ translationType: machine
       </td>
 
       <td>
-        `ランズフェルド`
+        `runsFailed`
       </td>
     </tr>
 
@@ -4419,7 +4439,7 @@ translationType: machine
       </td>
 
       <td>
-        `runSucceeded`
+        `runsSucceeded`
       </td>
     </tr>
 
@@ -4475,7 +4495,7 @@ translationType: machine
       </td>
 
       <td>
-        `トータルビラブルエクセキューション`
+        `totalBillableExecutions`
       </td>
     </tr>
 
@@ -4559,7 +4579,7 @@ translationType: machine
       </td>
 
       <td>
-        `トリガースキップ`
+        `triggersSkipped`
       </td>
     </tr>
 
@@ -4587,7 +4607,7 @@ translationType: machine
       </td>
 
       <td>
-        `トリガーが成功した`
+        `triggersSucceeded`
       </td>
     </tr>
 
@@ -4657,7 +4677,7 @@ translationType: machine
       </td>
 
       <td>
-        `アクションの失敗`
+        `actionsFailed`
       </td>
     </tr>
 
@@ -4825,7 +4845,7 @@ translationType: machine
       </td>
 
       <td>
-        `runCancelled`
+        `runsCancelled`
       </td>
     </tr>
 
@@ -4853,7 +4873,7 @@ translationType: machine
       </td>
 
       <td>
-        `ランズフェルド`
+        `runsFailed`
       </td>
     </tr>
 
@@ -4881,7 +4901,7 @@ translationType: machine
       </td>
 
       <td>
-        `runSucceeded`
+        `runsSucceeded`
       </td>
     </tr>
 
@@ -5007,7 +5027,7 @@ translationType: machine
       </td>
 
       <td>
-        `トリガースキップ`
+        `triggersSkipped`
       </td>
     </tr>
 
@@ -5035,7 +5055,7 @@ translationType: machine
       </td>
 
       <td>
-        `トリガーが成功した`
+        `triggersSucceeded`
       </td>
     </tr>
 
@@ -5077,7 +5097,7 @@ translationType: machine
       </td>
 
       <td>
-        `アクティブコア`
+        `activeCores`
       </td>
     </tr>
 
@@ -5091,7 +5111,7 @@ translationType: machine
       </td>
 
       <td>
-        `アクティブノード`
+        `activeNodes`
       </td>
     </tr>
 
@@ -5105,7 +5125,7 @@ translationType: machine
       </td>
 
       <td>
-        `完了したラン`
+        `completedRuns`
       </td>
     </tr>
 
@@ -5133,7 +5153,7 @@ translationType: machine
       </td>
 
       <td>
-        `FailedRuns`
+        `failedRuns`
       </td>
     </tr>
 
@@ -5329,7 +5349,7 @@ translationType: machine
       </td>
 
       <td>
-        `startRuns`
+        `startedRuns`
       </td>
     </tr>
 
@@ -5343,7 +5363,7 @@ translationType: machine
       </td>
 
       <td>
-        `トータルコア`
+        `totalCores`
       </td>
     </tr>
 
@@ -5357,7 +5377,7 @@ translationType: machine
       </td>
 
       <td>
-        `トータルノード`
+        `totalNodes`
       </td>
     </tr>
 
@@ -5371,7 +5391,7 @@ translationType: machine
       </td>
 
       <td>
-        `使えないコア`
+        `unusableCores`
       </td>
     </tr>
 
@@ -5385,7 +5405,7 @@ translationType: machine
       </td>
 
       <td>
-        `使用不可能なノード`
+        `unusableNodes`
       </td>
     </tr>
 
@@ -5399,7 +5419,7 @@ translationType: machine
       </td>
 
       <td>
-        `メモリメトリックバイト`
+        `memoryMetricBytes`
       </td>
     </tr>
 
@@ -5413,7 +5433,7 @@ translationType: machine
       </td>
 
       <td>
-        `メモリ・スラッシング・メトリック・パーセンテージ`
+        `memoryThrashingMetricPercent`
       </td>
     </tr>
 
@@ -5469,7 +5489,7 @@ translationType: machine
       </td>
 
       <td>
-        `キャッシュヒット`
+        `cacheHits`
       </td>
     </tr>
 
@@ -5483,7 +5503,7 @@ translationType: machine
       </td>
 
       <td>
-        `キャッシュミセス`
+        `cacheMisses`
       </td>
     </tr>
 
@@ -5525,7 +5545,7 @@ translationType: machine
       </td>
 
       <td>
-        `接続されたクライアント`
+        `connectedClients`
       </td>
     </tr>
 
@@ -5553,7 +5573,7 @@ translationType: machine
       </td>
 
       <td>
-        `期限切れキー`
+        `expiredKeys`
       </td>
     </tr>
 
@@ -5581,7 +5601,7 @@ translationType: machine
       </td>
 
       <td>
-        `オペレーションズパーセコンド`
+        `operationsPerSecond`
       </td>
     </tr>
 
@@ -5595,7 +5615,7 @@ translationType: machine
       </td>
 
       <td>
-        `プロセッサータイムパーセンテージ`
+        `processorTimePercent`
       </td>
     </tr>
 
@@ -5651,7 +5671,7 @@ translationType: machine
       </td>
 
       <td>
-        `トータルキーズ`
+        `totalKeys`
       </td>
     </tr>
 
@@ -5693,7 +5713,7 @@ translationType: machine
       </td>
 
       <td>
-        `キャッシュヒット`
+        `cacheHits`
       </td>
     </tr>
 
@@ -5707,7 +5727,7 @@ translationType: machine
       </td>
 
       <td>
-        `キャッシュミセス`
+        `cacheMisses`
       </td>
     </tr>
 
@@ -5749,7 +5769,7 @@ translationType: machine
       </td>
 
       <td>
-        `接続されたクライアント`
+        `connectedClients`
       </td>
     </tr>
 
@@ -5777,7 +5797,7 @@ translationType: machine
       </td>
 
       <td>
-        `期限切れキー`
+        `expiredKeys`
       </td>
     </tr>
 
@@ -5805,7 +5825,7 @@ translationType: machine
       </td>
 
       <td>
-        `オペレーションズパーセコンド`
+        `operationsPerSecond`
       </td>
     </tr>
 
@@ -5819,7 +5839,7 @@ translationType: machine
       </td>
 
       <td>
-        `プロセッサータイムパーセンテージ`
+        `processorTimePercent`
       </td>
     </tr>
 
@@ -5875,7 +5895,7 @@ translationType: machine
       </td>
 
       <td>
-        `トータルキーズ`
+        `totalKeys`
       </td>
     </tr>
 
@@ -5917,7 +5937,7 @@ translationType: machine
       </td>
 
       <td>
-        `アクティブ・コネクションズ`
+        `activeConnections`
       </td>
     </tr>
 
@@ -5945,7 +5965,7 @@ translationType: machine
       </td>
 
       <td>
-        `コネクション クローズド`
+        `connectionsClosed`
       </td>
     </tr>
 
@@ -5959,7 +5979,7 @@ translationType: machine
       </td>
 
       <td>
-        `コネクションズオープン`
+        `connectionsOpened`
       </td>
     </tr>
 
@@ -5987,7 +6007,7 @@ translationType: machine
       </td>
 
       <td>
-        `デッドレター・メッセージ`
+        `deadletteredMessages`
       </td>
     </tr>
 
@@ -6029,7 +6049,7 @@ translationType: machine
       </td>
 
       <td>
-        `メッセージ`
+        `messages`
       </td>
     </tr>
 
@@ -6043,7 +6063,7 @@ translationType: machine
       </td>
 
       <td>
-        `アウトゴーイングメッセージ`
+        `outgoingMessages`
       </td>
     </tr>
 
@@ -6057,7 +6077,7 @@ translationType: machine
       </td>
 
       <td>
-        `スケジュールされたメッセージ`
+        `scheduledMessages`
       </td>
     </tr>
 
@@ -6071,7 +6091,7 @@ translationType: machine
       </td>
 
       <td>
-        `サーバーエラー`
+        `serverErrors`
       </td>
     </tr>
 
@@ -6085,7 +6105,7 @@ translationType: machine
       </td>
 
       <td>
-        `サイズバイト`
+        `sizeBytes`
       </td>
     </tr>
 
@@ -6113,7 +6133,7 @@ translationType: machine
       </td>
 
       <td>
-        `スロットル付きリクエスト`
+        `throttledRequests`
       </td>
     </tr>
 
@@ -6127,7 +6147,7 @@ translationType: machine
       </td>
 
       <td>
-        `ユーザーエラー`
+        `userErrors`
       </td>
     </tr>
 
@@ -6141,7 +6161,7 @@ translationType: machine
       </td>
 
       <td>
-        `メモリ使用量の割合`
+        `memoryUsagePercent`
       </td>
     </tr>
 
@@ -6169,7 +6189,7 @@ translationType: machine
       </td>
 
       <td>
-        `コネクション クローズド`
+        `connectionsClosed`
       </td>
     </tr>
 
@@ -6183,7 +6203,7 @@ translationType: machine
       </td>
 
       <td>
-        `コネクションズオープン`
+        `connectionsOpened`
       </td>
     </tr>
 
@@ -6211,7 +6231,7 @@ translationType: machine
       </td>
 
       <td>
-        `デッドレター・メッセージ`
+        `deadletteredMessages`
       </td>
     </tr>
 
@@ -6267,7 +6287,7 @@ translationType: machine
       </td>
 
       <td>
-        `メッセージ`
+        `messages`
       </td>
     </tr>
 
@@ -6281,7 +6301,7 @@ translationType: machine
       </td>
 
       <td>
-        `アウトゴーイングメッセージ`
+        `outgoingMessages`
       </td>
     </tr>
 
@@ -6295,7 +6315,7 @@ translationType: machine
       </td>
 
       <td>
-        `スケジュールされたメッセージ`
+        `scheduledMessages`
       </td>
     </tr>
 
@@ -6309,7 +6329,7 @@ translationType: machine
       </td>
 
       <td>
-        `サーバーエラー`
+        `serverErrors`
       </td>
     </tr>
 
@@ -6323,7 +6343,7 @@ translationType: machine
       </td>
 
       <td>
-        `サイズバイト`
+        `sizeBytes`
       </td>
     </tr>
 
@@ -6351,7 +6371,7 @@ translationType: machine
       </td>
 
       <td>
-        `スロットル付きリクエスト`
+        `throttledRequests`
       </td>
     </tr>
 
@@ -6365,7 +6385,7 @@ translationType: machine
       </td>
 
       <td>
-        `デッドレター・メッセージの転送`
+        `transferDeadLetterMessages`
       </td>
     </tr>
 
@@ -6379,7 +6399,7 @@ translationType: machine
       </td>
 
       <td>
-        `メッセージの転送`
+        `transferMessages`
       </td>
     </tr>
 
@@ -6393,7 +6413,7 @@ translationType: machine
       </td>
 
       <td>
-        `ユーザーエラー`
+        `userErrors`
       </td>
     </tr>
 
@@ -6435,7 +6455,7 @@ translationType: machine
       </td>
 
       <td>
-        `メッセージ`
+        `messages`
       </td>
     </tr>
 
@@ -6449,7 +6469,7 @@ translationType: machine
       </td>
 
       <td>
-        `スケジュールされたメッセージ`
+        `scheduledMessages`
       </td>
     </tr>
 
@@ -6463,7 +6483,7 @@ translationType: machine
       </td>
 
       <td>
-        `デッドレター・メッセージの転送`
+        `transferDeadLetterMessages`
       </td>
     </tr>
 
@@ -6477,7 +6497,7 @@ translationType: machine
       </td>
 
       <td>
-        `メッセージの転送`
+        `transferMessages`
       </td>
     </tr>
 
@@ -6505,7 +6525,7 @@ translationType: machine
       </td>
 
       <td>
-        `コネクション クローズド`
+        `connectionsClosed`
       </td>
     </tr>
 
@@ -6519,7 +6539,7 @@ translationType: machine
       </td>
 
       <td>
-        `コネクションズオープン`
+        `connectionsOpened`
       </td>
     </tr>
 
@@ -6547,7 +6567,7 @@ translationType: machine
       </td>
 
       <td>
-        `デッドレター・メッセージ`
+        `deadletteredMessages`
       </td>
     </tr>
 
@@ -6603,7 +6623,7 @@ translationType: machine
       </td>
 
       <td>
-        `メッセージ`
+        `messages`
       </td>
     </tr>
 
@@ -6617,7 +6637,7 @@ translationType: machine
       </td>
 
       <td>
-        `アウトゴーイングメッセージ`
+        `outgoingMessages`
       </td>
     </tr>
 
@@ -6631,7 +6651,7 @@ translationType: machine
       </td>
 
       <td>
-        `スケジュールされたメッセージ`
+        `scheduledMessages`
       </td>
     </tr>
 
@@ -6645,7 +6665,7 @@ translationType: machine
       </td>
 
       <td>
-        `サーバーエラー`
+        `serverErrors`
       </td>
     </tr>
 
@@ -6659,7 +6679,7 @@ translationType: machine
       </td>
 
       <td>
-        `サイズバイト`
+        `sizeBytes`
       </td>
     </tr>
 
@@ -6673,7 +6693,7 @@ translationType: machine
       </td>
 
       <td>
-        `サブスクリプション`
+        `subscriptions`
       </td>
     </tr>
 
@@ -6701,7 +6721,7 @@ translationType: machine
       </td>
 
       <td>
-        `スロットル付きリクエスト`
+        `throttledRequests`
       </td>
     </tr>
 
@@ -6715,7 +6735,7 @@ translationType: machine
       </td>
 
       <td>
-        `デッドレター・メッセージの転送`
+        `transferDeadLetterMessages`
       </td>
     </tr>
 
@@ -6729,7 +6749,7 @@ translationType: machine
       </td>
 
       <td>
-        `メッセージの転送`
+        `transferMessages`
       </td>
     </tr>
 
@@ -6743,161 +6763,7 @@ translationType: machine
       </td>
 
       <td>
-        `ユーザーエラー`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Service Fabric
-      </td>
-
-      <td>
-        `azure.servicefabricmesh.applications.ActualCpu`
-      </td>
-
-      <td>
-        `actualCpu`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Service Fabric
-      </td>
-
-      <td>
-        `azure.servicefabricmesh.applications.ActualMemory`
-      </td>
-
-      <td>
-        `実際のメモリバイト`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Service Fabric
-      </td>
-
-      <td>
-        `azure.servicefabricmesh.applications.AllocatedCpu`
-      </td>
-
-      <td>
-        `割り当てられたCpu`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Service Fabric
-      </td>
-
-      <td>
-        `azure.servicefabricmesh.applications.AllocatedMemory`
-      </td>
-
-      <td>
-        `割り当てられたメモリバイト`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Service Fabric
-      </td>
-
-      <td>
-        `azure.servicefabricmesh.applications.ApplicationStatus`
-      </td>
-
-      <td>
-        `アプリケーションステータス`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Service Fabric
-      </td>
-
-      <td>
-        `azure.servicefabricmesh.applications.ContainerStatus`
-      </td>
-
-      <td>
-        `containerStatus`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Service Fabric
-      </td>
-
-      <td>
-        `azure.servicefabricmesh.applications.CpuUtilization`
-      </td>
-
-      <td>
-        `cpuUtilizationPercent`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Service Fabric
-      </td>
-
-      <td>
-        `azure.servicefabricmesh.applications.MemoryUtilization`
-      </td>
-
-      <td>
-        `メモリ使用率（MemoryUtilizationPercent`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Service Fabric
-      </td>
-
-      <td>
-        `azure.servicefabricmesh.applications.RestartCount`
-      </td>
-
-      <td>
-        `restartCount`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Service Fabric
-      </td>
-
-      <td>
-        `azure.servicefabricmesh.applications.ServiceReplicaStatus`
-      </td>
-
-      <td>
-        `serviceReplicaStatus`
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Azure Service Fabric
-      </td>
-
-      <td>
-        `azure.servicefabricmesh.applications.ServiceStatus`
-      </td>
-
-      <td>
-        `サービスステータス`
+        `userErrors`
       </td>
     </tr>
 
@@ -6925,7 +6791,7 @@ translationType: machine
       </td>
 
       <td>
-        `データベースサイズ制限バイト`
+        `databaseSizeLimitBytes`
       </td>
     </tr>
 
@@ -6953,7 +6819,7 @@ translationType: machine
       </td>
 
       <td>
-        `接続失敗`
+        `connectionFailed`
       </td>
     </tr>
 
@@ -6967,7 +6833,7 @@ translationType: machine
       </td>
 
       <td>
-        `コネクションSuccessful`
+        `connectionSuccessful`
       </td>
     </tr>
 
@@ -6995,7 +6861,7 @@ translationType: machine
       </td>
 
       <td>
-        `デッドロック`
+        `deadlock`
       </td>
     </tr>
 
@@ -7037,7 +6903,7 @@ translationType: machine
       </td>
 
       <td>
-        `dtuUed`
+        `dtuUsed`
       </td>
     </tr>
 
@@ -7047,7 +6913,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.sql.servers.database.dw_cpu_percent`
+        `azure.sql.servers.databases.dw_cpu_percent`
       </td>
 
       <td>
@@ -7061,7 +6927,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.sql.servers.database.dw_physical_data_read_percent`
+        `azure.sql.servers.databases.dw_physical_data_read_percent`
       </td>
 
       <td>
@@ -7163,7 +7029,7 @@ translationType: machine
       </td>
 
       <td>
-        `ストレージバイト`
+        `storageBytes`
       </td>
     </tr>
 
@@ -7177,7 +7043,7 @@ translationType: machine
       </td>
 
       <td>
-        `ストレージパーセンテージ`
+        `storagePercent`
       </td>
     </tr>
 
@@ -7187,7 +7053,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.sql.servers.databases.warmers_percent`
+        `azure.sql.servers.databases.workers_percent`
       </td>
 
       <td>
@@ -7275,7 +7141,7 @@ translationType: machine
       </td>
 
       <td>
-        `データベースDtuConsumptionPercent`
+        `databaseDtuConsumptionPercent`
       </td>
     </tr>
 
@@ -7317,7 +7183,7 @@ translationType: machine
       </td>
 
       <td>
-        `DatabaseWorkersPercent`
+        `databaseWorkersPercent`
       </td>
     </tr>
 
@@ -7359,7 +7225,7 @@ translationType: machine
       </td>
 
       <td>
-        `eDTU使用`
+        `eDTUUsed`
       </td>
     </tr>
 
@@ -7415,7 +7281,7 @@ translationType: machine
       </td>
 
       <td>
-        `ストレージリミットバイト`
+        `storageLimitBytes`
       </td>
     </tr>
 
@@ -7429,7 +7295,7 @@ translationType: machine
       </td>
 
       <td>
-        `ストレージパーセンテージ`
+        `storagePercent`
       </td>
     </tr>
 
@@ -7443,7 +7309,7 @@ translationType: machine
       </td>
 
       <td>
-        `ストレージ使用バイト`
+        `storageUsedBytes`
       </td>
     </tr>
 
@@ -7453,7 +7319,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.sql.servers.elasticpools.wors_percent`
+        `azure.sql.servers.elasticpools.workers_percent`
       </td>
 
       <td>
@@ -7555,7 +7421,7 @@ translationType: machine
       </td>
 
       <td>
-        `IoRequests`
+        `ioRequests`
       </td>
     </tr>
 
@@ -7583,7 +7449,7 @@ translationType: machine
       </td>
 
       <td>
-        `ストレージスペースの使用状況`
+        `storageSpaceUsed`
       </td>
     </tr>
 
@@ -7597,7 +7463,7 @@ translationType: machine
       </td>
 
       <td>
-        `バーチャルコア`
+        `virtualCore`
       </td>
     </tr>
 
@@ -7611,7 +7477,7 @@ translationType: machine
       </td>
 
       <td>
-        `アベイラビリティパーセンテージ`
+        `availabilityPercent`
       </td>
     </tr>
 
@@ -7625,7 +7491,7 @@ translationType: machine
       </td>
 
       <td>
-        `blobs.AvailabilityPercent`
+        `blobs.availabilityPercent`
       </td>
     </tr>
 
@@ -7723,7 +7589,7 @@ translationType: machine
       </td>
 
       <td>
-        `blobs.succeedServerLatencyMilliseconds`
+        `blobs.successServerLatencyMilliseconds`
       </td>
     </tr>
 
@@ -7737,7 +7603,7 @@ translationType: machine
       </td>
 
       <td>
-        `BLOBS.TRANSITION`
+        `blobs.transactions`
       </td>
     </tr>
 
@@ -7779,7 +7645,7 @@ translationType: machine
       </td>
 
       <td>
-        `ファイル.egressBytes`
+        `files.egressBytes`
       </td>
     </tr>
 
@@ -7793,7 +7659,7 @@ translationType: machine
       </td>
 
       <td>
-        `ファイル.fileCapacityBytes`
+        `files.fileCapacityBytes`
       </td>
     </tr>
 
@@ -7807,7 +7673,7 @@ translationType: machine
       </td>
 
       <td>
-        `ファイル.ファイルカウント`
+        `files.fileCount`
       </td>
     </tr>
 
@@ -7821,7 +7687,7 @@ translationType: machine
       </td>
 
       <td>
-        `ファイル.ファイルシェアカウント`
+        `files.fileShareCount`
       </td>
     </tr>
 
@@ -7835,7 +7701,7 @@ translationType: machine
       </td>
 
       <td>
-        `ファイル.ingressBytes`
+        `files.ingressBytes`
       </td>
     </tr>
 
@@ -7863,7 +7729,7 @@ translationType: machine
       </td>
 
       <td>
-        `ファイル.succeedServerLatencyMilliseconds`
+        `files.successServerLatencyMilliseconds`
       </td>
     </tr>
 
@@ -7877,7 +7743,7 @@ translationType: machine
       </td>
 
       <td>
-        `ファイル・トランザクション`
+        `files.transactions`
       </td>
     </tr>
 
@@ -7919,7 +7785,7 @@ translationType: machine
       </td>
 
       <td>
-        `キュー.egressBytes`
+        `queues.egressBytes`
       </td>
     </tr>
 
@@ -7933,7 +7799,7 @@ translationType: machine
       </td>
 
       <td>
-        `キュー.ingressBytes`
+        `queues.ingressBytes`
       </td>
     </tr>
 
@@ -8003,7 +7869,7 @@ translationType: machine
       </td>
 
       <td>
-        `queues.succeedServerLatencyMilliseconds`
+        `queues.successServerLatencyMilliseconds`
       </td>
     </tr>
 
@@ -8017,7 +7883,7 @@ translationType: machine
       </td>
 
       <td>
-        `キュー・トランザクション`
+        `queues.transactions`
       </td>
     </tr>
 
@@ -8031,7 +7897,7 @@ translationType: machine
       </td>
 
       <td>
-        `成功E2ELatencyMilliseconds`
+        `successE2ELatencyMilliseconds`
       </td>
     </tr>
 
@@ -8073,7 +7939,7 @@ translationType: machine
       </td>
 
       <td>
-        `table.egressBytes`
+        `tables.egressBytes`
       </td>
     </tr>
 
@@ -8087,7 +7953,7 @@ translationType: machine
       </td>
 
       <td>
-        `table.ingressBytes`
+        `tables.ingressBytes`
       </td>
     </tr>
 
@@ -8115,7 +7981,7 @@ translationType: machine
       </td>
 
       <td>
-        `table.succeedServerLatencyMilliseconds`
+        `tables.successServerLatencyMilliseconds`
       </td>
     </tr>
 
@@ -8129,7 +7995,7 @@ translationType: machine
       </td>
 
       <td>
-        `table.tableCapacityBytes`
+        `tables.tableCapacityBytes`
       </td>
     </tr>
 
@@ -8171,7 +8037,7 @@ translationType: machine
       </td>
 
       <td>
-        `テーブル.トランザクション`
+        `tables.transactions`
       </td>
     </tr>
 
@@ -8185,7 +8051,7 @@ translationType: machine
       </td>
 
       <td>
-        `トランザクション`
+        `transactions`
       </td>
     </tr>
 
@@ -8241,7 +8107,7 @@ translationType: machine
       </td>
 
       <td>
-        `dropDdosBytesPerSecond`
+        `droppedDdosBytesPerSecond`
       </td>
     </tr>
 
@@ -8311,7 +8177,7 @@ translationType: machine
       </td>
 
       <td>
-        `IfUnderDdosAttack`
+        `ifUnderDdosAttack`
       </td>
     </tr>
 
@@ -8321,7 +8187,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.network.publicipaddresses.PacketDroppedDDoS`
+        `azure.network.publicipaddresses.PacketsDroppedDDoS`
       </td>
 
       <td>
@@ -8335,7 +8201,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.network.publicipaddresses.PacketForwardedDDoS`
+        `azure.network.publicipaddresses.PacketsForwardedDDoS`
       </td>
 
       <td>
@@ -8349,7 +8215,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.network.publicipaddresses.PacketInDDoS`
+        `azure.network.publicipaddresses.PacketsInDDoS`
       </td>
 
       <td>
@@ -8535,7 +8401,7 @@ translationType: machine
       </td>
 
       <td>
-        `AvailableAddresses`
+        `availableAddresses`
       </td>
     </tr>
 
@@ -8633,7 +8499,7 @@ translationType: machine
       </td>
 
       <td>
-        `dataDiskWriteOperationsCountPerSecond（データディスクライトオペレーションズカウントパーセコンド`
+        `dataDiskWriteOperationsCountPerSecond`
       </td>
     </tr>
 
@@ -8685,7 +8551,7 @@ translationType: machine
       </td>
 
       <td>
-        `azure.compute.virtualmachinescalesets.DiskbliteOperationsSec`
+        `azure.compute.virtualmachinescalesets.DiskWriteOperationsSec`
       </td>
 
       <td>
@@ -8759,7 +8625,7 @@ translationType: machine
       </td>
 
       <td>
-        `OSDiskQueueDepth`
+        `osDiskQueueDepth`
       </td>
     </tr>
 
@@ -8829,7 +8695,7 @@ translationType: machine
       </td>
 
       <td>
-        `アウトバウンドフロー`
+        `outboundFlows`
       </td>
     </tr>
 
@@ -8899,7 +8765,7 @@ translationType: machine
       </td>
 
       <td>
-        `プレミアムOsDiskCacheReadHitPercent`
+        `premiumOsDiskCacheReadHitPercent`
       </td>
     </tr>
 
@@ -8913,7 +8779,7 @@ translationType: machine
       </td>
 
       <td>
-        `プレミアムO'Sディスクキャッシュリードミスパーセンテージ`
+        `premiumOsDiskCacheReadMissPercent`
       </td>
     </tr>
 
@@ -8969,7 +8835,7 @@ translationType: machine
       </td>
 
       <td>
-        `diskkWriteOpsPerSecond`
+        `diskWriteOpsPerSecond`
       </td>
     </tr>
 

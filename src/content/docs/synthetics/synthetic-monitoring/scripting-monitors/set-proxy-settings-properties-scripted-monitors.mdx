@@ -2,7 +2,6 @@
 title: Set proxy settings and properties for scripted monitors
 tags:
   - Synthetics
-  - Synthetic monitoring
   - Scripting monitors
 metaDescription: How to control network proxy settings for synthetic scripted monitors.
 redirects:
@@ -23,7 +22,7 @@ The global object `$network` allows you to control the network configuration use
 <CollapserGroup>
   <Collapser
     id="setproxy-perurl"
-    title={<>$network.setProxy(string or object <var>PROXY URL</var>)</>}
+    title={<>$network.setProxy(string or object PROXY URL)</>}
   >
     Sets a proxy server to be used for all per-URL requests (HTTP, HTTPS, and FTP).
 
@@ -32,75 +31,75 @@ The global object `$network` allows you to control the network configuration use
     * The port is optional. If not provided, it will be derived from the scheme. For example, for HTTP the port would be 80.
     * The username and password are assumed to be the result of a call to `encodeURIComponent()`. Special characters like `@` and `:` in the username and/or the password must be escaped.
 
-    <CollapserGroup>
-      <Collapser
-        id="setproxy-perurl-returns"
-        title="Returns"
-      >
-        This method returns a `Promise` that will resolve once the configuration has been applied.
-      </Collapser>
+      <CollapserGroup>
+        <Collapser
+          id="setproxy-perurl-returns"
+          title="Returns"
+        >
+          This method returns a `Promise` that will resolve once the configuration has been applied.
+        </Collapser>
 
-      <Collapser
-        id="setproxy-parameters"
-        title="Parameters"
-      >
-        <table>
-          <thead>
-            <tr>
-              <th style={{ width: "150px" }}>
-                Parameter
-              </th>
+        <Collapser
+          id="setproxy-parameters"
+          title="Parameters"
+        >
+          <table>
+            <thead>
+              <tr>
+                <th style={{ width: "150px" }}>
+                  Parameter
+                </th>
 
-              <th style={{ width: "150px" }}>
-                Data Type
-              </th>
+                <th style={{ width: "150px" }}>
+                  Data Type
+                </th>
 
-              <th>
-                Description
-              </th>
-            </tr>
-          </thead>
+                <th>
+                  Description
+                </th>
+              </tr>
+            </thead>
 
-          <tbody>
-            <tr>
-              <td>
-                `proxyURL | proxyUrlParsed`
-              </td>
+            <tbody>
+              <tr>
+                <td>
+                  `proxyURL | proxyUrlParsed`
+                </td>
 
-              <td>
-                String or Object
-              </td>
+                <td>
+                  String or Object
+                </td>
 
-              <td>
-                The URL to connect to the proxy server. A string containing a `proxyURL` (for example, `http://proxy_host:8888`) or a plain object in the same format as defined by [Node's `url.parse(urlString)` method](https://nodejs.org/api/url.html#url_url_strings_and_url_objects).
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </Collapser>
+                <td>
+                  The URL to connect to the proxy server. A string containing a `proxyURL` (for example, `http://proxy_host:8888`) or a plain object in the same format as defined by [Node's `url.parse(urlString)` method](https://nodejs.org/api/url.html#url_url_strings_and_url_objects).
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </Collapser>
 
-      <Collapser
-        id="setproxy-example"
-        title="Examples"
-      >
-        An example of setting a proxy server with HTTP protocol on port 1234 with no authentication:
+        <Collapser
+          id="setproxy-example"
+          title="Examples"
+        >
+          An example of setting a proxy server with HTTP protocol on port 1234 with no authentication:
 
-        ```
-        $network.setProxy('http://host.com:1234')
-        ```
+          ```
+          $network.setProxy('http://host.com:1234')
+          ```
 
-        An example of setting a proxy server with HTTP protocol with authentication credentials.
+          An example of setting a proxy server with HTTP protocol with authentication credentials.
 
-        ```
-        $network.setProxy('http://proxyUsername:proxyPassword@proxyHost:1234')
-        ```
-      </Collapser>
-    </CollapserGroup>
+          ```
+          $network.setProxy('http://proxyUsername:proxyPassword@proxyHost:1234')
+          ```
+        </Collapser>
+      </CollapserGroup>
   </Collapser>
 
   <Collapser
     id="setproxy-http"
-    title={<>$network.setProxyForHttp(string or object <var>PROXY URL</var>)</>}
+    title={<>$network.setProxyForHttp(string or object PROXY URL)</>}
   >
     <Callout variant="tip">
       This call is exactly the same as the [per-URL `setProxy` call](#setproxy-perurl), except that it applies to HTTP traffic.
@@ -113,75 +112,75 @@ The global object `$network` allows you to control the network configuration use
     * The port is optional. If not provided, it will be derived from the scheme. For example, for HTTP the port would be 80.
     * The username and password are assumed to be the result of a call to `encodeURIComponent()`. Special characters like `@` and `:` in the username and/or the password must be escaped.
 
-    <CollapserGroup>
-      <Collapser
-        id="setproxy-perurl-returns"
-        title="Returns"
-      >
-        This method returns a `Promise` that will resolve once the configuration has been applied.
-      </Collapser>
+      <CollapserGroup>
+        <Collapser
+          id="setproxy-perurl-returns"
+          title="Returns"
+        >
+          This method returns a `Promise` that will resolve once the configuration has been applied.
+        </Collapser>
 
-      <Collapser
-        id="setproxy-parameters"
-        title="Parameters"
-      >
-        <table>
-          <thead>
-            <tr>
-              <th style={{ width: "150px" }}>
-                Parameter
-              </th>
+        <Collapser
+          id="setproxy-parameters"
+          title="Parameters"
+        >
+          <table>
+            <thead>
+              <tr>
+                <th style={{ width: "150px" }}>
+                  Parameter
+                </th>
 
-              <th style={{ width: "150px" }}>
-                Data Type
-              </th>
+                <th style={{ width: "150px" }}>
+                  Data Type
+                </th>
 
-              <th>
-                Description
-              </th>
-            </tr>
-          </thead>
+                <th>
+                  Description
+                </th>
+              </tr>
+            </thead>
 
-          <tbody>
-            <tr>
-              <td>
-                `proxyURL | proxyUrlParsed`
-              </td>
+            <tbody>
+              <tr>
+                <td>
+                  `proxyURL | proxyUrlParsed`
+                </td>
 
-              <td>
-                String or Object
-              </td>
+                <td>
+                  String or Object
+                </td>
 
-              <td>
-                The URL to connect to the proxy server. A string containing a `proxyURL` (for example, `http://proxy_host:8888`) or a plain object in the same format as defined by [Node's `url.parse(urlString)` method](https://nodejs.org/api/url.html#url_url_strings_and_url_objects).
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </Collapser>
+                <td>
+                  The URL to connect to the proxy server. A string containing a `proxyURL` (for example, `http://proxy_host:8888`) or a plain object in the same format as defined by [Node's `url.parse(urlString)` method](https://nodejs.org/api/url.html#url_url_strings_and_url_objects).
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </Collapser>
 
-      <Collapser
-        id="setproxy-example"
-        title="Examples"
-      >
-        An example of setting a proxy server with HTTP protocol on port 1234 with no authentication:
+        <Collapser
+          id="setproxy-example"
+          title="Examples"
+        >
+          An example of setting a proxy server with HTTP protocol on port 1234 with no authentication:
 
-        ```
-        $network.setProxyForHttp('http://host.com:1234')
-        ```
+          ```
+          $network.setProxyForHttp('http://host.com:1234')
+          ```
 
-        An example of setting a proxy server with HTTP protocol with authentication credentials.
+          An example of setting a proxy server with HTTP protocol with authentication credentials.
 
-        ```
-        $network.setProxyForHttp('http://proxyUsername:proxyPassword@proxyHost:1234')
-        ```
-      </Collapser>
-    </CollapserGroup>
+          ```
+          $network.setProxyForHttp('http://proxyUsername:proxyPassword@proxyHost:1234')
+          ```
+        </Collapser>
+      </CollapserGroup>
   </Collapser>
 
   <Collapser
     id="setproxy-https"
-    title={<>$network.setProxyForHttps(string or object <var>PROXY URL</var>)</>}
+    title={<>$network.setProxyForHttps(string or object PROXY URL)</>}
   >
     <Callout variant="tip">
       This call is exactly the same as the [per-URL `setProxy` call](#setproxy-perurl), except that it applies to HTTPS traffic.
@@ -194,75 +193,75 @@ The global object `$network` allows you to control the network configuration use
     * The port is optional. If not provided, it will be derived from the scheme. For example, for HTTP the default port would be 443.
     * The username and password are assumed to be the result of a call to `encodeURIComponent()`. Special characters like `@` and `:` in the username and/or the password must be escaped.
 
-    <CollapserGroup>
-      <Collapser
-        id="setproxy-perurl-returns"
-        title="Returns"
-      >
-        This method returns a `Promise` that will resolve once the configuration has been applied.
-      </Collapser>
+      <CollapserGroup>
+        <Collapser
+          id="setproxy-perurl-returns"
+          title="Returns"
+        >
+          This method returns a `Promise` that will resolve once the configuration has been applied.
+        </Collapser>
 
-      <Collapser
-        id="setproxy-parameters"
-        title="Parameters"
-      >
-        <table>
-          <thead>
-            <tr>
-              <th style={{ width: "150px" }}>
-                Parameter
-              </th>
+        <Collapser
+          id="setproxy-parameters"
+          title="Parameters"
+        >
+          <table>
+            <thead>
+              <tr>
+                <th style={{ width: "150px" }}>
+                  Parameter
+                </th>
 
-              <th style={{ width: "150px" }}>
-                Data Type
-              </th>
+                <th style={{ width: "150px" }}>
+                  Data Type
+                </th>
 
-              <th>
-                Description
-              </th>
-            </tr>
-          </thead>
+                <th>
+                  Description
+                </th>
+              </tr>
+            </thead>
 
-          <tbody>
-            <tr>
-              <td>
-                `proxyURL | proxyUrlParsed`
-              </td>
+            <tbody>
+              <tr>
+                <td>
+                  `proxyURL | proxyUrlParsed`
+                </td>
 
-              <td>
-                String or Object
-              </td>
+                <td>
+                  String or Object
+                </td>
 
-              <td>
-                The URL to connect to the proxy server. A string containing a `proxyURL` (for example, `http://proxy_host:8888`) or a plain object in the same format as defined by [Node's `url.parse(urlString)` method](https://nodejs.org/api/url.html#url_url_strings_and_url_objects).
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </Collapser>
+                <td>
+                  The URL to connect to the proxy server. A string containing a `proxyURL` (for example, `http://proxy_host:8888`) or a plain object in the same format as defined by [Node's `url.parse(urlString)` method](https://nodejs.org/api/url.html#url_url_strings_and_url_objects).
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </Collapser>
 
-      <Collapser
-        id="setproxy-example"
-        title="Examples"
-      >
-        An example of setting a proxy server with HTTPS protocol on port 1234 with no authentication:
+        <Collapser
+          id="setproxy-example"
+          title="Examples"
+        >
+          An example of setting a proxy server with HTTPS protocol on port 1234 with no authentication:
 
-        ```
-        $network.setProxyForHttps('https://host.com:1234')
-        ```
+          ```
+          $network.setProxyForHttps('https://host.com:1234')
+          ```
 
-        An example of setting a proxy server with HTTPS protocol with authentication credentials.
+          An example of setting a proxy server with HTTPS protocol with authentication credentials.
 
-        ```
-        $network.setProxyForHttps('https://proxyUsername:proxyPassword@proxyHost:1234')
-        ```
-      </Collapser>
-    </CollapserGroup>
+          ```
+          $network.setProxyForHttps('https://proxyUsername:proxyPassword@proxyHost:1234')
+          ```
+        </Collapser>
+      </CollapserGroup>
   </Collapser>
 
   <Collapser
     id="setproxy-pac"
-    title={<>$network.setProxyPAC(string <var>PAC SCRIPT URL</var>, object <var>AUTH OBJECT</var>)</>}
+    title={<>$network.setProxyPAC(string PAC SCRIPT URL, object AUTH OBJECT)</>}
   >
     Sets a proxy server via a proxy auto-config (PAC) script and returns a promise. This function is only available for [scripted browser monitors](/docs/synthetics/new-relic-synthetics/scripting-monitors/write-scripted-browsers).
 
@@ -335,15 +334,16 @@ The global object `$network` allows you to control the network configuration use
 
         ```
         var authCredentialsMap = {
-        'example.com': {username: '<var>authUsername</var>', password: '<var>authPassword</var>'},
+        'example.com': {username: 'authUsername', password: 'authPassword'},
         }
         ```
 
         Here's an example of setting up a proxied network via proxy auto-config (PAC) script:
+
         ```
         var authCredentialsMap = {
-        'example.com': {username: '<var>authUsername</var>', password: '<var>authPassword</var>'},
-        'anotherExample.com': {username: '<var>authUsername</var>', password: '<var>authPassword</var>'},
+        'example.com': {username: 'authUsername', password: 'authPassword'},
+        'anotherExample.com': {username: 'authUsername', password: 'authPassword'},
         }
 
         $network.setProxyPAC("https://www.example.com/pacScript", authCredentialsMap)
@@ -354,7 +354,7 @@ The global object `$network` allows you to control the network configuration use
 
   <Collapser
     id="setproxy-advanced"
-    title={<>$network.setProxyAdvanced(object <var>PROXY RULES OBJECT</var>)</>}
+    title={<>$network.setProxyAdvanced(object PROXY RULES OBJECT)</>}
   >
     <Callout variant="tip">
       This method is **Chrome-specific**: it only applies to scripted browser monitor types. It can be used to allow for a more flexible and complex proxy configuration. In most cases, this method will not be needed.
@@ -431,7 +431,7 @@ The global object `$network` allows you to control the network configuration use
 
         ```
         var proxyRules =
-          {singleProxy: {host:"http://entproxy.mycompany.com"},
+          {singleProxy: {host:"entproxy.mycompany.com", port:8888, scheme:"http"},
           bypassList:['s3.amazonaws.com','*.localcdn.com']
           }
         $network.setProxyAdvanced(proxyRules)

@@ -48,7 +48,7 @@ However, the Python agent API is much more powerful and is best for setting up m
 
 ## Monitor transactions and segments [#transaction-segments]
 
-The Python agent is [compatible with most of the common WSGI web frameworks](/docs/agents/python-agent/getting-started/compatibility-requirements-python-agent). If the agent supports your framework, web requests automatically will be captured as [transactions](/docs/accounts-partnerships/education/getting-started-new-relic/glossary#transaction) and displayed in the New Relic One UI. A transaction can also have function-level segments that are captured as part of a [transaction trace](/docs/accounts-partnerships/education/getting-started-new-relic/glossary#transaction-trace).
+The Python agent is [compatible with most of the common WSGI web frameworks](/docs/agents/python-agent/getting-started/compatibility-requirements-python-agent). If the agent supports your framework, web requests automatically will be captured as [transactions](/docs/accounts-partnerships/education/getting-started-new-relic/glossary#transaction) and displayed in the New Relic UI. A transaction can also have function-level segments that are captured as part of a [transaction trace](/docs/accounts-partnerships/education/getting-started-new-relic/glossary#transaction-trace).
 
 Use these methods to monitor web transactions, non-web transactions, and transaction segments:
 
@@ -73,6 +73,16 @@ Use these methods to monitor web transactions, non-web transactions, and transac
 
       <td>
         The Python agent automatically captures web transactions for [supported frameworks](/docs/agents/python-agent/getting-started/compatibility-requirements-python-agent). If you do not have a supported framework, you can use the [`wsgi_application`](/docs/agents/python-agent/python-agent-api/wsgi_application) function to monitor your WSGI entry point.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Monitor ASGI web transactions
+      </td>
+
+      <td>
+        The Python agent automatically captures web transactions for [supported frameworks](/docs/agents/python-agent/getting-started/compatibility-requirements-python-agent). If you do not have a supported framework, you can use the [`asgi_application`](/docs/apm/agents/python-agent/python-agent-api/asgi_application) function to monitor your ASGI entry point.
       </td>
     </tr>
 
@@ -164,7 +174,7 @@ Use these calls when you want to change the metadata of an existing transaction:
       </td>
 
       <td>
-        Add [custom attributes](/docs/accounts-partnerships/education/getting-started-new-relic/glossary#attribute) to your transactions using [`add_custom_parameter`](/docs/agents/python-agent/python-agent-api/add_custom_parameter), or use other API calls to [report custom data](#custom-data).
+        Add [custom attributes](/docs/new-relic-solutions/get-started/glossary/#attribute) to your transactions using [`add_custom_attribute`](/docs/agents/python-agent/python-agent-api/add_custom_attribute), or use other API calls to [report custom data](#custom-data).
       </td>
     </tr>
 
@@ -264,7 +274,7 @@ Use these methods to create new event data and new metric data:
       </td>
 
       <td>
-        To add attributes to events for more detailed querying or error analytics, use [`add_custom_parameter`](/docs/agents/python-agent/python-agent-api/add_custom_parameter).
+        To add attributes to events for more detailed querying or error analytics, use [`add_custom_attribute`](/docs/agents/python-agent/python-agent-api/add_custom_attribute).
       </td>
     </tr>
 

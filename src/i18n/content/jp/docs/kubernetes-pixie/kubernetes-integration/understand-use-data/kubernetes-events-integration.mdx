@@ -8,26 +8,26 @@ metaDescription: The Kubernetes events integration for infrastructure monitoring
 translationType: machine
 ---
 
-New Relic Kubernetes events integration は、Kubernetes クラスタで発生しているイベントを監視し、そのイベントを New Relic に送信します。イベントデータを可視化するには、 [Kubernetes クラスターエクスプローラー](/docs/integrations/kubernetes-integration/cluster-explorer/kubernetes-cluster-explorer) を [New Relic One](/docs/new-relic-one/use-new-relic-one/get-started/introduction-new-relic-one) プラットフォームで使用するか、インフラストラクチャ [events UI](/docs/infrastructure/new-relic-infrastructure/infrastructure-ui-pages/infrastructure-events-page-live-feed-every-config-change) を使用します。
+New Relic Kubernetesイベント統合は、Kubernetesクラスターで発生するイベントを監視し、それらのイベントをNewRelicに送信します。イベントデータを視覚化するには、 [Kubernetesクラスターエクスプローラー](/docs/integrations/kubernetes-integration/cluster-explorer/kubernetes-cluster-explorer)を使用するか、インフラストラクチャ[イベントUI](/docs/infrastructure/new-relic-infrastructure/infrastructure-ui-pages/infrastructure-events-page-live-feed-every-config-change)を使用します。
 
-## インストレーション [#installation]
+## インストール [#installation]
 
-Kubernetes Events integraitonは、当社の [Guided Install](/docs/kubernetes-pixie/kubernetes-integration/installation/kubernetes-integration-install-configure) を使用した場合と、 [Helmを使用してインストールした場合の両方において、デフォルトでインストールされます。](/docs/kubernetes-pixie/kubernetes-integration/installation/install-kubernetes-integration-using-helm) 。
+[ガイド付きインストール](/docs/kubernetes-pixie/kubernetes-integration/installation/kubernetes-integration-install-configure)を使用する場合、または[Helm を介して](/docs/kubernetes-pixie/kubernetes-integration/installation/install-kubernetes-integration-using-helm)インストールする場合の両方で、Kubernetes イベント統合がデフォルトでインストールされます。
 
 ## あなたのKubernetesイベントを見る [#use-data]
 
-Kubernetesのイベント統合のインストールに成功したら、New Relicでイベントを表示したり、問い合わせたりすることができます。
+Kubernetes イベント統合を正常にインストールしたら、New Relic でイベントを表示およびクエリできます。
 
-[New Relic One ダッシュボードにイベントを追加するには](/docs/dashboards/new-relic-one-dashboards/get-started/introduction-new-relic-one-dashboards):
+[ダッシュボード](/docs/dashboards/new-relic-one-dashboards/get-started/introduction-new-relic-one-dashboards)にイベントを追加するには：
 
 1. [新規または既存のダッシュボード](/docs/query-your-data/explore-query-data/dashboards/introduction-dashboards/) にチャートを追加したり、New Relic [クエリビルダー](/docs/chart-builder/use-chart-builder/get-started/introduction-chart-builder) を使ってチャートを作成したりします。
 
-2. チャートを作成または更新する際には、チャートタイプ **テーブル** を選択し、次のイベントクエリを使用します。 <var>YOUR_CLUSTER_NAME</var> をお客様のクラスタ名に置き換えてください。
+2. グラフを作成または更新するときは、グラフ タイプ**のテーブル**を選択し、次のイベント クエリを使用して、 `YOUR_CLUSTER_NAME`をクラスターの名前に置き換えます。
 
-   ```
+   ```sql
    FROM InfrastructureEvent SELECT
-   event.involvedObject.kind,event.involvedObject.name,event.reason,event.message
-   WHERE clusterName = '<var>YOUR_CLUSTER_NAME</var>' limit 100
+   event.involvedObject.kind, event.involvedObject.name, event.reason,event.message
+   WHERE clusterName = 'YOUR_CLUSTER_NAME' limit 100
    ```
 
 ## イベント検索 [#data-insights]
@@ -38,83 +38,72 @@ Kubernetesのイベント統合のインストールに成功したら、New Rel
 
 すべての属性名を見るには、次のようなクエリを使用します。
 
-```
+```sql
 FROM InfrastructureEvent SELECT keyset() WHERE category = 'kubernetes'
 ```
 
 ### イベントの詳細を見る [#event-details]
 
-クラスタの最新イベントの詳細を確認するには、次のクエリを使用します。 <var>YOUR_CLUSTER_NAME</var> をクラスタの名前に置き換えてください。
+クラスター内の最新のイベントの詳細を表示するには、次のクエリを使用して、 `YOUR_CLUSTER_NAME`をクラスターの名前に置き換えます。
 
-```
+```sql
 FROM InfrastructureEvent SELECT event.involvedObject.kind,
 event.involvedObject.name, event.type, event.message, event.reason WHERE
-category = 'kubernetes' AND clusterName='<var>YOUR_CLUSTER_NAME</var>'​
+category = 'kubernetes' AND clusterName = 'YOUR_CLUSTER_NAME'
 ```
 
 New Relic が収集するイベントは、Kubernetes が与える属性と全く同じものになります。これらの属性の参照については、 [Kubernetes event v1 core documentation](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#event-v1-core) をご参照ください。
 
 ### New Relicでのイベント検索 [#data-infrastructure]
 
-New Relic Infrastructure UI でイベントを検索するには、以下の方法があります。
+インフラストラクチャ UI でイベントを検索するには:
 
-1. [Navigate to Infrastructure event page](http://one.newrelic.com): Go to [**one.newrelic.com**](http://one.newrelic.com) **> Infrastructure** **> **.
+1. [イベント ページに移動します](https://one.newrelic.com)。 **[one.newrelic.com](https://one.newrelic.com/all-capabilities) > Infrastructure > Events**に移動します。
 
 2. **カテゴリー** で、 **kubernetes** を選択します。
 
-3. 特定のイベントを探すには、
+3. 使用
 
    <Icon name="fe-search"/>
 
-   **Search events** フィールドを使用します。特定のイベントのセットに焦点を当てるには、 [フィルターセット](/docs/scopes-organize-your-infrastructure) を選択または変更します。
+   特定のイベントを 検索するには、**Search events** \[イベントを検索] フィールドを使用します。特定のイベント セットに焦点を当てるには、フィルター セットを選択または変更します。
 
 ### Kubernetesクラスタエクスプローラでのイベント表示 [#data-cluster]
 
 Kubernetesのクラスタエクスプローラでイベントを表示するには、以下のいずれかの方法を使用します。
 
-* **In New Relic One**: Go to **[one.newrelic.com](http://one.newrelic.com) > Kubernetes cluster explorer**.
+* **New Relic の**場合: **[one.newrelic.com](https://one.newrelic.com/all-capabilities) > Kubernetes クラスター エクスプローラー**に移動します。
 
 続いて、ポッドの詳細を表示する。
 
 1. Kubernetesクラスタエクスプローラで、ポッドを選択します。
 2. Select **Show pod events**.
 
-## オプションです。イベントコレクターのメトリクスを収集する [#events-mentrics]
+## オプションです。イベントコレクターのメトリクスを収集する [#events-metrics]
 
-イベントコレクター自体のメトリックデータを収集するには、New Relic Prometheus OpenMetricsインテグレーションをインストールします。始めるには
+イベントコレクター自体のメトリックデータを収集するには、New Relic Prometheus エージェント統合をインストールします。開始するには:
 
-1. New Relic のインストール [Prometheus OpenMetrics インテグレーション](/docs/integrations/prometheus-integrations/prometheus-kubernetes/new-relic-prometheus-openmetrics-integration-kubernetes).
-2. 設定したスクレイプラベル（デフォルトは `prometheus.io/scrape=true` ）でKubernetesイベント統合のデプロイをラベル付けします。
+1. New Relic [Prometheus エージェント統合](/docs/infrastructure/prometheus-integrations/install-configure-prometheus-agent/install-prometheus-agent/)をインストールします。
+2. Kubernetesイベント統合のデプロイに、設定済みのスクレイプラベルでラベルを付けます（デフォルトは`prometheus.io/scrape=true` ）。
 
 ## オプションカスタム属性の定義 [#custom-attributes]
 
-インテグレーションから送信されるイベントにカスタム属性を追加するには、 `NRI_KUBE_EVENTS_attributeKey=attributeValue` のように、環境変数として指定する必要があります。これらの環境変数は、 `kube-events` コンテナの仕様の一部として定義する必要があります。
+統合によって送信されるイベントにカスタム属性を追加するには、これらを`customAttributes`マップの下の[values.yaml](https://github.com/newrelic/nri-kube-events/blob/main/charts/nri-kube-events/values.yaml)で指定する必要があります。
 
-たとえば、すべてのイベントに `environment` with value `staging` という属性を追加するには、マニフェストに次のように記述します。
+たとえば、値`dev`の属性`environment`をすべてのイベントに追加するには、以下を`values.yaml`に追加します。
 
+```yml
+nri-kube-events:
+  customAttributes:
+    environment: dev
 ```
-env:
-  - name: NRI_KUBE_EVENTS_environment
-    value: dev
-```
 
-`kube-events` コンテナのspecに環境を必ず指定して、マニフェストを以下のようにします。
+グローバルに設定することで、他のすべてのkubernetes統合に他のカスタム属性をグローバルに追加できます。
 
-```
-...
-kind: Deployment
-...
-spec:
-  ...
-  template:
-    ...
-    spec:
-      containers:
-        - name: kube-events
-          ...
-          env:
-            - name: NRI_KUBE_EVENTS_environment
-              value: dev
+```yml
+global:
+  customAttributes:
+    environment: dev
 ```
 
 ## トラブルシューティング
@@ -128,11 +117,11 @@ spec:
   >
     イベントコレクターのログを確認するために
 
-    ```
+    ```bash
     kubectl logs deploy/nr-kube-events kube-events
     ```
 
-    詳細を表示するには、設定ファイルの `verbose:"true"` を `config` セクションに、 `clusterName` の前か後に追加して、冗長モードを有効にします。
+    詳細を追加するには、設定ファイルの`config`セクションに`clusterName`の前または後に`verbose: "true"`を追加して、冗長モードを有効にします。
   </Collapser>
 
   <Collapser
@@ -141,7 +130,7 @@ spec:
   >
     イベントをNew Relicに送信する責任のあるエージェントのログを確認するため。
 
-    ```
+    ```bash
     kubectl logs deploy/nr-kube-events infra-agent
     ```
   </Collapser>

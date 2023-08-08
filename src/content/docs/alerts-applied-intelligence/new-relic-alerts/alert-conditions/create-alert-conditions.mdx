@@ -23,10 +23,14 @@ A condition describes a monitored data source and the behavior of that data sour
 
 Related documentation:
 
-* [Basic concepts and workflow](/docs/alerts/new-relic-alerts/getting-started/alert-policy-workflow)
+* [Basic concepts and workflow](/docs/alerts-applied-intelligence/applied-intelligence/incident-intelligence/basic-alerting-concepts)
 * [Min/max limits](/docs/alerts/new-relic-alerts/getting-started/minimum-maximum-values#limits) (like maximum number of conditions per policy)
 * [REST API](/docs/alerts/rest-api-alerts/new-relic-alerts-rest-api/rest-api-calls-new-relic-alerts) to list or edit alert settings
 * [NRQL Condition NerdGraph API](/docs/alerts/alerts-nerdgraph/nerdgraph-examples/nerdgraph-api-alerts-nrql-conditions) to manage your NRQL conditions via NerdGraph.
+
+If you haven't already, create your free New Relic account below to start monitoring your data today.
+
+<InlineSignup/>
 
 ## Create a condition [#create-condition]
 
@@ -63,21 +67,14 @@ Here are descriptions of the different types of conditions:
     id="apm-conditions"
     title="APM metric alert conditions"
   >
-    See [APM metric alert conditions](/docs/alerts-applied-intelligence/new-relic-alerts/alert-conditions/apm-metric-alert-conditions) for tips about creating APM conditions using NRQL.
+    See [APM metric alert conditions](/docs/alerts-applied-intelligence/new-relic-alerts/alert-conditions/apm-metric-alert-conditions) for tips about creating <InlinePopover type="apm" /> conditions using NRQL.
   </Collapser>
 
   <Collapser
-    id="baseline-conditions"
-    title="Baseline conditions"
+    id="anomaly-conditions"
+    title="Anomaly conditions"
   >
-    [Baseline alerting](/docs/alerts/new-relic-alerts/configuring-alert-policies/create-baseline-alert-conditions) allows you to create conditions that dynamically adjust to changing data and trends, such as weekly or seasonal patterns. This feature is available for [APM](/docs/apm/new-relic-apm/getting-started/welcome-new-relic-apm) and [browser monitoring](/docs/browser/new-relic-browser/getting-started/new-relic-browser) apps, as well as [NRQL queries](/docs/alerts/new-relic-alerts/defining-conditions/create-alert-conditions-nrql-queries).
-  </Collapser>
-
-  <Collapser
-    id="outlier-detection"
-    title="Outlier detection conditions"
-  >
-    [Outlier detection](/docs/outlier-detection-nrql-alerts) attempts to find groupings in your data and then looks for values that are outliers from those groupings. Outlier detection is available only for NRQL alerts.
+    [Anomaly alerting](/docs/alerts/new-relic-alerts/configuring-alert-policies/create-anomaly-alert-conditions) allows you to create conditions that dynamically adjust to changing data and trends, such as weekly or seasonal patterns. This feature is available for [APM](/docs/apm/new-relic-apm/getting-started/welcome-new-relic-apm) and [browser monitoring](/docs/browser/new-relic-browser/getting-started/new-relic-browser) apps, as well as [NRQL queries](/docs/alerts/new-relic-alerts/defining-conditions/create-alert-conditions-nrql-queries).
   </Collapser>
 
   <Collapser
@@ -116,7 +113,7 @@ Here are descriptions of the different types of conditions:
     * CPU utilization time
     * Garbage collection CPU time
 
-    Violations will automatically close when the inverse of the threshold is met, but by using the UI you can also change the time when a [violation](/docs/using-new-relic/welcome-new-relic/get-started/glossary#alert-violation) force-closes for a JVM health metric. Default is 24 hours.
+      Violations will automatically close when the inverse of the threshold is met, but by using the UI you can also change the time when a [violation](/docs/using-new-relic/welcome-new-relic/get-started/glossary#alert-violation) force-closes for a JVM health metric. Default is 24 hours.
   </Collapser>
 
   <Collapser
@@ -131,10 +128,10 @@ Here are descriptions of the different types of conditions:
 
     To define the percentile threshold:
 
-    1. Select **Web transactions percentiles** as the type of condition for your APM app's condition, then select a single app. (To alert on more than one app, create an individual **Web transactions percentiles** condition for each.)
+    1. Select **Web transactions percentiles** as the type of condition for your <InlinePopover type="apm" /> app's condition, then select a single app. (To alert on more than one app, create an individual **Web transactions percentiles** condition for each.)
     2. To define the thresholds that open the violation, type the **Percentile nth** response time value, then select its frequency (above, below, or equal to this value).
 
-    We store the transaction time in milliseconds, although the user interface shows the Critical and Warning values as seconds. If you want to define milliseconds, be sure to include the decimal point in your value.
+       We store the transaction time in milliseconds, although the user interface shows the Critical and Warning values as seconds. If you want to define milliseconds, be sure to include the decimal point in your value.
   </Collapser>
 
   <Collapser
@@ -152,16 +149,16 @@ Here are descriptions of the different types of conditions:
     1. Select **APM > Application metric** as the product type.
     2. When identifying entities, select the **Labels** tab. Search for a label by name, or select a label from the list of categories.
 
-    You can also create conditions directly within the context of what you are monitoring with [Infrastructure](/docs/infrastructure/new-relic-infrastructure/configuration/infrastructure-alerts-add-edit-or-view-host-alert-information).
+       You can also create conditions directly within the context of what you are monitoring with [Infrastructure](/docs/infrastructure/new-relic-infrastructure/configuration/infrastructure-alerts-add-edit-or-view-host-alert-information).
   </Collapser>
 
   <Collapser
     id="infrastructure"
     title="Infrastructure conditions"
   >
-    You can [create conditions for your resources](/docs/infrastructure/new-relic-infrastructure/configuration/infrastructure-alerts-add-edit-or-view-host-alert-information) directly in Infrastructure.
+    You can [create conditions for your resources](/docs/infrastructure/new-relic-infrastructure/configuration/infrastructure-alerts-add-edit-or-view-host-alert-information) directly from our infrastructure monitoring UI.
 
-    For example, if you want to be notified when we have stopped receiving data from an Infrastructure agent, use the [host not reporting](/docs/infrastructure/new-relic-infrastructure/configuration/create-infrastructure-host-not-reporting-condition) condition type. This allows you to dynamically alert on filtered groups of hosts and configure the time window from 5 to 60 minutes.
+    For example, if you want to be notified when we have stopped receiving data from an infrastructure agent, use the [host not reporting](/docs/infrastructure/new-relic-infrastructure/configuration/create-infrastructure-host-not-reporting-condition) condition type. This allows you to dynamically alert on filtered groups of hosts and configure the time window from 5 to 60 minutes.
   </Collapser>
 </CollapserGroup>
 
@@ -178,7 +175,7 @@ If you want to change the default condition name, make it short and descriptive.
 
 To change an existing condition's name:
 
-1. In the **[one.newrelic.com](https://one.newrelic.com/ "Link opens in a new window.")** top nav, click **Alerts & AI**, click **Alert policies**, then **(select a policy)**.
+1. Go to **[one.newrelic.com](https://one.newrelic.com/all-capabilities) > Alerts & AI > Alert conditions (policies) > (select a policy)**.
 2. Click a condition name to edit it, and then type a meaningful name for the condition.
 
 You can't edit the product and condition type associated with a condition. Instead, you must delete the condition and create a new one with a different product and condition type.
@@ -200,7 +197,7 @@ You may also manage your policies via [the policies NerdGraph API](/docs/alerts/
 
 The policies index lists them in alphabetical order. To view or search for existing conditions:
 
-1. In the **[one.newrelic.com](https://one.newrelic.com/ "Link opens in a new window.")** top nav, click **Alerts & AI**, then click **Alert policies**.
+1. Go to **[one.newrelic.com](https://one.newrelic.com/all-capabilities) > Alerts & AI > Alert conditions (policies)**.
 2. Use the search box, sort any column, or scroll the list, then select a policy's name to see its conditions.
 
 To view [policy and condition information for a specific entity](/docs/alerts/new-relic-alerts-beta/configuring-alert-policies/view-policy-conditions-new-relic-products): From that entity's product UI, select **Settings**, then click **Alert conditions**.

@@ -7,17 +7,15 @@ metaDescription: Read about assorted technical rules and min/max limits for aler
 translationType: machine
 ---
 
-このドキュメントには、New Relic のアラート機能に関する技術的なルールや制限事項が記載されています。
+New Relic アラートと応用インテリジェンスに関する制限とルール:
 
-なお、New Relic の組織に複数のアカウントがある場合、 **あるアカウントが他のアカウントのアラートポリシーを継承することはありません。** アカウントごとにアラートポリシーを個別に作成する必要があります。
-
-以下のルールは、New Relic One のユーザーインターフェースと REST API (v2) の両方に適用されます。
+該当なし
 
 <table>
   <thead>
     <tr>
-      <th width={250}>
-        **アラート**
+      <th width={275}>
+        **限定状態**
       </th>
 
       <th>
@@ -51,7 +49,7 @@ translationType: machine
       </td>
 
       <td>
-        64文字
+        128文字
       </td>
     </tr>
 
@@ -70,20 +68,6 @@ translationType: machine
     </tr>
 
     <tr>
-      <td>
-        [ポリシーごとの製品](/docs/alerts/new-relic-alerts-beta/getting-started/new-relic-alerts)
-      </td>
-
-      <td>
-        New Relic 製品（APM、モバイルモニタリング、シンセティックモニタリングなど）のいずれか。
-      </td>
-
-      <td>
-        すべてのNew Relic製品
-      </td>
-    </tr>
-
-    <tr>
       <td id="condition">
         **アラート状態。**
       </td>
@@ -91,6 +75,20 @@ translationType: machine
       <td/>
 
       <td/>
+    </tr>
+
+    <tr>
+      <td>
+        アカウントごと、1 分あたりの一致したデータ ポイント ([詳細](#query-limit))
+      </td>
+
+      <td>
+        該当なし
+      </td>
+
+      <td>
+        300M
+      </td>
     </tr>
 
     <tr>
@@ -139,7 +137,7 @@ translationType: machine
       <td>
         [NRQLクエリ条件](/docs/alerts/new-relic-alerts/defining-conditions/define-alert-conditions#nrql-conditions)
 
-        または
+        また
 
         [Webアプリのレスポンスパーセンタイル](/docs/alerts/new-relic-alerts/defining-conditions/define-alert-conditions#app-response-percentiles) per account
       </td>
@@ -163,7 +161,7 @@ translationType: machine
       </td>
 
       <td>
-        1つ以上の製品から1000個のターゲット
+        NRQL 条件の場合は 5000 ターゲット 非 NRQL 条件の場合は 1000 ターゲット
       </td>
     </tr>
 
@@ -173,17 +171,17 @@ translationType: machine
       </td>
 
       <td>
-        0 警告、1 危険
+        警告 1 つまたは重大 1 つ
       </td>
 
       <td>
-        1ワーニング、1クリティカル
+        1 つの警告と 1 つのクリティカル
       </td>
     </tr>
 
     <tr>
       <td id="violation">
-        **アラート違反です。**
+        **アラート インシデント:**
       </td>
 
       <td/>
@@ -193,7 +191,7 @@ translationType: machine
 
     <tr>
       <td>
-        [カスタム違反の説明](/docs/alerts-applied-intelligence/new-relic-alerts/alert-conditions/alert-custom-violation-descriptions)
+        [カスタム インシデントの説明](/docs/alerts-applied-intelligence/new-relic-alerts/alert-conditions/alert-custom-violation-descriptions)
       </td>
 
       <td/>
@@ -205,13 +203,11 @@ translationType: machine
 
     <tr>
       <td>
-        [条件違反の期間](/docs/alerts/new-relic-alerts-beta/configuring-alert-policies/define-thresholds-trigger-alert)
+        [状態インシデントの期間](/docs/alerts/new-relic-alerts-beta/configuring-alert-policies/define-thresholds-trigger-alert)
       </td>
 
       <td>
-        5分
-
-        **例外：** 1分間で `少なくとも1回` 条件を満たした場合、最初の1分間（または任意の1分間）に違反が発生する可能性があるため。
+        30秒
       </td>
 
       <td>
@@ -221,41 +217,79 @@ translationType: machine
 
     <tr>
       <td>
-        インシデントあたりの違反件数
+        問題ごとのインシデント数
       </td>
 
       <td>
-        1つの違反
+        1件
       </td>
 
       <td>
-        10,000件のバイオレーション
+        10,000 件のインシデント
 
-        この制限を超えた違反行為は、持続されません。
+        この制限を超えるインシデントは保持されません。
       </td>
     </tr>
 
     <tr>
       <td>
-        違反行為検索API - ページサイズ
+        インシデント検索 API: ページサイズ
       </td>
 
       <td>
-        1ページ(25違反以下)
+        1 ページ (25 件以下)
       </td>
 
       <td>
-        1000ページ（25Kバイオレーション）
+        1000 ページ (25,000 件のインシデント)
 
         <Callout variant="tip">
-          すべての未解決違反を取得するには、 `only-open` パラメータのみを使用してください。25K 以上の未解決違反があり、REST API で取得する必要がある場合は、New Relic サポートまでお問い合わせください。
+          未解決のインシデントをすべて取得するには、 `only-open` パラメータのみを使用します。25,000 件を超える未解決のインシデントがあり、REST API 経由でそれらを取得する必要がある場合は、サポートにお問い合わせください。
         </Callout>
       </td>
     </tr>
 
     <tr>
+      <td id="workflows">
+        **ワークフロー:**
+      </td>
+
+      <td/>
+
+      <td/>
+    </tr>
+
+    <tr>
+      <td>
+        [アカウントごとのワークフロー](/docs/alerts-applied-intelligence/applied-intelligence/incident-workflows/incident-workflows)
+      </td>
+
+      <td>
+        該当なし
+      </td>
+
+      <td>
+        初期制限 1000
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        ワークフロー フィルター サイズ
+      </td>
+
+      <td>
+        1文字
+      </td>
+
+      <td>
+        ワークフローあたり 4096 文字
+      </td>
+    </tr>
+
+    <tr>
       <td id="channel">
-        **通知チャンネル。**
+        **通知チャネル (レガシー):**
       </td>
 
       <td/>
@@ -308,3 +342,29 @@ translationType: machine
     </tr>
   </tbody>
 </table>
+
+## NRDB アラート クエリに一致する 1 分あたりのデータ ポイント [#query-limit]
+
+アラート条件 `Matched data points per minute` 制限は、New Relic [アカウント](/docs/accounts/accounts-billing/account-structure/new-relic-account-structure) 内のアラート クエリの一致 [データ ポイント](/docs/alerts-applied-intelligence/new-relic-alerts/advanced-alerts/understand-technical-concepts/streaming-alerts-key-terms-concepts)の合計レートに適用されます。
+
+この制限を超えると、レートが制限を下回るまで、影響を受けるアカウントの条件を作成または更新できなくなります。既存のアラート条件は影響 **を受けません** 。
+
+[制限 UI](/docs/data-apis/manage-data/view-system-limits)で、一致したデータ ポイントと制限違反を確認できます。
+
+どのような条件が最大のスループットにつながっているかを理解するには、次のようなクエリを実行できます。
+
+```sql
+FROM NrAiSignal 
+SELECT sum(aggregatedDataPointsCount) AS 'alert matched data points' 
+FACET conditionId
+```
+
+一致したデータ ポイントを最適化するためのヒント:
+
+* [スライディング ウィンドウ](/docs/alerts-applied-intelligence/new-relic-alerts/alert-conditions/create-nrql-alert-conditions/#sliding-window-aggregation)を使用している場合は、データ ポイントの数が大幅に増加する可能性があることに注意してください。データ ポイントの数を減らすには、より長い集計期間を使用できます。
+* `WHERE` 句を使用して、アラート対象のデータ量を絞り込みます。 `FACET` の代わりに `WHERE` を使用すると、場合によってはより効率的なアラートを生成できます。
+* 同様のアラートを結合します。類似したアラート条件が複数ある場合は、組み合わせフィルターを使用してそれらをグループ化することを検討してください。
+
+制限の引き上げをリクエストするには、New Relic アカウント担当者にお問い合わせください。
+
+[スライディング ウィンドウ](/docs/query-your-data/nrql-new-relic-query-language/nrql-query-tutorials/create-smoother-charts-sliding-windows) を使用すると、データ ポイントの数が大幅に増加する可能性があることに注意してください。生成されるデータ ポイントの数を減らすために、スライディング ウィンドウ集計の期間を長くすることを検討してください。

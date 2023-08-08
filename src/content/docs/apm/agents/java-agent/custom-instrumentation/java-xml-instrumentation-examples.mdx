@@ -18,7 +18,7 @@ For your New Relic-monitored Java application, one [custom instrumentation](/doc
 
 ## Edit XML file in UI [#ui]
 
-To edit your XML file directly from the New Relic UI: Go to **[one.newrelic.com](https://one.newrelic.com) > APM > (select an app) > Settings > Instrumentation**. From here you can:
+To edit your XML file directly from the New Relic UI: Go to **[one.newrelic.com](https://one.newrelic.com/all-capabilities) > APM & services > (select an app) > Settings > Instrumentation**. From here you can:
 
 * Download a sample XML file.
 * Select an edit existing XML file.
@@ -267,11 +267,11 @@ The XML file format includes root and child nodes.
             A boolean indicating whether to match lambdas.
 
             The `traceLambda` node has the attributes:
-            - `includeNonstatic` - a boolean indicating whether to match non static methods (defaults to false);
-            - `pattern` - a string with the pattern to search for the lambda methods.
+
+            * `includeNonstatic` - a boolean indicating whether to match non static methods (defaults to false);
+            * `pattern` - a string with the pattern to search for the lambda methods.
           </td>
         </tr>
-
       </tbody>
     </table>
   </Collapser>
@@ -327,7 +327,7 @@ The XML file format includes root and child nodes.
             * Do not use generics with collection objects. For example, write `java.util.List` instead of `java.util.List<String>`.
             * Include brackets for arrays. For example, an array of integers will be `int[ ]` and an array of strings will be `java.lang.String[ ]`.
             * Include two sets of brackets for an array of arrays. For example, an array of arrays of longs would be `long[ ][ ]`.
-            * To send the parameter as an analytic event to New Relic One, add an XML attribute to the type element called `attributeName`.
+            * To send the parameter as an analytic event to New Relic, add an XML attribute to the type element called `attributeName`.
             * To use a method with no parameters, the `parameters` node needs to be present to match a "no arguments" method.
           </td>
         </tr>
@@ -355,7 +355,7 @@ Here is a sample class and an XML file that could be used to instrument that cla
     id="package-test"
     title="Sample class"
   >
-    ```
+    ```java
     package test;
 
     import java.util.HashMap;
@@ -416,12 +416,13 @@ Here is a sample class and an XML file that could be used to instrument that cla
     id="sample-xml-file"
     title="Sample XML instrumentation file and explanation"
   >
-    ```
+    ```xml
     <?xml version="1.0" encoding="UTF-8"?>
     <extension xmlns="https://newrelic.com/docs/java/xsd/v1.0"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="newrelic-extension extension.xsd "
-        name="customExtension" version="1.0">
+      xsi:schemaLocation="newrelic-extension extension.xsd"
+      name="customExtension" version="1.0">
+
       <instrumentation metricPrefix="EXAMPLE">
         <pointcut transactionStartPoint="true">
 
@@ -443,14 +444,16 @@ Here is a sample class and an XML file that could be used to instrument that cla
           </method>
         </pointcut>
 
-        <pointcut transactionStartPoint="false" ignoreTransaction="false"
+        <pointcut transactionStartPoint="false" 
+          ignoreTransaction="false"
           excludeFromTransactionTrace="false"
           metricNameFormat="SampleTester/methods">
+          
           <className>test.SampleTester</className>
           <method>
             <name>printMaxRepeat</name>
           </method>
-         <method>
+          <method>
             <name>printMax</name>
           </method>
         </pointcut>

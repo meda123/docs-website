@@ -12,7 +12,7 @@ redirects:
   - /docs/agents/java-agent/instrumentation/browser-monitoring-best-practices-java
 ---
 
-You can use [browser monitoring](/docs/browser/new-relic-browser/getting-started/introduction-new-relic-browser) with APM for Java to measure end-user load times. This document explains best practices for setting up browser monitoring. For information on how to set up browser monitoring for your Java app, see [Browser monitoring and the Java agent](/docs/agents/java-agent/instrumentation/page-load-timing-java).
+You can use [browser monitoring](/docs/browser/new-relic-browser/getting-started/introduction-new-relic-browser) with <InlinePopover type="apm" /> for Java to measure end-user load times. This document explains best practices for setting up browser monitoring. For information on how to set up browser monitoring for your Java app, see [Browser monitoring and the Java agent](/docs/agents/java-agent/instrumentation/page-load-timing-java).
 
 ## Ensure you are using the Apache Jasper compiler. [#jasper]
 
@@ -32,7 +32,7 @@ The New Relic Java agent only auto-instruments pages compiled with the Apache Ja
 <html>
 <head>
 <meta charset="utf-8">
-<mark><%= com.newrelic.api.agent.NewRelic.getBrowserTimingHeader() %></mark>
+<%= com.newrelic.api.agent.NewRelic.getBrowserTimingHeader() %>
  . . .
 </head>
 ```
@@ -44,7 +44,7 @@ The `X-UA-Compatible` meta tag should be within the meta tags immediately after 
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=9">
-<mark><%= com.newrelic.api.agent.NewRelic.getBrowserTimingHeader() %></mark>
+<%= com.newrelic.api.agent.NewRelic.getBrowserTimingHeader() %>
  . . .
 </head>
 ```

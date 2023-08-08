@@ -49,7 +49,7 @@ This is the recommended method for New Relic installation and maintenance.
       <td>
         **Configure the New Relic apt repository.**
 
-        ```
+        ```bash
         echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' | sudo tee /etc/apt/sources.list.d/newrelic.list
         ```
 
@@ -69,7 +69,7 @@ This is the recommended method for New Relic installation and maintenance.
 
         This step is required to register New Relic as an authenticated source where apt-get will look for new packages. To get the New Relic public apt-key from global key servers, run the following command as root:
 
-        ```
+        ```bash
         wget -O- https://download.newrelic.com/548C16BF.gpg | sudo apt-key add -
         ```
 
@@ -87,7 +87,7 @@ This is the recommended method for New Relic installation and maintenance.
 
         Execute the following command as root:
 
-        ```
+        ```bash
         sudo apt-get update
         ```
       </td>
@@ -103,7 +103,7 @@ This is the recommended method for New Relic installation and maintenance.
 
         Execute the following command to install directly from the New Relic repositories:
 
-        ```
+        ```bash
         sudo apt-get install newrelic-php5
         ```
       </td>
@@ -125,7 +125,7 @@ This is the recommended method for New Relic installation and maintenance.
 
         If so, run the following command:
 
-        ```
+        ```bash
         sudo newrelic-install install
         ```
       </td>
@@ -139,7 +139,7 @@ This is the recommended method for New Relic installation and maintenance.
       <td>
         **Configure your application name and New Relic license key.**
 
-        The installation process prompts for your application name and license key. Your [license key](/docs/subscriptions/license-key) appears in the account information section of **Account settings**. For headless installations, you can also [preseed your license key and application name by using `debconf`](#preseeding).
+        The installation process prompts for your application name and license key. Your <InlinePopover type="licenseKey" /> appears in the account information section of **Account settings**. For headless installations, you can also [preseed your license key and application name by using `debconf`](#preseeding).
       </td>
     </tr>
 
@@ -161,7 +161,7 @@ This is the recommended method for New Relic installation and maintenance.
 
 To run an unattended installation, you can use non-interactive mode. Include the `-y` flag to automatically respond `yes` to any prompt during package installation. For example:
 
-```
+```bash
 DEBIAN_FRONTEND=noninteractive apt-get -y install newrelic-php5
 ```
 
@@ -212,8 +212,8 @@ To install the PHP agent manually using `dpkg`:
 
         Run the following `wget` command, replacing `https://LINK_TO_PACKAGE` with the full URL of the package:
 
-        ```
-        wget -L https://<var>LINK_TO_PACKAGE</var>
+        ```bash
+        wget -L https://LINK_TO_PACKAGE
         ```
       </td>
     </tr>
@@ -230,14 +230,14 @@ To install the PHP agent manually using `dpkg`:
 
         **32-bit:**
 
-        ```
-        dpkg -i newrelic-php5-common_<var>X.X.X.X</var>_all.deb newrelic-daemon_<var>X.X.X.X</var>_i386.deb newrelic-php5_<var>X.X.X.X</var>_i386.deb
+        ```bash
+        dpkg -i newrelic-php5-common_X.X.X.X_all.deb newrelic-daemon_X.X.X.X_i386.deb newrelic-php5_X.X.X.X_i386.deb
         ```
 
         **64-bit:**
 
-        ```
-        dpkg -i newrelic-php5-common_<var>X.X.X.X</var>_all.deb newrelic-daemon_<var>X.X.X.X</var>_amd64.deb newrelic-php5_<var>X.X.X.X</var>_amd64.deb
+        ```bash
+        dpkg -i newrelic-php5-common_X.X.X.X_all.deb newrelic-daemon_X.X.X.X_amd64.deb newrelic-php5_X.X.X.X_amd64.deb
         ```
       </td>
     </tr>
@@ -250,7 +250,7 @@ To install the PHP agent manually using `dpkg`:
       <td>
         **Configure your application name and New Relic license key.**
 
-        The installation process prompts for your application name and license key. Your [license key](/docs/subscriptions/license-key) appears in the account information section of **Account settings**. For headless installations, you can also [preseed your license key and application name by using `debconf`](#preseeding).
+        The installation process prompts for your application name and license key. Your <InlinePopover type="licenseKey" /> appears in the account information section of **Account settings**. For headless installations, you can also [preseed your license key and application name by using `debconf`](#preseeding).
       </td>
     </tr>
 
@@ -268,9 +268,11 @@ To install the PHP agent manually using `dpkg`:
   </tbody>
 </table>
 
+<InstallFeedback />
+
 ## Headless: Preseed license key and app name [#preseeding]
 
-For headless installations, you can preseed your [license key](/docs/subscriptions/license-key) and [application name](/docs/site/naming-your-application). You must use the default php5 packages provided by your distribution. To preseed, set values in your `debconf` database by using [`debconf-set-selections`](http://manpages.ubuntu.com/manpages/trusty/en/man1/debconf-set-selections.1.html).
+For headless installations, you can preseed your <InlinePopover type="licenseKey" /> and [application name](/docs/site/naming-your-application). You must use the default php5 packages provided by your distribution. To preseed, set values in your `debconf` database by using [`debconf-set-selections`](http://manpages.ubuntu.com/manpages/trusty/en/man1/debconf-set-selections.1.html).
 
 <Callout variant="important">
   These settings will be ignored if you are not using a packaged PHP. You will be prompted to run `newrelic-install`.
@@ -295,7 +297,7 @@ These keys are located in the `newrelic-php5` package:
     <tr>
       <td>
         ```
-        newrelic-php5/<var>application-name</var>
+        newrelic-php5/application-name
         ```
 
         The name of your app. This string sets [`newrelic.appname`](/docs/php/php-agent-phpini-settings#inivar-appname) in your `newrelic.ini`.
@@ -309,10 +311,10 @@ These keys are located in the `newrelic-php5` package:
     <tr>
       <td>
         ```
-        newrelic-php5/<var>license-key</var>
+        newrelic-php5/license-key
         ```
 
-        Your [New Relic license key](/docs/subscriptions/license-key). This string sets [`newrelic.license`](/docs/php/php-agent-phpini-settings#inivar-license) in your `newrelic.ini`.
+        Your <InlinePopover type="licenseKey" />. This string sets [`newrelic.license`](/docs/php/php-agent-phpini-settings#inivar-license) in your `newrelic.ini`.
       </td>
 
       <td>
@@ -324,7 +326,9 @@ These keys are located in the `newrelic-php5` package:
 
 For example, you can run these commands to preseed your app name and license key:
 
+```bash
+echo newrelic-php5 newrelic-php5/application-name string "My App Name" | debconf-set-selections
+echo newrelic-php5 newrelic-php5/license-key string "YOUR_LICENSE_KEY" | debconf-set-selections
 ```
-echo newrelic-php5 newrelic-php5/application-name string "<var>My App Name</var>" | debconf-set-selections
-echo newrelic-php5 newrelic-php5/license-key string "<var>YOUR_LICENSE_KEY</var>" | debconf-set-selections
-```
+
+<InstallFeedback />

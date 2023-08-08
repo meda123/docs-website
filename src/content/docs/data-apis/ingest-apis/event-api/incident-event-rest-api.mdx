@@ -1,10 +1,15 @@
 ---
 title: Incident event REST API
 tags:
-  - Alerts and Applied Intelligence
+  - Alerts and applied intelligence
   - Applied intelligence
   - Incident intelligence
 metaDescription: "Read about how to report activities from your applied intelligence incident management system to New Relic for advanced correlation."
+redirects:
+  - /docs/alerts-applied-intelligence/applied-intelligence/incident-intelligence/rest-api-applied-intelligence
+  - /docs/rest-api-new-relic-ai
+  - /docs/new-relic-one/use-new-relic-one/new-relic-ai/rest-api-new-relic-ai
+  - /docs/alerts-applied-intelligence/applied-intelligence/incident-intelligence/rest-api-new-relic-ai
 ---
 
 You can use the [Event API](/docs/data-apis/ingest-apis/introduction-event-api) to report custom applied intelligence incident events to New Relic.
@@ -15,7 +20,7 @@ The API is an asynchronous endpoint. This means you can send a large volume of P
 
 Here's the general process for sending custom incident events to New Relic via the incident event API:
 
-1. Generate a [license key](/docs/apis/intro-apis/new-relic-api-keys/#ingest-license-key) for the account you want to report data to.
+1. Generate a <InlinePopover type="licenseKey" /> for the account you want to report data to.
 2. Before you get started creating custom attributes, review the [Event API's limits and restricted characters](/docs/data-apis/ingest-apis/introduction-event-api/#limits).
 3. Generate the JSON for your incident event that follows our [JSON format guidelines](/docs/data-apis/ingest-apis/introduction-event-api#instrument).
 4. Submit a compressed JSON payload (for example, gzip or deflate) to the HTTPS endpoint using curl in a POST request.
@@ -51,12 +56,12 @@ The `eventType` field must use `NrAiIncidentExternal`.
 
 Here's an example of how to use curl to send your JSON payload.
 
-```
-gzip -c example_incidents.json | curl --data-binary @- -X POST -H "Content-Type: application/json" -H "Api-Key: <var>YOUR_LICENSE_KEY</var>" -H "Content-Encoding: gzip"
-https://insights-collector.newrelic.com/v1/accounts/<var>YOUR_ACCOUNT</var>/events
+```bash
+gzip -c example_incidents.json | curl --data-binary @- -X POST -H "Content-Type: application/json" -H "Api-Key: YOUR_LICENSE_KEY" -H "Content-Encoding: gzip"
+https://insights-collector.newrelic.com/v1/accounts/YOUR_ACCOUNT/events
 ```
 
-```
+```json
 Response
 {"success":true, "uuid":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"}%
 ```
@@ -69,10 +74,10 @@ You can query your data with [Nerdgraph API](/docs/apis/nerdgraph/get-started/in
 
 Here's an example of a NerdGraph query and its result.
 
-```json
+```graphql
 {
   actor {
-    account(id: <var>YOUR_ACCOUNT_ID</var>) {
+    account(id: YOUR_ACCOUNT_ID) {
       nrql(query: "SELECT * FROM NrAiInternalIncident since 3 days ago") {
         results
       }
@@ -92,7 +97,7 @@ Here's an example of a NerdGraph query and its result.
     "entitiesData.types": "unknown",
     "labelsHash": "91f938318e899dcd62965e2724548f4844f2898f3cf1c5411397ecc0eec87fc1",
     "annotations.description": "[\"The latency is above threshold of 500000 MS\"]",
-    "labels.originalAccountIds": "<var>YOUR_ACCOUNT_ID</var>",
+    "labels.originalAccountIds": "YOUR_ACCOUNT_ID",
     "entitiesData.names": "testEntity",
     "entitiesData.entities": "{\"id\":\"testEntity123\",\"name\":\"testEntity\",\"type\":\"unknown\"}",
     "priority": "HIGH",
@@ -101,9 +106,9 @@ Here's an example of a NerdGraph query and its result.
     "closedAt": "",
     "updatedAt": 1641910123824,
     "annotations.title": "[\"Test\",\"Test2222\",\"Test3\"]",
-    "nrAccountId": <var>YOUR_ACCOUNT_ID</var>,
+    "nrAccountId": YOUR_ACCOUNT_ID,
     "accumulations": "{\"source\":[\"rest\"],\"origin\":[\"luna\"],\"entity_guid\":[\"testEntity123\"],\"tag.stackTrace\":[\"some stack trace...\"]}",
-    "labels.accountIds": "<var>YOUR_ACCOUNT_ID</var>",
+    "labels.accountIds": "YOUR_ACCOUNT_ID",
     "createdAt": 1641909163997,
     "priority.order": 2,
     "labels.aggregationKeys": "416e2e55069764086ad83e97a1160be0cb4c545b7950522f7c86baaa2a11b9b6",
@@ -126,7 +131,7 @@ Here's an example of a NerdGraph query and its result.
 
 ## Incident event API specification [#api-specs]
 
-The incident event API uses the Event API's value types. For descriptions of these value types and guidelines on using them, see [our event API JSON guidelines](/docs/data-apis/ingest-apis/introduction-event-api/#json-guidelines). 
+The incident event API uses the Event API's value types. For descriptions of these value types and guidelines on using them, see [our event API JSON guidelines](/docs/data-apis/ingest-apis/introduction-event-api/#json-guidelines).
 
 <table>
   <thead>
@@ -134,12 +139,13 @@ The incident event API uses the Event API's value types. For descriptions of the
       <th>
         Field
       </th>
+
       <th>
         Description
       </th>
     </tr>
   </thead>
-  
+
   <tbody>
     <tr>
       <td>
@@ -147,6 +153,7 @@ The incident event API uses the Event API's value types. For descriptions of the
 
         _string_, _number_, or _timestamp_
       </td>
+
       <td>
         **REQUIRED**
 
@@ -168,13 +175,13 @@ The incident event API uses the Event API's value types. For descriptions of the
       <td>
         `state`
 
-        _enum: (trigger, resolve, acknowledge)_
-
+        _enum: (`trigger`, `resolve`)_
       </td>
+
       <td>
         **REQUIRED**
 
-        Whether the event should trigger a new incident or resolve an existing one.
+        Whether the event should trigger a new incident or resolve an existing one. Updates to the incident can also be sent using trigger.
       </td>
     </tr>
 
@@ -182,10 +189,11 @@ The incident event API uses the Event API's value types. For descriptions of the
       <td>
         `priority`
 
-        _enum: (low, medium, high, critical)_
+        _enum: (`low`, `medium`, `high`, `critical`)_
       </td>
+
       <td>
-        The incident's priority. Default: _high_.
+        The incident's priority. Default: `high`.
 
         Highest priority will be used when different priorities are sent.
       </td>
@@ -196,13 +204,12 @@ The incident event API uses the Event API's value types. For descriptions of the
         `title`
 
         _string_
-
       </td>
+
       <td>
-        **REQUIRED, when `state` is _trigger_**
+        **REQUIRED, when `state` is `trigger`**
 
         The triggering event's title.
-
       </td>
     </tr>
 
@@ -211,13 +218,12 @@ The incident event API uses the Event API's value types. For descriptions of the
         `source`
 
         _string_
-
       </td>
+
       <td>
-        **REQUIRED, when `state` is _trigger_**
+        **REQUIRED, when `state` is `trigger`**
 
         The origin of the incident, or the monitoring system that triggered it (not the entity that faulted).
-
       </td>
     </tr>
 
@@ -226,8 +232,8 @@ The incident event API uses the Event API's value types. For descriptions of the
         `description`
 
         _string_
-
       </td>
+
       <td>
         The triggering event's description.
       </td>
@@ -238,8 +244,8 @@ The incident event API uses the Event API's value types. For descriptions of the
         `deepLinkUrl`
 
         _string_
-
       </td>
+
       <td>
         A deep link to a page related to the incident.
       </td>
@@ -250,8 +256,8 @@ The incident event API uses the Event API's value types. For descriptions of the
         `runbookUrl`
 
         _string_
-
       </td>
+
       <td>
         A runbook URL.
       </td>
@@ -262,8 +268,8 @@ The incident event API uses the Event API's value types. For descriptions of the
         `externalId`
 
         _string_
-
       </td>
+
       <td>
         An external ID you can attach to the event.
 
@@ -276,8 +282,8 @@ The incident event API uses the Event API's value types. For descriptions of the
         `entityName`
 
         _string_
-
       </td>
+
       <td>
         The name of the entity that generated the incident.
       </td>
@@ -288,8 +294,8 @@ The incident event API uses the Event API's value types. For descriptions of the
         `entity.guid`
 
         _string_
-
       </td>
+
       <td>
         The ID of the entity that generated the incident.
       </td>
@@ -300,13 +306,11 @@ The incident event API uses the Event API's value types. For descriptions of the
         `version`
 
         _float_
-
       </td>
+
       <td>
         The current format's version.
       </td>
     </tr>
-
-    </tbody>
-
+  </tbody>
 </table>

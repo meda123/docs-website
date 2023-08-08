@@ -13,22 +13,20 @@ redirects:
 
 The New Relic RabbitMQ [on-host integration](/docs/integrations/host-integrations/getting-started/introduction-host-integrations) reports metrics and configuration data from your RabbitMQ service, including important metrics relating to the cluster, vhosts, queues, exchanges, and consumers.
 
-Read on to install the integration, and to see what data we collect.
-
 ## Compatibility and requirements [#comp-req]
 
 Our integration is compatible with:
 
-- RabbitMQ version 3.0 or higher for Metric data.
-- RabbitMQ version 3.7 or higher for Inventory data.
+* RabbitMQ version 3.0 or higher for Metric data.
+* RabbitMQ version 3.7 or higher for Inventory data.
 
 Before installing the integration, make sure that you meet the following requirements:
 
-- RabbitMQ [Management Plugin](https://www.rabbitmq.com/management.html) configured.
-- RabbitMQ command line tool, [rabbitmqctl](#rabbitmqctl), in the `PATH` of the root user.
-- If RabbitMQ is **not** running on Kubernetes or Amazon ECS, you must [install the infrastructure agent](/docs/infrastructure/install-infrastructure-agent/get-started/install-infrastructure-agent-new-relic) on a host running RabbitMQ. Otherwise:
-  - If running on Kubernetes, see [these requirements](/docs/monitor-service-running-kubernetes#requirements).
-  - If running on ECS, see [these requirements](/docs/integrations/host-integrations/host-integrations-list/monitor-services-running-amazon-ecs).
+* RabbitMQ [Management Plugin](https://www.rabbitmq.com/management.html) configured.
+* RabbitMQ command line tool, [rabbitmqctl](#rabbitmqctl), in the `PATH` of the root user.
+* If RabbitMQ is **not** running on Kubernetes or Amazon ECS, you must [install the infrastructure agent](/docs/infrastructure/install-infrastructure-agent/get-started/install-infrastructure-agent-new-relic) on a host running RabbitMQ. Otherwise:
+  * If running on Kubernetes, see [these requirements](/docs/kubernetes-pixie/kubernetes-integration/get-started/kubernetes-integration-compatibility-requirements/).
+  * If running on ECS, see [these requirements](/docs/integrations/host-integrations/host-integrations-list/monitor-services-running-amazon-ecs).
 
 ## Install and activate [#install]
 
@@ -36,24 +34,36 @@ To install the RabbitMQ integration, follow the instructions for your environmen
 
 <CollapserGroup>
   <Collapser
+    id="ansible"
+    title="Ansible"
+  >
+  Get started with our [infrastructure monitoring agent](/docs/infrastructure/infrastructure-monitoring/get-started/get-started-infrastructure-monitoring/) using [configuration management tools](/docs/infrastructure/install-infrastructure-agent/linux-installation/install-configuration-management-tools).
+  </Collapser>
+
+  <Collapser
     id="ecs-install"
     title="ECS"
   >
     See [Monitor service running on ECS](/docs/integrations/host-integrations/host-integrations-list/monitor-services-running-amazon-ecs).
   </Collapser>
 
-{' '}
+  {
+    ' '
+  }
 
-<Collapser id="k8s-install" title="Kubernetes">
-  See [Monitor service running on
-  Kubernetes](/docs/monitor-service-running-kubernetes).
-</Collapser>
+  <Collapser
+    id="k8s-install"
+    title="Kubernetes"
+  >
+    See [Monitor service running on
+    Kubernetes](/docs/monitor-service-running-kubernetes).
+  </Collapser>
 
   <Collapser
     id="linux-install"
     title="Linux"
   >
-    1. Follow the instructions for [installing an integration](/docs/install-integrations-package), using the file name `nri-rabbitmq`.
+    1. Install [the infrastructure agent](/docs/integrations/host-integrations/installation/install-infrastructure-host-integrations/#install), and replace the `INTEGRATION_FILE_NAME` variable with `nri-rabbitmq`.
     2. Change the directory to the integrations configuration folder:
 
        ```
@@ -68,12 +78,11 @@ To install the RabbitMQ integration, follow the instructions for your environmen
     5. [Restart the infrastructure agent](/docs/infrastructure/new-relic-infrastructure/configuration/start-stop-restart-check-infrastructure-agent-status).
     6. To enable automatic Rabbitmq error log parsing and forwarding, copy (or rename) the `rabbitmq-log.yml.example` file to `rabbitmq-log.yml`. No need to restart the agent.
 
-    **Example:**
+       **Example:**
 
-    ```
-    sudo cp /etc/newrelic-infra/logging.d/rabbitmq-log.yml.example /etc/newrelic-infra/logging.d/rabbitmq-log.yml
-    ```
-
+       ```
+       sudo cp /etc/newrelic-infra/logging.d/rabbitmq-log.yml.example /etc/newrelic-infra/logging.d/rabbitmq-log.yml
+       ```
   </Collapser>
 
   <Collapser
@@ -82,11 +91,11 @@ To install the RabbitMQ integration, follow the instructions for your environmen
   >
     1. Download the `nri-rabbitmq` .MSI installer image from:
 
-       [http://download.newrelic.com/infrastructure_agent/windows/integrations/nri-rabbitmq/nri-rabbitmq-amd64.msi](http://download.newrelic.com/infrastructure_agent/windows/integrations/nri-rabbitmq/nri-rabbitmq-amd64.msi)
+       [https://download.newrelic.com/infrastructure_agent/windows/integrations/nri-rabbitmq/nri-rabbitmq-amd64.msi](https://download.newrelic.com/infrastructure_agent/windows/integrations/nri-rabbitmq/nri-rabbitmq-amd64.msi)
     2. To install from the Windows command prompt, run:
 
        ```
-       msiexec.exe /qn /i <var>PATH\TO\</var>nri-rabbitmq-amd64.msi
+       msiexec.exe /qn /i PATH\TO\nri-rabbitmq-amd64.msi
        ```
     3. In the Integrations directory, `C:\Program Files\New Relic\newrelic-infra\integrations.d\`, create a copy of the sample configuration file by running:
 
@@ -94,19 +103,33 @@ To install the RabbitMQ integration, follow the instructions for your environmen
        cp rabbitmq-config.yml.sample rabbitmq-config.yml
        ```
     4. Edit the `rabbitmq-config.yml` configuration file using the [configuration settings](#config).
-    5. [Restart the infrastructure agent](/docs/infrastructure/new-relic-infrastructure/configuration/start-stop-restart-check-infrastructure-agent-status).
+    5. To enable automatic Rabbitmq error log parsing and forwarding, copy (or rename) the `rabbitmq-log-win.yml.example` file to `rabbitmq-log-win.yml`.
 
+       **Command Prompt Example:**
+
+       ```
+       rename "C:\Program Files\New Relic\newrelic-infra\logging.d\rabbitmq-log-win.yml.example" rabbitmq-log-win.yml
+       ```
+
+       **Powershell Example:**
+
+       ```
+       Rename-Item -Path "C:\Program Files\New Relic\newrelic-infra\logging.d\rabbitmq-log-win.yml.example" -NewName "rabbitmq-log-win.yml"
+       ```
+    6. [Restart the infrastructure agent](/docs/infrastructure/new-relic-infrastructure/configuration/start-stop-restart-check-infrastructure-agent-status).
   </Collapser>
 </CollapserGroup>
 
 Additional notes:
 
-- **Advanced:** Integrations are also available in [tarball format](/docs/integrations/host-integrations/installation/install-host-integrations-built-new-relic#tarball) to allow for install outside of a package manager.
-- **On-host integrations do not automatically update.** For best results, regularly [update the integration package](/docs/integrations/host-integrations/installation/update-infrastructure-host-integration-package) and [the infrastructure agent](/docs/infrastructure/new-relic-infrastructure/installation/update-infrastructure-agent).
+* **Advanced:** Integrations are also available in [tarball format](/docs/infrastructure/host-integrations/installation/install-infrastructure-host-integrations/#tarball) to allow for install outside of a package manager.
+* **On-host integrations do not automatically update.** For best results, regularly [update the integration package](/docs/integrations/host-integrations/installation/update-infrastructure-host-integration-package) and [the infrastructure agent](/docs/infrastructure/new-relic-infrastructure/installation/update-infrastructure-agent).
 
 <Callout variant="important">
   This integration can monitor only one RabbitMQ server instance per host.
 </Callout>
+
+<InstallFeedback />
 
 ## Configure the integration [#config]
 
@@ -114,16 +137,16 @@ An integration's YAML-format configuration is where you can place required login
 
 There are several ways to configure the integration, depending on how it was installed:
 
-- If enabled via Kubernetes: see [Monitor services running on Kubernetes](/docs/monitor-service-running-kubernetes).
-- If enabled via Amazon ECS: see [Monitor services running on ECS](/docs/integrations/host-integrations/host-integrations-list/monitor-services-running-amazon-ecs).
-- If installed on-host: edit the config in the integration's YAML config file, `rabbitmq-config.yml`.
+* If enabled via Kubernetes: see [Monitor services running on Kubernetes](/docs/monitor-service-running-kubernetes).
+* If enabled via Amazon ECS: see [Monitor services running on ECS](/docs/integrations/host-integrations/host-integrations-list/monitor-services-running-amazon-ecs).
+* If installed on-host: edit the config in the integration's YAML config file, `rabbitmq-config.yml`.
 
 For an example configuration, see [Example config file](#example-config).
 
 The configuration file has common settings applicable to all integrations like `interval`, `timeout`, `inventory_source`. To read all about these common settings refer to our [Configuration Format](/docs/create-integrations/infrastructure-integrations-sdk/specifications/host-integrations-newer-configuration-format/#configuration-basics) document.
 
 <Callout variant="important">
-  If you are still using our Legacy configuration/definition files please refer
+  If you're still using our Legacy configuration/definition files please refer
   to this
   [document](/docs/create-integrations/infrastructure-integrations-sdk/specifications/host-integrations-standard-configuration-format/)
   for help.
@@ -133,7 +156,7 @@ Specific settings related to RabbitMQ are defined using the `env` section of the
 
 **Cluster environments**
 
-In cluster environments, only one node should use `METRICS=false` and `INVENTORY=false` ; the rest should use `INVENTORY=true` and `METRICS=false`.
+In cluster environments, the integration collects metrics from all the cluster with only one instance of the integration connected to one node. This instance should use `METRICS=true` and `INVENTORY=true`. For the rest of the nodes only Inventory should be collected using `METRICS=false` and `INVENTORY=true`. For more on these, see [instance settings](#instance-settings).
 
 If you're running a cluster environment in Kubernetes, you need to deploy RabbitMQ as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), and configure the agent to query all the metrics from the RabbitMQ pod. Set the autodiscovery matching condition [in the config file](https://github.com/newrelic/nri-rabbitmq/blob/master/rabbitmq-config.yml.k8s_sample) to this value:
 
@@ -145,250 +168,540 @@ discovery:
       podName: rabbitmq-0
 ```
 
-### RabbitMQ Instance Settings [#instance-settings]
+<Callout variant="important">
+  The integration has a limitation on the number of queues that can be collected. If the number of queues exceeds 2000, after the application of queue filters, the integration won't report any of them.
+  We offer a workaround that will preserve all metrics, but it will disable entity registration. To apply the workaround, add the following environment variable to the configuration file:
+
+  ```yaml
+  integrations:
+  - name: nri-rabbitmq
+    env:
+      # Integration configuration parameters.
+      METRICS: true
+      DISABLE_ENTITIES: true
+      QUEUES_MAX_LIMIT: "0"
+  
+  ```
+  
+</Callout>
+
+### RabbitMQ instance settings [#instance-settings]
 
 The RabbitMQ integration collects both Metrics(<strong>M</strong>) and Inventory(<strong>I</strong>) information. Check the **Applies To** column below to find which settings can be used for each specific collection:
 
 <table>
   <thead>
     <tr>
-      <th style={{ width: '150px' }}>Setting</th>
-      <th>Description</th>
-      <th>Default</th>
-      <th>Applies To
-    </th>
-  </tr>
-</thead>
+      <th style={{ width: '150px' }}>
+        Setting
+      </th>
+
+      <th>
+        Description
+      </th>
+
+      <th>
+        Default
+      </th>
+
+      <th>
+        Applies To
+      </th>
+    </tr>
+  </thead>
 
   <tbody>
-  <tr>
-    <td>
-      **HOSTNAME**
-    </td>
-    <td>
-      Hostname or IP of the RabbitMQ management plugin.
-    </td>
-    <td>
-      localhost
-    </td>
-    <td style={{ "text-align": "center" }}>
-      M/I
-    </td>
-  </tr>
+    <tr>
+      <td>
+        **HOSTNAME**
+      </td>
 
-{' '}
+      <td>
+        Hostname or IP of the RabbitMQ management plugin.
+      </td>
 
-<tr>
-  <td>**PORT**</td>
-  <td>Port number of the RabbitMQ management plugin.</td>
-  <td>15672</td>
-  <td style={{ 'text-align': 'center' }}>M/I</td>
-</tr>
+      <td>
+        localhost
+      </td>
 
-{' '}
+      <td style={{ "text-align": "center" }}>
+        M/I
+      </td>
+    </tr>
 
-<tr>
-  <td>**USERNAME**</td>
-  <td>User that is connecting to RabbitMQ management plugin.</td>
-  <td>N/A</td>
-  <td style={{ 'text-align': 'center' }}>M/I</td>
-</tr>
+    {
+      ' '
+    }
 
-{' '}
+    <tr>
+      <td>
+        **PORT**
+      </td>
 
-<tr>
-  <td>**PASSWORD**</td>
-  <td>Password to connect to RabbitMQ management plugin.</td>
-  <td>N/A</td>
-  <td style={{ 'text-align': 'center' }}>M/I</td>
-</tr>
+      <td>
+        Port number of the RabbitMQ management plugin.
+      </td>
 
-{' '}
+      <td>
+        15672
+      </td>
 
-<tr>
-  <td>**MANAGEMENT_PATH_PREFIX**</td>
-  <td>RabbitMQ Management Prefix.</td>
-  <td>N/A</td>
-  <td style={{ 'text-align': 'center' }}>M/I</td>
-</tr>
+      <td style={{ 'text-align': 'center' }}>
+        M/I
+      </td>
+    </tr>
 
-{' '}
+    {
+      ' '
+    }
 
-<tr>
-  <td>**USE_SSL**</td>
-  <td>Option to connect using SSL.</td>
-  <td>false</td>
-  <td style={{ 'text-align': 'center' }}>M/I</td>
-</tr>
+    <tr>
+      <td>
+        **USERNAME**
+      </td>
 
-{' '}
+      <td>
+        User that is connecting to RabbitMQ management plugin.
+      </td>
 
-<tr>
-  <td>**CA_BUNDLE_DIR**</td>
-  <td>Location of SSL certificate on the host.</td>
-  <td>N/A</td>
-  <td style={{ 'text-align': 'center' }}>M/I</td>
-</tr>
+      <td>
+        N/A
+      </td>
 
-{' '}
+      <td style={{ 'text-align': 'center' }}>
+        M/I
+      </td>
+    </tr>
 
-<tr>
-  <td>**CA_BUNDLE_FILE**</td>
-  <td>Location of SSL certificate on the host.</td>
-  <td>N/A</td>
-  <td style={{ 'text-align': 'center' }}>M/I</td>
-</tr>
+    {
+      ' '
+    }
 
-{' '}
+    <tr>
+      <td>
+        **PASSWORD**
+      </td>
 
-<tr>
-  <td>**NODE_NAME_OVERRIDE**</td>
-  <td>Overrides the local node name instead of retrieving it from RabbitMQ.</td>
-  <td>N/A</td>
-  <td style={{ 'text-align': 'center' }}>M/I</td>
-</tr>
+      <td>
+        Password to connect to RabbitMQ management plugin.
+      </td>
 
-{' '}
+      <td>
+        N/A
+      </td>
 
-<tr>
-  <td>**CONFIG_PATH**</td>
-  <td>Absolute path to the RabbitMQ configuration file.</td>
-  <td>N/A</td>
-  <td style={{ 'text-align': 'center' }}>M/I</td>
-</tr>
+      <td style={{ 'text-align': 'center' }}>
+        M/I
+      </td>
+    </tr>
 
-  <tr>
-    <td>
-      **QUEUES**
-    </td>
-    <td>
-      Queue names to collect in the format of a JSON array of strings. If a queue name exactly matches (case sensitive) one of these, it will be collected.
+    {
+      ' '
+    }
 
-      Example:
-      ```
-      queues: '["myQueue1","myQueue2"]'
-      ```
-    </td>
-    <td>
-      N/A
-    </td>
-    <td style={{ "text-align": "center" }}>
-      I
-    </td>
+    <tr>
+      <td>
+        **TIMEOUT**
+      </td>
 
-  </tr>
+      <td>
+        Timeout in seconds to timeout the connection to RabbitMQ endpoint.
+      </td>
 
-  <tr>
-    <td>
-      **QUEUES_REGEXES**
-    </td>
-    <td>
-      Queue names to collect in the format of a JSON array of REGEX strings. If a queue name matches one of these, it will be collected.
+      <td>
+        30
+      </td>
 
-      Example:
-      ```
-      queues_regexes: '["queue[0-9]+",".*"]'
-      ```
-    </td>
-    <td>
-      N/A
-    </td>
-    <td style={{ "text-align": "center" }}>
-      M/I
-    </td>
+      <td style={{ 'text-align': 'center' }}>
+        M/I
+      </td>
+    </tr>
 
-  </tr>
+    {
+      ' '
+    }
 
-{' '}
+    <tr>
+      <td>
+        **MANAGEMENT_PATH_PREFIX**
+      </td>
 
-<tr>
-  <td>**EXCHANGES**</td>
-  <td>
-    Exchange names to collect in the format of a JSON array of strings. If an
-    exchange name exactly matches (case sensitive) one of these, it will be
-    collected.
-  </td>
-  <td>N/A</td>
-  <td style={{ 'text-align': 'center' }}>M/I</td>
-</tr>
+      <td>
+        RabbitMQ Management Prefix.
+      </td>
 
-{' '}
+      <td>
+        N/A
+      </td>
 
-<tr>
-  <td>**EXCHANGES_REGEXES**</td>
-  <td>
-    Exchanges names to collect in the format of a JSON array of REGEX strings.
-    If an exchange name matches one of these it will be collected.
-  </td>
-  <td>N/A</td>
-  <td style={{ 'text-align': 'center' }}>M/I</td>
-</tr>
+      <td style={{ 'text-align': 'center' }}>
+        M/I
+      </td>
+    </tr>
 
-{' '}
+    {
+      ' '
+    }
 
-<tr>
-  <td>**VHOSTS**</td>
-  <td>
-    Vhost names to collect in the format of a JSON array of strings. If a vhost
-    name exactly matches (case sensitive) one of these, it will be included.
-    This also affects only collecting entities belonging to vhosts specified.
-  </td>
-  <td>N/A</td>
-  <td style={{ 'text-align': 'center' }}>M/I</td>
-</tr>
+    <tr>
+      <td>
+        **USE_SSL**
+      </td>
 
-{' '}
+      <td>
+        Option to connect using SSL.
+      </td>
 
-<tr>
-  <td>**VHOSTS_REGEXES**</td>
-  <td>
-    Vhost names to collect in the format of a JSON array of REGEX strings. If a
-    vhost name matches one of these the vhost and any entities belonging to this
-    vhost will be collected.
-  </td>
-  <td>N/A</td>
-  <td style={{ 'text-align': 'center' }}>M/I</td>
-</tr>
+      <td>
+        false
+      </td>
 
-{' '}
+      <td style={{ 'text-align': 'center' }}>
+        M/I
+      </td>
+    </tr>
 
-<tr>
-  <td>**METRICS**</td>
-  <td>Set to `true` to enable Metrics only collection.</td>
-  <td>false</td>
-  <td style={{ 'text-align': 'center' }}></td>
-</tr>
+    {
+      ' '
+    }
 
-{' '}
+    <tr>
+      <td>
+        **CA_BUNDLE_DIR**
+      </td>
 
-<tr>
-  <td>**INVENTORY**</td>
-  <td>Set to `true` to enable Inventory only collection.</td>
-  <td>false</td>
-  <td style={{ 'text-align': 'center' }}></td>
-</tr>
+      <td>
+        Location of SSL certificate on the host.
+      </td>
 
-{' '}
+      <td>
+        N/A
+      </td>
 
-<tr>
-  <td>**EVENTS**</td>
-  <td>Set to `true` to enable Events only collection.</td>
-  <td>false</td>
-  <td style={{ 'text-align': 'center' }}></td>
-</tr>
+      <td style={{ 'text-align': 'center' }}>
+        M/I
+      </td>
+    </tr>
 
+    {
+      ' '
+    }
+
+    <tr>
+      <td>
+        **CA_BUNDLE_FILE**
+      </td>
+
+      <td>
+        Location of SSL certificate on the host.
+      </td>
+
+      <td>
+        N/A
+      </td>
+
+      <td style={{ 'text-align': 'center' }}>
+        M/I
+      </td>
+    </tr>
+
+    {
+      ' '
+    }
+
+    <tr>
+      <td>
+        **NODE_NAME_OVERRIDE**
+      </td>
+
+      <td>
+        Overrides the local node name instead of retrieving it from RabbitMQ.
+      </td>
+
+      <td>
+        N/A
+      </td>
+
+      <td style={{ 'text-align': 'center' }}>
+        M/I
+      </td>
+    </tr>
+
+    {
+      ' '
+    }
+
+    <tr>
+      <td>
+        **CONFIG_PATH**
+      </td>
+
+      <td>
+        Absolute path to the RabbitMQ configuration file.
+      </td>
+
+      <td>
+        N/A
+      </td>
+
+      <td style={{ 'text-align': 'center' }}>
+        M/I
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        **QUEUES**
+      </td>
+
+      <td>
+        Queue names to collect in the format of a JSON array of strings. If a queue name exactly matches (case sensitive) one of these, it will be collected.
+
+        Example:
+
+        ```
+        queues: '["myQueue1","myQueue2"]'
+        ```
+      </td>
+
+      <td>
+        N/A
+      </td>
+
+      <td style={{ "text-align": "center" }}>
+        I
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        **QUEUES_REGEXES**
+      </td>
+
+      <td>
+        Queue names to collect in the format of a JSON array of REGEX strings. If a queue name matches one of these, it will be collected.
+
+        Example:
+
+        ```
+        queues_regexes: '["queue[0-9]+",".*"]'
+        ```
+      </td>
+
+      <td>
+        N/A
+      </td>
+
+      <td style={{ "text-align": "center" }}>
+        M/I
+      </td>
+    </tr>
+
+    {
+      ' '
+    }
+
+    <tr>
+      <td>
+        **EXCHANGES**
+      </td>
+
+      <td>
+        Exchange names to collect in the format of a JSON array of strings. If an
+        exchange name exactly matches (case sensitive) one of these, it will be
+        collected.
+      </td>
+
+      <td>
+        N/A
+      </td>
+
+      <td style={{ 'text-align': 'center' }}>
+        M/I
+      </td>
+    </tr>
+
+    {
+      ' '
+    }
+
+    <tr>
+      <td>
+        **EXCHANGES_REGEXES**
+      </td>
+
+      <td>
+        Exchanges names to collect in the format of a JSON array of REGEX strings.
+        If an exchange name matches one of these it will be collected.
+      </td>
+
+      <td>
+        N/A
+      </td>
+
+      <td style={{ 'text-align': 'center' }}>
+        M/I
+      </td>
+    </tr>
+
+    {
+      ' '
+    }
+
+    <tr>
+      <td>
+        **VHOSTS**
+      </td>
+
+      <td>
+        Vhost names to collect in the format of a JSON array of strings. If a vhost
+        name exactly matches (case sensitive) one of these, it will be included.
+        This also affects only collecting entities belonging to vhosts specified.
+      </td>
+
+      <td>
+        N/A
+      </td>
+
+      <td style={{ 'text-align': 'center' }}>
+        M/I
+      </td>
+    </tr>
+
+    {
+      ' '
+    }
+
+    <tr>
+      <td>
+        **VHOSTS_REGEXES**
+      </td>
+
+      <td>
+        Vhost names to collect in the format of a JSON array of REGEX strings. If a
+        vhost name matches one of these the vhost and any entities belonging to this
+        vhost will be collected.
+      </td>
+
+      <td>
+        N/A
+      </td>
+
+      <td style={{ 'text-align': 'center' }}>
+        M/I
+      </td>
+    </tr>
+
+    {
+      ' '
+    }
+
+    <tr>
+      <td>
+        **METRICS**
+      </td>
+
+      <td>
+        Set to `true` to enable Metrics-only collection.
+      </td>
+
+      <td>
+        false
+      </td>
+
+      <td style={{ 'text-align': 'center' }}/>
+    </tr>
+
+    {
+      ' '
+    }
+
+    <tr>
+      <td>
+        **INVENTORY**
+      </td>
+
+      <td>
+        Set to `true` to enable Inventory-only collection.
+      </td>
+
+      <td>
+        false
+      </td>
+
+      <td style={{ 'text-align': 'center' }}/>
+    </tr>
+
+    {
+      ' '
+    }
+
+    <tr>
+      <td>
+        **EVENTS**
+      </td>
+
+      <td>
+        Set to `true` to enable Events-only collection.
+      </td>
+
+      <td>
+        false
+      </td>
+
+      <td style={{ 'text-align': 'center' }}/>
+    </tr>
+
+    {
+      ' '
+    }
+
+    <tr>
+      <td>
+        **DISABLE_ENTITIES**
+      </td>
+
+      <td>
+        Configure whether inventory entries are created for entities during metrics collection. Only to be used as workaround to collect large amounts of Queues.
+      </td>
+
+      <td>
+        false
+      </td>
+      <td style={{ 'text-align': 'center' }}/>
+    </tr>
+
+    {
+      ' '
+    }
+
+    <tr>
+      <td>
+        **QUEUES_MAX_LIMIT**
+      </td>
+
+      <td>
+        Defines the max amount of Queues that can be processed, if this number is reached all queues will be dropped. If defined as '0' no limits are applied, this used with DISABLE_ENTITIES=true to avoid, memory increase in the Agent.
+      </td>
+
+      <td>
+        2000
+      </td>
+
+      <td style={{ 'text-align': 'center' }}/>
+    </tr>
   </tbody>
 </table>
 
 The values for these settings can be defined in several ways:
 
-- Adding the value directly in the config file. This is the most common way.
-- Replacing the values from environment variables using the `{{}}` notation. This requires infrastructure agent v1.14.0+. Read more [here](/docs/infrastructure/install-infrastructure-agent/configuration/configure-infrastructure-agent/#passthrough).
-- Using Secrets management. Use this to protect sensible information such as passwords to be exposed in plain text on the configuration file. For more information, see [Secrets management](/docs/integrations/host-integrations/installation/secrets-management).
+* Adding the value directly in the config file. This is the most common way.
+* Replacing the values from environment variables using the `{{}}` notation. This requires infrastructure agent v1.14.0+. Read more [here](/docs/infrastructure/install-infrastructure-agent/configuration/configure-infrastructure-agent/#passthrough).
+* Using Secrets management. Use this to protect sensible information such as passwords to be exposed in plain text on the configuration file. For more information, see [Secrets management](/docs/integrations/host-integrations/installation/secrets-management).
 
 ### Labels/Custom Attributes [#labels]
 
-Environment variables can be used to control config settings, such as your license key, and are then passed through to the Infrastructure agent. For instructions on how to use this feature, see [Configure the Infrastructure agent](/docs/infrastructure/new-relic-infrastructure/configuration/configure-infrastructure-agent#passthrough).
+Environment variables can be used to control config settings, such as your <InlinePopover type="licenseKey" />, and are then passed through to the infrastructure agent. For instructions on how to use this feature, see [Configure the infrastructure agent](/docs/infrastructure/new-relic-infrastructure/configuration/configure-infrastructure-agent#passthrough).
 You can further decorate your metrics using labels. Labels allow you to add key/value pairs attributes to your metrics which you can then use to query, filter or group your metrics on.<br/>
 Our default sample config file includes examples of labels but, as they are not mandatory, you can remove, modify or add new ones of your choice.
 
@@ -416,7 +729,7 @@ Here's an example configuration file:
           USERNAME: admin
           PASSWORD: admin
           CA_BUNDLE_DIR: /path/to/bundle/dir/
-          NODE_NAME_OVERRIDE: local_node_name
+          NODE_NAME_OVERRIDE: local_node_name@localhost
           CONFIG_PATH: /path/to/config/file/rabbitmq.conf
           USE_SSL: true
 
@@ -434,8 +747,8 @@ Here's an example configuration file:
           role: rabbitmq
         inventory_source: config/rabbitmq
     ```
-
   </Collapser>
+
   <Collapser
     id="example-config2"
     title="METRICS ONLY"
@@ -449,7 +762,7 @@ Here's an example configuration file:
           PORT: 15672
           USERNAME: admin
           PASSWORD: admin
-          NODE_NAME_OVERRIDE: local_node_name
+          NODE_NAME_OVERRIDE: local_node_name@locahost
 
           QUEUES: '["myQueue1","myQueue2"]'
           QUEUES_REGEXES: '["queue[0-9]+",".*"]'
@@ -465,8 +778,8 @@ Here's an example configuration file:
           role: rabbitmq
         inventory_source: config/rabbitmq
     ```
-
   </Collapser>
+
   <Collapser
     id="example-config3"
     title="INVENTORY ONLY"
@@ -480,7 +793,7 @@ Here's an example configuration file:
           PORT: 15672
           USERNAME: admin
           PASSWORD: admin
-          NODE_NAME_OVERRIDE: local_node_name
+          NODE_NAME_OVERRIDE: local_node_name@localhost
           CONFIG_PATH: /path/to/config/file/rabbitmq.conf
 
           QUEUES: '["myQueue1","myQueue2"]'
@@ -497,8 +810,8 @@ Here's an example configuration file:
           role: rabbitmq
         inventory_source: config/rabbitmq
     ```
-
   </Collapser>
+
   <Collapser
     id="example-config4"
     title="EVENTS ONLY"
@@ -512,7 +825,7 @@ Here's an example configuration file:
           PORT: 15672
           USERNAME: admin
           PASSWORD: admin
-          NODE_NAME_OVERRIDE: local_node_name
+          NODE_NAME_OVERRIDE: local_node_name@localhost
         interval: 15s
         labels:
           env: production
@@ -530,10 +843,10 @@ Data from this service is reported to an [integration dashboard](/docs/integrati
 
 Metrics are attached to these [event types](/docs/using-new-relic/data/understand-data/new-relic-data-types#events-new-relic):
 
-- [RabbitmqVhostSample](#vhostsample)
-- [RabbitmqNodeSample](#nodesample)
-- [RabbitmqExchangeSample](#exchangesample)
-- [RabbitmqQueueSample](#queuesample)
+* [RabbitmqVhostSample](#vhostsample)
+* [RabbitmqNodeSample](#nodesample)
+* [RabbitmqExchangeSample](#exchangesample)
+* [RabbitmqQueueSample](#queuesample)
 
 You can [query this data](/docs/using-new-relic/data/understand-data/query-new-relic-data) for troubleshooting purposes or to create custom charts and dashboards.
 
@@ -558,7 +871,6 @@ These attributes are attached to the `RabbitmqVhostSample` event type:
         Description
       </th>
     </tr>
-
   </thead>
 
   <tbody>
@@ -661,7 +973,6 @@ These attributes are attached to the `RabbitmqVhostSample` event type:
         Number of current connections in the state tuning.
       </td>
     </tr>
-
   </tbody>
 </table>
 
@@ -680,7 +991,6 @@ These attributes are attached to the `RabbitmqNodeSample` event type:
         Description
       </th>
     </tr>
-
   </thead>
 
   <tbody>
@@ -813,7 +1123,6 @@ These attributes are attached to the `RabbitmqNodeSample` event type:
         Node running (0 or 1). 0 shows that the node is not running and 1 shows that the node is running. In RabbitMQ this is seen as `running`.
       </td>
     </tr>
-
   </tbody>
 </table>
 
@@ -832,7 +1141,6 @@ These attributes are attached to the `RabbitmqExchangeSample` event type:
         Description
       </th>
     </tr>
-
   </thead>
 
   <tbody>
@@ -885,7 +1193,6 @@ These attributes are attached to the `RabbitmqExchangeSample` event type:
         Rate of messages published from this exchange into a queue per second. In RabbitMQ this is seen as `message_stats.publish_out_details.rate`.
       </td>
     </tr>
-
   </tbody>
 </table>
 
@@ -904,7 +1211,6 @@ These attributes are attached to the `RabbitmqQueueSample` event type:
         Description
       </th>
     </tr>
-
   </thead>
 
   <tbody>
@@ -1119,7 +1425,6 @@ These attributes are attached to the `RabbitmqQueueSample` event type:
         Rate of total messages in queue. In RabbitMQ this is seen as `messages_details.rate`.
       </td>
     </tr>
-
   </tbody>
 </table>
 
@@ -1138,7 +1443,6 @@ Other metadata includes:
         Description
       </th>
     </tr>
-
   </thead>
 
   <tbody>
@@ -1161,21 +1465,20 @@ Other metadata includes:
         The version of the RabbitMQ management plugin. For example: 3.6.7.
       </td>
     </tr>
-
   </tbody>
 </table>
 
 ## Inventory data [#inventory]
 
-The integration captures the configuration parameters of RabbitMQ in the `/etc/rabbitmq/rabbitmq.conf` file. Inventory data is only captured in [RabbitMQ version 3.7](http://www.rabbitmq.com/blog/2018/02/05/whats-new-in-rabbitmq-3-7/) or higher; the [inventory data](/docs/infrastructure/integrations-getting-started/getting-started/understand-integration-data-data-types#inventory-data) will appear on the Infrastructure [**Inventory** page](/docs/infrastructure/new-relic-infrastructure/infrastructure-ui-pages/infrastructure-inventory-page-search-your-entire-infrastructure), under the `config/rabbitmq` source.
+The integration captures the configuration parameters of RabbitMQ in the `/etc/rabbitmq/rabbitmq.conf` file. Inventory data is only captured in [RabbitMQ version 3.7](http://www.rabbitmq.com/blog/2018/02/05/whats-new-in-rabbitmq-3-7/) or higher; the [inventory data](/docs/infrastructure/integrations-getting-started/getting-started/understand-integration-data-data-types#inventory-data) will appear on the [**Inventory** page](/docs/infrastructure/new-relic-infrastructure/infrastructure-ui-pages/infrastructure-inventory-page-search-your-entire-infrastructure) in the infrastructure UI, under the `config/rabbitmq` source.
 
 <Callout variant="caution">
-  Be aware that any sensitive information that you put into the `rabbit.conf` file will appear on the Infrastructure **Inventory** page. This includes items such as the following from AWS:
+  Be aware that any sensitive information that you put into the `rabbit.conf` file will appear on the **Inventory** page in the infrastructure UI. This includes items such as the following from AWS:
 
-```
-cluster_formation.aws.secret_key,
-cluster_formation.aws.access_key_id
-```
+  ```
+  cluster_formation.aws.secret_key,
+  cluster_formation.aws.access_key_id
+  ```
 </Callout>
 
 ## Troubleshooting [#troubleshoot]
@@ -1191,12 +1494,11 @@ Troubleshooting tips:
 
     ```
     find -name "rabbitmqctl"
-    export PATH="$PATH:<var><LOCATION_TO_RABBITMQCTL></var>
+    export PATH="$PATH:<LOCATION_TO_RABBITMQCTL>
     ```
-
   </Collapser>
 </CollapserGroup>
 
 ## Check the source code [#source-code]
 
-This integration is open source software. That means you can [browse its source code](https://github.com/newrelic/nri-rabbitmq 'Link opens in a new window.') and send improvements, or create your own fork and build it.
+This integration is open source software. That means you can [browse its source code](https://github.com/newrelic/nri-rabbitmq) and send improvements, or create your own fork and build it.

@@ -9,6 +9,8 @@ translate:
 metaDescription: A summary of the New Relic PHP agent's system requirements and the supported PHP frameworks and libraries.
 redirects:
   - /docs/agents/php-agent/getting-started/php-agent-compatibility-requirements
+signupBanner:
+  text: Monitor and improve your entire stack. 100GB free. Forever.
 ---
 
 Before you [install](/docs/apm/agents/php-agent/installation) New Relic for PHP, make sure your system meets the applicable requirements.
@@ -17,41 +19,51 @@ If you don't have one already, [create a New Relic account](https://newrelic.com
 
 ## PHP releases [#php-release]
 
-New Relic supports PHP versions 5.5, 5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, and 8.1.
+
+
+New Relic supports PHP versions 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, and 8.2.
 
 <Callout variant="important">
-  Compatibility note: When PHP 8.0 or 8.1 detects an observability extension, like the New Relic agent, PHP disables Just-In-Time compilation.
+  Compatibility note: When PHP 8.0, 8.1, or 8.2 detects an observability extension, like the New Relic agent, PHP disables Just-In-Time compilation.
 
-Support for PHP 8.1 does not include Fibers.
+  Support for PHP 8.1+ does not include Fibers.
 
+  Support for PHP versions 7.0 and 7.1 will EOL in December, 2023.
 </Callout>
 
-- We recommend using a [supported release](http://php.net/supported-versions.php) of PHP, especially 7.4, 8.0, and 8.1.
-- PHP 5.1 support was deprecated in release 4.0 of the agent, and removed in release 4.5.
-- PHP 5.2 support was deprecated in release 6.8 of the agent, and removed in release 7.0.
-- PHP 5.3 and PHP 5.4 support was deprecated in release [9.15](/docs/release-notes/agent-release-notes/php-release-notes/php-agent-9150293) of the agent, and removed in release [9.17](/docs/release-notes/agent-release-notes/php-release-notes/php-agent-9170300/).
-- 32-bit support for PHP versions 5.5, 5.6, 7.0, 7.1, 7.2, 7.3, 7.4 was deprecated in release [9.19](/docs/release-notes/agent-release-notes/php-release-notes/php-agent-9190309).
-- Release [9.19](/docs/release-notes/agent-release-notes/php-release-notes/php-agent-9190309) is the last release to support ZTS builds. In the future, ZTS builds may not be provided and support may be completely pulled from the codebase.
+* We highly recommend using a [supported release](http://php.net/supported-versions.php) of PHP.
+* Release [9.19](/docs/release-notes/agent-release-notes/php-release-notes/php-agent-9190309) was the last release to support ZTS builds.
+
+<Callout variant="important">
+**For installations using an unsupported PHP version or platform (examples: 32 bit OSes, FreeBSD, ZTS), it's highly recommended that you disable the auto-update mechanisms for the PHP agent packages.** This can be done by adding the PHP agent packages to an exclusion list for package upgrades. Or you could version pin the PHP agent package to an agent version that supports the old, unsupported feature(s). Failure to prevent upgrades may result in a newer agent release being installed and removal of support for the required, unsupported features. This would disrupt APM data collection.
+The PHP agent packages which are affected are:
+   - newrelic-php5
+   - newrelic-php5-common
+   - newrelic-daemon
+</Callout>
 
 ## Permissions [#permissions]
 
-- Installation: Root access [is required](/docs/agents/php-agent/troubleshooting/determing-permissions-requirements) for most installations.
-- Running: Root access [is not required](/docs/agents/php-agent/troubleshooting/determing-permissions-requirements).
+* Installation: Root access [is required](/docs/agents/php-agent/troubleshooting/determing-permissions-requirements) for most installations.
+* Running: Root access [is not required](/docs/agents/php-agent/troubleshooting/determing-permissions-requirements).
 
 ## License key [#license_key]
 
-For any installation, you will need your New Relic [license key](/docs/subscriptions/license-key). This is a 40-character hexadecimal string that New Relic provides when you [sign up](https://newrelic.com/signup) for your account. For more information, see the PHP [install script](/docs/php/the-newrelic-install-script) and [license key settings](/docs/php/php-agent-phpini-settings#inivar-license) in the PHP INI file.
+For any installation, you will need your New Relic <InlinePopover type="licenseKey" />. This is a 40-character hexadecimal string that New Relic provides when you [sign up](https://newrelic.com/signup) for your account. For more information, see the PHP [install script](/docs/php/the-newrelic-install-script) and [license key settings](/docs/php/php-agent-phpini-settings#inivar-license) in the PHP INI file.
 
 ## Processor type [#processor]
 
-- Intel (and compatible) platforms
-- ARM64
+* Intel (and compatible) platforms
+* ARM64
 
 ## Operating systems [#operating-systems]
 
-<Callout variant="important">
-  The Windows operating system is not supported.
-</Callout>
+The New Relic PHP agent is supported on Ubuntu, Debian, Amazon Linux, Alpine, RHEL and CentOS Operating Systems (OS).
+When vendors announce end of life (e.g., Standard Support for Ubuntu, EOL LTS for Debian,
+Maintenance Support for RHEL and Maintenance Update for CentOS), New Relic will continue to support those latest versions for one year. After the year has passed, New Relic will end support for those versions. If the version of PHP you’re using is no longer officially available for an OS, then support could end sooner than one year. It is highly recommended
+to use the latest version of the OS that is officially supported by the vendor.
+The latest versions of our agent may work on OS versions that are past End of Life,
+however it is no longer tested or officially supported by the New Relic PHP agent.
 
 <table>
   <thead>
@@ -64,95 +76,58 @@ For any installation, you will need your New Relic [license key](/docs/subscript
         **Supported by New Relic's PHP agent**
       </th>
     </tr>
-
   </thead>
 
   <tbody>
     <tr>
       <td>
         Linux (x86_64)
-
-        Linux (x86) **DEPRECATED**
       </td>
 
       <td>
-          <Callout variant="important">
-            As of June 2022, we're discontinuing support for x86 architecture. For more information, see our [PHP agent release notes v9.19.0](/docs/release-notes/agent-release-notes/php-release-notes/php-agent-9190309).
-          </Callout>
 
-        * AWS Linux 2
-        * Red Hat Enterprise Linux (RHEL) 6 or higher
+        * Alpine 3.12 or higher
 
-         <Callout variant="important">
-            As of March 2022, we deprecated support for Red Hat Enterprise Linux (RHEL) 6. For more information, see our [PHP agent release notes v9.20.0](/docs/release-notes/agent-release-notes/php-release-notes/php-agent-9200310).  It will no longer be supported starting June, 2022.
-          </Callout>
+        * Amazon Linux 2
 
-          <Callout variant="important">
-            As of January 2021, we discontinued support for Red Hat Enterprise Linux (RHEL) 5. For more information, see our [PHP agent release notes v9.15.0](/docs/release-notes/agent-release-notes/php-release-notes/php-agent-9150293) and our [Explorers Hub post](https://discuss.newrelic.com/t/important-upcoming-changes-to-capabilities-across-browser-php-python-mobile-and-android-agents/123951).
-          </Callout>
+        * Red Hat Enterprise Linux (RHEL) 7 or higher
 
-        * CentOS 6 or higher
+        * CentOS 7 or higher
 
-         <Callout variant="important">
-            As of March 2022, we deprecated support for Centos 6. For more information, see our [PHP agent release notes v9.20.0](/docs/release-notes/agent-release-notes/php-release-notes/php-agent-9200310).  It will no longer be supported starting June, 2022.
-          </Callout>
+        * Debian 9.0 ("stretch") or higher
 
-          <Callout variant="important">
-            As of January 2021, we discontinued support for CentOS 5. For more information, see our [PHP agent release notes v9.15.0](/docs/release-notes/agent-release-notes/php-release-notes/php-agent-9150293) and our [Explorers Hub post](https://discuss.newrelic.com/t/important-upcoming-changes-to-capabilities-across-browser-php-python-mobile-and-android-agents/123951).
-          </Callout>
+        * Ubuntu LTS 18.04 ("Bionic Beaver") or higher or Ubuntu non-LTS 21.04 ("Hirsute Hippo") or higher.
 
-        * Debian 7.0 ("wheezy") or higher
-        * Ubuntu LTS 14.04 ("Trusty Tahr") or higher or Ubuntu non-LTS 19.04 ("Disco Dingo") or higher.
         * Any other Linux distribution with:
 
-          * Kernel version 2.6.13 or higher (2.6.26 or higher highly recommended)
-          * glibc 2.5 or higher with [NPTL](https://en.wikipedia.org/wiki/Native_POSIX_Thread_Library) support or musl libc version 1.1 or higher
+          * Kernel version 4.9 (long term) or higher
+          * glibc 2.17 or higher with [NPTL](https://en.wikipedia.org/wiki/Native_POSIX_Thread_Library) support or musl libc version 1.1.24 or higher
       </td>
     </tr>
+
     <tr>
       <td>
         Linux (ARM64)
       </td>
+
       <td>
-        * AWS Linux 2 (including AWS Graviton 2)
+        * Amazon Linux 2 (including AWS Graviton 2)
         * CentOS 8
+        * Alpine 3.16 or later
+        * Debian 11 or later
 
-        <Callout variant="important">
-          ARM64 is only supported with:
-          * PHP 8.0 and with New Relic PHP Agent 9.18.1 or later.
-          * PHP 8.1 and with New Relic PHP Agent 9.19.0 or later.
-        </Callout>
 
-        For more information on ARM64 support, please see [the ARM64 installation info](/docs/apm/agents/php-agent/installation/php-agent-installation-arm64).
+      <Callout variant="important">
+        ARM64 support is provided only for PHP 8.0, 8.1, and 8.2.
+      </Callout>
+      <Callout variant="important">
+        New Relic PHP agent 10.10.0 or later provides support for ARM64 by including binaries in a tarball distribution.
+      </Callout>
+      <Callout variant="important">
+        The New Relic PHP agent 9.18.1 - 10.9.0 source distribution provides ARM64 support ONLY on Amazon Linux 2 (including AWS Graviton 2) and Centos 8.
+      </Callout>
 
-  </td>
-</tr>
-
-    <tr>
-      <td>
-        macOS (x86_64 only) ** UNSUPPORTED **
-      </td>
-
-      <td>
-        <Callout variant="important">
-          As of January 2021, we're discontinuing support for macOS. For more information, see our [PHP agent release notes v9.15.0](/docs/release-notes/agent-release-notes/php-release-notes/php-agent-9150293) and our [Explorers Hub post](https://discuss.newrelic.com/t/important-upcoming-changes-to-capabilities-across-browser-php-python-mobile-and-android-agents/123951).
-        </Callout>
-
-        macOS 10.6 or higher. Because modern versions of macOS can't run 32-bit applications, New Relic removed support for 32-bit macOS with PHP agent release 4.6.
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        FreeBSD (x64) **DEPRECATED**
-      </td>
-
-      <td>
-          <Callout variant="important">
-            As of June, 2022, we're discontinuing support for FreeBSD. For more information, see our [PHP agent release notes v9.19.0](/docs/release-notes/agent-release-notes/php-release-notes/php-agent-9190309).
-          </Callout>
-
-        The latest agent supports the latest production release.
+          For more information on ARM64 support and installation, please see [the ARM64 installation info](/docs/apm/agents/php-agent/installation/php-agent-installation-arm64).
       </td>
     </tr>
 
@@ -161,8 +136,8 @@ For any installation, you will need your New Relic [license key](/docs/subscript
 
 ## Web servers [#webserver]
 
-- Apache 2.2 or 2.4 via `mod_php`
-- Any web server that supports FastCGI using PHP-FPM
+* Apache 2.2 or 2.4 via `mod_php`
+* Any web server that supports FastCGI using PHP-FPM
 
 ## Frameworks
 
@@ -203,27 +178,20 @@ Supported PHP frameworks include:
 
     <tr>
       <td>
-        [Drupal 6.x, 7.x, 8.x, and 9.x](/docs/agents/php-agent/frameworks-libraries/drupal-specific-functionality)
+        [Drupal 6.x, 7.x, 8.x, 9.1-9.5](/docs/agents/php-agent/frameworks-libraries/drupal-specific-functionality)
       </td>
+
+      <td>
+        Slim 2.x, 3.x, and 4.x
+      </td>      
     </tr>
 
     <tr>
       <td>
         Joomla 3.x
       </td>
-
       <td>
-        Slim 2.x, 3.x, and 4.x
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Kohana 3.2 and 3.3
-      </td>
-
-      <td>
-        Symfony 3.x, 4.x, 5.x
+        Symfony 3.x, 4.x, and 5.x
       </td>
     </tr>
 
@@ -239,39 +207,36 @@ Supported PHP frameworks include:
 
     <tr>
       <td>
-        Laravel 4.x, 5.x, 6.x, and 7.x
+        Laravel Lumen 6.x, 7.x, and 8.x
       </td>
 
       <td>
         Yii 1.x
       </td>
     </tr>
-
+    
     <tr>
-      <td>
-        Laravel Lumen 6.x, 7.x, and 8.x
-      </td>
-
       <td>
         Zend Framework 1.x, 2.x, and 3.x
       </td>
-    </tr>
+    
+      <td>
+        
+      </td>
 
+
+    </tr>
   </tbody>
 </table>
 
-<Callout variant="important">Joomla 3.x is not supported on PHP 8.x</Callout>
 
 <Callout variant="important">
-  As of PHP agent version 9.17, the following frameworks or framework versions
-  are no longer supported and may be removed from future agent builds: * Cake
-  PHP 1.x * Joomla 1.5, 1.6, and 2.x * Kohana * Silex 1.x and 2.x * Symfony 1.x
-  and 2.x
+  Joomla 3.x is not supported on PHP 8.x
 </Callout>
 
 The PHP agent's list of frameworks continues to grow. Even if the framework you are using is not listed here, the PHP agent may be able to provide you with useful information about your app.
 
-For more information, see [PHP frameworks: Integrating support for New Relic](/docs/php/framework-developers-integrated-support-for-new-relic). If you want to suggest support for other popular PHP frameworks, visit us at the [Explorers Hub](https://discuss.newrelic.com/tags/phpagent) and create a `Feature Idea`!
+For more information, see [PHP frameworks: Integrating support for New Relic](/docs/php/framework-developers-integrated-support-for-new-relic). If you want to suggest support for other popular PHP frameworks, visit us at the [Support Forum](https://discuss.newrelic.com/tags/phpagent) and create a `Feature Idea`!
 
 ## Databases and libraries [#databases]
 
@@ -292,7 +257,7 @@ Supported databases and libraries:
   <tbody>
     <tr>
       <td>
-        Firebird
+        Firebird (PDO Driver only)
       </td>
 
       <td>
@@ -316,7 +281,7 @@ Supported databases and libraries:
       </td>
 
       <td>
-        PDO
+        PDO Drivers
       </td>
     </tr>
 
@@ -342,7 +307,7 @@ Supported databases and libraries:
 
     <tr>
       <td>
-        Microsoft SQL Server
+        Microsoft SQL Server (PDO Driver only)
       </td>
 
       <td>
@@ -362,14 +327,13 @@ Supported databases and libraries:
 
     <tr>
       <td>
-        ODBC
+        ODBC (PDO Driver only)
       </td>
 
       <td>
-        Sybase
+        Sybase (PDO Driver only)
       </td>
     </tr>
-
   </tbody>
 </table>
 
@@ -379,9 +343,7 @@ If your application uses other application performance monitoring (APM) software
 
 ## Instance details
 
-New Relic collects [instance details for a variety of databases and database drivers](/docs/apm/applications-menu/features/analyze-database-instance-level-performance-issues). The ability to view specific instances and the types of database information in APM depends on your New Relic agent version.
-
-New Relic's PHP agent [version 6.8 or higher](/docs/release-notes/agent-release-notes/php-release-notes/php-agent-680177) supports instance details for the following:
+New Relic collects [instance details for a variety of databases and database drivers](/docs/apm/applications-menu/features/analyze-database-instance-level-performance-issues). The ability to view specific instances and the types of database information in APM is available for the following:
 
 <table>
   <thead>
@@ -393,12 +355,7 @@ New Relic's PHP agent [version 6.8 or higher](/docs/release-notes/agent-release-
       <th>
         Extension
       </th>
-
-      <th>
-        Minimum agent version
-      </th>
     </tr>
-
   </thead>
 
   <tbody>
@@ -410,10 +367,6 @@ New Relic's PHP agent [version 6.8 or higher](/docs/release-notes/agent-release-
       <td>
         [mongodb](https://github.com/mongodb/mongo-php-library)
       </td>
-
-      <td>
-        7.1
-      </td>
     </tr>
 
     <tr>
@@ -423,10 +376,6 @@ New Relic's PHP agent [version 6.8 or higher](/docs/release-notes/agent-release-
 
       <td>
         [mysql](http://php.net/manual/en/book.mysql.php)
-      </td>
-
-      <td>
-        6.8
       </td>
     </tr>
 
@@ -438,10 +387,6 @@ New Relic's PHP agent [version 6.8 or higher](/docs/release-notes/agent-release-
       <td>
         [mysqli](http://php.net/manual/en/book.mysqli.php)
       </td>
-
-      <td>
-        6.8
-      </td>
     </tr>
 
     <tr>
@@ -451,10 +396,6 @@ New Relic's PHP agent [version 6.8 or higher](/docs/release-notes/agent-release-
 
       <td>
         [pdo_mysql](http://php.net/manual/en/ref.pdo-mysql.php)
-      </td>
-
-      <td>
-        6.8
       </td>
     </tr>
 
@@ -466,10 +407,6 @@ New Relic's PHP agent [version 6.8 or higher](/docs/release-notes/agent-release-
       <td>
         [pgsql](http://php.net/manual/en/book.pgsql.php)
       </td>
-
-      <td>
-        6.9
-      </td>
     </tr>
 
     <tr>
@@ -479,10 +416,6 @@ New Relic's PHP agent [version 6.8 or higher](/docs/release-notes/agent-release-
 
       <td>
         [pdo_pgsql](http://php.net/manual/en/ref.pdo-pgsql.php)
-      </td>
-
-      <td>
-        6.9
       </td>
     </tr>
 
@@ -494,10 +427,6 @@ New Relic's PHP agent [version 6.8 or higher](/docs/release-notes/agent-release-
       <td>
         [predis](https://github.com/nrk/predis)
       </td>
-
-      <td>
-        7.1
-      </td>
     </tr>
 
     <tr>
@@ -508,26 +437,31 @@ New Relic's PHP agent [version 6.8 or higher](/docs/release-notes/agent-release-
       <td>
         [redis](https://pecl.php.net/package/redis)
       </td>
-
-      <td>
-        7.1
-      </td>
     </tr>
-
   </tbody>
 </table>
 
 To disable collection of host information, use either of these options:
 
-- Set `newrelic.datastore_tracer.instance_reporting.enabled` to `false` in the `newrelic.ini`.
-- Omit the database name with `newrelic.datastore_tracer.database_name_reporting.enabled = false`.
+* Set `newrelic.datastore_tracer.instance_reporting.enabled` to `false` in the `newrelic.ini`.
+* Omit the database name with `newrelic.datastore_tracer.database_name_reporting.enabled = false`.
 
 To request instance-level information from datastores currently not listed for your New Relic agent, get support at [support.newrelic.com](https://support.newrelic.com).
 
+## Codesteam/Code-level metrics
+
+The PHP agent supports code-level metrics for PHP releases 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1 and 8.2.
+
+## Logs In Context [#logging]
+
+The PHP agent supports APM [logs in context](/docs/logs/logs-context/configure-logs-context-php/) for the following libraries:
+
+* Monolog 2 and 3
+
 ## Message queuing [#queuing]
 
-- HTTP
-- Laravel Queuing, available as an experimental feature in the [PHP Agent 6.6.0.169 release](/docs/release-notes/agent-release-notes/php-release-notes/php-agent-660169), enabled by default since [PHP Agent 8.0.0.204](/docs/release-notes/agent-release-notes/php-release-notes/php-agent-800204).
+* HTTP
+* Laravel Queuing
 
 ## Security requirements [#security]
 
@@ -548,7 +482,6 @@ The PHP agent integrates with other New Relic features to give you end-to-end vi
         Integration
       </th>
     </tr>
-
   </thead>
 
   <tbody>
@@ -564,11 +497,24 @@ The PHP agent integrates with other New Relic features to give you end-to-end vi
 
     <tr>
       <td>
+        [Codestream/Code-level metrics](/docs/codestream/how-use-codestream/performance-monitoring/)
+      </td>
+
+      <td>
+        New Relic CodeStream allows developers to see how the code they're responsible for is performing in production
+        by bringing observability into the IDE and making it part of their daily routine.
+        The PHP agent reports code-level metrics (starting with release 10.4.0) on your application which enables
+        detailed insight into how your code is performing at the method level.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
         [Infrastructure monitoring](/docs/infrastructure/new-relic-infrastructure/getting-started/introduction-new-relic-infrastructure)
       </td>
 
       <td>
-        When you install the infrastructure and APM agents on the same host, they automatically detect one another. You can then view a list of hosts in the APM UI, and filter your Infrastructure hosts by APM app in the Infrastructure UI. For more information, see [APM data in infrastructure monitoring](/docs/infrastructure/new-relic-infrastructure/data-instrumentation/new-relic-apm-data-infrastructure).
+        When you install the infrastructure and APM agents on the same host, they automatically detect one another. You can then view a list of hosts in the APM UI, and filter your hosts by APM app in the infrastructure UI. For more information, see [APM data in infrastructure monitoring](/docs/infrastructure/new-relic-infrastructure/data-instrumentation/new-relic-apm-data-infrastructure).
       </td>
     </tr>
 
@@ -591,6 +537,5 @@ The PHP agent integrates with other New Relic features to give you end-to-end vi
         [Synthetic transaction traces](/docs/synthetics/new-relic-synthetics/using-monitors/collect-synthetic-transaction-traces) connect requests from synthetic monitors to the underlying APM transaction.
       </td>
     </tr>
-
   </tbody>
 </table>

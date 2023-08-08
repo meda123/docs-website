@@ -6,6 +6,7 @@ tags:
   - Alert notifications
 translate:
   - jp
+  - kr
 metaDescription: 'Read about how to set up alerts notification channels so you can be notified when incidents are opened, acknowledged, or closed.'
 redirects:
   - /docs/alerts/new-relic-alerting/managing-notification-channels/controlling-when-how-send-alerts
@@ -29,17 +30,17 @@ redirects:
   - /docs/alerts/new-relic-alerts/managing-notification-channels/notification-channels-control-where-send-alerts
 ---
 
-You can use [alerts](/docs/alerts) to set up notification channels, and attach those channels to [policies](/docs/alerts/new-relic-alerts/getting-started/alert-policy-workflow#terminology). Your selected channels provide fast and consistent ways for the right personnel to be notified about incidents. For example, notifications allow you to include charts about the incident to provide context and share them with your team.
+You can use [alerts](/docs/alerts) to set up notification channels, and attach those channels to [policies](/docs/alerts-applied-intelligence/new-relic-alerts/alert-policies/create-edit-or-find-alert-policy). 
 
-Alerts offers several notification channels, including webhooks, Slack rooms, email, and more. You'll be notified by your notification channels when incidents are opened, acknowledged, or closed. This document explains the available notification channels and how to set them up.
+<Callout variant="important" title="EOL NOTICE">
+We're replacing notification channels with the more powerful [workflows](/docs/alerts-applied-intelligence/applied-intelligence/incident-workflows/incident-workflows) feature. Existing notifications will be automatically migrated to workflows that provide more options, flexibility, and control and you can enrich notifications with additional data.
+</Callout> 
 
-<Callout variant="tip">
-  This document is about alerts notifications. For general information about unsubscribing from other New Relic emails, including marketing emails, weekly reports, and announcements, see [Unsubscribe from New Relic emails](/docs/accounts/accounts/account-maintenance/unsubscribe-new-relic-emails).
-</Callout>
+We offer several notification channels, including webhooks, Slack rooms, email, and more. You'll be notified by your notification channels when incidents are opened, acknowledged, or closed. 
 
 ## View notification channels [#view-channels]
 
-To see all notification channels in your account: Go to **[one.newrelic.com](https://one.newrelic.com/ "Link opens in a new window.")**, in the top nav click **Alerts & AI**, then click **Notification channels**.
+To see all notification channels in your account: Go to **[one.newrelic.com](https://one.newrelic.com/all-capabilities) > Alerts & AI > Channels**.
 
 ## Add or remove notification channels [#add-channel]
 
@@ -64,11 +65,11 @@ These are the available notification channel types.
     id="user"
     title="User"
   >
-    **Requirement**: This feature is not available for users on the New Relic One user model, only to users on the original user model (learn about [user model differences](/docs/accounts/original-accounts-billing/original-product-based-pricing/overview-user-models)). As a workaround, you can use the [email notification channel](#email). 
+    **Requirement**: This feature is not available for users on our newer user model, only to users on the original user model (learn about [user model differences](/docs/accounts/original-accounts-billing/original-product-based-pricing/overview-user-models)). As a workaround, you can use the [email notification channel](#email).
 
-    Use the **User** notification channel to select existing account team members and admins. To view the **Users** list or to [add users to alert policies](/docs/alerts/new-relic-alerts-beta/managing-notification-channels/view-or-update-user-email-channels): Go to **[one.newrelic.com](https://one.newrelic.com/ "Link opens in a new window.")**, in the top nav click **Alerts & AI**, then click **Notification channels**.
+    Use the **User** notification channel to select existing account team members and admins. To view the **Users** list or to [add users to alert policies](/docs/alerts/new-relic-alerts-beta/managing-notification-channels/view-or-update-user-email-channels): Go to **[one.newrelic.com](https://one.newrelic.com/all-capabilities) > Alerts & AI > Channels**.
 
-    If a user has [configured the New Relic mobile app](/docs/mobile-apps/new-relic-mobile-apps/authentication-alerts/alerting-new-relic-mobile-apps/), the user notification channel also sends [push notifications](#mobile-push) to any of the user's registered mobile devices. 
+    If a user has [configured the New Relic mobile app](/docs/mobile-apps/new-relic-mobile-apps/authentication-alerts/alerting-new-relic-mobile-apps/), the user notification channel also sends [push notifications](#mobile-push) to any of the user's registered mobile devices.
 
     If your account has one or more [child accounts](/docs/accounts/install-new-relic/account-setup/manage-apps-or-users-sub-accounts), the notification channel includes only users for the [currently selected parent or child account](/docs/accounts/install-new-relic/account-setup/use-multiple-accounts).
   </Collapser>
@@ -303,6 +304,11 @@ These are the available notification channel types.
     id="victorops"
     title="VictorOps"
   >
+  
+    <Callout variant="important" title="EOL NOTICE">
+      After September 30, 2022, we're discontinuing support for several capabilities, including VictorOps notifications. For more details, including how you can easily prepare for this transition, see our [Support Forum post](https://discuss.newrelic.com/t/july-2022-end-of-life-announcements/188318).
+    </Callout>
+
     You must have an existing [VictorOps](http://victorops.com/ "Link opens in a new window") account in order to provide the following required information:
 
     <table>
@@ -466,6 +472,11 @@ These are the available notification channel types.
     id="xmatters"
     title="xMatters"
   >
+  
+    <Callout variant="important" title="EOL NOTICE">
+      After September 30, 2022, we're discontinuing support for several capabilities, including xMatters notifications. For more details, including how you can easily prepare for this transition, see our [Support Forum post](https://discuss.newrelic.com/t/july-2022-end-of-life-announcements/188318).
+    </Callout>
+
     You must have an existing [xMatters](https://www.xmatters.com/integration/new-relic/ "Link opens in a new window") account in order to provide the following information:
 
     <table>
@@ -514,7 +525,9 @@ These are the available notification channel types.
 
 To receive mobile push notifications:
 
-1. Log in to your New Relic account via the mobile app at least once to ensure the device is registered.
+1. Log in to your New Relic account via the mobile app at least once to ensure the device is registered. If you haven't already, create your free New Relic account below to start monitoring your data today.
+
+<InlineSignup/>
 2. [Add the user channel](/docs/alerts/new-relic-alerts-beta/managing-notification-channels/view-or-update-user-email-channels#account-users) to the alert policy.
 3. Switch push notifications **On** for the device.
 

@@ -3,6 +3,11 @@
     "statusCode": "404",
     "errorMessage": "The URL you entered may be broken, or the page has been removed. <2>Go back to the home page</2>"
   },
+  "findYourQuickstart": {
+    "subtext": "Monitor everything in your stack with 600+ integrations.",
+    "cta": "Find your quickstart",
+    "button": "View all"
+  },
   "dataDictionary": {
     "title": "New Relic data dictionary",
     "intro": "This data dictionary defines some of our default-reported data stored in NRDB and queryable via NRQL. This includes events like Transaction, MobileRequest, and BrowserInteraction, and our Metric, Log, and Span data types. These definitions are also available from our query builder UI by mousing over applicable data type and attribute names.",
@@ -17,166 +22,228 @@
   "whatsNew": {
     "title": "What's new in New Relic"
   },
+  "homepageVideo": {
+    "header": "New Relic docs",
+    "p1": "Welcome! We're here to help you monitor, debug, and improve your entire stack—with data.",
+    "p2": "If you're ready to jump in, search or browse the docs. Or create a New Relic account for free. Need some inspiration first? Check out this intro video. Let's begin!"
+  },
   "home": {
+    "personas": {
+      "default": {
+        "1": "Frontend devs",
+        "2": "Back-end devs",
+        "3": "Dev-ops and SREs"
+      },
+      "active": {
+        "1": "Frontend developers",
+        "2": "Back-end developers",
+        "3": "Dev-ops and SREs"
+      },
+      "blurbs": {
+        "1": "Click the tiles below to learn how you can use New Relic to monitor the performance of your application, troubleshoot frontend issues your users face, and monitor your site's core web vitals.",
+        "2": "Click the tiles below to learn how you can use New Relic to monitor the performance of your infrastructure, monitor your application, and manage all your logs.",
+        "3": "Click the tiles below to learn how you can use New Relic to monitor your infrastructure, track your changes and deployments, and define service levels between teams."
+      },
+      "tiles": {
+        "1": [
+          {
+            "label": "Monitor your apps",
+            "url": "https://docs.newrelic.com/introduction-apm/"
+          },
+          {
+            "label": "Monitor user experience",
+            "url": "https://docs.newrelic.com/docs/browser/browser-monitoring/getting-started/introduction-browser-monitoring/"
+          },
+          {
+            "label": "Measure core web vitals",
+            "url": "https://docs.newrelic.com/docs/browser/new-relic-browser/guides/guide-to-monitoring-core-web-vitals/"
+          }
+        ],
+        "2": [
+          {
+            "label": "Monitor your infrastructure",
+            "url": "https://docs.newrelic.com/docs/infrastructure/infrastructure-monitoring/get-started/get-started-infrastructure-monitoring/"
+          },
+          {
+            "label": "Monitor your apps",
+            "url": "https://docs.newrelic.com/introduction-apm/"
+          },
+          {
+            "label": "Manage your logs",
+            "url": "https://docs.newrelic.com/docs/logs/get-started/get-started-log-management/"
+          }
+        ],
+        "3": [
+          {
+            "label": "Monitor your infrastructure",
+            "url": "https://docs.newrelic.com/docs/infrastructure/infrastructure-monitoring/get-started/get-started-infrastructure-monitoring/"
+          },
+          {
+            "label": "Track changes and deployments",
+            "url": "https://docs.newrelic.com/docs/change-tracking/change-tracking-introduction/"
+          },
+          {
+            "label": "Define SLIs and SLOs",
+            "url": "https://docs.newrelic.com/docs/service-level-management/create-slm/"
+          }
+        ]
+      }
+    },
     "banner": {
-      "title": "Welcome to \n New Relic docs!",
+      "title": "Getting started",
       "intro": {
-        "p1": "We're here to help you monitor, debug, and improve your entire stack. If you're new to New Relic, read our <2>Introduction to New Relic doc</2>. Or get started right now by creating an account and installing a quickstart:"
+        "p1": "New to New Relic? Read our <2>Introduction to New Relic doc</2>. Or get started right now by creating an account and installing New Relic:"
       },
       "button1": "Create a free account",
-      "button2": "Find your quickstart"
+      "button2": "Install New Relic"
     },
-    "welcome": {
+    "toggle": {
+      "newUserView": "New user view",
+      "defaultView": "Default view",
+      "tooltip": "<0>👋 Hey there! Are you a new user? </0><1> Check out our <1>new</1> introduction view here! </1>"
+    },
+    "search": {
+      "popularSearches": {
+        "options": [
+          "NRQL",
+          "logs",
+          "alert",
+          "best practices",
+          "Kubernetes"
+        ],
+        "title": "Popular searches"
+      },
+      "placeholder": "What are you looking for?"
+    },
+    "popularDocs": {
+      "title": "Popular docs",
       "t1": {
-        "title": "Getting started"
+        "title": "Monitor all your apps and services"
       },
       "t2": {
-        "title": "What's new"
+        "title": "Deploy browser monitoring"
       },
       "t3": {
-        "title": "Popular content"
+        "title": "Get started with synthetic monitoring"
       }
     },
-    "tdp": {
-      "title": "Data and APIs",
-      "description": "Ingest, visualize, and alert on all your telemetry data in one place.",
-      "t1": {
-        "title": "Data explorer",
-        "description": "Query and build charts with NRQL, our PromQL-style syntax, or our visual chart builder."
-      },
-      "t2": {
-        "title": "Dashboards",
-        "description": "Combine data from anywhere in our platform into customized dashboards."
-      },
-      "t3": {
-        "title": "APIs",
-        "description": "Find APIs to send data in, get data out, or manage the New Relic platform."
-      },
-      "t4": {
-        "title": "Manage data",
-        "description": "Monitor and control your data usage."
-      },
-      "t5": {
-        "title": "Build on New Relic One",
-        "description": "Learn how to build custom apps on our platform at developer.newrelic.com"
-      }
-    },
-    "fso": {
-      "title": "Observability solutions",
-      "description": "Analyze and troubleshoot problems easily across your entire software stack.",
-      "t1": {
-        "title": "APM",
-        "description": "Get real-time and trending data about your app's performance and stability."
-      },
-      "t2": {
-        "title": "Browser",
-        "description": "Measure website performance, track errors, and see how users interact with your site."
-      },
-      "t3": {
-        "title": "Distributed Tracing",
-        "description": "Track requests through your distributed system to find trends and anomalies."
-      },
-      "t4": {
-        "title": "Infrastructure",
-        "description": "Monitor your infrastructure—hosts, cloud providers, container services, backend services, orchestrators, and more."
-      },
-      "t5": {
-        "title": "Kubernetes and Pixie",
-        "description": "Get instant Kubernetes observability. "
-      },
-      "t6": {
-        "title": "Log Management",
-        "description": "Get logs alongside your telemetry data with our fast, scalable log management."
-      },
-      "t7": {
-        "title": "Mobile",
-        "description": "Understand user journeys in your Android and iOS apps and troubleshoot crashes."
-      },
-      "t8": {
-        "title": "Network Performance Monitoring",
-        "description": "Monitor your network devices."
-      },
-      "t9": {
-        "title": "Serverless",
-        "description": "Monitor AWS Lambda, Azure Functions, and Google Cloud Functions."
-      },
-      "t10": {
-        "title": "Synthetics",
-        "description": "Simulate user activity to detect outages and fix poor website performance."
-      },
-      "t11": {
-        "title": "Workloads",
-        "description": "Group or monitor entities across your entire stack based on a team or a set of responsibilities."
-      },
-      "t12": {
-        "title": "Service level management",
-        "description": "Create and consume SLIs and SLOs."
-      }
-    },
-    "ai": {
-      "title": "Alerts and Applied Intelligence (AI)",
-      "description": "Automatically detect anomalies, correlate issues, and reduce alert noise.",
-      "t1": {
-        "title": "Introduction to Alerts",
-        "description": "Get notified about important changes in your system based on any data you connect to New Relic."
-      },
-      "t2": {
-        "title": "Introduction to Applied Intelligence",
-        "description": "Recognize issues sooner, resolve problems faster, and reduce noise for better incident management."
-      },
-      "t3": {
-        "title": "Incident Intelligence",
-        "description": "Get an overview of all your incidents. See sources and related events, and find out how they all correlate."
-      },
-      "t4": {
-        "title": "Proactive Detection",
-        "description": "Get notified by Slack or webhook of unusual app behavior."
-      },
-      "t5": {
-        "title": "Workflows",
-        "description": "Enrich your incidents with New Relic data before sending them to your notification platform."
-      }
-    },
-    "integrations": {
-      "title": "New Relic integrations",
-      "description": "<0>Integrations</0> connect the technologies in your stack to New Relic. Here are a few of our <4>370+ integrations</4>:",
-      "title1": "Back-end, front-end, and mobile applications",
-      "title2": "Infrastructure and cloud platforms",
-      "title3": "Open-source monitoring systems"
-    },
-    "mobile_apps": {
-      "title": "New Relic mobile apps",
-      "description": "View the power of NR1 in the palm of your hand."
-    },
-    "security": {
-      "title": "Security, privacy, and legal information",
-      "description": "Find out how we ensure security, data privacy, and compliance, and find our terms of service.",
-      "t1": {
-        "title": "Data privacy",
-        "description": "New Relic takes your data privacy seriously. Our principles-based approach aims to go beyond the legal requirements for consent."
-      },
-      "t2": {
-        "title": "Security compliance",
-        "description": "Whether your data is in transit to New Relic or at rest in our storage, strong encryption measures can help protect against unauthorized access or theft of valuable data."
-      },
-      "t3": {
-        "title": "Security bulletins",
-        "description": "Security bulletins are a way for us to let you know about security vulnerabilities, remediation strategies, and applicable updates."
-      },
-      "t4": {
-        "title": "Licenses",
-        "description": "All about New Relic's licenses, Usage Plan, and policies. Find out what open source software we use in our products."
-      }
+    "pageTitle": "Welcome to New Relic docs!",
+    "whatsNew": {
+      "title": "What's new"
     }
   },
-  "subNav": {
-    "homeLink": "Home",
-    "filter": {
-      "placeholder": "Filter navigation"
-    }
+  "navFooter": {
+    "default": "Go to the New Relic platform",
+    "apm": "Go to APM UI",
+    "browser": "Go to browser monitoring UI",
+    "infrastructure": "Go to infrastructure monitoring UI",
+    "logs": "Go to log management UI",
+    "mobile": "Go to mobile monitoring UI",
+    "network-monitoring": "Go to network monitoring UI",
+    "alerts-ai": "Go to alerts & AI UI",
+    "dashboards": "Go to dashboards UI",
+    "vulnerability-management": "Go to Vulnerability Management UI"
   },
   "machineTranslation": {
     "calloutHeading": "This machine translation is provided for your convenience.",
-    "calloutBody": "In the event of any inconsistency between the English version and the translated version, the <2>English version</2> shall prevail. Please visit <4>this page</4> for more information."
+    "calloutBody": "In the event of any inconsistency between the English version and the translated version, the <2>English version</2> shall prevail. Please visit <5>this page</5> for more information."
+  },
+  "inlineSignup": {
+    "ctaButton": "Start now",
+    "emailLabel": "Company email",
+    "emailValidationHint": "Please format your email like \"user@example.com\"",
+    "nameLabel": "Name",
+    "nameValidationHint": "Please enter your name",
+    "submitError": "An error occurred trying to create your account. Please try again later.",
+    "terms": "100 GB + 1 user free. Forever. No credit card required.<1 />By signing up you're agreeing to <4>Terms of Service</4> and <8>Services Privacy Notice.</8>"
+  },
+  "personaSignup": {
+    "terms": "100 GB + 1 user free. Forever. No credit card required.",
+    "conditions": "By signing up you're agreeing to <2>Terms of Service</2> and <6>Services Privacy Notice.</6>"
+  },
+  "installFeedback": {
+    "question": "Did this doc help with your installation?",
+    "prompt": "Tell us how can we do this better.",
+    "commentButton": "Leave us a comment!",
+    "comment": "Comments",
+    "email": "Your email (optional)",
+    "emailDisclaimer": "We'll only use this email for follow-up questions about your feedback.",
+    "validEmail": "Please provide a valid email",
+    "submitButton": "Submit comment",
+    "submitMessage": "Thank you for your feedback!"
+  },
+  "apm": {
+    "intro": {
+      "title": "Improve your app performance with APM",
+      "text": [
+        "Our application performance monitoring (APM) provides a unified monitoring service for all your apps and microservices.",
+        "Monitor everything from the hundreds of dependencies of a modern stack down to simple web-transaction times and throughput of an app. Keep track of your app's health in real-time by monitoring your metrics, events, logs, and transactions (MELT) through pre-built and custom dashboards."
+      ]
+    },
+    "block1": {
+      "list": [
+        "Observe the performance of your application by installing one of our agents - it takes just minutes!",
+        "Monitor the performance and health of all your services in one place",
+        "Pair New Relic with OpenTelemetry or other open source tools"
+      ],
+      "subTitle": "See the health of all your services in a glance"
+    },
+    "block2": {
+      "list": [
+        "Metrics, events, and traces",
+        "Instant log management",
+        "Vulnerability reporting"
+      ],
+      "title": "Monitor more than just your app's performance.",
+      "text": "Our agents automatically instrument and report:"
+    },
+    "block3": [
+      {
+        "list": [
+          "Ingest all your logs automatically with our APM agents",
+          "See all your logs in one place.",
+          "Find problems faster, reduce context switching."
+        ],
+        "subTitle": "Log Management"
+      },
+      {
+        "list": [
+          "Ingest common vulnerabilities and exposures (CVEs) automatically with our APM agents",
+          "Manage the security of your services with zero config.",
+          "Overcome security blindspots and collaborate on remediation by assigning CVEs."
+        ],
+        "subTitle": "Vulnerability management"
+      }
+    ],
+    "block4": {
+      "list": [
+        "Monitor latency, errors, traffic, saturation, and Apdex scores to identify bottlenecks and optimize performance for your users",
+        "Use prebuilt dashboards to identify and triage errors and other poor user experiences"
+      ],
+      "subTitle": "Ensure a great user experience"
+    },
+    "block5": [
+      {
+        "subTitle": "Proactive error management",
+        "text": "Is your early-access software still slightly unstable? Proactively monitor and solve those errors before they affect your users with errors inbox."
+      },
+      {
+        "subTitle": "Measure user satisfaction",
+        "text": "Do your users always comment on how speedy your web app is and you want to quantify that feedback? Measure their satisfaction by monitoring your Apdex at a glance."
+      },
+      {
+        "subTitle": "Automatic log ingest",
+        "text": "Need somewhere to store your logs? Our agents automatically ingest them."
+      },
+      {
+        "subTitle": "Track dependancies",
+        "text": "Does your modern stack has dozens or even hundreds of dependencies to keep track of? Easily track them with automap and external services."
+      }
+    ]
+  },
+  "quickstartChooser": {
+    "blurbLineOne": "Choose your app's language below to install an APM agent.",
+    "blurbLineTwo": "It takes just a few minutes!",
+    "heading": "Ready to try APM?"
   }
 }

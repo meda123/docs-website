@@ -127,6 +127,39 @@ test('deserializes InlineCode components', async () => {
   expect(mdx).toEqual(input.trim());
 });
 
+test('deserializes Side components', async () => {
+  const input = `
+<Side>
+  This is one side for the SideBySide component
+</Side>
+  `;
+
+  const mdx = await deserializeHTML(await serializeMDX(input));
+
+  expect(mdx).toEqual(input.trim());
+});
+
+test('deserializes SideBySide components', async () => {
+  const input = `
+<SideBySide>
+  <Side>
+    This will be displayed on the left hand-side
+  </Side>
+
+  <Side>
+    This will be displayed on the right hand-side
+  </Side>
+</SideBySide>
+  `;
+
+  const html = await serializeMDX(input);
+  console.log('html', html);
+  const mdx = await deserializeHTML(html);
+  console.log('mdx', mdx.trim());
+
+  expect(mdx).toEqual(input.trim());
+});
+
 test('deserializes TechTileGrid components', async () => {
   const input = `
 <TechTileGrid>
@@ -194,4 +227,74 @@ The Varnish Cache integration collects both metrics(<b>M</b>) and inventory(<b>I
   const mdx = await deserializeHTML(await serializeMDX(input));
 
   expect(mdx).toEqual(input.trim());
+});
+
+test('deserialize html with backticks as <code>', async () => {
+  const input = `
+\`test\`
+`;
+
+  const mdx = await deserializeHTML(await serializeMDX(input));
+
+  expect(mdx).toEqual(input.trim());
+});
+
+test('deserializes Tabs Component', async () => {
+  const input = `
+<Tabs>
+  <TabsBar>
+    <TabsBarItem id="grails-run-app">
+      Pass with run-app
+    </TabsBarItem>
+
+    <TabsBarItem id="grails-run-war">
+      Pass with run-war
+    </TabsBarItem>
+  </TabsBar>
+
+  <TabsPages>
+    <TabsPageItem id="grails-run-app">
+      1. Begin with an unzipped version of Grails.
+      2. Run this command:
+    </TabsPageItem>
+
+    <TabsPageItem id="grails-run-war">
+      1. In your Grails app, open this file with your text editor:
+      2. Add or edit the JVM arguments line:
+    </TabsPageItem>
+  </TabsPages>
+</Tabs>
+  `;
+
+  const mdx = await deserializeHTML(await serializeMDX(input));
+
+  expect(mdx).toEqual(input.trim());
+});
+
+test('deserializes InlinePopover component', async () => {
+  const input = '<InlinePopover/>';
+
+  const mdx = await deserializeHTML(await serializeMDX(input));
+  expect(mdx).toEqual(input);
+});
+
+test('deserialize iframes', async () => {
+  const input = `<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/04JP0ky_hjI"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+/>`;
+
+  const mdx = await deserializeHTML(await serializeMDX(input));
+  expect(mdx).toEqual(input);
+});
+
+test('deserializes InlineSignup component', async () => {
+  const input = '<InlineSignup/>';
+
+  const mdx = await deserializeHTML(await serializeMDX(input));
+  expect(mdx).toEqual(input);
 });

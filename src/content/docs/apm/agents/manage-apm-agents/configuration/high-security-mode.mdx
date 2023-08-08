@@ -17,7 +17,9 @@ For more information about our security measures, see our [security and privacy 
 
 ## Requirements
 
-Customers on our [New Relic One pricing model](docs/accounts/accounts-billing/new-relic-one-pricing-billing/new-relic-one-pricing-billing) require [Enterprise edition](https://newrelic.com/pricing). Customers on our original pricing model have access depending on their subscription level.
+Requires [Enterprise edition](/docs/accounts/accounts-billing/new-relic-one-pricing-billing/new-relic-one-pricing-billing/#editions). 
+
+Have questions about access to this feature? Talk to your New Relic account representative. 
 
 ## Account level [#overview]
 
@@ -41,16 +43,6 @@ Currently there are two versions of high security mode. [Version 1](#version1des
   <tbody>
     <tr>
       <td>
-        C SDK
-      </td>
-
-      <td>
-        n/a
-      </td>
-    </tr>
-
-    <tr>
-      <td>
         [Go](/docs/agents/go-agent/instrumentation/go-agent-configuration#high_security)
       </td>
 
@@ -65,7 +57,7 @@ Currently there are two versions of high security mode. [Version 1](#version1des
       </td>
 
       <td>
-        3.7 or higher (enabled by default)
+        3.7 or higher
       </td>
     </tr>
 
@@ -149,10 +141,10 @@ To enable high security, you must update both the local configuration on your se
       </td>
 
       <td>
-        * For users on our [original user model](/docs/accounts/original-accounts-billing/original-product-based-pricing/overview-changes-pricing-user-model/#user-model): Only the account owner can configure this. Go to [one.newrelic.com](https://one.newrelic.com), click the [account dropdown](/docs/using-new-relic/welcome-new-relic/get-started/glossary#account-dropdown) and select **Account settings**. On that page, select **High security mode**.
-        * For users on the [New Relic One user model](/docs/accounts/original-accounts-billing/original-product-based-pricing/overview-changes-pricing-user-model/#user-model): Get the [account ID](/docs/accounts/accounts-billing/account-structure/account-id) for the account you want to enable. Then use that to go to this URL: `https://rpm.newrelic.com/accounts/YOUR_ACCOUNT_ID`. On that page, you can configure high security mode.  
+        * For users on [our original user model](/docs/accounts/original-accounts-billing/original-users-roles/users-roles-original-user-model): Only the account owner can configure this. Go to **[one.newrelic.com](https://one.newrelic.com/all-capabilities)**, click the [user menu](/docs/accounts/accounts-billing/general-account-settings/intro-account-settings) and select **Account settings**. On that page, select **High security mode**.
+        * For users on [our newer user model](/docs/accounts/original-accounts-billing/original-product-based-pricing/overview-changes-pricing-user-model/#user-model): Get the [account ID](/docs/accounts/accounts-billing/account-structure/account-id) for the account you want to enable. Then use that to go to this URL: `https://rpm.newrelic.com/accounts/YOUR_ACCOUNT_ID`. On that page, you can configure high security mode.
 
-        If the agent is configured for high security via the UI but not locally, then the agent connections are rejected, and the agent will shut down. However, this won't shut down your application.
+          If the agent is configured for high security via the UI but not locally, then the agent connections are rejected, and the agent will shut down. However, this won't shut down your application.
       </td>
     </tr>
 
@@ -164,7 +156,6 @@ To enable high security, you must update both the local configuration on your se
       <td>
         Enable high security mode in your agent configuration file. High security mode is disabled by default, and the exact procedure to enable it varies by agent:
 
-        * C SDK: n/a
         * [Go](/docs/agents/go-agent/instrumentation/go-agent-configuration#high_security)
         * [Java](/docs/java/java-agent-configuration#cfg-enable_high_security)
         * [.NET](/docs/dotnet/dotnet-agent-configuration#high_security_mode)
@@ -173,7 +164,7 @@ To enable high security, you must update both the local configuration on your se
         * [Python](/docs/python/python-agent-configuration#high_security)
         * [Ruby](/docs/ruby/ruby-agent-configuration#high_security)
 
-        If the agent is configured for high security locally but not via the UI, then the agent connections will be rejected, and the agent will shut down. This will not shut down your application.
+          If the agent is configured for high security locally but not via the UI, then the agent connections will be rejected, and the agent will shut down. This will not shut down your application.
       </td>
     </tr>
   </tbody>
@@ -248,23 +239,23 @@ Once enabled, high security mode (v2) ensures the following for your account:
         For example, in the Java agent, attributes passed in through the following `NewRelic` agent API calls will be blocked:
 
         ```
-        NewRelic.addCustomParameter(<var>String key, String value</var>)
+        NewRelic.addCustomParameter(String key, String value)
         ```
 
         ```
-        NewRelic.addCustomParameter(<var>String key, Number value</var>)
+        NewRelic.addCustomParameter(String key, Number value)
         ```
 
         ```
-        NewRelic.setUserName(<var>String name</var>)
+        NewRelic.setUserName(String name)
         ```
 
         ```
-        NewRelic.setAccountName(<var>String name</var>)
+        NewRelic.setAccountName(String name)
         ```
 
         ```
-        NewRelic.setProductName(<var>String name</var>)
+        NewRelic.setProductName(String name)
         ```
       </td>
     </tr>
@@ -301,6 +292,16 @@ Once enabled, high security mode (v2) ensures the following for your account:
       </td>
     </tr>
 
+    <tr>
+      <td>
+        Prevents in-agent log event forwarding
+      </td>
+
+      <td>
+        High security mode does not allow log events to be forwarded to APM using the `application_logging.forwarding.enabled` configuration option as log messages may contain sensitive customer data.
+      </td>
+    </tr>        
+        
     <tr>
       <td>
         Prevents deploying Custom Instrumentation via [CIE](/docs/agents/java-agent/custom-instrumentation/custom-instrumentation-editor-quickly-customize-your-java-instrumentation)

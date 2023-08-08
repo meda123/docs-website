@@ -1,5 +1,5 @@
 ---
-title: ページロードタイミングのプロセス
+title: New Relicがページロードタイミングを測定する方法
 tags:
   - Browser
   - Browser monitoring
@@ -7,6 +7,10 @@ tags:
 metaDescription: Time-based explanation of how a web page load event happens and how that corresponds to browser's page load timing measurements.
 translationType: human
 ---
+
+import browserPageLoadTimeline from 'images/browser_diagram_page-load-timeline.webp'
+
+import browserPageLoadChart from 'images/browser_screenshot-full_page-load-chart.webp'
 
 このドキュメントは、以下について説明します。
 
@@ -21,7 +25,11 @@ translationType: human
 
 以下に示すのは、大半のウェブページ読み込みにおける主要なステップになります。図表の1～6の数は、その下に続くステップと一致しています。
 
-![browser-pageload-timeline.png](./images/browser-page-load-timeline.png "browser-pageload-timeline.png")
+<img
+  title="browser-pageload-timeline.png"
+  alt="browser-pageload-timeline.png"
+  src={browserPageLoadTimeline}
+/>
 
 <figcaption>
   **ページロードタイムライン：**ウェブページのロードに含まれるステップ。Browserモニタリングチャートには、このプロセスの次のセグメントが表示されます。**[ネットワーク](#h3-network)**、**[ウェブアプリケーション](#h3-app-time)**、**[DOM処理](#h3-dom)**、**[ページレンダリング](#h3-page)**。
@@ -46,10 +54,14 @@ Browserモニタリングは、[ブラウザ**概要**ページ](/docs/browser/n
 
 チャートの色は、[ページロードタイミング図表](#process)の色と一致します。
 
-![page_load_overview.png](./images/page_load_overview.png "page_load_overview.png")
+<img
+  title="page_load_overview.png"
+  alt="page_load_overview.png"
+  src={browserPageLoadChart}
+/>
 
 <figcaption>
-  **[one.newrelic.com](https://one.newrelic.com) > Browser >（アプリケーションを選択）> Summary**：読み込み時間チャートが**概要**と**ページ表示**ページに表示されます。
+  **[one.newrelic.com](https://one.newrelic.com/all-capabilities) > Browser >（select an app）> Summary**：読み込み時間チャートが**Summary**と**Page views**ページに表示されます。
 </figcaption>
 
 ブラウザがこれらの時間を収集する方法は、ブラウザが[Navigation Timing Specification API](/docs/browser/new-relic-browser/page-load-timing-resources/instrumentation-browser-monitoring)を使用できるかどうかによって異なります。カスタムページロードタイミングのイベントは、[BrowserエージェントAPI](/docs/browser/new-relic-browser/browser-agent-apis/reporting-data-events-browser-agent-api)で追加できます。
@@ -61,7 +73,7 @@ Browserモニタリングは、[ブラウザ**概要**ページ](/docs/browser/n
     id="h3-app-time"
     title="Webアプリケーション"
   >
-    ウェブアプリケーション時間には、アプリケーションサーバー上で費やした時間も含まれます。これは、APMエージェントが、ページロードタイミングのブラウザインストゥルメンテーションを提供した場合にのみ判断できます。
+    ウェブアプリケーション時間には、アプリケーションサーバー上で費やした時間も含まれます。これは、<InlinePopover type="apm"/>エージェントが、ページロードタイミングのブラウザインストゥルメンテーションを提供した場合にのみ判断できます。
   </Collapser>
 
   <Collapser
@@ -70,7 +82,7 @@ Browserモニタリングは、[ブラウザ**概要**ページ](/docs/browser/n
   >
     ネットワーク層には、リダイレクトならびにHTMLのリクエストと受け取りにかかった時間が含まれます。サーバー上あるいは統計的アセットに費やした時間は含まれません。
 
-    ネットワークの時間測定は、リンクを初めてクリックした時から始まります。ネットワーク時間には、DNSのほか、 ご利用サイトでリダイレクトがある場合は複数のルックアップ、TCP（[リクエストキュー時間監視](/docs/apm/other-features/request-queueing/request-queuing-tracking-front-end-time)を設定済みでない限りファイアウォールを含む）、SSL接続時間が含まれます。
+    ネットワークの時間測定は、リンクを初めてクリックした時から始まります。ネットワーク時間には、DNSのほか、 ご利用サイトでリダイレクトがある場合は複数のルックアップ、TCP（[リクエストキュー時間監視](/docs/apm/other-features/request-queueing/request-queuing-tracking-frontend-time)を設定済みでない限りファイアウォールを含む）、SSL接続時間が含まれます。
 
     * リクエストキューイング監視を**設定した**場合、ネットワーク時間にはXリクエストヘッダ後に発生するいずれのリクエストキュー時間も**含まれません**。
 
@@ -107,7 +119,7 @@ Browserモニタリングは、[ブラウザ**概要**ページ](/docs/browser/n
     id="h3-request"
     title="リクエストキューイング"
   >
-    **リクエストキューイング**は、ご利用のアカウントがブラウザとAPMの双方をリンクしている場合に読み込み時間チャートに表示されます。New Relicでは、[リクエストキューイング](/docs/apm/applications-menu/features/request-queuing-tracking-front-end-time)はリクエストが本番環境システムに入ってから、アプリケーションに到達するまでの時間を指します。本番環境インフラの特性次第で、この時間はリクエストが入力する実際のキューを含むか、時間のかかるその他の関数を表す場合があります（負荷バランシングや内部ネットワークレイテンシーなど）。
+    **リクエストキューイング**は、そのアカウントがBrowserモニタリングとAPMをリンクしている場合に読み込み時間チャートに表示されます。New Relicでは、[リクエストキューイング](/docs/apm/applications-menu/features/request-queuing-tracking-frontend-time)はリクエストが本番環境システムに入ってから、アプリケーションに到達するまでの時間を指します。本番環境インフラの特性次第で、この時間はリクエストが入力する実際のキューを含むか、時間のかかるその他の関数を表す場合があります（負荷バランシングや内部ネットワークレイテンシーなど）。
   </Collapser>
 </CollapserGroup>
 
@@ -115,10 +127,24 @@ Browserモニタリングは、[ブラウザ**概要**ページ](/docs/browser/n
 
 アプリケーションサーバートランザクションの数（1分あたりのリクエストまたは**rpm**）は、同一のアプリケーションのブラウザトランザクションの数（1分あたりのページまたは**ppm**）よりも大きいことがよくあります。詳細は、[トラブルシューティングの手順](/docs/browser/new-relic-browser/troubleshooting/app-server-requests-greatly-outnumber-browser-transactions)を参照してください。
 
-## 外れ値
+## 外れ値 [#outliers]
 
 ご利用のアプリケーションがどれだけ優れたパフォーマンスを示しているとしても、必ず一部の遅いブラウザ、プラットフォーム、そしてネットワークによって総合的な集計レスポンスタイムの表示は遅れます。外れ値による非対称を最小限に留めるため、ページロードタイミングはアプリケーションのブラウザApdex T設定の4.5倍以上のエンドユーザーレスポンスタイムを固定して、Apdex Tの4.5倍または13.5秒のうちどちらか大きい方に縮小します。（[ヒストグラムの外れ値](/docs/data-analysis/user-interface-functions/histograms-viewing-data-distribution#outliers)は95%でカットオフされます。）
 
 たとえば、ご利用のアプリケーションの[エンドユーザーApdex T閾値](/docs/browser/new-relic-browser/installation-configuration/browser-settings-ui-options-browser-monitoring#apdex)が8秒の場合、これらのレスポンスタイムは36秒で固定されます。これによって、これらのレスポンスタイムがアプリケーション全体に及ぼす影響を最小限に留めながらも、「挫折した」Apdexスコアを考慮できます。
 
 [SPAモニタリング](/docs/browser/single-page-app-monitoring/get-started/welcome-single-page-app-monitoring)では、外れ値の扱いが異なります。初期ページ読み込みまたはルート変更の時間が30分に達すると、このイベントは無効データとして扱われ、破棄されます。
+
+## 次のステップ [#next-steps]
+
+以下のドキュメントで、ページロードタイミングに関する詳細をご覧ください。
+
+* [PageViewTimingイベントについて](/docs/browser/new-relic-browser/page-load-timing-resources/pageviewtiming-async-or-dynamic-page-details)
+* [ページロードタイミングで作成されたクッキー](/docs/browser/browser-monitoring/page-load-timing-resources/new-relic-cookies-used-browser)
+* [クッキーの収集とセッションの追跡](/docs/browser/browser-monitoring/page-load-timing-resources/cookie-collection-session-tracking)
+* [キャッシュされたページの監視方法](/docs/browser/new-relic-browser/page-load-timing-resources/cached-pages)
+* [Syntheticとブラウザにおけるページロードタイミングの比較](/docs/browser/new-relic-browser/page-load-timing-resources/compare-page-load-performance-browser-synthetics)
+
+まだ作成されていない場合は、無料のNew Relicアカウントを以下で作成し、今すぐデータの監視を開始してください。
+
+<InlineSignup/>

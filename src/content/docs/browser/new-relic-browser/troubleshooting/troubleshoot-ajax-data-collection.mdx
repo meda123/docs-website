@@ -28,7 +28,7 @@ If your application is [instrumented with browser monitoring](/docs/browser/new-
     * Browser monitoring: Other methods (including the newer [Fetch API](https://fetch.spec.whatwg.org/)) currently are not supported when using browser Pro.
     * Single-page app monitoring: Fetch is supported for AJAX requests within a [browser interaction](/docs/browser/single-page-app-monitoring/use-spa-data/understand-spa-data-collection#browser-interaction) with [SPA monitoring](/docs/browser/single-page-app-monitoring/get-started/welcome-single-page-app-monitoring).
 
-    If you are making requests using [JSONP](https://en.wikipedia.org/wiki/JSONP), see [JSONP requirements](#jsonp).
+      If you are making requests using [JSONP](https://en.wikipedia.org/wiki/JSONP), see [JSONP requirements](#jsonp).
   </Collapser>
 
   <Collapser
@@ -39,13 +39,13 @@ If your application is [instrumented with browser monitoring](/docs/browser/new-
 
     If instrumentation has succeeded, the console should return something like:
 
-    ```
+    ```js
     function (t){var e=new p(t);try{u.emit("new-xhr"...
     ```
 
     If instrumentation failed, you will see something like:
 
-    ```
+    ```js
     function XMLHttpRequest() { [native_code] }
     ```
 

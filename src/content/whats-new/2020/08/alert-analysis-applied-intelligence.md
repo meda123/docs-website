@@ -13,9 +13,9 @@ Dig deeper into alerts you receive with automatic alert analysis, which provides
 * A suggestion of key attributes that may explain the alert
 * A comparison of signals showing associated anomalies (if you’ve configured Proactive Detection) and related signals for this specific entity, such as CPU, throughput, and more, that occurred around the same time as the alert violation
 
-![A screenshot of alert analysis features with labels.](./images/alert-analysis-details.png "A screenshot of alert analysis features with labels.")
+![A screenshot of alert analysis features with labels.](./images/alert-analysis-details.webp "A screenshot of alert analysis features with labels.")
 
-To view an alert analysis, in the **[one.newrelic.com](https://one.newrelic.com)** top nav, click **Alerts & AI**, then in the side nav under Incident Intelligence click **Issue Feed**.
+To view an alert analysis, in the **[one.newrelic.com](https://one.newrelic.com/all-capabilities)** top nav, click **Alerts & AI**, then in the side nav under Incident Intelligence click **Issue Feed**.
 
 When you open an issue, you’ll find **Related Activity**. If you want to dig into a detailed analysis of the alert, click **Analyze**.
 

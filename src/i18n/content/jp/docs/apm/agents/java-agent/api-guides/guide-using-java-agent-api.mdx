@@ -5,9 +5,10 @@ tags:
   - Java agent
   - API guides
 metaDescription: 'A goal-focused guide to New Relic''s Java agent API, with links to relevant sections of the complete API documentation on GitHub.'
+translationType: human
 ---
 
-New Relic JavaエージェントAPIを使うことで、APM [Javaエージェント](/docs/agents/java-agent/getting-started/new-relic-java)の機能のコントロール、カスタマイズ、そして拡張が可能です。このAPIは、以下の内容によって構成されています。
+New Relic JavaエージェントAPIを使うことで、<InlinePopover type="apm"/>[Javaエージェント](/docs/agents/java-agent/getting-started/new-relic-java)の機能のコントロール、カスタマイズ、そして拡張が可能です。このAPIは、以下の内容によって構成されています。
 
 * `com.newrelic.api.agent.NewRelic`クラス上の静的メソッド
 * カスタムインストゥルメンテーションを実装するための[@Trace アノテーション](/docs/agents/java-agent/custom-instrumentation/java-instrumentation-annotation)
@@ -47,11 +48,11 @@ APIクラスにアクセスするには、アプリケーションのクラス�
   <tbody>
     <tr>
       <td>
-        New Relicが`Transaction`を自動的に作成しない場合に作成する
+        New Relicがトランザクションを自動作成しない場合、`Transaction` を作成する。
       </td>
 
       <td>
-        報告されるべき作業を含むメソッドで[`@Trace(dispatcher = true)`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/Trace.html)。このアノテーションを既存トランザクションのコンテキスト内のメソッドで使用した場合、新たなトランザクションは開始されず、このメソッドを既存トランザクションに含めることになります。
+        [報告されるべき作業を含むメソッドで`@Trace(dispatcher = true)`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/Trace.html)。このアノテーションを既存トランザクションのコンテキスト内のメソッドで使用した場合、新たなトランザクションは開始されず、このメソッドを既存トランザクションに含めることになります。
       </td>
     </tr>
 
@@ -61,13 +62,13 @@ APIクラスにアクセスするには、アプリケーションのクラス�
       </td>
 
       <td>
-        経過時間を計測したいメソッドで[`@Trace()`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/Trace.html)。
+        時間を計測したいメソッドに[`@Trace()`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/Trace.html)する。
       </td>
     </tr>
 
     <tr>
       <td>
-        現在の`Transaction`の名前を設定する
+        現在の名前を設定する `Transaction`
       </td>
 
       <td>
@@ -77,7 +78,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        現在の`Transaction`のレスポンスタイムに対してタイマーを開始し、作成する`Transaction`を`Other`トランザクションとしてではなく、`Web`トランザクションとして報告させる
+        現在の`Transaction` のレスポンスタイムに対しタイマーを開始し、作成する `Transaction` を `Web` トランザクションとしてではなく、`Other` Webトランザクションとして報告する。
       </td>
 
       <td>
@@ -87,7 +88,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        [カスタムアトリビュート](/docs/agents/manage-apm-agents/agent-data/collect-custom-attributes)を`Transactions`と`TransactionEvents`に追加する
+        [カスタム属性](/docs/agents/manage-apm-agents/agent-data/collect-custom-attributes)を`Transactions`に追加する `TransactionEvents`
       </td>
 
       <td>
@@ -97,7 +98,17 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        `Transaction`がNew Relicに報告されるのを防ぐ
+        `enduser.id`エージェント属性を設定して、[ユーザー追跡](/docs/apm/agents/java-agent/attributes/java-agent-attributes#user-attributes)を`Transactions`に追加します。
+      </td>
+
+      <td>
+        [`NewRelic.setUserId()`](http://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/NewRelic.html)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `Transaction` がNew Relicに報告されるのを防ぐ。
       </td>
 
       <td>
@@ -107,7 +118,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        アプリケーションの`Apdex`スコアの計算時に[Transaction](/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction)を除外する
+        アプリケーションの `Transaction`Apdex[ スコアを計算するときに ](/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction)を除外する
       </td>
 
       <td>
@@ -116,6 +127,15 @@ APIクラスにアクセスするには、アプリケーションのクラス�
     </tr>
   </tbody>
 </table>
+
+## 関連ログの参照 [#logs]
+
+アプリケーションのエラーとトレースのコンテキスト内でログを直接表示するには、次のAPI呼び出しを使用してログに注釈を付けます。
+
+* [`getTraceMetadata`](http://newrelic.github.io/java-agent-api/javadoc/com/newrelic/api/agent/Agent.html#getTraceMetadata())
+* [`getLinkingMetadata`](http://newrelic.github.io/java-agent-api/javadoc/com/newrelic/api/agent/Agent.html#getLinkingMetadata())
+
+ログデータと他のテレメトリーデータの相関に関する詳細は、[コンテキストのログ](/docs/logs/logs-context/java-configure-logs-context-all/)に関するドキュメントを参照してください。
 
 ## 非同期の作業をインストゥルメントする [#async]
 
@@ -137,7 +157,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
   <tbody>
     <tr>
       <td>
-        非同期メソッドが既存の`Transaction`にリンクされている場合、そのメソッドをトレースする...
+        既存の `Transaction` にリンクされている場合の非同期メソッドをトレースする。
       </td>
 
       <td>
@@ -147,17 +167,17 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        現在のスレッド上の`Token`に関連する`Transaction`をリンクする...
+        現在のスレッド上の `Transaction` に関連する `Token` をリンクする。
       </td>
 
       <td>
-        [`Token.link()`または`Token.linkAndExpire()`](http://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/Token.html)
+        [`Token.link()` または `Token.linkAndExpire()`](http://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/Token.html)
       </td>
     </tr>
 
     <tr>
       <td>
-        現在の`Transaction`に関連する`Token`を期限切れにする...
+        現在の `Token`に関連する `Transaction` を失効させる
       </td>
 
       <td>
@@ -167,7 +187,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        `Segment`の時間計測を停止し、その親`Transaction`の一部として報告させる
+        `Segment`の時間計測を停止し、その親の一部として報告させる `Transaction`
       </td>
 
       <td>
@@ -177,7 +197,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        `Segment`の時間計測を停止し、その親**Transaction**の一部として報告`させない`
+        `Segment`の時間計測を停止し、その親の一部として報告**させない** `Transaction`
       </td>
 
       <td>
@@ -213,7 +233,23 @@ APIクラスにアクセスするには、アプリケーションのクラス�
   <tbody>
     <tr>
       <td>
-        ディストリビューティッド（分散）トレーシングのヘッダーを作成して、`Headers`データ構造に挿入します。このAPIは、`newrelic`ヘッダーとW3C Trace Contextヘッダー（`traceparent`と`tracestate`）の両方を挿入します。明示的にnewrelic[ヘッダー`を`除外するようにエージェントが設定](/docs/agents/java-agent/configuration/java-agent-configuration-config-file#dt-exclude_newrelic_header)されている場合は例外です。
+        受信または送信メッセージのタイプ固有のヘッダーについて説明します。
+      </td>
+
+      <td>
+        ```
+        <a href="http://newrelic.github.io/java-agent-api/javadoc/com/newrelic/api/agent/Headers.html">Headers</a>
+        ```
+
+        `Headers`の提供された実装については、`ConcurrentHashMapHeaders`を使用してください。
+
+        [Kafkaを使用したDT API使用](https://github.com/newrelic/newrelic-java-examples/tree/main/newrelic-java-agent/distributed-tracing/kafka-examples)におけるW3Cトレースコンテキストヘッダーの実装例を参照してください。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        ディストリビューティッド（分散）トレーシングのヘッダーを作成して、`Headers`データ構造に挿入します。このAPIは、`newrelic`ヘッダーとW3C Trace Contextヘッダー（`traceparent`と`tracestate`）の両方を挿入します。[明示的に`newrelic`ヘッダーを除外するようにエージェントが設定されている](/docs/agents/java-agent/configuration/java-agent-configuration-config-file#dt-exclude_newrelic_header)場合は例外です。
       </td>
 
       <td>
@@ -241,19 +277,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        受信または送信メッセージのタイプ固有のヘッダー。提供されている`Headers`の実装には、`ConcurrentHashMapHeaders`を使用します。
-      </td>
-
-      <td>
-        ```
-        <a href="http://newrelic.github.io/java-agent-api/javadoc/com/newrelic/api/agent/Headers.html">Headers</a>
-        ```
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        ディストリビューティッド（分散）トレーシングのヘッダーを受け入れる際のトランスポートタイプを定義するための列挙体の定数を提供するユーティリティクラス。
+        ディストリビューティッド（分散）トレーシングのヘッダーを受け入れる際のトランスポートタイプを定義するための列挙体の定数を提供するユーティリティクラスを理解します。
       </td>
 
       <td>
@@ -265,7 +289,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        分散トレースの[カスタム属性](/docs/agents/manage-apm-agents/agent-data/collect-custom-attributes)を`  SpanEvents  `に追加
+        分散トレースの[カスタム属性](/docs/agents/manage-apm-agents/agent-data/collect-custom-attributes)を`SpanEvents`に追加
       </td>
 
       <td>
@@ -334,7 +358,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        サービス接続に使用するペイロード。`text()`コールが、ペイロードのJSON文字列表現を返す。
+        サービス接続に使用するペイロード。`text()` コールが、ペイロードのJSON文字列表現を返す。
       </td>
 
       <td>
@@ -348,7 +372,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        サービス接続に使用するペイロード。`httpSafe()`コールが、base64でエンコードされたペイロードのJSON文字列表現を返す。
+        サービス接続に使用するペイロード。`httpSafe()` コールが、base64エンコードされたペイロードのJSON文字列表現を返す。
       </td>
 
       <td>
@@ -396,13 +420,13 @@ APIクラスにアクセスするには、アプリケーションのクラス�
         <a href="https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/Transaction.html">Transaction.getRequestMetadata(), .processRequestMetadata(...), .getResponseMetadata(), .processResponseMetadata(...)</a>
         ```
 
-        `Transaction`を使用して[New Relic APIクラスへのリファレンスを取得する](#)方法については、このドキュメントの情報もご覧ください。
+        `Transaction`を使用して[New Relic APIクラスへのリファレンスを取得する方法](#)については、このドキュメントの情報もご覧ください。
       </td>
     </tr>
 
     <tr>
       <td>
-        `TracedMethod`のメトリック名やロールアップメトリック名を表示または変更する
+        のメトリック名やロールアップメトリック名を表示または変更する `TracedMethod`
 
         （`OtherTransaction/all`などのロールアップメトリック名は特定のトランザクションに限定されておらず、すべてのバックグラウンドトランザクションを表しています。）
       </td>
@@ -412,19 +436,19 @@ APIクラスにアクセスするには、アプリケーションのクラス�
         <a href="https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/TracedMethod.html">TracedMethod.getMetricName(), .setMetricName(...), .setRollupMetricName(...)</a>
         ```
 
-        `TracedMethod`を使用して[New Relic APIクラスへのリファレンスを取得する](#)方法については、このドキュメントの情報もご覧ください。
+        `TracedMethod`を使用して[New Relic APIクラスへのリファレンスを取得する方法](#)については、このドキュメントの情報もご覧ください。
       </td>
     </tr>
 
     <tr>
       <td>
-        JavaエージェントAPIの[`@Trace`アノテーション](/docs/agents/java-agent/custom-instrumentation/java-instrumentation-annotation)を使って、トレースされている外部HTTPサービス、データベースサーバー、メッセージキュー、またはその他の外部リソースへのコールを報告する
+        JavaエージェントAPIの [`@Trace` アノテーション](/docs/agents/java-agent/custom-instrumentation/java-instrumentation-annotation)を使用してトレースされている、外部HTTPサービス、データベースサーバー、メッセージキュー、またその他の外部リソースへのコールを報告する
       </td>
 
       <td>
-        [`ExternalParameters`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/ExternalParameters.html)ビルダーを使用して作成された引数を[`TracedMethod.reportAsExternal(...)`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/TracedMethod.html)に渡す。
+        [`TracedMethod.reportAsExternal(...)`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/TracedMethod.html)は[`ExternalParameters`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/ExternalParameters.html)ビルダーを使用して構築された引数を渡します。
 
-        `TracedMethod`を使用して[New Relic APIクラスへのリファレンスを取得する](#)方法については、このドキュメントの情報もご覧ください。
+        `TracedMethod`を使用して[New Relic APIクラスへのリファレンスを取得する方法](#)については、このドキュメントの情報もご覧ください。
       </td>
     </tr>
 
@@ -434,9 +458,9 @@ APIクラスにアクセスするには、アプリケーションのクラス�
       </td>
 
       <td>
-        [`TracedMethod.addOutboundRequestHeaders(...)`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/TracedMethod.html)と`TracedMethod.reportAsExternal(...)`
+        [`TracedMethod.addOutboundRequestHeaders(...)`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/TracedMethod.html)ならびに `TracedMethod.reportAsExternal(...)`
 
-        `TracedMethod`を使用して[New Relic APIクラスへのリファレンスを取得する](#)方法については、このドキュメントの情報もご覧ください。
+        `TracedMethod`を使用して[New Relic APIクラスへのリファレンスを取得する方法](#)については、このドキュメントの情報もご覧ください。
       </td>
     </tr>
 
@@ -446,9 +470,9 @@ APIクラスにアクセスするには、アプリケーションのクラス�
       </td>
 
       <td>
-        `Transaction.setRequest（...）、Transaction.setResponse（...）`、または`NewRelic.setRequestAndResponse（...）`、および`Transaction.markResponseSent()`
+        `Transaction.setRequest(...), Transaction.setResponse(...)`、または`NewRelic.setRequestAndResponse(...)`、および `Transaction.markResponseSent()`
 
-        `Transaction`を使用して[New Relic APIクラスへのリファレンスを取得する](#)方法については、このドキュメントの情報もご覧ください。
+        `Transaction`を使用して[New Relic APIクラスへのリファレンスを取得する方法](#)については、このドキュメントの情報もご覧ください。
       </td>
     </tr>
   </tbody>
@@ -456,7 +480,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
 ## New Relic APIクラスへのリファレンスを取得する [#obtain-references]
 
-他のタスクでは、New Relicの`エージェント`オブジェクトが必要になります。`エージェント`オブジェクトは、以下の機能を提供する複数のオブジェクトを公開します：
+他のタスクでは、New Relicの`Agent`オブジェクトが必要になります。`Agent`オブジェクトは、以下の機能を提供する複数のオブジェクトを公開します：
 
 <table>
   <thead>
@@ -474,7 +498,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
   <tbody>
     <tr>
       <td>
-        現在の`Transaction`へのリファレンスを取得する
+        現在の へのリファレンスを入手する `Transaction`
       </td>
 
       <td>
@@ -484,7 +508,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        非同期作業をリンクする`Token`を取得する
+        非同期の作業をリンクするための `Token` を入手する。
       </td>
 
       <td>
@@ -496,7 +520,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        起動して、`Segment`へのリファレンスを取得する
+        開始して、へのリファレンスを入手する `Segment`
       </td>
 
       <td>
@@ -518,7 +542,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        `Agent`ロガーへのリファレンスを取得する
+        `Agent` ロガーへのリファレンスを入手する。
       </td>
 
       <td>
@@ -528,7 +552,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        `エージェント`[の設定](/docs/agents/java-agent/configuration/java-agent-configuration-config-file)へのリファレンスを取得する
+        `Agent`[Agent](/docs/agents/java-agent/configuration/java-agent-configuration-config-file)コンフィギュレーションへのリファレンスを入手する。
       </td>
 
       <td>
@@ -602,7 +626,27 @@ APIクラスにアクセスするには、アプリケーションのクラス�
 
     <tr>
       <td>
-        New Relicが自動的にヘッダに追加しない[Transactions](/docs/agents/java-agent/custom-instrumentation/java-agent-api-example-program#include-browser)に対するブラウザの`ページロードタイミング`を追加する
+        独自のカスタム定義フィンガープリントでエラーをグループ化し、[`ErrorGroupCallback`](/docs/java/java-agent-api/java-agent-api-register-error-group-callback-to-set-fingerprint.mdx)インターフェイスの実装を用いて、New Relicに送信されるエラーのグループキーを生成します。フィンガープリントは、エラー受信トレイUIでエラーメッセージのグループ化に使用します。
+      </td>
+
+      <td>
+        [`public interface ErrorGroupCallback { String generateGroupingString(ErrorData errorData); }`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/NewRelic.html)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        コールバック関数を使用して、独自のエラーフィンガープリントを設定します。指定されたエラーのグループキーの生成に使用する[`ErrorGroupCallback`](/docs/java/java-agent-api/java-agent-api-register-error-group-callback-to-set-fingerprint.mdx)を登録します。
+      </td>
+
+      <td>
+        [`NewRelic.setErrorGroupCallback(errorGroupCallback)`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/NewRelic.html)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        [New Relicが自動的にヘッダに追加しない ](/docs/agents/java-agent/custom-instrumentation/java-agent-api-example-program#include-browser)に対する、ブラウザ ページロードタイミング`Transactions`を追加する。
       </td>
 
       <td>
@@ -618,7 +662,7 @@ APIクラスにアクセスするには、アプリケーションのクラス�
       </td>
 
       <td>
-        [`NewRelic.recordMetric（...）`、`.recordResponseTimeMetric（...）`、または`.incrementCounter（...）`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/NewRelic.html)
+        [`NewRelic.recordMetric(...)`、`.recordResponseTimeMetric(...)` 、または `.incrementCounter(...)`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/NewRelic.html)
       </td>
     </tr>
 
@@ -630,9 +674,9 @@ APIクラスにアクセスするには、アプリケーションのクラス�
       <td>
         `Insights.recordCustomEvent(...)`
 
-        または、[`NewRelic.addCustomParameter(...)`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/NewRelic.html)を使用して、New Relic定義の`TransactionEvent`タイプにカスタムアトリビュートを追加する。
+        または、[`NewRelic.addCustomParameter(...)`](https://newrelic.github.io/java-agent-api/javadoc/index.html?com/newrelic/api/agent/NewRelic.html)を使用して、New Relicが定義した`TransactionEvent`タイプにカスタム属性を追加する。
 
-        `Insight`を使用して[New Relic APIクラスへのリファレンスを取得する](#)方法については、このドキュメントの情報もご覧ください。
+        `Insights`を使用して[New Relic APIクラスへのリファレンスを取得する方法](#)については、このドキュメントの情報もご覧ください。
       </td>
     </tr>
   </tbody>

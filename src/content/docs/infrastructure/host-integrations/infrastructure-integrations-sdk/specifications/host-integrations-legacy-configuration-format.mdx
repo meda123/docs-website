@@ -336,9 +336,9 @@ instances:
         * Keys: The argument name. Transformed to upper case when set as environment variable.
         * Values: The argument values. Passed through as is.
 
-        The arguments are made available to an integration as a set of environment variables.
+          The arguments are made available to an integration as a set of environment variables.
 
-        Arguments in the config file cannot be capitalised and should use underscores to separate words.
+          Arguments in the config file cannot be capitalised and should use underscores to separate words.
       </td>
     </tr>
 
@@ -365,7 +365,7 @@ instances:
 
         Default: depends on the `usermode`. By default, integrations are executed with the same user that's running the integration agent, nri-agent for privileged and unprivileged mode and root user for root mode.
 
-        When present, the Infrastructure agent will execute the integration binary as the specified user. For example, to run the integration binary as the root user when running the agent in a `usermode` different than `root`, just add `integration_user: root` to the configuration file.
+        When present, the infrastructure agent will execute the integration binary as the specified user. For example, to run the integration binary as the root user when running the agent in a `usermode` different than `root`, just add `integration_user: root` to the configuration file.
       </td>
     </tr>
   </tbody>

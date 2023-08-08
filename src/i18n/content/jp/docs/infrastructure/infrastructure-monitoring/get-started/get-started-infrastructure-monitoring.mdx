@@ -5,36 +5,40 @@ tags:
   - Infrastructure monitoring
   - Get started
 metaDescription: 'New Relic provides flexible, dynamic monitoring of your entire infrastructure. Learn about features, installation, and use cases.'
+signupBanner:
+  text: Monitor and improve your entire stack. 100GB free. Forever.
 translationType: human
 ---
 
-import amazonlinux from './images/amazonlinux.png'
+import infrastructureHostsDashboard from 'images/infrastructure_screenshot-full_hosts-dashboard.webp'
 
-import centos from './images/centos.png'
+import infrastructureInventory from 'images/infrastructure_screenshot-full_inventory.webp'
 
-import dockerLogoCrop from './images/docker-logo-crop.png'
+import infrastructureEvents from 'images/infrastructure_screenshot-full_events.webp'
 
-import debian from './images/debian.png'
-
-import redHatNew2 from './images/red-hat-new2.png'
-
-import suse from './images/suse.png'
-
-import ubuntu from './images/ubuntu.png'
-
-import windows from './images/windows.png'
+import infrastructurek8ClusterExplorer from 'images/infrastructure_screenshot-full_k8-cluster-explorer.webp'
 
 New Relicでは、クラウドや専用ホストで実行しているサービスや、オーケストレーションされた環境で実行しているコンテナなど、フレキシブルでダイナミックなインフラストラクチャ全体のオブザーバビリティを提供します。すべてのホストの健全性とパフォーマンスを、アプリケーションのコンテキストやログ、設定変更と関連付けることができます。
 
 Infrastructureモニタリングを使用して、現在の運用チームは、データセンターや数千ものAmazonやGoogle Cloud、Azureインスタンスなどの複雑なハイブリッドシステムの完全なオブザーバビリティを実現します。
 
-当社のインフラストラクチャモニタリングのソリューションに関する詳細と、その開始方法を続けてお読みください。また、New Relicアカウントをまだお持ちでない場合は、[New Relicアカウントを新たに作成してください](https://newrelic.com/signup)。永久無料です。
+当社のインフラストラクチャモニタリングのソリューションに関する詳細と、その開始方法を続けてお読みください。まだ作成されていない場合は、無料のNew Relicアカウントを以下で作成し、今すぐデータの監視を開始してください。
 
-![New Relic One - Infrastructureモニタリング](./images/nrone-infrastructure-hosts.png "New Relic One - Infrastructureモニタリング")
+<InlineSignup/>
+
+<img
+  title="New Relic - Infrastructure Monitoring"
+  alt="New Relic - Infrastructure Monitoring"
+  src={infrastructureHostsDashboard}
+/>
 
 <figcaption>
-  New Relic Oneのインフラストラクチャに関する**Hosts**ページには、システム、ネットワーク、プロセス、およびストレージのパフォーマンス指標が表示されます。
+  インフラストラクチャに関する**Hosts**ページには、システム、ネットワーク、プロセス、およびストレージのパフォーマンス指標が表示されます。
 </figcaption>
+
+<Callout variant="tip">
+  Infrastrcutureモニタリングを効果的に使用する方法を知りたいですか？当社のガイド付き[インフラストラクチャと根本原因のラボ](/docs/infrastructure/infrastructure-monitoring/get-started/identify-root-causes-guide)をお試しください。
+</Callout>
 
 ## Infrastructureモニタリングソリューション [#infrastructure-solutions]
 
@@ -49,8 +53,6 @@ Infrastructureモニタリングを使用して、現在の運用チームは、
 ## クイック・スタート：ガイド付きインストールを使用 [#quick]
 
 最も手っ取り早い方法は、当社のガイド付きインストールを使用することです。このインストールでは、[Infrastructureモニタリングエージェント](/docs/infrastructure/install-infrastructure-agent/get-started/install-infrastructure-agent)をインストールし、ご使用の環境でアプリケーションとログソースを検出します。
-
-![ガイド付きインストールCLIのスクリーンショット。](./images/guided-install-cli.png "ガイド付きインストールCLI。")
 
 <ButtonGroup>
   <ButtonLink
@@ -76,18 +78,26 @@ Infrastructureモニタリングを使用して、現在の運用チームは、
 
 リアルタイムのメトリクスと解析により、ホストパフォーマンスの変化を設定の変更と関連付けて考察することで、[平均解決時間](https://newrelic.com/devops/how-to-reduce-mttr)（MTTR）を短縮できます。**インベントリ**ページでは、エステート全体を検索し、特定のパッケージ、設定ファイル、または起動スクリプトが含まれるホストを正確に特定できます。
 
-![New Relic One - Infrastructureモニタリング - インベントリ](./images/nrone-infrastructure-inventory.png "New Relic One - Infrastructureモニタリング - インベントリ")
+<img
+  title="New Relic - Infrastructure monitoring - Inventory"
+  alt="New Relic - Infrastructure monitoring - Inventory"
+  src={infrastructureInventory}
+/>
 
 <figcaption>
-  New Relic Oneの**Inventory**ページでは、エステートのすべてのインフラストラクチャ[エンティティ](/docs/new-relic-one/use-new-relic-one/core-concepts/what-entity-new-relic)が表示されます。
+  **インベントリ**ページでは、主にエステートのすべてのインフラストラクチャ[エンティティ](/docs/new-relic-one/use-new-relic-one/core-concepts/what-entity-new-relic)を取り上げています。
 </figcaption>
 
 **Events**ページでは、設定の変更、再起動、SSHセッション、その他の[重要なイベント](/docs/infrastructure-events-page#types)の変更を追跡できます。リアルタイムフィードで、インフラストラクチャ全体の変更ログを提供します。当社のソリューションは5秒以内に[安全に](/docs/infrastructure/new-relic-infrastructure/getting-started/infrastructure-security)データを収集・表示するため、モニタリングが現実から遅れを取ることはありません。
 
-![New Relic One - Infrastructureモニタリング - イベント](./images/nrone-infrastructure-events.png "New Relic One - Infrastructureモニタリング - イベント")
+<img
+  title="New Relic - Infrastructure monitoring - Events"
+  alt="New Relic - Infrastructure monitoring - Events"
+  src={infrastructureEvents}
+/>
 
 <figcaption>
-  New Relic Oneの**EEvents**ページには、ホストで発生している事象すべてのリアルタイムフィードが含まれます。
+  **イベント**ページには、ホストで発生したすべてのもののリアルタイムフィードが含まれます。
 </figcaption>
 
 Infrastructureモニタリングツールを使用して、次のことも行えます。
@@ -98,9 +108,11 @@ Infrastructureモニタリングツールを使用して、次のことも行え
 
 ## インフラストラクチャおよびアプリデータのログを表示 [#logs-context]
 
-ログとインフラストラクチャのデータを統合して、トラブルシューティングをより簡単かつ迅速にできます。[コンテキストのログ](/docs/logs/logs-context/configure-logs-context-apm-agents/)では、Kubernetesクラスタなど、インフラストラクチャデータのログを表示することもできます。必要な数の設定ファイルを追加できます。これらのファイルは、ログメタデータを当社のプラットフォームにプッシュするソースとして機能します。
+ログとインフラストラクチャのデータを統合して、トラブルシューティングをより簡単かつ迅速にできます。コンテキストのログでは、Kubernetesクラスタなど、インフラストラクチャデータのログを表示することもできます。必要な数の設定ファイルを追加できます。これらのファイルは、ログメタデータを当社のプラットフォームにプッシュするソースとして機能します。
 
-エラーとトレースに関連するログメッセージをアプリケーションのUIで直接表示することもできます。New Relic Oneで別のUIページに切り替える必要はありません。詳細については、[ログ転送のドキュメント](/docs/logs/forward-logs/forward-your-logs-using-infrastructure-agent/)を参照してください。
+エラーとトレースに関連するログメッセージをアプリケーションやホストのUIで直接表示することもできます。New Relicで別のUIページに切り替える必要はありません。詳細については、[コンテキストのAPMログ](/docs/apm/new-relic-apm/getting-started/get-started-logs-context)のドキュメントを参照してください。
+
+<InlinePopover type="apm"/>エージェントがコンテキストソリューションの自動ログをまだサポートしていない場合は、コンテキストソリューションの手動ログを引き続き使用できます。また、[Infrastructureエージェント](/docs/logs/forward-logs/forward-your-logs-using-infrastructure-agent/)またはその他の[サポートされているサードパーティ製のログフォワーダー](/docs/logs/forward-logs/enable-log-management-new-relic)を使用してログを転送できます。
 
 ## Infrastructureエージェントをインストールする [#install]
 
@@ -119,10 +131,14 @@ Infrastructureインテグレーションにより、一般的な多くのサー
 * NGINX、Cassandra、MySQLなど、当社の[オンホストインテグレーション](/docs/infrastructure/host-integrations/host-integrations-list)は、Infrastructureエージェントと連携して機能します。
 * [New Relic Flex](/docs/introduction-new-relics-flex-integration)と独自のインテグレーションを構築します。
 
-![Kubernetesノードとポッド、それぞれの関係を理解します。 ](./images/NR_Cluster_Explorer.png "NR_Cluster_Explorer.png")
+<img
+  title="NR_Cluster_Explorer.png"
+  alt="Understand your Kubernetes nodes and pods, and how the relate to each other. "
+  src={infrastructurek8ClusterExplorer}
+/>
 
 <figcaption>
-  New Relic Oneの**[Kubernetesクラスタエクスプローラー](/docs/integrations/kubernetes-integration/cluster-explorer/kubernetes-cluster-explorer)**は、大規模なKubernetesの実行に関連する問題に対する革新的な優れた解決策を提供します。
+  **[Kubernetesクラスタエクスプローラー](/docs/integrations/kubernetes-integration/cluster-explorer/kubernetes-cluster-explorer)**は、大規模なKubernetesの実行に関連する問題に対する、強力で革新的な解決策となります。
 </figcaption>
 
 ## ホストの絞り込み [#filter-sets]
@@ -133,9 +149,13 @@ Infrastructureインテグレーションにより、一般的な多くのサー
 
 ## Infrastructureデータを詳しく調べる
 
-New Relic Oneで、[Infrastructureデータのクエリと可視化](/docs/using-new-relic/data/understand-data/query-new-relic-data)を行えます。
+[Infrastructureデータのクエリと可視化](/docs/using-new-relic/data/understand-data/query-new-relic-data)を行えます。
 
 * [Infrastructureイベント](/docs/infrastructure/manage-your-data/data-instrumentation/default-infrastructure-events)のサンプリングと検索を行い、収集しているデータについて完全に理解する。
-* [データエクスプローラー](/docs/query-your-data/explore-query-data/data-explorer/introduction-data-explorer)で、データを視覚的に把握する。
+* [メトリクスとイベント](/docs/query-your-data/explore-query-data/data-explorer/introduction-data-explorer)を使用してデータを視覚的に参照します。
 * [NRQL](/docs/insights/nrql-new-relic-query-language/using-nrql/introduction-nrql)を使用して、データに対してSQLのようなクエリを作成するか、またはPromQLスタイルのクエリを使用してデータのクエリを行います。
 * [ダッシュボード](/docs/dashboards/new-relic-one-dashboards/get-started/introduction-new-relic-one-dashboards)を使用して、高度なデータ可視化やデータのコンテキスト化を行い、システムがどうなっているかをリアルタイムで理解する。
+
+<Callout variant="tip">
+  Datadogを使用してインフラストラクチャをモニターしていますが、New Relicのモニタリング機能を無料で試してみませんか？その方法については、[Datadogからの移行方法に関するガイド](/docs/journey-migration/migrating-from-dd/)を参照してください。
+</Callout>

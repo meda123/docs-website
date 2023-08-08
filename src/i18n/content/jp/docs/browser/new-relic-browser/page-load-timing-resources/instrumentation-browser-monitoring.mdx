@@ -5,11 +5,12 @@ tags:
   - Browser monitoring
   - Page load timing resources
 metaDescription: 'For an overview of instrumentation for browser''s page load timing and browser monitoring features, start here.'
+translationType: human
 ---
 
 リアルユーザーモニタリング（RUM）とも呼ばれる標準的な[ページロードタイミング](/docs/browser/new-relic-browser/page-load-timing/page-load-timing-process)に関して、当社はWebページ全体の総合的な読み込み時間を測定します。ページ読み込み後の追加の監視によって、ページ内AJAXコール、JavaScriptエラー、そしてその他のベントやインタラクションの詳細を得ることができます。
 
-ブラウザモニタリングでは、New Relicエージェントを活用して、ページが出来上がるのに合わせJavaScriptを動的にインジェクトすることで、より詳細なバックエンドのタイミング情報を収集することができます。Browserは、[シングルページアプリケーション（SPA）アーキテクチャ](/docs/browser/single-page-app-monitoring/get-started/add-apps-single-page-app-monitoring)によってアプリをモニターすることもできます。
+ブラウザモニタリングでは、New Relicエージェントを活用して、ページが出来上がるのに合わせJavaScriptを動的にインジェクトすることで、より詳細なバックエンドのタイミング情報を収集することができます。Browserは、[シングルページアプリケーション（SPA）アーキテクチャー](/docs/browser/single-page-app-monitoring/get-started/add-apps-single-page-app-monitoring)によってアプリをモニターすることもできます。
 
 ## ブラウザデータを収集するインストゥルメンテーション [#instrumentation]
 
@@ -41,10 +42,10 @@ metaDescription: 'For an overview of instrumentation for browser''s page load ti
       <td>
         [Navigation Timing Specification](http://www.w3.org/TR/navigation-timing/ "新しいウィンドウで開くリンク") APIを実装したブラウザの場合、ページロードタイミング情報はブラウザから読み込まれ、ブラウザエージェントを介してNew Relicにレポートされます。パフォーマンスタイミングオブジェクトから適正値を読み取ることで、タイミング情報をキャプチャします。
 
-        * **ナビゲーション開始**：`navigationStart`
-        * **最初のバイト**：`responseStart`
-        * **DOM準備完了**：`DOMContentLoadedEventEnd`
-        * **ページ準備完了**：`loadEventEnd`
+        * **ナビゲーション開始**: `navigationStart`
+        * **ファーストバイト**: `responseStart`
+        * **DOM の準備完了**: `DOMContentLoadedEventEnd`
+        * **ページ準備完了**: `loadEventEnd`
       </td>
     </tr>
 
@@ -54,7 +55,7 @@ metaDescription: 'For an overview of instrumentation for browser''s page load ti
       </td>
 
       <td>
-        ナビゲーションタイミング指定APIを実装していないブラウザの場合、New Relicは[NREUMクッキー](/docs/browser/new-relic-browser/miscellaneous/new-relic-cookies#nreum)とBrowserエージェントを頼りにタイミング情報を収集します。
+        ナビゲーションタイミング指定APIを実装していないブラウザの場合、New Relicは[NREUMクッキー](/docs/browser/new-relic-browser/miscellaneous/new-relic-cookies#nreum)とBrowserエージェントを頼りにタイミング情報を収集します。<Callout variant="important">Browserエージェントのバージョン1220以降では、[セッションクッキーの使用が廃止されているため](/docs/release-notes/new-relic-browser-release-notes/browser-agent-release-notes/browser-agent-v1220/#removed-3rd-party-cookies)、この情報はBrowserエージェントのバージョン1216以下を使用している場合にのみ関連します。</Callout>
       </td>
     </tr>
 
@@ -66,7 +67,7 @@ metaDescription: 'For an overview of instrumentation for browser''s page load ti
       <td>
         Browserでは、次のものも使用します：
 
-        * `XMLHttpRequest`オブジェクトの計測による[AJAXタイミングデータ](/docs/browser/new-relic-browser/browser-pro-features/ajax-dashboard-identifying-time-consuming-calls)の収集
+        * `XMLHttpRequest`オブジェクトの計測による[AJAXタイミングデータ](/docs/browser/new-relic-browser/browser-pro-features/ajax-dashboard-identifying-time-consuming-calls)の収集。
         * JavaScript関数のインストゥルメンテーションによる、捕捉されなかった[JavaScriptエラー](/docs/browser/new-relic-browser/browser-pro-features/js-errors-dashboard-examining-errors-over-time)の収集。
       </td>
     </tr>
@@ -141,6 +142,16 @@ httpsおよびhttp Webページの**双方**に関して、New Relicはhttps経�
 
       <td>
         https経由のページ読み込み後に一度
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        ページ表示タイミングデータを送信する（`PageViewTiming`）
+      </td>
+
+      <td>
+        最初のページ読み込みの10秒後にデータを送信し、その後は30秒ごとに送信します。
       </td>
     </tr>
 

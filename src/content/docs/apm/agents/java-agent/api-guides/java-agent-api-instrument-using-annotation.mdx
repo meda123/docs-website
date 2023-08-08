@@ -25,19 +25,17 @@ New Relic's Java agent provides several options for [custom instrumentation](/do
   To use annotations, you must modify the source code. If you can't or don't want to modify your source code, see [Custom instrumentation](/docs/agents/java-agent/custom-instrumentation/java-custom-instrumentation) for other instrumentation options.
 </Callout>
 
-## Configure your agent for annotations [#configure]
+## Annotations are enabled by default [#configure]
 
-By default, the configuration setting `enable_custom_tracing` is set to `true` in the Java agent, which is the setting required for @Trace annotations to function. This setting is **not** included in the `newrelic.yml` by default.
+By default, the configuration setting `enable_custom_tracing` is set to `true` in the Java agent, which is the setting required for @Trace annotations to function. 
 
-The only time you need to incorporate this setting into your configuration file is if you want to disable @Trace annotations altogether. To do this, set `enable_custom_tracing: false` (prefaced with two spaces) in the `common` stanza of your `newrelic.yml`.
-
-Make sure that `newrelic-api.jar` appears in your classpath as it contains all these annotations.
+This setting is **not** included in the `newrelic.yml` by default. If you want to disable annotations, set `enable_custom_tracing: false` (prefaced with two spaces) in the `common` stanza of your `newrelic.yml`.
 
 ## @Trace [#trace]
 
 Annotating a method with `@Trace` tells the Java agent that measurements should be taken for that method.
 
-To add a method call as a custom trace add `@Trace` annotations to your method.
+To add a method call as a custom trace add `@Trace` annotations to your method. Make sure that `newrelic-api.jar` appears in your classpath as it contains all these annotations.
 
 ```java
 import com.newrelic.api.agent.Trace;
@@ -48,7 +46,7 @@ import com.newrelic.api.agent.Trace;
   public void run() {
     // background task
   }
- ```
+```
 
 ### Create a new transaction [#new-trans]
 
@@ -220,14 +218,14 @@ The `@Trace` annotation supports the following properties.
 
     This property affects transaction traces and error reporting. By default, the metric name will include the class name followed by the method name. If you do not want class followed by method, then you can use this property to change the metric name.
 
-    If you set the `metricName`, as in `@Trace(metricName="YourMessageHere")`, then the time spent in this method will appear as <var>YourMessageHere</var> in any transaction trace.
+    If you set the `metricName`, as in `@Trace(metricName="YourMessageHere")`, then the time spent in this method will appear as YourMessageHere in any transaction trace.
 
-    If you set the `metricName` in addition to the dispatcher, as in `@Trace(metricName="YourMessageHere", dispatcher=true)`, then the transaction name will appear as <var>YourMessageHere</var> in the APM **Transactions** page but the time spent in this method will not appear as <var>YourMessageHere</var> in any transaction trace.
+    If you set the `metricName` in addition to the dispatcher, as in `@Trace(metricName="YourMessageHere", dispatcher=true)`, then the transaction name will appear as YourMessageHere in the APM **Transactions** page but the time spent in this method will not appear as YourMessageHere in any transaction trace.
 
     Here is an example:
 
     ```java
-    @Trace(metricName="<var>YourMetricName</var>")
+    @Trace(metricName="YourMetricName")
     ```
 
     <Callout variant="important">
@@ -268,7 +266,6 @@ The `@Trace` annotation supports the following properties.
     ```java
     @Trace(excludeFromTransactionTrace=true)
     ```
-    
   </Collapser>
 
   <Collapser
@@ -315,7 +312,6 @@ The `@Trace` annotation supports the following properties.
   </Collapser>
 </CollapserGroup>
 
-
 ## @TraceLambda [#tracelambda]
 
 If your transaction traces show large blocks of uninstrumented time and you want to include lambda expressions within the trace, you can use the `@TraceLambda` annotation without parameters:
@@ -340,16 +336,26 @@ The `@TraceLambda` annotation supports the following properties.
     id="trace-lambda-pattern"
     title={<InlineCode>pattern</InlineCode>}
   >
-
     <table>
       <tbody>
         <tr>
-          <th>Type:</th>
-          <td>String</td>
+          <th>
+            Type:
+          </th>
+
+          <td>
+            String
+          </td>
         </tr>
+
         <tr>
-          <th>Default:</th>
-          <td>`^\$?(lambda\|anonfun)\$(?\<name\>.*)`</td>
+          <th>
+            Default:
+          </th>
+
+          <td>
+            `^\$?(lambda\|anonfun)\$(?\<name\>.*)`
+          </td>
         </tr>
       </tbody>
     </table>
@@ -360,27 +366,36 @@ The `@TraceLambda` annotation supports the following properties.
     `@Trace` annotation.
 
     Here is an example:
-    
+
     ```java
     @TraceLambda(pattern="YourPattern")
     ```
-    
   </Collapser>
 
   <Collapser
     id="trace-lambda-includeNonstatic"
     title={<InlineCode>includeNonstatic</InlineCode>}
   >
-
     <table>
       <tbody>
         <tr>
-          <th>Type:</th>
-          <td>Boolean</td>
+          <th>
+            Type:
+          </th>
+
+          <td>
+            Boolean
+          </td>
         </tr>
+
         <tr>
-          <th>Default:</th>
-          <td>`false`</td>
+          <th>
+            Default:
+          </th>
+
+          <td>
+            `false`
+          </td>
         </tr>
       </tbody>
     </table>
@@ -388,11 +403,10 @@ The `@TraceLambda` annotation supports the following properties.
     If `true`, the marked classes nonstatic methods will be eligible for assessment against the pattern for instrumentation.
 
     Here is an example:
-    
+
     ```java
     @TraceLambda(includeNonstatic="true")
     ```
-    
   </Collapser>
 </CollapserGroup>
 
@@ -411,43 +425,53 @@ class ClassContainingMethods() {
 
 The `@TraceByReturnType` annotation supports the following properties.
 
-  <CollapserGroup>
-    <Collapser
-      id="trace-by-return-type-traceReturnTypes"
-      title={<InlineCode>traceReturnTypes</InlineCode>}
-    >
-
-      <table>
-        <tbody>
+<CollapserGroup>
+  <Collapser
+    id="trace-by-return-type-traceReturnTypes"
+    title={<InlineCode>traceReturnTypes</InlineCode>}
+  >
+    <table>
+      <tbody>
         <tr>
-          <th>Type:</th>
-          <td>List&lt;Class></td>
+          <th>
+            Type:
+          </th>
+
+          <td>
+            List&lt;Class>
+          </td>
         </tr>
+
         <tr>
-          <th>Default:</th>
-          <td>empty list</td>
+          <th>
+            Default:
+          </th>
+
+          <td>
+            empty list
+          </td>
         </tr>
-        </tbody>
-      </table>
-      If you set the `traceReturnTypes`, as in `@TraceByReturnType(traceReturnTypes={String.class})`, then the marked classes method return types will be matched against the `String.class`. All matched methods will be marked with the `@Trace` annotation.
+      </tbody>
+    </table>
 
-      Here is an example:
-      
-      ```java
-      @TraceByReturnType(traceReturnTypes={Integer.class, String.class})
-      class ClassContainingMethods() {
-        public String doSomething() { // matches
-          // ...
-        }
+    If you set the `traceReturnTypes`, as in `@TraceByReturnType(traceReturnTypes={String.class})`, then the marked classes method return types will be matched against the `String.class`. All matched methods will be marked with the `@Trace` annotation.
 
-        public Long somethingElse() { // does not match
-          // ...
-        }
+    Here is an example:
+
+    ```java
+    @TraceByReturnType(traceReturnTypes={Integer.class, String.class})
+    class ClassContainingMethods() {
+      public String doSomething() { // matches
+        // ...
       }
-      ```
-      
-    </Collapser>
-  </CollapserGroup>
+
+      public Long somethingElse() { // does not match
+        // ...
+      }
+    }
+    ```
+  </Collapser>
+</CollapserGroup>
 
 ## Performance considerations
 

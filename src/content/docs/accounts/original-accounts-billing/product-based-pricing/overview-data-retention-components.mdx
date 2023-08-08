@@ -23,15 +23,33 @@ redirects:
   - /docs/synthetics/new-relic-synthetics/getting-started/synthetics-data-retention
   - /docs/accounts/accounts/data-management/overview-data-retention-components
   - /docs/legacy-data-management-information
+  - /docs/accounts/original-accounts-billing/original-data-retention/event-data-retention-original-pricing-plan
+  - /docs/insights/new-relic-insights/managing-dashboards-data/insights-data-retention
+  - /docs/insights/use-insights-ui/manage-account-data/insights-data-retention
+  - /node/38131
+  - /docs/insights/use-insights-ui/manage-account-data/extend-event-data-retention
+  - /docs/insights/new-relic-insights/explore/data-summary
+  - /docs/insights/using-insights-ui/basic-ui-tasks/data-summary-manage-apps-reporting-insights
+  - /docs/insights/use-insights-ui/basic-ui-tasks/data-summary-page-manage-apps-reporting-insights
+  - /docs/insights/use-insights-ui/manage-account-data/data-summary-page-manage-apps-reporting-insights
+  - /docs/accounts/accounts/subscription-pricing/flexible-retention-define-how-long-new-relic-retains-event-data
+  - /docs/beta-flex-retention
+  - /docs/flex-retention-define-how-long-new-relic-retains-your-event-data
+  - /docs/accounts/accounts/data-management/event-data-retention
+  - /docs/insights/use-insights-ui/manage-account-data/event-data-retention
 ---
 
 <Callout variant="important">
-  This doc is for organizations on our [original pricing model](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing). If you're on our [New Relic One pricing model](/docs/accounts/accounts-billing/new-relic-one-pricing-users/pricing-billing), see [Manage your data](/docs/telemetry-data-platform/get-data-new-relic/manage-data/manage-your-data). Not sure which you're on? See [Overview of pricing models](/docs/accounts/original-accounts-billing/original-product-based-pricing/overview-pricing-models).
-
-  If you're on our original pricing model, you retain your existing subscriptions and data retention values. You manage these existing retention settings from the **Data management hub** in New Relic One. To manage your retention settings, go to the [Data management UI](/docs/telemetry-data-platform/manage-data/manage-your-data/#where-to-find-the-data-management-hub). You'll see your existing retention settings. Adjust retention values by clicking **Edit retention**.
+  This doc applies for organizations on our [original pricing model](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing). If you're on our [usage-based pricing model](/docs/accounts/accounts-billing/new-relic-one-pricing-users/pricing-billing), see [Manage your data](/docs/telemetry-data-platform/get-data-new-relic/manage-data/manage-your-data). Not sure which you're on? See [Overview of pricing models](/docs/accounts/original-accounts-billing/original-product-based-pricing/overview-pricing-models).
 </Callout>
 
-New Relic stores different types of data for different periods of time. The retention period for a type of data will vary depending on the product, the subscription level, and the feature.
+New Relic stores different types of data for different periods of time. The retention period for a type of data will vary depending on the product, the subscription level, and the feature. 
+
+## Data retention UI [#find]
+
+The best way to understand your data retention and see what options are available is to go to the UI. One reason this is recommended is because your organization may have edited your settings and they may no longer be the default settings documented here. 
+
+The **Data retention** UI page is located in the [Data management hub](/docs/data-apis/manage-data/manage-your-data). Adjust retention values by clicking **Edit retention**. 
 
 ## Limits on editing and deleting data [#edit-limits]
 
@@ -48,7 +66,7 @@ Select a New Relic product to see details about its data retention:
     id="apm"
     title="APM"
   >
-    Specific retention policies apply to each APM subscription level, including Lite, Essentials, Pro, and Enterprise. This includes [metric timeslice data](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-metric-data), [key metrics](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-key-metrics), [trace data](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-trace-data), and [event data](/docs/accounts/accounts/data-management/event-data-retention). In addition to retention limits, your data is subject to aggregation (averaging) after certain elapsed time periods. For more information, see the [aggregate metric data](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention-components#components-aggregate-metrics) description.
+    Specific retention policies apply to each <InlinePopover type="apm" /> subscription level, including Lite, Essentials, Pro, and Enterprise. This includes [metric timeslice data](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-metric-data), [key metrics](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-key-metrics), [trace data](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-trace-data), and [event data](/docs/accounts/accounts/data-management/event-data-retention). In addition to retention limits, your data is subject to aggregation (averaging) after certain elapsed time periods. For more information, see the [aggregate metric data](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention-components#components-aggregate-metrics) description.
 
     ## APM data retention policies [#policies]
 
@@ -484,7 +502,7 @@ Select a New Relic product to see details about its data retention:
       </tbody>
     </table>
 
-    In addition, Infrastructure downsamples your data on the fly, as it's generated. All Infrastructure metric data types (including [On-Host Integrations](/docs/integrations/host-integrations/getting-started/introduction-host-integrations) metrics) will display different granularity depending on the age of the data and the size of the time window. The following table illustrates when different downsampled buckets will be used, both in the Infrastructure UI and for queries:
+    In addition, infrastructure monitoring downsamples your data as it's ingested. All infrastructure metric data types (including [on-host integrations](/docs/integrations/host-integrations/getting-started/introduction-host-integrations) metrics) will display different granularity depending on the age of the data and the size of the time window. The following table illustrates when different downsampled buckets will be used, both in the Infrastructure UI and for queries:
 
     <table>
       <thead>
@@ -591,7 +609,52 @@ Select a New Relic product to see details about its data retention:
     id="insights"
     title="Insights"
   >
-    For organizations on our [original pricing model](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing), an Insights subscription [extends your event data retention](/docs/accounts/accounts/data-management/event-data-retention). An Insights Pro subscription allows you to [customize the length of your event data retention](/docs/accounts/accounts/data-management/event-data-retention#flex-retention).
+For organizations on our original pricing model, a paid Insights subscription is what governs the extension of event data retention for:
+
+* Our APM, Browser, Mobile, and Serverless products
+* [Custom events](/docs/insights/insights-data-sources/custom-data/report-custom-event-data) that come from an agent API or from the [Event API](/docs/insights/insights-data-sources/custom-data/introduction-event-api)
+
+To see the data retention governed by your Insights subscription: go to the [usage UI](/docs/accounts/accounts-billing/new-relic-one-pricing-billing/new-relic-one-pricing-billing#usage-ui) and select **Insights usage**.
+
+With an Insights Pro subscription, you can use [flexible retention to customize how long your event data is retained](/docs/accounts/accounts/subscription-pricing/flexible-retention-define-how-long-new-relic-retains-event-data). This lets you keep only the data you need, for as long as you need it.
+
+<CollapserGroup>
+  <Collapser
+    id="retention-calculation"
+    title="How number of events stored is calculated"
+  >
+    This is an explanation of how the number of stored events are calculated by default for an Insights Pro subscription. (Note that with [flexible retention](/docs/accounts/accounts/subscription-pricing/flexible-retention-define-how-long-new-relic-retains-event-data), you have more fine-grained control over the retention period.)
+
+    The events stored is calculated based on 1) total events stored over time (calculated based on the events generated per week) and 2) the weeks of data retention available. This equation can be represented like this:
+
+    ```
+    events stored = (events generated per week) * (weeks of retention)
+    ```
+
+    An Insights Pro subscription provides a given number of weeks of data retention as well as a given number of events over that retention period.
+
+    For example:
+
+    * (200M transactions per week) \* (4 weeks of retention) = 800M events stored in Insights
+    * (16M transactions per week) \* (50 weeks of retention) = 800M events stored in Insights
+
+    For Insights Pro subscriptions, data is purged based on retention window, not volume. It is deleted from the system once it's past the retention window.
+
+    For example: If your Insights license is for 800 million events with a 4 week retention period, your data would start being purged after it is older than four weeks. Temporary spikes in data exceeding your subscription level will still be recorded, but consistent overage should be solved by upgrading your subscription level or decreasing data collected.
+
+    For customers without an [Insights Pro subscription](#insights-pro), New Relic may throttle or downsample events to a limit of not more than than 4,000 events per host per minute.
+  </Collapser>
+
+  <Collapser
+    id="usage-overage"
+    title="Insights Pro event overage example"
+  >
+    In this example, you have an Insights Pro subscription with a license for 800 million events over 4 weeks, a rate of 200 million events per week. You have APM Pro, Browser Pro, and Mobile Enterprise. A fifth week of data is added via your subscriptions, bumping you to a total of 1 billion events stored within your plan:
+
+    * If you are using 975 million events, you **are not** over your retention.
+    * If you are using 1.25 billion events, you **are** over your retention.
+  </Collapser>
+</CollapserGroup>
   </Collapser>
 
   <Collapser
@@ -600,9 +663,9 @@ Select a New Relic product to see details about its data retention:
   >
     For organizations on our [original pricing model](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing), log data can be retained for up to 30 days by New Relic. Shorter retention periods of 8 or 15 days are also available.
 
-    ### Logs in context data retention [#logs-in-context-retention]
+    ### Logs-in-context data retention [#logs-in-context-retention]
 
-    New Relic Logs logs in context data retention policy is based on your current APM product subscription level. For more information, see [APM data retention](/docs/apm/new-relic-apm/maintenance/apm-data-retention).
+    Our logs-in-context data retention policy is based on your current APM product subscription level. For more information, see [APM data retention](/docs/apm/new-relic-apm/maintenance/apm-data-retention).
   </Collapser>
 
   <Collapser
@@ -775,7 +838,7 @@ Select a New Relic product to see details about its data retention:
 
         <tr>
           <td>
-            MobileJSError events [(React Native beta)](/docs/mobile-monitoring/new-relic-mobile-react-native/customize/customize-query-mobile-app-data-react-native) \*
+            MobileJSError events [(React Native preview)](/docs/mobile-monitoring/new-relic-mobile-react-native/customize/customize-query-mobile-app-data-react-native) \*
           </td>
 
           <td>
@@ -931,10 +994,10 @@ Select a New Relic product to see details about its data retention:
     For organizations on our [original pricing model](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing), [Synthetics](/docs/synthetics/new-relic-synthetics) data retention policies depend on your Synthetics product subscription level. This includes [data components](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention) such as metric data, aggregate metrics, key metrics, trace data, and Insights events.
 
     <Callout variant="tip">
-      Synthetics events do not count against an [Insights Pro subscription](/docs/accounts/accounts/data-management/event-data-retention#insights-pro).
+      Synthetic monitoring events do not count against an [Insights Pro subscription](/docs/accounts/accounts/data-management/event-data-retention#insights-pro).
     </Callout>
 
-    Your current subscription level appears in the right column of the **Account summary** page: Go to **[synthetics.newrelic.com](https://synthetics.newrelic.com) > ([account dropdown](/docs/accounts-partnerships/education/getting-started-new-relic/glossary#account-dropdown)) > Account settings > Account > Summary**.
+    Your current subscription level appears in the right column of the **Account summary** page: Go to **[synthetics.newrelic.com](https://synthetics.newrelic.com) > ([user menu](/docs/accounts/accounts-billing/general-account-settings/intro-account-settings)) > Account settings > Account > Summary**.
 
     ## Synthetics data retention policies
 
@@ -958,7 +1021,7 @@ Select a New Relic product to see details about its data retention:
       <tbody>
         <tr>
           <td>
-            Synthetics monitor data
+            Synthetic monitoring data
           </td>
 
           <td>
@@ -1207,7 +1270,7 @@ For organizations on our [original pricing model](/docs/accounts/original-accoun
             * [Slow query samples](/docs/apm/applications-menu/monitoring/databases-slow-queries-page)
             * [Error details](/docs/apm/applications-menu/events/view-apm-error-analytics)
 
-            See [APM data retention details](/docs/apm/new-relic-apm/maintenance/apm-data-retention).
+              See [APM data retention details](/docs/apm/new-relic-apm/maintenance/apm-data-retention).
           </td>
         </tr>
 
@@ -1223,7 +1286,7 @@ For organizations on our [original pricing model](/docs/accounts/original-accoun
             * [Browser traces](/docs/browser/new-relic-browser/additional-standard-features/browser-traces)
             * [JavaScript errors](/docs/browser/new-relic-browser/browser-pro-features/javascript-errors-page-examining-errors-over-time)\*
 
-            See [Browser data retention details](/docs/browser/new-relic-browser/getting-started/browser-data-retention).
+              See [Browser data retention details](/docs/browser/new-relic-browser/getting-started/browser-data-retention).
           </td>
         </tr>
 
@@ -1238,7 +1301,7 @@ For organizations on our [original pricing model](/docs/accounts/original-accoun
             * [App crash stack traces](/docs/mobile-monitoring/mobile-monitoring-ui/crashes/mobile-apps-crash-report)
             * [Interaction traces](/docs/mobile-monitoring/mobile-monitoring-ui/mobile-app-pages/interactions-page#interactions-timeline)
 
-            See [Mobile data retention details](/docs/mobile-monitoring/new-relic-mobile/getting-started/mobile-data-retention).
+              See [Mobile data retention details](/docs/mobile-monitoring/new-relic-mobile/getting-started/mobile-data-retention).
           </td>
         </tr>
       </tbody>
@@ -1247,3 +1310,4 @@ For organizations on our [original pricing model](/docs/accounts/original-accoun
     \*JavaScript errors in the stack trace UI are saved as trace data. JS errors are also saved as [events](#components-insights-events).
   </Collapser>
 </CollapserGroup>
+

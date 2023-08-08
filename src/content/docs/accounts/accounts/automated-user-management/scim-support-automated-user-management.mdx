@@ -10,16 +10,17 @@ redirects:
   - /docs/scim-support-automated-user-management
 ---
 
-To set up the provisioning and management of your New Relic users from an identity provider, we provide a SCIM API for the identity providers that don't already have [New Relic-specific apps and implementations](/docs/accounts/accounts/automated-user-management/automated-user-provisioning-single-sign#requirements).   
+To set up the provisioning and management of your New Relic users from an identity provider, we provide a SCIM API for the identity providers that don't already have [New Relic-specific apps and implementations](/docs/accounts/accounts/automated-user-management/automated-user-provisioning-single-sign#requirements).
 
 ## Who should use the SCIM API? [#when-to-use]
 
-If you have an identity provider that has a New Relic app (Azure AD, Okta, and OneLogin), see [the guides for those](/docs/accounts/accounts/automated-user-management/automated-user-provisioning-single-sign). The SCIM API is meant for organizations that either aren't using those identity providers, or that want to use the SCIM API for additional configuration not available with the apps (for example, **managing user type**). Additional restrictions: 
-* Ping Identity's PingOne is **not** supported because it doesn't allow provisioning of groups. 
+If you have an identity provider that has a New Relic app (Azure AD, Okta, and OneLogin), see [the guides for those](/docs/accounts/accounts/automated-user-management/automated-user-provisioning-single-sign). The SCIM API is meant for organizations that either aren't using those identity providers, or that want to use the SCIM API for additional configuration not available with the apps (for example, **managing user type**). Additional restrictions:
 
-Before using our SCIM API, you should first [set up an authentication domain with SCIM enabled](/docs/accounts/accounts-billing/new-relic-one-user-management/authentication-domains-saml-sso-scim-more/#source-users). The authentication domain UI will give you values that you can use to integrate with your identity provider.  
+* Ping Identity's PingOne is **not** supported because it doesn't allow provisioning of groups.
 
-Note that after you set up an integration with the SCIM API, there are [next steps](#next-steps) to do, including downgrading some users to basic users, and granting user groups access to New Relic accounts. 
+Before using our SCIM API, you should first [set up an authentication domain with SCIM enabled](/docs/accounts/accounts-billing/new-relic-one-user-management/authentication-domains-saml-sso-scim-more/#source-users). The authentication domain UI will give you values that you can use to integrate with your identity provider.
+
+Note that after you set up an integration with the SCIM API, there are [next steps](#next-steps) to do, including downgrading some users to basic users, and granting user groups access to New Relic accounts.
 
 ## Our SCIM API tutorial [#tutorial]
 
@@ -27,11 +28,11 @@ This doc contains technical information about our SCIM API. For detailed instruc
 
 ## SCIM service provider [#scim-provider]
 
-New Relic's SCIM service provider follows the [SCIM 2.0 API](http://www.simplecloud.info/) as described in [RFCs 7643](https://tools.ietf.org/html/rfc7643) and [7644](https://tools.ietf.org/html/rfc7644). You do not need to implement all aspects of the SCIM 2.0 specification to integrate your user information with New Relic. In fact, the New Relic service provider itself does not implement all aspects of the specification. This document describes the features from the specification available for an integration with New Relic.
+Our SCIM service provider follows the [SCIM 2.0 API](http://www.simplecloud.info/) as described in [RFCs 7643](https://tools.ietf.org/html/rfc7643) and [7644](https://tools.ietf.org/html/rfc7644). You do not need to implement all aspects of the SCIM 2.0 specification to integrate your user information with New Relic. In fact, the New Relic service provider itself does not implement all aspects of the specification. This document describes the features from the specification available for an integration with New Relic.
 
 ## Authentication [#authentication]
 
-Authentication requires a bearer token. This bearer token is specific to your [New Relic authentication domain](/docs/accounts/accounts-billing/new-relic-one-user-management/authentication-domains-saml-sso-scim-more) and is displayed when first enabling SCIM for an authentication domain. 
+Authentication requires a bearer token. This bearer token is specific to your [New Relic authentication domain](/docs/accounts/accounts-billing/new-relic-one-user-management/authentication-domains-saml-sso-scim-more) and is displayed when first enabling SCIM for an authentication domain.
 
 ## Supported resources [#supported-resources]
 
@@ -267,7 +268,7 @@ Supported actions are:
     Example request:
 
     ```
-    GET /Groups/<var>YOUR_GROUP_ID</var>
+    GET /Groups/YOUR_GROUP_ID
     ```
 
     Example response:
@@ -335,7 +336,7 @@ Supported actions are:
     In the request, include the fields that you want to change. If you include the `members` field, the group’s users will be adjusted to match the contents of the members field. Example request:
 
     ```
-    PUT /Groups/<var>YOUR_GROUP_ID</var>
+    PUT /Groups/YOUR_GROUP_ID
 
     {
       "schemas": [
@@ -373,7 +374,7 @@ Supported actions are:
     Example request:
 
     ```
-    PATCH /Groups/<var>YOUR_GROUP_ID</var>
+    PATCH /Groups/YOUR_GROUP_ID
 
     {
       "schemas": [
@@ -401,7 +402,7 @@ Supported actions are:
     Example request:
 
     ```
-    PATCH /Groups/<var>YOUR_GROUP_ID</var>
+    PATCH /Groups/YOUR_GROUP_ID
 
     {
       "schemas": [
@@ -431,7 +432,7 @@ Supported actions are:
     Example request:
 
     ```
-    PATCH /Groups/<var>YOUR_GROUP_ID</var>
+    PATCH /Groups/YOUR_GROUP_ID
 
     {
       "schemas": [
@@ -461,7 +462,7 @@ Supported actions are:
     Example request:
 
     ```
-    DELETE /Groups/<var>YOUR_GROUP_ID</var>
+    DELETE /Groups/YOUR_GROUP_ID
     ```
 
     Example response:
@@ -539,7 +540,7 @@ Supported actions are:
     Example request:
 
     ```
-    GET /Users/<var>YOUR_USER_ID</var>
+    GET /Users/YOUR_USER_ID
     ```
 
     Example response:
@@ -629,7 +630,7 @@ Supported actions are:
     In the request, include the fields that you want to change. If you include the `groups` field, the user’s groups will be adjusted to match the contents of the groups field. Example request:
 
     ```
-    PUT /Users/<var>YOUR_USER_ID</var>
+    PUT /Users/YOUR_USER_ID
 
     {
       "schemas": [
@@ -681,7 +682,7 @@ Supported actions are:
     Example request:
 
     ```
-    PATCH /Users/<var>YOUR_USER_ID</var>
+    PATCH /Users/YOUR_USER_ID
 
     {
       "schemas": [
@@ -709,7 +710,7 @@ Supported actions are:
     Example request:
 
     ```
-    DELETE /Users/<var>YOUR_USER_ID</var>
+    DELETE /Users/YOUR_USER_ID
     ```
 
     Example response:
@@ -819,23 +820,26 @@ Items in this section could change as we work to bring our service provider into
   </tbody>
 </table>
 
-
 ## Next steps when you're done [#next-steps]
 
-Next steps: 
+Next steps:
 
 ### Adjust your users' user type [#edit-user-type]
 
 When your users are provisioned in New Relic, you can see them in the [**User management** UI](/docs/accounts/accounts-billing/new-relic-one-user-management/user-management-ui-and-tasks#where).
 
-If you're adding users to New Relic via SCIM but **not** [managing their user type via SCIM](#user-type), they start out as [basic users](/docs/accounts/accounts-billing/new-relic-one-user-management/user-type). To upgrade users, you have two options: 
+If you're adding users to New Relic via SCIM but **not** [managing their user type via SCIM](#user-type), they start out as [basic users](/docs/accounts/accounts-billing/new-relic-one-user-management/user-type). To upgrade users, you have two options:
 
 * Use the [User management UI](/docs/accounts/accounts-billing/new-relic-one-user-management/user-management-ui-and-tasks#add-users).
 * Use the [SCIM API to manage user type](#user-type).
 
-### Assign access grants [#access-grants]
+### Assign group access [#access-grants]
 
-Once your users are in New Relic, you need to grant them access to specific New Relic accounts, specific groups, and specific roles. Without doing this, your users have no access to New Relic accounts. To learn how to do this, see: 
+Once your users are in New Relic, you need to grant them access to specific New Relic accounts, specific groups, and specific roles. Without doing this, your users have no access to New Relic accounts. To learn how to do this, see:
 
-* [How access grants work](/docs/accounts/accounts-billing/new-relic-one-user-management/user-management-concepts#understand-concepts)
-* The [user management tutorial](/docs/accounts/accounts-billing/new-relic-one-user-management/tutorial-add-new-user-groups-roles-new-relic-one-user-model/) 
+* [How user access works](/docs/accounts/accounts-billing/new-relic-one-user-management/user-management-concepts#understand-concepts)
+* The [user management tutorial](/docs/accounts/accounts-billing/new-relic-one-user-management/tutorial-add-new-user-groups-roles-new-relic-one-user-model/)
+
+### Set up SAML SSO 
+
+If you want to set up SAML SSO, which most SCIM users do, see the [SAML SSO docs](/docs/accounts/accounts-billing/new-relic-one-user-management/authentication-domains-saml-sso-scim-more#authentication).

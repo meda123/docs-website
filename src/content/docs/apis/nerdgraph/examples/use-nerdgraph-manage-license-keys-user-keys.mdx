@@ -11,15 +11,15 @@ redirects:
   - /docs/apis/nerdgraph/examples/use-nerdgraph-manage-license-keys-personal-api-keys
 ---
 
-This doc contains tutorials on how to use [NerdGraph](/docs/introduction-new-relic-graphql) to programmatically manage some New Relic API keys: the license key, the browser key, and the user key. For general information about our keys, see [API keys](/docs/apis/get-started/intro-apis/types-new-relic-api-keys).
+This doc contains tutorials on how to use [NerdGraph](/docs/introduction-new-relic-graphql) to programmatically manage some New Relic API keys: the license key, the browser key, and the <InlinePopover type="userKey" />. For general information about our keys, see [API keys](/docs/apis/get-started/intro-apis/types-new-relic-api-keys).
 
 ## Overview of feature description [#terms]
 
 You can use the [API keys UI](https://one.newrelic.com/launcher/api-keys-ui.api-keys-launcher) to create and manage keys. Alternatively, you can use [NerdGraph](/docs/introduction-new-relic-graphql)'s `ApiAccess` field to programmatically create and manage the following types of keys:
 
-* [User keys](/docs/apis/get-started/intro-apis/types-new-relic-api-keys#personal-api-key), required for using NerdGraph 
+* [User keys](/docs/apis/get-started/intro-apis/types-new-relic-api-keys#personal-api-key), required for using NerdGraph
 * Data ingest keys, including:
-  * The [license key](/docs/apis/get-started/intro-apis/types-new-relic-api-keys): required for the ingest of most data to New Relic, except for browser monitoring data and mobile monitoring data 
+  * The <InlinePopover type="licenseKey" />: required for the ingest of most data to New Relic, except for browser monitoring data and mobile monitoring data
   * [Browser key](/docs/browser/new-relic-browser/configuration/copy-browser-monitoring-license-key-app-id): required for the ingest of browser monitoring data
 
 One common use case for this feature is the ability to rotate keys for security purposes. Note that you can't use this NerdGraph functionality to delete the license key or browser key that was originally created with an account; those original keys can't be deleted. You can only create additional license keys and manage the ones you've created.
@@ -44,7 +44,7 @@ Things to note before using these example queries:
 ## Create keys
 
 <Callout variant="tip">
-You can find and generate user keys using the [NerdGraph GraphiQL explorer](/docs/apis/nerdgraph/get-started/introduction-new-relic-nerdgraph/#explorer), at the top of that interface. 
+  You can find and generate user keys using the [NerdGraph GraphiQL explorer](/docs/apis/nerdgraph/get-started/introduction-new-relic-nerdgraph/#explorer), at the top of that interface.
 </Callout>
 
 To create multiple keys (user key or license key) in a single mutation, for multiple accounts and key types. Note that the mutation can return successfully created keys as well as any errors encountered trying to create keys.
@@ -53,7 +53,7 @@ Example of creating a key:
 
 ```
 mutation {
-  apiAccessCreateKeys(keys: {ingest: {accountId: <var>YOUR_ACCOUNT_ID</var>, ingestType:
+  apiAccessCreateKeys(keys: {ingest: {accountId: YOUR_ACCOUNT_ID, ingestType:
     BROWSER, name: "Browser Key", notes: "A note."}}) {
     createdKeys {
       id
@@ -91,7 +91,7 @@ Here's an example of using this query to create a [user key](/docs/apis/get-star
 
     ```
     mutation {
-      apiAccessCreateKeys(keys: {user: {accountId: <var>YOUR_ACCOUNT_ID</var>, userId: <var>YOUR_USER_ID</var>}}) {
+      apiAccessCreateKeys(keys: {user: {accountId: YOUR_ACCOUNT_ID, userId: YOUR_USER_ID}}) {
         createdKeys {
           id
           key
@@ -123,7 +123,7 @@ The update mutation takes the key ID, not the key string, to identify keys.
 
 ```
 mutation {
-  apiAccessUpdateKeys(keys: {ingest: {keyId: <var>KEY_ID</var>, name: "Updated name", notes:
+  apiAccessUpdateKeys(keys: {ingest: {keyId: KEY_ID, name: "Updated name", notes:
     "A new note!"}}) {
     updatedKeys {
       id
@@ -147,7 +147,7 @@ The delete mutation takes the key ID, not the key string, to identify keys. Dele
 
 ```
 mutation {
-  apiAccessDeleteKeys(keys: {ingestKeyIds: <var>INGEST_KEY_ID</var>}) {
+  apiAccessDeleteKeys(keys: {ingestKeyIds: INGEST_KEY_ID}) {
     deletedKeys {
       id
     }
@@ -170,7 +170,7 @@ Single key example query:
 query {
   actor {
     apiAccess {
-      key(id: <var>INGEST_KEY_ID</var>, keyType: INGEST) {
+      key(id: INGEST_KEY_ID, keyType: INGEST) {
         key
         name
         type

@@ -8,6 +8,10 @@ metaDescription: New Relic PHP agent notes about the Guzzle library (supported a
 translationType: machine
 ---
 
+import apmGuzzleSequence from 'images/apm_screenshot-crop_guzzle-sequence.webp'
+
+import apmGuzzleParallel from 'images/apm_screenshot-crop_guzzle-parallel.webp'
+
 New Relic は **Guzzle HTTP クライアントライブラリのバージョン 3、4、5、6 をサポートしています** [New Relic PHP エージェントのバージョン 5.4](/docs/release-notes/agent-release-notes/php-release-notes) 以上を使用しています。
 
 Guzzle ライブラリでは、シーケンシャルおよびパラレルの両方のリクエストが可能です。このページでは、New Relic UI の [**Summary** page](/docs/apm/applications-menu/monitoring/apm-overview-page) で、それぞれのタイプのリクエストがどのように表示されるかを説明しています。どのコールが最も遅かったかを知るには、個々の外部コールのタイミングを表示する [External Services ページ](/docs/apm/applications-menu/monitoring/external-services-page) をご覧ください。
@@ -16,33 +20,37 @@ Guzzle ライブラリでは、シーケンシャルおよびパラレルの両�
 
 このPHPコードは、Guzzleで複数のシーケンシャルなリクエストを行います。
 
-```
+```php
 $client = new \GuzzleHttp\Client;
-$response = $client->get('http://<var>YOUR_SITE</var>.com/api/foo');
-$client->delete('http://<var>YOUR_SITE</var>.com/api/foo/'.$response->getBody());
+$response = $client->get('http://YOUR_SITE.com/api/foo');
+$client->delete('http://YOUR_SITE.com/api/foo/'.$response->getBody());
 ```
 
 このコードは、New RelicのUIに次のように表示されます。
 
-![guzzle_sequential.png](./images/guzzle_sequential.png "Guzzleによるシーケンシャルリクエスト")
+<img
+  title="Sequential requests with Guzzle"
+  alt="guzzle_sequential.png"
+  src={apmGuzzleSequence}
+/>
 
 <figcaption>
-  [**one.newrelic.com**](http://one.newrelic.com/) **> APM> (selected app)> Overview> Web トランザクションの時間**: New Relic UI での Guzzle によるシーケンシャルなリクエスト。
+  **[one.newrelic.com](https://one.newrelic.com/all-capabilities) > APM & サービス > (アプリを選択) > 概要 > Web トランザクション時間**: New Relic UI の Guzzle を使用したシーケンシャル リクエスト。
 </figcaption>
 
-[応答時間](/docs/data-analysis/user-interface-functions/response-time) は、紺色の線で示されています。緑色の **web external time** は、Guzzle ライブラリに費やされた時間を表しています。リクエストは連続して行われたため、応答時間は ****と [PHP、MySQL、ウェブ外部の活動に費やされた合計時間](/docs/data-analysis/user-interface-functions/response-time#response-time-total-time) と同じです。
+[応答時間](/docs/data-analysis/user-interface-functions/response-time)は紺色の線で示されています。緑の**Web外部時間**は、Guzzleライブラリで費やされた時間を表します。リクエストは順番に行われたため、応答時間はPHP、MySQL、およびWebの外部アクティビティに費やされた[合計時間](/docs/data-analysis/user-interface-functions/response-time#response-time-total-time)と**同じ**です。
 
 ## 並列リクエスト [#more_help]
 
 このPHPコードは、プロミスの配列をアンラッピングすることで、複数のリクエストを並行して行います。
 
-```
+```php
 $client = new \GuzzleHttp\Client;
 
 $promises = [
-  $client->getAsync('http://<var>YOUR_SITE</var>.com/api/foo'),
-  $client->getAsync('http://<var>YOUR_SITE</var>.com/api/bar'),
-  $client->getAsync('http://<var>YOUR_SITE</var>.com/api/quux'),
+    $client->getAsync('http://YOUR_SITE.com/api/foo'),
+    $client->getAsync('http://YOUR_SITE.com/api/bar'),
+    $client->getAsync('http://YOUR_SITE.com/api/quux'),
 ];
 
 \GuzzleHttp\Promise\unwrap($promises);
@@ -50,10 +58,14 @@ $promises = [
 
 このコードは、New RelicのUIに次のように表示されます。
 
-![Guzzleによる並列リクエスト](./images/guzzle_parallel.png "Guzzleによる並列リクエスト")
+<img
+  title="Parallel requests with Guzzle"
+  alt="Parallel requests with Guzzle"
+  src={apmGuzzleParallel}
+/>
 
 <figcaption>
-  [**one.newrelic.com**](http://one.newrelic.com/) **> APM> (selected app)> Summary> Web トランザクションの時間**: New Relic UI での Guzzle による並列リクエスト
+  **[one.newrelic.com](https://one.newrelic.com/all-capabilities) > APM & サービス > (アプリを選択) > 概要 > Web トランザクション時間**: New Relic UI での Guzzle による並列リクエスト
 </figcaption>
 
 緑色の **web external の時間** は、Guzzle ライブラリに費やされた時間を表しています。リクエストは非同期に実行されたため、 [PHP、MySQL、web externalに費やされた合計時間](/docs/data-analysis/user-interface-functions/response-time#response-time-total-time) は、 **応答時間よりも大きい** 。
@@ -66,5 +78,5 @@ $promises = [
 
 ガズルのサポートを無効にするには
 
-1. `newrelic.guzzle.enabled = false` を `newrelic.ini` ファイルに追加します。
+1. `newrelic.guzzle.enabled = false`を`newrelic.ini`ファイルに追加します。
 2. [Webサーバー](/docs/agents/php-agent/troubleshooting/why-when-restart-your-web-server-php) （Apache、Nginx、PHP-FPMなど）を再起動します。

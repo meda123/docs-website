@@ -114,21 +114,33 @@ The agent provides different metrics and inventory depending on the running mode
         **Process samples** do not report these metrics:
 
         * File descriptor count
+
         * I/O read bytes per second
+
         * I/O read count per second
+
         * I/O total read bytes
+
         * I/O total read count
+
         * I/O total write bytes
+
         * I/O total write count
+
         * I/O write bytes per second
+
         * I/O write count per second
 
-        The following **inventory sources** are not reported:
+          The following **inventory sources** are not reported:
 
         * `config/sshd`
+
         * `kernel/sysctl`
+
         * `packages/rpm`
+
         * `packages/dpkg`
+
         * `services/pidfile` on SysV-based distributions
       </td>
     </tr>
@@ -168,7 +180,7 @@ As root, integrations will run as usual. When running as privileged or unprivile
           </td>
 
           <td>
-            ```
+            ```bash
             sudo chown nri-agent:nri-agent -R /tmp/nr-apache.json
             ```
           </td>
@@ -180,7 +192,7 @@ As root, integrations will run as usual. When running as privileged or unprivile
           </td>
 
           <td>
-            ```
+            ```bash
             sudo chown nri-agent:nri-agent -R /tmp/nr-integrations
             ```
           </td>
@@ -192,7 +204,7 @@ As root, integrations will run as usual. When running as privileged or unprivile
           </td>
 
           <td>
-            ```
+            ```bash
             sudo chown nri-agent:nri-agent -R /tmp/nr-mysql.json
             ```
           </td>
@@ -204,7 +216,7 @@ As root, integrations will run as usual. When running as privileged or unprivile
           </td>
 
           <td>
-            ```
+            ```bash
             sudo chown nri-agent:nri-agent -R /tmp/nr-nginx.json
             ```
           </td>
@@ -216,7 +228,7 @@ As root, integrations will run as usual. When running as privileged or unprivile
           </td>
 
           <td>
-            ```
+            ```bash
             sudo chown nri-agent:nri-agent -R /tmp/nr-redis.json
             ```
           </td>
@@ -241,7 +253,7 @@ As root, integrations will run as usual. When running as privileged or unprivile
   When deciding which run mode to use, consider how much data you want to be able to collect and analyze, or how much data you want to restrict.
 </Callout>
 
-For default and [assisted installations](/docs/infrastructure/install-configure-infrastructure/linux-installation/assisted-install-infrastructure-linux), you can set the running mode by including the `NRIA_MODE` environment variable set to either `ROOT`, `PRIVILEGED`, or `UNPRIVILEGED`.
+For default and [assisted installations](/docs/infrastructure/install-configure-infrastructure/linux-installation/assisted-install-infrastructure-linux), you can set the running mode by including the [`NRIA_MODE`](/docs/infrastructure/install-infrastructure-agent/linux-installation/linux-agent-running-modes/#set-mode) environment variable set to either `ROOT`, `PRIVILEGED`, or `UNPRIVILEGED`.
 
 For [manual installations](/docs/infrastructure/install-configure-infrastructure/linux-installation/manual-install-infrastructure-linux), follow the instructions described in our docs.
 
@@ -271,13 +283,13 @@ For [manual installations](/docs/infrastructure/install-configure-infrastructure
              </td>
 
              <td>
-               ```
+               ```bash
                dpkg --purge newrelic-infra
                ```
 
                OR
 
-               ```
+               ```bash
                sudo apt-get remove --purge newrelic-infra
                ```
              </td>
@@ -289,19 +301,19 @@ For [manual installations](/docs/infrastructure/install-configure-infrastructure
              </td>
 
              <td>
-               ```
+               ```bash
                rpm -e newrelic-infra
                ```
 
                OR
 
-               ```
+               ```bash
                sudo yum remove newrelic-infra
                ```
 
                OR
 
-               ```
+               ```bash
                sudo zypper rm newrelic-infra
                ```
              </td>

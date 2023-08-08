@@ -22,10 +22,6 @@ Custom metrics let you record arbitrary performance data via an API call (for ex
   Collecting too many metrics can impact the performance of your application and your New Relic agent. To avoid data problems, keep the total number of unique custom metrics under 2000.
 </Callout>
 
-<Callout variant="important">
-  These procedures have not bee tested with Rails version 7 or higher.
-</Callout>
-
 ## Naming metrics [#metric_names]
 
 Metric names identify specific data values tracked by New Relic. When using the New Relic Ruby agent's API to track custom metrics, it's important to consider your metric naming and how the values will aggregate.
@@ -57,7 +53,7 @@ A custom metric name consists of the prefix `Custom/`, the class or category nam
     * Custom
 
     <Callout variant="tip">
-      For custom metric names, use `Custom/<class>/<method>` or `Custom/<category>>/>name>`
+      For custom metric names, use `Custom/<class>/<method>` or `Custom/<category>/<name>`
     </Callout>
   </Collapser>
 
@@ -67,9 +63,9 @@ A custom metric name consists of the prefix `Custom/`, the class or category nam
   >
     There are two basic data structures used to collect metric data: `MetricSpec` and `Stats`.
 
-    `A MetricSpec is an identifier for which we have data. The following pseudo Ruby defines a metric:`
+    A `MetricSpec` is an identifier for which we have data. The following pseudo Ruby defines a metric:
 
-    ```
+    ```rb
     class MetricSpec
       attr_accessor :name    # String - metric name
       attr_accessor :scope   # String - current controller action
@@ -80,7 +76,7 @@ A custom metric name consists of the prefix `Custom/`, the class or category nam
 
     Metric values are recorded by `Stats`. `Stats` typically collects data about method execution but can store any interesting data. The following pseudo Ruby defines `Stats`:
 
-    ```
+    ```rb
     class Stats
       attr_accessor :call_count           # Integer - method invocation count
       attr_accessor :total_call_time      # Float - total method call time (in seconds)
@@ -135,7 +131,7 @@ When `value` is a Hash, it must contain `:count`, `:total`, `:min`, `:max`, and 
 
 Here is an example that shows how you might use metrics to track currency flowing through a site:
 
-```
+```rb
 class Cart
 
   def checkout()

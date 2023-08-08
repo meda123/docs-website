@@ -1,32 +1,42 @@
 ---
-title: ワークフローの変数
+title: ワークフロー変数
 tags:
   - Alerts and applied intelligence
   - Applied intelligence
   - workflows
   - Enrichments
   - Issues
-metaDescription: 'For Applied Intelligence, an explanations of the variables used for workflows.'
+metaDescription: 'For New Relic applied intelligence, an explanations of the variables used for workflows.'
 translationType: machine
 ---
 
-[ワークフローに使用される変数の説明](/docs/alerts-applied-intelligence/applied-intelligence/incident-workflows/incident-workflows).
+import alertsWorkflowVariables from 'images/alerts_screenshot-crop_workflow-variables.webp'
+
+New Relic の応用インテリジェンス [ワークフロー](/docs/alerts-applied-intelligence/applied-intelligence/incident-workflows/incident-workflows)に使用される変数の説明。
+
+<img
+  title="Applied intelligence workflow variables"
+  alt="Applied intelligence workflow variables"
+  src={alertsWorkflowVariables}
+/>
+
+<figcaption>
+  ワークフローを作成するとき、変数を使用して、a) どのタイプの問題が通知を生成するか、b) 通知ペイロードの内容に何を含めるかを制御できます。このスクリーンショットは、通知ペイロード セクションを示しています。
+</figcaption>
 
 ## 変数 [#variables]
 
-issue entityの変数を使用して、送信したいissueの種類と通知に表示されるメッセージ・テンプレートを選択します。
-
-ここに、変数の包括的なリストがあります。
+ワークフロー変数とその説明は次のとおりです。
 
 <table>
   <thead>
     <tr>
       <th style={{ width: "200px" }}>
-        キー（最初の単語がグループ化に使われます）
+        キー (グループ化に使用される最初の単語)
       </th>
 
       <th>
-        表示名（最初の単語はグループ分けに使用されます）
+        表示名 (グループ化に使用される最初の単語)
       </th>
 
       <th>
@@ -38,21 +48,119 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
   <tbody>
     <tr>
       <td>
-        accumulations.conditionName
+        accumulations.conditionDescription
       </td>
 
       <td>
-        アラートコンディション名
+        conditionDescription
       </td>
 
       <td>
-        New Relicの違反状態
+        条件のカスタム違反の説明。
       </td>
     </tr>
 
     <tr>
       <td>
-        アキュムレーション.オリジン
+        accumulations.conditionFamilyId
+      </td>
+
+      <td>
+        conditionFamilyId
+      </td>
+
+      <td>
+        違反を生成したインシデント検出条件の ID。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        accumulations.conditionName
+      </td>
+
+      <td>
+        アラート条件名
+      </td>
+
+      <td>
+        New Relic が条件に違反しました。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        積立状態商品
+      </td>
+
+      <td>
+        アラート状態の製品
+      </td>
+
+      <td>
+        New Relic の状態タイプ。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        蓄積.deepLinkUrl
+      </td>
+
+      <td>
+        違反コールバック URL
+      </td>
+
+      <td>
+        関連する違反コールバックへの直接リンク。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Accumulations.evaluation.metricValueFunction
+      </td>
+
+      <td>
+        カスタム指標値関数
+      </td>
+
+      <td>
+        カスタムメトリック値関数。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        累積.評価.名前
+      </td>
+
+      <td>
+        <InlinePopover type="apm"/>条件メトリック名
+      </td>
+
+      <td>
+        <InlinePopover type="apm"/>条件メトリック名
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        蓄積.nrqlQuery
+      </td>
+
+      <td>
+        NRQLクエリ
+      </td>
+
+      <td>
+        条件のNRQLクエリ。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        蓄積.起源
       </td>
 
       <td>
@@ -60,7 +168,7 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        問題を発生させたNew Relicまたはサードパーティのソース
+        インシデントを作成した New Relic またはサードパーティのソース。
       </td>
     </tr>
 
@@ -74,13 +182,27 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        違反が発生したインシデント検知ポリシー名
+        違反を生成したインシデント検出ポリシー名。
       </td>
     </tr>
 
     <tr>
       <td>
-        アキュムレーション.ソース
+        蓄積.runbookUrl
+      </td>
+
+      <td>
+        ランブックの URL
+      </td>
+
+      <td>
+        Runbook URL のリスト。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        蓄積.ソース
       </td>
 
       <td>
@@ -88,7 +210,77 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        ソースから報告されたターゲットシステム
+        インシデントを報告するシステム。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        蓄積.タグ.アカウント
+      </td>
+
+      <td>
+        New Relic アカウント
+      </td>
+
+      <td>
+        New Relic アカウント。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Accumulations.tag.affectedService
+      </td>
+
+      <td>
+        影響を受けるサービス
+      </td>
+
+      <td>
+        影響を受けるサービスのリスト。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        累積.タグ.割り当てグループ
+      </td>
+
+      <td>
+        担当グループ
+      </td>
+
+      <td>
+        割り当てグループのリスト。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        蓄積.タグ.原因サービス
+      </td>
+
+      <td>
+        コーズサービス
+      </td>
+
+      <td>
+        原因サービスのリスト。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        承認者
+      </td>
+
+      <td>
+        承認者
+      </td>
+
+      <td>
+        問題を認識したユーザー。
       </td>
     </tr>
 
@@ -98,11 +290,11 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        イシュー・アクティベート・アット
+        問題が発生した時刻
       </td>
 
       <td>
-        課題起動のタイムスタンプ
+        問題のアクティブ化のタイムスタンプ。
       </td>
     </tr>
 
@@ -112,11 +304,11 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        課題内容
+        問題の説明
       </td>
 
       <td>
-        全インシデント記述のリスト
+        すべてのインシデントの説明のリスト。
       </td>
     </tr>
 
@@ -126,11 +318,39 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        課題名
+        問題のタイトル
       </td>
 
       <td>
-        全インシデントのタイトル一覧
+        すべてのインシデントのタイトルのリスト。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        注釈.ワイルドカード
+      </td>
+
+      <td>
+        アラート ファセット
+      </td>
+
+      <td>
+        アラート ファセット。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        閉鎖者
+      </td>
+
+      <td>
+        閉店日
+      </td>
+
+      <td>
+        問題をクローズしたユーザーの ID。
       </td>
     </tr>
 
@@ -144,7 +364,21 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        課題のクローズのタイムスタンプ、課題がクローズされていない場合はnull
+        問題が終了したときのタイムスタンプ。問題がクローズされていない場合は null。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        閉鎖インシデント数
+      </td>
+
+      <td>
+        クローズされたインシデント数
+      </td>
+
+      <td>
+        この問題に関してクローズされたインシデントの合計数。
       </td>
     </tr>
 
@@ -158,7 +392,49 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        課題作成時のタイムスタンプ
+        問題作成時のタイムスタンプ。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        dataMLModules.components
+      </td>
+
+      <td>
+        機械学習コンポーネント
+      </td>
+
+      <td>
+        New Relic の応用インテリジェンス機械学習コンポーネントのリスト。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        dataMLModules.goldenSignals
+      </td>
+
+      <td>
+        機械学習のゴールデンシグナル
+      </td>
+
+      <td>
+        New Relic の応用インテリジェンス機械学習ゴールデン シグナルのリスト。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        dataMLModules.suggestedResponders
+      </td>
+
+      <td>
+        機械学習が提案する応答者
+      </td>
+
+      <td>
+        (非推奨) New Relic 応用インテリジェンス機械学習が提案するレスポンダーのリスト。
       </td>
     </tr>
 
@@ -168,11 +444,11 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        影響を受けた事業者のデータ
+        影響を受けるエンティティのデータ
       </td>
 
       <td>
-        衝撃を受けたエンティティの名前、ID、タイプ、種類を記述したオブジェクトのリスト
+        影響を受けるエンティティの名前、ID、タイプ、種類を説明するオブジェクトのリスト。
       </td>
     </tr>
 
@@ -182,11 +458,11 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        影響を受けた事業者のID
+        影響を受けるエンティティ ID
       </td>
 
       <td>
-        影響を受けたすべてのエンティティIDのセット
+        影響を受けるすべてのエンティティ ID のセット。
       </td>
     </tr>
 
@@ -196,11 +472,11 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        影響を受けた事業者の種類
+        影響を受けるエンティティの種類
       </td>
 
       <td>
-        影響を受けるすべてのエンティティの種類のセット
+        影響を受けるすべてのエンティティの種類のセット。
       </td>
     </tr>
 
@@ -210,11 +486,11 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        影響を受ける組織名
+        影響を受けるエンティティ名
       </td>
 
       <td>
-        影響を受けるすべてのエンティティ名のセット
+        影響を受けるすべてのエンティティ名のセット。
       </td>
     </tr>
 
@@ -224,11 +500,25 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        影響を受ける事業者の種類
+        影響を受けるエンティティのタイプ
       </td>
 
       <td>
-        影響を受けるすべてのエンティティタイプのセット
+        影響を受けるすべてのエンティティ タイプのセット。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        影響を受けたエンティティ数
+      </td>
+
+      <td>
+        影響を受けるエンティティの数
+      </td>
+
+      <td>
+        この問題の影響を受けるエンティティの数。
       </td>
     </tr>
 
@@ -242,7 +532,7 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        問題のすべての集約されたインシデントのリスト
+        問題のすべての集約インシデントのリスト。
       </td>
     </tr>
 
@@ -252,25 +542,67 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        問題は相関している
+        問題は相関しています
       </td>
 
       <td>
-        イシューは相関しているか
+        問題に相関がある場合 (true、false)。
       </td>
     </tr>
 
     <tr>
       <td>
-        issue.pageUrl
+        認められている
       </td>
 
       <td>
-        課題ページのURL
+        問題は認識されています
       </td>
 
       <td>
-        関連する課題のページへの直接リンク
+        問題が認識された場合 (true、false)。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        issueAckUrl
+      </td>
+
+      <td>
+        発行確認URL
+      </td>
+
+      <td>
+        問題を確認するための直接リンク。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        issueCloseUrl
+      </td>
+
+      <td>
+        クローズURLを発行する
+      </td>
+
+      <td>
+        問題を解決するための直接リンク。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        issuePageUrl
+      </td>
+
+      <td>
+        発行ページのURL
+      </td>
+
+      <td>
+        関連する問題ページへの直接リンク。
       </td>
     </tr>
 
@@ -284,7 +616,7 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        課題の有効化（UTC）の文字列形式
+        UTC での発行アクティベーションの文字列形式。
       </td>
     </tr>
 
@@ -298,7 +630,7 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        UTCにおけるissue closureの文字列フォーマット
+        UTC での問題終了の文字列形式。
       </td>
     </tr>
 
@@ -312,7 +644,63 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        UTCでの課題作成の文字列形式
+        UTC での問題作成の文字列形式。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        問題確認済み
+      </td>
+
+      <td>
+        AcknowledgedAt 文字列を発行する
+      </td>
+
+      <td>
+        UTC で確認された問題の文字列形式。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        発行終了時刻
+      </td>
+
+      <td>
+        ClosedAt 文字列を発行する
+      </td>
+
+      <td>
+        UTC での問題終了の文字列形式。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        issueDurationMs
+      </td>
+
+      <td>
+        発行期間 (ミリ秒)
+      </td>
+
+      <td>
+        問題が開始されてからのミリ秒数。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        issueDurationText
+      </td>
+
+      <td>
+        テキストの問題の期間
+      </td>
+
+      <td>
+        問題の期間を人間にわかりやすく表現したもの。
       </td>
     </tr>
 
@@ -326,7 +714,35 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        課題の一意のID
+        問題の一意の ID。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        問題のタイトル
+      </td>
+
+      <td>
+        問題のタイトル
+      </td>
+
+      <td>
+        通常、最初の事件のタイトル。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        issueUpdatedAt
+      </td>
+
+      <td>
+        UpdatedAt UTC 文字列を発行します
+      </td>
+
+      <td>
+        問題更新のタイムスタンプ (UTC)。
       </td>
     </tr>
 
@@ -336,11 +752,11 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        課題環境 関連するアカウントID
+        環境に関連付けられたアカウント ID を発行する
       </td>
 
       <td>
-        New Relic AIのエンバイロメント関連アカウントID
+        New Relic に適用されたインテリジェンス環境に関連付けられたアカウント ID。
       </td>
     </tr>
 
@@ -350,11 +766,11 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        ラベル アラート アグリゲーションキー
+        アラート集約キーにラベルを付ける
       </td>
 
       <td>
-        New Relic Incident detection オリジナルのインシデントID
+        New Relic インシデント検出の元のインシデント ID。
       </td>
     </tr>
 
@@ -364,11 +780,11 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        ラベル アカウントID
+        アカウントIDにラベルを付ける
       </td>
 
       <td>
-        インシデント検知ポリシーのアカウントID
+        インシデント検出ポリシーのアカウント ID。
       </td>
     </tr>
 
@@ -378,11 +794,95 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        ラベル・アラート・ポリシーID
+        アラートポリシーIDにラベルを付ける
       </td>
 
       <td>
-        違反が発生したインシデント検出ポリシーID
+        違反を生成したインシデント検出ポリシー ID。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        ラベル.targetId
+      </td>
+
+      <td>
+        ターゲット ID
+      </td>
+
+      <td>
+        ターゲットID。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        ミュート状態
+      </td>
+
+      <td>
+        ミューティング状態を発行する
+      </td>
+
+      <td>
+        計算された問題のミュート状態 (MUTED、NOT_MUTED)。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        nrAccountId
+      </td>
+
+      <td>
+        アカウントID
+      </td>
+
+      <td>
+        アカウントID。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        openIncidentsCount
+      </td>
+
+      <td>
+        未解決のインシデント数
+      </td>
+
+      <td>
+        この問題に関する未解決のインシデントの合計数。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        所有者 （オーナー）
+      </td>
+
+      <td>
+        オーナー
+      </td>
+
+      <td>
+        問題を認めた人。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        ポリシーの URL
+      </td>
+
+      <td>
+        アラートポリシーのURL
+      </td>
+
+      <td>
+        アラート ポリシーの URL。
       </td>
     </tr>
 
@@ -392,11 +892,11 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        課題の優先順位
+        発行の優先度
       </td>
 
       <td>
-        課題の優先度
+        問題の優先度レベル (CRITICAL、HIGH、MEDIUM、LOW)。
       </td>
     </tr>
 
@@ -406,11 +906,25 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        課題 優先度 テキスト
+        発行優先テキスト
       </td>
 
       <td>
-        課題の優先順位を小文字で表示
+        発行の優先度を小文字で表します (Critical、High、Medium、Low)。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        実際の問題数
+      </td>
+
+      <td>
+        発行数
+      </td>
+
+      <td>
+        発行数。
       </td>
     </tr>
 
@@ -420,11 +934,11 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        課題 州
+        問題の状態
       </td>
 
       <td>
-        課題の現状
+        問題のライフサイクル状態 (CREATED、ACTIVATED、CLOSED)。
       </td>
     </tr>
 
@@ -438,7 +952,7 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        課題の状態を小文字で表示
+        問題のライフサイクル状態を小文字で示します (アクティブ (オープン)、クローズ)。
       </td>
     </tr>
 
@@ -448,11 +962,11 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        課題状況
+        発行相関ステータス
       </td>
 
       <td>
-        課題の現状
+        問題の相関ステータス。
       </td>
     </tr>
 
@@ -466,7 +980,7 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        イシューの中で集約または相関しているインシデントの数
+        問題内で集計または関連付けられているインシデントの数。
       </td>
     </tr>
 
@@ -476,11 +990,11 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        イシュー・トリガー・アット
+        発生した問題
       </td>
 
       <td>
-        通知された課題のタイムスタンプ
+        トリガーされた問題通知のタイムスタンプ。
       </td>
     </tr>
 
@@ -490,25 +1004,39 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        課題通知トリガーイベント
+        発行通知トリガーイベント
       </td>
 
       <td>
-        通知トリガーイベント
+        通知トリガー イベント (STATE_CHANGE、INCIDENT_ADDED、INCIDENT_CLOSED、CLOSE_INACTIVE、CLOSED_TTL、USER_ACTION、PRIORITY_CHANGED、MERGE_REQUEST)。
       </td>
     </tr>
 
     <tr>
       <td>
-        更新日時
+        updatedAt
       </td>
 
       <td>
-        問題の更新日
+        問題の更新日時
       </td>
 
       <td>
-        課題の最終更新日のタイムスタンプ
+        最後に更新された問題のタイムスタンプ。
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        違反グラフの URL
+      </td>
+
+      <td>
+        違反チャートのURL
+      </td>
+
+      <td>
+        違反チャートの画像へのリンク。
       </td>
     </tr>
 
@@ -522,7 +1050,7 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
       </td>
 
       <td>
-        トリガーされたワークフローの名前
+        トリガーされたワークフローの名前。
       </td>
     </tr>
   </tbody>
@@ -530,13 +1058,13 @@ issue entityの変数を使用して、送信したいissueの種類と通知に
 
 ## ワークフローのデータエンリッチメントの例 [#enrichment-examples]
 
-条件に違反したエンティティに関する情報を取得するには、クエリの `where` ステートメントの一部としてカスタム変数を使用することができます。たとえば、EC2インスタンスの状態を取得するには、次のように使用します。
+条件に違反したエンティティに関する情報を取得するには、クエリの`where`ステートメントの一部としてカスタム変数を使用できます。たとえば、EC2インスタンスの状態を取得するには、次を使用します。
 
 ```
-SELECT latest(ec2State) FROM ComputeSample where provider = 'Ec2Instance' and entityName in <var>{{entitiesData.names}}</var>
+SELECT latest(ec2State) FROM ComputeSample where provider = 'Ec2Instance' and entityName in {{entitiesData.names}}
 ```
 
-このクエリは、単一のフィールドのみを使用するため、単一の値（例えば、 `stopped` ）を返します。変数 `entitiesData.names` は、エンティティの識別子のリストです。他のエンティティ・プロパティも同じように使用できます。
+クエリは単一のフィールドのみを使用するため、このクエリは単一の値（たとえば、 `stopped` ）を返します。変数`entitiesData.names`は、エンティティの識別子のリストです。他のエンティティプロパティも同じように使用できます。
 
 カスタム変数を使用することで、ワークフローのデータクエリをさまざまな方法で強化することができます。
 
@@ -589,10 +1117,10 @@ SELECT latest(ec2State) FROM ComputeSample where provider = 'Ec2Instance' and en
     id="transaction-failures"
     title="トランザクションに失敗した場合の問い合わせ"
   >
-    アプリケーションのトランザクションがいつ失敗したのかを知りたい場合があります。このクエリは、 <var>&#x7B;&#x7B;entitiesData.names}}</var> 変数でフィルタリングされた最新のHTTPステータスコードレスポンスのうち、アラートポリシーの閾値に違反したものを表示します。
+    アプリケーション トランザクションがいつ失敗したかを知りたい場合があります。このクエリは、&#x7B;&#x7B;entitiesData.names}} によってフィルター処理された最新の HTTP ステータス コード レスポンスを示します。アラート ポリシーのしきい値に違反した変数。
 
     ```
-    From Transaction select latest(httpResponseCode), average(duration) where appName in {{entitiesData.names}}
+    From Transaction select latest(http.statusCode), average(duration) where appName in {{entitiesData.names}}
     ```
   </Collapser>
 

@@ -1,5 +1,5 @@
 ---
-title: アプリケーションベースラインの作成
+title: クラウド移行：アプリケーションベースラインを作成する
 tags:
   - New Relic solutions
   - New Relic solutions
@@ -14,7 +14,7 @@ translationType: machine
 * 私のアプリケーションは以前よりも安定していないのでしょうか？
 * 前述の質問のいずれかが原因で、私は顧客を失っているのでしょうか？
 
-これらの質問に答えるには、まず基本的なテストを行い、システムのパフォーマンスと可用性のベースラインを確立することから始めます。ベースラインとは、アプリケーションの現在のパフォーマンスと可用性を測定したもので、移行後にビジネスケースを検証するための比較対象となります。場合によっては、 [移行の受け入れテストを実施する際にベースラインを変更することもあります](/docs/perform-migration-acceptance-testing) 。また、移行中にベースラインを比較対象として使用し、移行が順調に進んでいることを確認することもできます。
+これらの質問に答えるには、まずいくつかの基本的なテストを実行して、システムのパフォーマンスと可用性のベースラインを確立します。ベースラインは、アプリケーションの現在のパフォーマンスと可用性の測定値であり、移行後にビジネスケースを検証するための比較として使用します。場合によっては、 [移行受け入れテストを実行する](/docs/new-relic-solutions/new-relic-solutions/optimize-cloud-architecture-spend-continuously-improve-your-modern-cloud-environment)ときにベースラインを変更することがあります。移行中の比較ポイントとしてベースラインを使用して、順調に進んでいることを確認することもできます。
 
 ## 1.コンポーネントの識別 [#identify-components]
 
@@ -23,7 +23,7 @@ translationType: machine
 * アプリケーション（バックエンド／マイクロサービス／cronジョブ）
 * メッセージキューなどの依存関係にあるサービス
 * データベース
-* ウェブサイト
+* Webサイト
 * 基盤となるサーバーとインフラ
 
 <Callout variant="tip">
@@ -131,7 +131,7 @@ translationType: machine
 
         <tr>
           <td>
-            ウェブサイト
+            Webサイト
           </td>
 
           <td>
@@ -184,8 +184,14 @@ translationType: machine
 ここでは、特定したコンポーネントに応じて、ベースライン化に使用するNew Relic製品を紹介します。
 
 * [**APM**](/docs/apm) : APM でウェブアプリケーションを監視します。 [New Relic エージェントおよび製品の互換性と要件](/docs/agents/manage-apm-agents/installation/compatibility-requirements-new-relic-agents) を参照して、サポートされている各言語の正確な互換性の詳細を確認してください。
+
 * [**インフラストラクチャ**](/docs/infrastructure) : インフラストラクチャでホストを監視します。 [インフラストラクチャの互換性と要件](/docs/infrastructure/new-relic-infrastructure/getting-started/compatibility-requirements-new-relic-infrastructure) サポートされているオペレーティングシステムと環境を参照してください。また、 [オンホストの統合により、他の製品やサービスをインスツルメンテーションすることができます。](/docs/integrations/host-integrations/host-integrations-list).
-* [**シンセティック**](/docs/synthetics) : [シンセティック・モニタリングでWebフロントエンドやAPIを監視](/docs/synthetics).時には、オンプレミス環境をAPMやインフラでインスツルメンテーションできない場合があります。例えば、組織のポリシーで、ファイアウォールの後ろにエージェントをインストールすることが禁止されているかもしれません。このような場合、アプリケーションがWebフロントエンドであれば、Syntheticsを使用してください。Syntheticsは、ベースラインを確立しながら、エージェントを使用しないモニタリングを提供します。
+
+* [**シンセティック モニタリング**](/docs/synthetics): [シンセティック モニタリングを使用して Web フロントエンドと API をモニタリング](/docs/synthetics)します。 場合によっては、オンプレミス環境をインストルメント化できない場合があります。
+
+  <InlinePopover type="apm"/>
+
+  またはインフラストラクチャ。 たとえば、組織のポリシーで、ファイアウォールの背後にエージェントをインストールすることが禁止されている場合があります。このような場合、アプリケーションに Web フロントエンドがある場合は、ベースラインを確立する機能を提供しながらエージェント以外の監視を提供するため、合成監視を使用します。
 
 <CollapserGroup>
   <Collapser
@@ -246,7 +252,7 @@ translationType: machine
           </td>
 
           <td>
-            APM、インフラ、シンセサイザー
+            APM、インフラ監視、合成監視
           </td>
         </tr>
 
@@ -304,7 +310,7 @@ translationType: machine
 
         <tr>
           <td>
-            ウェブサイト
+            Webサイト
           </td>
 
           <td>
@@ -324,7 +330,7 @@ translationType: machine
           </td>
 
           <td>
-            シンセティック
+            シンセティックス
           </td>
         </tr>
 
@@ -367,7 +373,7 @@ translationType: machine
     id="deploy-apm"
     title="APMの導入"
   >
-    [アプリケーションスタックにAPMエージェント](/docs/agents/manage-apm-agents/installation/install-agent) をインストールします。APMエージェントをインストールする手順は、言語によって異なります。
+    アプリケーション スタックに[APM エージェントをインストールします](/docs/agents/manage-apm-agents/installation/install-agent) 。 をインストールする手順 <InlinePopover type="apm"/>エージェントは言語によって異なります。
   </Collapser>
 
   <Collapser
@@ -393,7 +399,7 @@ translationType: machine
     id="create-synthetics-monitor"
     title="シンセティックモニターの作成"
   >
-    Syntheticsは、Webサイト、重要なビジネストランザクション、APIエンドポイントを監視するための、自動化されたスクリプト可能なツール群です。はじめに [add a monitor](/docs/synthetics/new-relic-synthetics/using-monitors/add-edit-monitors#adding-monitors).
+    合成監視は、Webサイト、重要なビジネストランザクション、およびAPIエンドポイントを監視するための自動化されたスクリプト可能なツールのスイートです。開始[するには、モニターを追加し](/docs/synthetics/new-relic-synthetics/using-monitors/add-edit-monitors#adding-monitors)ます。
 
     <Callout variant="tip">
       Web サイトの URL がパブリックネットワークからアクセスできることを確認してください。また、 [New Relic の IP を許可リストに追加する必要があるかもしれません](/docs/synthetics/new-relic-synthetics/administration/synthetics-public-minion-ips) 。
@@ -425,11 +431,11 @@ APM のナビゲート、解釈、使用についての詳細な情報は、New 
 
 ## 5.ダッシュボードの設定
 
-KPI を定義したら、それを [ダッシュボード](/docs/dashboards) で簡単に視覚化することができます。ダッシュボードでは、New Relic 製品が収集したすべてのデータを一箇所で見ることができます。ダッシュボードのデータは [イベント](/docs/using-new-relic/welcome-new-relic/get-started/glossary#event) で構成されており、各イベントにはイベントタイプ、タイムスタンプ、キーバリュー [属性](/docs/using-new-relic/welcome-new-relic/get-started/glossary#attribute) があります。
+KPI を定義したら、 [ダッシュボード](/docs/dashboards)で簡単に視覚化できます。<InlinePopover type="dashboards"/>New Relic 製品が収集するすべてのデータを表示する単一の場所を提供します。ダッシュボード データは [イベント](/docs/using-new-relic/welcome-new-relic/get-started/glossary#event)で構成され、各イベントにはイベント タイプ、タイムスタンプ、およびキーと値の [属性が](/docs/using-new-relic/welcome-new-relic/get-started/glossary#attribute)あります。
 
 イベントの詳細については、 [Data collection](/docs/data-analysis/metrics/analyze-your-metrics/data-collection-metric-timeslice-event-data) および [Default events for New Relic products](/docs/insights/insights-data-sources/default-data/insights-default-data-other-new-relic-products) を参照してください。
 
-New Relic では、 [データエクスプローラー](/docs/query-your-data/explore-query-data/browse-data/introduction-data-explorer/) と [NRQL クエリ言語](/docs/insights/nrql-new-relic-query-language/using-nrql/introduction-nrql) を使って、KPI やビジネス指標のデータを探すことができます。また、 [ダッシュボード](/docs/dashboards/new-relic-one-dashboards/get-started/introduction-new-relic-one-dashboards) を構築して、これらの KPI のパフォーマンスを追跡することができます。
+[指標とイベント、](/docs/query-your-data/explore-query-data/browse-data/introduction-data-explorer/)および[NRQL クエリ言語](/docs/insights/nrql-new-relic-query-language/using-nrql/introduction-nrql)を使用して、New Relic で KPI とビジネス指標データを見つけることができます。これらの KPI のパフォーマンスを追跡する[ダッシュボードを構築する](/docs/dashboards/new-relic-one-dashboards/get-started/introduction-new-relic-one-dashboards)こともできます。
 
 <CollapserGroup>
   <Collapser
@@ -660,11 +666,11 @@ New Relic では、 [データエクスプローラー](/docs/query-your-data/ex
 
 デフォルトの機器では取得できないデータが必要な場合は、カスタムデータを簡単に取得することができます。
 
-* [APMカスタム計測器](/docs/agents/manage-apm-agents/agent-data/custom-instrumentation)
+* [APMカスタム計測器](/docs/apm/agents/manage-apm-agents/agent-data/custom-instrumentation/)
 * [ブラウザのカスタムデータ](/docs/insights/insights-data-sources/custom-data/insert-data-via-new-relic-browser)
 * [インフラのカスタムアトリビュート](/docs/infrastructure/new-relic-infrastructure/configuration/configure-infrastructure-agent#conf-custom_attributes)
 * [カスタムイベントデータ](/docs/insights/insights-data-sources/custom-data/send-custom-data-insights)
 * [モバイルカスタムデータ](/docs/mobile-monitoring/new-relic-mobile/maintenance/add-custom-data-new-relic-mobile)
-* [シンセティック・カスタム・アトリビュート](/docs/synthetics/new-relic-synthetics/scripting-monitors/add-custom-attributes-new-relic-synthetics-data)
+* [合成カスタム属性](/docs/synthetics/new-relic-synthetics/scripting-monitors/add-custom-attributes-new-relic-synthetics-data)
 
 また、New Relic University [Custom data tutorial series](https://learn.newrelic.com/custom-data-with-apm) で、APM のカスタムインストルメントについて詳しく学ぶことができます。

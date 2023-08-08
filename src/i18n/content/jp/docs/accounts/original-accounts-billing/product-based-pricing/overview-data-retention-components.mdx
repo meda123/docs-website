@@ -9,12 +9,16 @@ translationType: machine
 ---
 
 <Callout variant="important">
-  このドキュメントは、 [オリジナル価格モデル](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing) の組織向けです。 [New Relic One の料金モデル](/docs/accounts/accounts-billing/new-relic-one-pricing-users/pricing-billing) をご利用の場合は、 [Manage your data](/docs/telemetry-data-platform/get-data-new-relic/manage-data/manage-your-data) をご覧ください。どちらのモデルかわからない場合は [Overview of Pricing models](/docs/accounts/original-accounts-billing/original-product-based-pricing/overview-pricing-models) をご覧ください。
-
-  当社のオリジナル価格モデルをご利用の場合、既存のサブスクリプションとデータ保持の値はそのままです。これらの既存の保持設定は、New Relic One の **データ管理ハブ** から管理します。保持設定を管理するには、 [データ管理 UI](/docs/telemetry-data-platform/manage-data/manage-your-data/#where-to-find-the-data-management-hub) にアクセスします。既存の保持設定が表示されます。リテンション値を調整するには、 **Edit retention** をクリックします。
+  このドキュメントは、[元の価格設定モデル](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing)の組織に適用されます。[使用量ベースの料金モデルを使用](/docs/accounts/accounts-billing/new-relic-one-pricing-users/pricing-billing)している場合は[、データの管理をご覧ください](/docs/telemetry-data-platform/get-data-new-relic/manage-data/manage-your-data)。どちらを使用しているかわかりませんか？ [価格設定モデルの概要を](/docs/accounts/original-accounts-billing/original-product-based-pricing/overview-pricing-models)参照してください。
 </Callout>
 
 New Relic では、異なる種類のデータを異なる期間保存します。データの種類ごとの保存期間は、製品、サブスクリプションレベル、機能によって異なります。
+
+## データ保持UI [#find]
+
+データ保持を理解し、利用可能なオプションを確認する最良の方法は、UIに移動することです。これが推奨される理由の1つは、組織が設定を編集した可能性があり、ここに記載されているデフォルト設定ではなくなっている可能性があるためです。
+
+**データ保持**UIページは、[データ管理ハブ](/docs/data-apis/manage-data/manage-your-data)にあります。 \[保持の**編集**]をクリックして保持値を調整します。
 
 ## データの編集・削除の制限 [#edit-limits]
 
@@ -31,7 +35,7 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
     id="apm"
     title="APM"
   >
-    Lite、Essentials、Pro、Enterpriseなどの各APMサブスクリプションレベルには、特定の保持ポリシーが適用されます。これには、 [メトリックのタイムスライスデータ](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-metric-data) 、 [キーメトリクス](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-key-metrics) 、 [トレースデータ](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-trace-data) 、 [イベントデータ](/docs/accounts/accounts/data-management/event-data-retention) が含まれます。保存制限に加えて、お客様のデータは、一定の経過時間後に集計（平均化）の対象となります。詳細については、 [aggregate metric data](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention-components#components-aggregate-metrics) の説明を参照してください。
+    それぞれに特定の保持ポリシーが適用されます <InlinePopover type="apm"/>Lite、Essentials、Pro、および Enterprise を含むサブスクリプション レベル。 これには、 [メトリック タイムスライス データ](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-metric-data)、 [キー メトリック](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-key-metrics)、 [トレース データ](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention#components-trace-data)、および [イベント データ](/docs/accounts/accounts/data-management/event-data-retention)が含まれます。 保持制限に加えて、一定の期間が経過すると、データは集計 (平均化) されます。詳細については、 [集計メトリック データの](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention-components#components-aggregate-metrics) 説明を参照してください。
 
     ## APMのデータ保持方針 [#policies]
 
@@ -53,7 +57,7 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
           </th>
 
           <th style={{ width: "140px" }}>
-            **Pro**
+            **プロ**
           </th>
         </tr>
       </thead>
@@ -165,7 +169,7 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
           </th>
 
           <th style={{ width: "140px" }}>
-            **スタンダード**
+            **標準**
           </th>
 
           <th style={{ width: "140px" }}>
@@ -177,7 +181,7 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
           </th>
 
           <th style={{ width: "140px" }}>
-            **エンタープライズ**
+            **企業**
           </th>
         </tr>
       </thead>
@@ -292,7 +296,7 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
           </th>
 
           <th style={{ width: "140px" }}>
-            **Pro**
+            **プロ**
           </th>
         </tr>
       </thead>
@@ -375,7 +379,7 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
 
   <Collapser
     id="infra"
-    title="インフラストラクチャ"
+    title="インフラストラクチャー"
   >
     [オリジナル価格モデル](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing), [インフラストラクチャ](/docs/infrastructure/new-relic-infrastructure/getting-started/welcome-new-relic-infrastructure) データ保持ポリシーは、お客様のインフラストラクチャ [サブスクリプションレベル](https://newrelic.com/infrastructure/pricing) およびお客様のインフラストラクチャ [コンピュートユニット価格モデル](/docs/accounts-partnerships/accounts/account-billing-usage/compute-unit-pricing-host-pricing#compute-unit) によって異なります。データ保持ルールは、そのデータがUIに表示されているか、クエリされているかに関わらず、同じように適用されます。
 
@@ -399,7 +403,7 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
           </th>
 
           <th>
-            **Pro**
+            **プロ**
           </th>
         </tr>
       </thead>
@@ -467,7 +471,7 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
       </tbody>
     </table>
 
-    また、Infrastructure は、生成されたデータをその場でダウンサンプリングします。インフラストラクチャーのすべてのメトリックデータタイプ（ [On-Host Integrations](/docs/integrations/host-integrations/getting-started/introduction-host-integrations) メトリクスを含む）は、データの年代とタイムウィンドウのサイズに応じて異なる粒度で表示されます。次の表は、InfrastructureのUIとクエリの両方で、異なるダウンサンプルされたバケットが使用される場合を示しています。
+    さらに、インフラストラクチャ監視では、データが取り込まれるときにダウンサンプリングされます。すべてのインフラストラクチャ メトリック データ タイプ ( [オンホスト統合](/docs/integrations/host-integrations/getting-started/introduction-host-integrations) メトリックを含む) は、データの古さと時間枠のサイズに応じて異なる粒度で表示されます。次の表は、インフラストラクチャ UI とクエリの両方で、さまざまなダウンサンプリングされたバケットがいつ使用されるかを示しています。
 
     <table>
       <thead>
@@ -574,7 +578,52 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
     id="insights"
     title="インサイト"
   >
-    [オリジナル価格モデル](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing) の組織の場合、Insights サブスクリプション [は、イベントデータの保存期間を延長します](/docs/accounts/accounts/data-management/event-data-retention) 。Insights Proのサブスクリプションでは、 [、イベントデータの保存期間をカスタマイズすることができます。](/docs/accounts/accounts/data-management/event-data-retention#flex-retention) 。
+    元の価格設定モデルを使用している組織の場合、有料のInsightsサブスクリプションが、次のイベントデータ保持の拡張を管理します。
+
+    * APM、ブラウザ、モバイル、サーバーレス製品
+    * エージェントAPIまたは[イベントAPI](/docs/insights/insights-data-sources/custom-data/introduction-event-api)からの[カスタムイベント](/docs/insights/insights-data-sources/custom-data/report-custom-event-data)
+
+    Insights サブスクリプションによって管理されるデータ保持を確認するには、 [使用状況 UI](/docs/accounts/accounts-billing/new-relic-one-pricing-billing/new-relic-one-pricing-billing#usage-ui) に移動し、 **Insights usage** \[Insights 使用状況] を選択します。
+
+    Insights Proサブスクリプションでは、 [柔軟な保持を使用して、イベントデータを保持する期間をカスタマイズできます](/docs/accounts/accounts/subscription-pricing/flexible-retention-define-how-long-new-relic-retains-event-data)。これにより、必要な限り、必要なデータのみを保持できます。
+
+    <CollapserGroup>
+      <Collapser
+        id="retention-calculation"
+        title="保存されたイベントの数の計算方法"
+      >
+        これは、InsightsProサブスクリプションのデフォルトで保存されたイベントの数がどのように計算されるかについての説明です。（ [柔軟な保持](/docs/accounts/accounts/subscription-pricing/flexible-retention-define-how-long-new-relic-retains-event-data)を使用すると、保持期間をよりきめ細かく制御できることに注意してください。）
+
+        保存されるイベントは、1）時間の経過とともに保存されるイベントの合計（1週間に生成されるイベントに基づいて計算）、および2）使用可能なデータ保持の週に基づいて計算されます。この方程式は次のように表すことができます。
+
+        ```
+        events stored = (events generated per week) * (weeks of retention)
+        ```
+
+        Insights Proサブスクリプションは、特定の週数のデータ保持と、その保持期間中の特定の数のイベントを提供します。
+
+        例えば：
+
+        * （1週間あたり2億件のトランザクション）\*（4週間の保持）=Insightsに保存された8億件のイベント
+        * （1週間あたり1600万件のトランザクション）\*（50週間の保持）=Insightsに保存された8億件のイベント
+
+        Insights Proサブスクリプションの場合、データはボリュームではなく保持ウィンドウに基づいてパージされます。保持期間を過ぎると、システムから削除されます。
+
+        例：Insightsライセンスが4週間の保存期間で8億件のイベントを対象としている場合、データは4週間を超えるとパージが開始されます。サブスクリプションレベルを超えるデータの一時的な急増は引き続き記録されますが、サブスクリプションレベルをアップグレードするか、収集されるデータを減らすことで、一貫した超過を解決する必要があります。
+
+        [Insights Proサブスクリプション](#insights-pro)をお持ちでないお客様の場合、New Relicは、ホストあたり1分あたり4,000イベント以下の制限までイベントを抑制またはダウンサンプリングする場合があります。
+      </Collapser>
+
+      <Collapser
+        id="usage-overage"
+        title="InsightsProイベントの超過の例"
+      >
+        この例では、Insights Proサブスクリプションがあり、4週間で8億イベントのライセンスがあり、1週間あたり2億イベントのレートです。APM Pro、Browser Pro、およびMobileEnterpriseがあります。サブスクリプションを介して5週間目のデータが追加され、プラン内に保存されている合計10億のイベントにぶつかります。
+
+        * 9億7500万のイベントを使用している場合**は、保持を超えていません**。
+        * 12億5千万のイベントを使用している場合**は**、保持を超えています。
+      </Collapser>
+    </CollapserGroup>
   </Collapser>
 
   <Collapser
@@ -583,9 +632,9 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
   >
     [オリジナル価格モデル](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing) の組織の場合、ログデータは New Relic によって最大 30 日間保持されます。より短い保持期間である8日または15日も可能です。
 
-    ### コンテキストデータの保持におけるログ [#logs-in-context-retention]
+    ### ログインコンテキストデータの保持 [#logs-in-context-retention]
 
-    New Relic Logs logs in context データ保持ポリシーは、現在ご利用の APM 製品のサブスクリプションレベルに基づいています。詳細については、 [APM データ保持](/docs/apm/new-relic-apm/maintenance/apm-data-retention) を参照してください。
+    ログインコンテキストのデータ保持ポリシーは、現在のAPM製品のサブスクリプションレベルに基づいています。詳細については、 [APMデータ保持](/docs/apm/new-relic-apm/maintenance/apm-data-retention)を参照してください。
   </Collapser>
 
   <Collapser
@@ -610,7 +659,7 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
           </th>
 
           <th style={{ width: "150px" }}>
-            **エンタープライズ**
+            **企業**
           </th>
         </tr>
       </thead>
@@ -758,7 +807,7 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
 
         <tr>
           <td>
-            MobileJSError events [(React Native beta)](/docs/mobile-monitoring/new-relic-mobile-react-native/customize/customize-query-mobile-app-data-react-native) \*。
+            MobileJSError イベント[(React Native プレビュー)](/docs/mobile-monitoring/new-relic-mobile-react-native/customize/customize-query-mobile-app-data-react-native) \*
           </td>
 
           <td>
@@ -828,7 +877,7 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
           </th>
 
           <th style={{ width: "150px" }}>
-            **スタンダード**
+            **標準**
           </th>
         </tr>
       </thead>
@@ -909,15 +958,15 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
 
   <Collapser
     id="synthetics"
-    title="シンセティック"
+    title="シンセティックス"
   >
     [オリジナル価格モデル](/docs/accounts/original-accounts-billing/product-pricing/product-based-pricing), [Synthetics](/docs/synthetics/new-relic-synthetics) データ保持ポリシーは、お客様のSynthetics製品のサブスクリプションレベルによって異なります。これには、メトリクスデータ、アグリゲートメトリクス、キーメトリクス、トレースデータ、インサイトイベントなどの [データコンポーネント](/docs/accounts-partnerships/accounts/account-billing-usage/data-retention) が含まれます。
 
     <Callout variant="tip">
-      Syntheticsのイベントは、 [Insights Proのサブスクリプションにはカウントされません](/docs/accounts/accounts/data-management/event-data-retention#insights-pro) 。
+      合成モニタリングイベントは、 [InsightsProサブスクリプション](/docs/accounts/accounts/data-management/event-data-retention#insights-pro)にはカウントされません。
     </Callout>
 
-    現在の購読レベルは、 **Account summary** ページの右欄に表示されます。Go to **[synthetics.newrelic.com](https://synthetics.newrelic.com) > ([account dropdown](/docs/accounts-partnerships/education/getting-started-new-relic/glossary#account-dropdown))> Account settings> Account> Summary**.
+    **アカウントの概要**ページの右側の列に、現在のサブスクリプション レベルが表示さ**[れ](https://synthetics.newrelic.com)[ます](/docs/accounts/accounts-billing/general-account-settings/intro-account-settings)**。
 
     ## シンセティック・データ・リテンション・ポリシー
 
@@ -933,7 +982,7 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
           </th>
 
           <th style={{ width: "140px" }}>
-            **Pro**
+            **プロ**
           </th>
         </tr>
       </thead>
@@ -941,7 +990,7 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
       <tbody>
         <tr>
           <td>
-            シンセティック・モニター・データ
+            合成モニタリングデータ
           </td>
 
           <td>
@@ -1039,7 +1088,7 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
       <tbody>
         <tr>
           <td>
-            エンタープライズ
+            企業
           </td>
 
           <td>
@@ -1049,7 +1098,7 @@ New Relic 製品を選択すると、そのデータ保持についての詳細�
 
         <tr>
           <td>
-            Pro
+            プロ
           </td>
 
           <td>

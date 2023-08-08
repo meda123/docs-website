@@ -14,6 +14,8 @@ redirects:
   - /docs/alerts-applied-intelligence/new-relic-alerts/alert-conditions/multi-location-synthetic-monitoring-alert-conditions
 ---
 
+import accountsSyntheticsMultiLocationAlertDiagram from 'images/accounts_screenshot-full_synthetics-multi-location-alert-diagram.webp'
+
 With multi-location Synthetic monitoring alert conditions, you can create a monitor to notify you when a specific number of locations are failing at the same time.
 
 ## Why this matters [#feature]
@@ -70,7 +72,7 @@ Rules for [creating a multi-location condition](#):
       </td>
 
       <td>
-        This feature has a limit of 1000 conditions per account, but some types of Infrastructure alert conditions also count towards this limit. If you get a notification that you've exceeded your limit, contact your account representative or [Support](https://support.newrelic.com/) for assistance.
+        This feature has a limit of 1000 conditions per account, but some types of infrastructure alert conditions also count towards this limit. If you get a notification that you've exceeded your limit, contact your New Relic representative or [Support](https://support.newrelic.com/) for assistance.
       </td>
     </tr>
 
@@ -88,7 +90,11 @@ Rules for [creating a multi-location condition](#):
 
 Here's a diagram that shows how a four-location condition will be triggered for non-simultaneous failures:
 
-![Synthetics multi-location alert condition diagram](./images/synthetics-multi-location-alert-diagram_0.png "synthetics-multi-location-alert-diagram.png")
+<img
+  title="synthetics-multi-location-alert-diagram.png"
+  alt="Synthetics multi-location alert condition diagram"
+  src={accountsSyntheticsMultiLocationAlertDiagram}
+/>
 
 <figcaption>
   This diagram shows an example of how a four-failed-locations setting will trigger a violation for failures that occur one after the other. Note that failed location checks will be viewed as failed until they next have a successful check.
@@ -98,7 +104,7 @@ Here's a diagram that shows how a four-location condition will be triggered for 
 
 Before creating a condition, read the [rules for multi-location conditions](#rules).
 
-1. In the **[one.newrelic.com](https://one.newrelic.com/ "Link opens in a new window.")** top nav, click **Alerts & AI**, click **Alert policies**, and start the process to [create a condition](/docs/alerts/new-relic-alerts/defining-conditions/define-alert-conditions#create-condition).
+1. Go to **[one.newrelic.com](https://one.newrelic.com/all-capabilities) > Alerts & AI > Alert conditions (Policies)**, and start the process to [create a condition](/docs/alerts/new-relic-alerts/defining-conditions/define-alert-conditions#create-condition).
 2. Click **Synthetics**, then click **Multiple location failures**.
 
 <Callout variant="important">
@@ -108,5 +114,7 @@ Before creating a condition, read the [rules for multi-location conditions](#rul
 ## Create condition with the API [#api]
 
 Before creating a condition, read the [rules for multi-location conditions](#rules).
+
+For example, multi-location condition REST API calls see the [REST API calls for alerts](/docs/alerts-applied-intelligence/new-relic-alerts/advanced-alerts/rest-api-alerts/rest-api-calls-alerts/#multilocation-synthetics-conditions) documentation.
 
 To use the alerts REST API to manage multi-location conditions, use the [REST API explorer](https://rpm.newrelic.com/api/explore/alerts_location_failure_conditions/create).

@@ -8,6 +8,12 @@ metaDescription: 'New Relic for Ruby supports the Bunny RabbitMQ client library,
 translationType: machine
 ---
 
+import apmTransactionsOverview from 'images/apm_screenshot-full_transactions-overview.webp'
+
+import apmTraceSummary from 'images/apm_screenshot-full_trace-summary.webp'
+
+import apmTraceDetails from 'images/apm_screenshot-full_trace-details.webp'
+
 New RelicのRubyエージェントは、 [Bunny RabbitMQクライアントライブラリ](https://rubygems.org/gems/bunny) をサポートしており、受信メッセージと送信メッセージの両方について、メッセージ処理のパフォーマンスを把握することができます。
 
 APM UIでは、RabbitMQのメッセージ受信（subscribe/consumeメッセージ）を介して開始されたトランザクションが、 **Message** のバックグラウンドタスクとして表示されます。RabbitMQによるメッセージ作成もトランザクショントレースに表示されます。
@@ -32,7 +38,7 @@ New Relic の Ruby エージェントは、RabbitMQ クライアントライブ�
 
 ## キューの操作 [#queue-ops]
 
-サポートされているキュー操作のエントリーポイントは、APMのユーザーインターフェースでは、 `Put` （メッセージの発行）、 `Take` （メッセージの受信）として表示されます。
+キュー操作でサポートされているエントリ ポイントは、APM のユーザー インターフェースでは`Put` (メッセージの発行) または`Take` (メッセージの受信) として表示されます。
 
 <table>
   <thead>
@@ -42,11 +48,11 @@ New Relic の Ruby エージェントは、RabbitMQ クライアントライブ�
       </th>
 
       <th>
-        **メッセージの公開 (`Put` in UI)**
+        **メッセージを公開します (UI では`Put` )**
       </th>
 
       <th>
-        **メッセージの受信 (`Take` in UI)**
+        **メッセージを受信 (UI では`Take` )**
       </th>
     </tr>
   </thead>
@@ -58,13 +64,13 @@ New Relic の Ruby エージェントは、RabbitMQ クライアントライブ�
       </td>
 
       <td>
-        `パブリッシュ`
+        `publish`
       </td>
 
       <td>
-        `ポップ`
+        `pop`
 
-        `サブスクライブ（ブロック付き）`
+        `subscribe (with block)`
       </td>
     </tr>
   </tbody>
@@ -79,9 +85,13 @@ New Relic の Ruby エージェントは、RabbitMQ クライアントライブ�
     id="view-in-txn-page"
     title="トランザクションのページ"
   >
-    キュー操作は、選択されたアプリのAPMの [**Transactions** page](/docs/apm/applications-menu/monitoring/transactions-dashboard) に表示されます。 `Put` と `Take` のメトリクスは、 **Breakdown table** に表示され、 `MessageBroker` のメトリクスに分類されます。以下に例を示します。
+    キュー操作は、選択したアプリの APM の \[[**トランザクション\]**ページ](/docs/apm/applications-menu/monitoring/transactions-dashboard)に表示されます。`Put`および`Take`指標が**内訳表**に表示され、 `MessageBroker`指標として分類されます。次に例を示します。
 
-    ![transactions_page.png](./images/transactions_page.png "transactions_page.png")
+    <img
+      title="transactions_page.png"
+      alt="transactions_page.png"
+      src={apmTransactionsOverview}
+    />
 
     [トランザクショントレース](/docs/apm/transactions/transaction-traces/transaction-traces) メッセージの追加詳細情報も提供しています。
 
@@ -94,9 +104,13 @@ New Relic の Ruby エージェントは、RabbitMQ クライアントライブ�
     id="view-in-txn-trace-summary"
     title="トランザクション・トレース・サマリー・ページ"
   >
-    [**トランザクショントレースサマリー** ページ](/docs/apm/transactions/transaction-traces/transaction-trace-summary) には、 `Put` と `Take` の操作が **Slowest components** セクションに表示されていることがあります。例えば、以下のようになります。
+    [**トランザクション追跡の概要**ページ](/docs/apm/transactions/transaction-traces/transaction-trace-summary)では、 **\[最も遅いコンポーネント]**セクションに`Put`および`Take`操作が表示される場合があります。例えば：
 
-    ![トレース・サムライ.png](./images/trace_summary.png "トレース・サムライ.png")
+    <img
+      title="trace_summary.png"
+      alt="trace_summary.png"
+      src={apmTraceSummary}
+    />
   </Collapser>
 
   <Collapser
@@ -105,6 +119,10 @@ New Relic の Ruby エージェントは、RabbitMQ クライアントライブ�
   >
     **Transaction trace** ページには、専用の **Details** タブがあり、トランザクションのより詳細な情報が表示されます。以下はその例です。
 
-    ![トレースの詳細.png](./images/trace_details.png "トレースの詳細.png")
+    <img
+      title="trace_details.png"
+      alt="trace_details.png"
+      src={apmTraceDetails}
+    />
   </Collapser>
 </CollapserGroup>

@@ -10,6 +10,8 @@ translationType: human
 
 New RelicのRubyエージェントはアプリケーションをモニターし、[パフォーマンスに関する問題の特定と解決](#monitor-performance)をサポートします。さらに、エージェントのパフォーマンス監視を拡張して[ビジネスデータの収集や分析](#business-data)を行い、顧客体験を改善し、データに基づくビジネス上の意思決定ができます。
 
+New Relic Rubyエージェントを使用して、[「私のアプリが遅い」のチュートリアル](/docs/journey-app-slow/root-causes/)でアプリのパフォーマンス問題を解決します。
+
 ## 互換性および要件 [#compat]
 
 Rubyエージェントは最も一般的な[Rubyフレームワークとプラットフォーム](/docs/agents/ruby-agent/getting-started/supported-frameworks)の多くをサポートしています。Rubyエージェントは [Google App Engine（GAE）フレキシブル環境](/docs/agents/ruby-agent/installation/install-new-relic-ruby-agent-gae-flexible-environment)でも使用できます。Rubyエージェントをインストールする前に、システムが[システム要件](/docs/agents/ruby-agent/getting-started/ruby-agent-requirements-supported-frameworks/)を満たしていることを確認してください。
@@ -21,7 +23,7 @@ Rubyエージェントは最も一般的な[Rubyフレームワークとプラ�
 * アプリの[Apdex（ユーザー満足度）](/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction)を監視します。
 * [アプリの高レベルの概要](/docs/apm/applications-menu/monitoring/apm-overview-page)を取得する
 * アプリの[アーキテクチャーマップ](/docs/data-analysis/user-interface-functions/view-your-data/service-maps-visualize-monitor-apps-entire-architecture)を作成する
-* [ディストリビューティッド（分散）トレーシング](docs/distributed-tracing/enable-configure/language-agents-enable-distributed-tracing/)を有効にして、多くのサービスに依存する環境でのアクティビティを理解します。
+* [ディストリビューティッド（分散）トレーシング](/docs/apm/agents/ruby-agent/configuration/distributed-tracing-ruby-agent)を有効にして、多くのサービスに依存する環境でのアクティビティを理解します。
 * [New Relic Infrastructure](/docs/infrastructure)をインストールして、アプリの詳細なホストデータを表示します。
 
 **エラーと問題をすばやく検知する**
@@ -40,7 +42,7 @@ Rubyエージェントは最も一般的な[Rubyフレームワークとプラ�
 
 **APMおよびインフラストラクチャデータのログを表示**
 
-ログとアプリケーションのデータを統合して、トラブルシューティングをより簡単かつ迅速にできます。New Relic Oneで別のUIページに切り替える必要はありません。
+ログとアプリケーションのデータを統合して、トラブルシューティングをより簡単かつ迅速にできます。別のUIページに切り替える必要はありません。
 
 * [コンテキストのログ](/docs/logs/logs-context/configure-logs-context-ruby/)では、エラーとトレースに関連するログメッセージをアプリケーションのUIで直接表示できます。
 * また、Kubernetesクラスタなど、[インフラストラクチャデータ](/docs/logs/forward-logs/forward-your-logs-using-infrastructure-agent/)のコンテキストでログを表示することもできます。
@@ -105,4 +107,4 @@ Rubyエージェントを使用してデータを整理、クエリ、可視化�
 
 ## ソースコードのチェック [#source-code]
 
-Rubyエージェントは、オープンソースソフトウェアです。つまり、[ソースコードを参照](https://github.com/newrelic/newrelic-ruby-agent "新しいウィンドウにリンクが開きます。")して改善を送信、または独自のフォークを作成して構築できます。詳細については、[README ](https://github.com/newrelic/newrelic-ruby-agent/blob/main/README.md "新しいウィンドウにリンクが開きます。")を参照してください。
+Rubyエージェントは、オープンソースソフトウェアです。つまり、[ソースコードを参照](https://github.com/newrelic/newrelic-ruby-agent)して改善を送信したり、独自のフォークを作成して構築したりできます。詳細については、[README](https://github.com/newrelic/newrelic-ruby-agent/blob/main/README.md)を参照してください。

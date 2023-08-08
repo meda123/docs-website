@@ -8,11 +8,11 @@ metaDescription: Examples of using New Relic NerdGraph API to adjust APM
 translationType: machine
 ---
 
-このドキュメントでは、NerdGraph APIを使用したAPMエージェントの設定例をご紹介します。
+このドキュメントは、構成の例の場所です <InlinePopover type="apm"/>NerdGraph API を使用するエージェント。
 
 ## サーバーサイドの設定 [#server-side-config]
 
-なお、APMエージェントがNerdGraph経由で変更された設定値を使用するには、 [サーバーサイドコンフィギュレーション](/docs/apm/agents/manage-apm-agents/configuration/server-side-agent-configuration#requirements) が有効になっている必要があります。
+注意してください <InlinePopover type="apm"/>エージェントが NerdGraph 経由で変更された構成値を使用するには、 [サーバー側の構成](/docs/apm/agents/manage-apm-agents/configuration/server-side-agent-configuration#requirements) を有効にする必要があります。
 
 要件については、 [server-side config requirements](/docs/apm/agents/manage-apm-agents/configuration/server-side-agent-configuration#requirements) を参照してください。
 
@@ -34,11 +34,11 @@ query ExampleReadQuery {
 }
 ```
 
-以下は、 [サーバー側の設定](/docs/apm/agents/manage-apm-agents/configuration/server-side-agent-configuration) を無効にした例です。なお、 `設定` は配列を使用しているので、複数のエンティティを更新したい場合に便利です。
+[サーバー側の設定を](/docs/apm/agents/manage-apm-agents/configuration/server-side-agent-configuration)無効にする例を次に示します。`guid`は配列を使用することに注意してください。これは、複数のエンティティを更新する場合に役立ちます。
 
 ```
-mutation ExampleUpdateQuery(guid: "ZjY1ODgxfEFQTXxBUFBYSUNBVElPTnz0ODEwMTY3NzZ", settings: { apmConfig: { useServerSideConfig: false }} )
-  {
+mutation ExampleUpdateQuery {
+  agentApplicationSettingsUpdate(guid: "ZjY1ODgxfEFQTXxBUFBYSUNBVElPTnz0ODEwMTY3NzZ", settings: {apmConfig: {useServerSideConfig: false}}) {
     apmSettings {
       apmConfig {
         useServerSideConfig
@@ -46,6 +46,8 @@ mutation ExampleUpdateQuery(guid: "ZjY1ODgxfEFQTXxBUFBYSUNBVElPTnz0ODEwMTY3NzZ",
     }
     errors {
       description
+      errorClass
+      field
     }
   }
 }

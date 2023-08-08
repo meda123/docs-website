@@ -10,73 +10,66 @@ translationType: machine
 
 가격 책정 버전 및 기타 요소에 따라 데이터 수집 감소, 에이전트 또는 통합 삭제 또는 제거, [조직](/docs/accounts/accounts-billing/new-relic-one-pricing-users/new-relic-account-structure) (귀하의 계정 또는 계정 그룹) 다운그레이드 또는 취소를 위한 다양한 옵션을 제공합니다.
 
-## 데이터 수집 줄이기 [#remove-tools]
+## 데이터 수집 줄이기 또는 중지 [#remove-tools]
 
-다운그레이드하거나 취소하지 않고 일부 데이터를 New Relic에 보고하는 것을 중단하려면 더 적은 데이터를 보내도록 도구를 구성할 수 있습니다. 데이터 수집을 관리하는 방법은 데이터 [관리](/docs/telemetry-data-platform/get-data-new-relic/manage-data/manage-your-data) 를 참조하십시오.
+다운그레이드하거나 취소하지 않고 일부 데이터를 New Relic에 보고하는 것을 중단하려면 더 적은 데이터를 보내도록 도구를 구성할 수 있습니다.
+
+데이터 수집을 관리하는 방법은 데이터 [관리](/docs/telemetry-data-platform/get-data-new-relic/manage-data/manage-your-data) 를 참조하십시오.
 
 에이전트 또는 통합을 제거하려면 다음과 같은 권장 절차를 따르십시오.
 
 * [APM, 브라우저 및 모바일 앱 제거](/docs/apm/new-relic-apm/maintenance/remove-applications-new-relic/)
 * [인프라 에이전트 제거](/docs/infrastructure/install-infrastructure-agent/update-or-uninstall/uninstall-infrastructure-agent/)
-* 다른 New Relic 도구를 비활성화하는 방법은 해당 문서를 참조하십시오. [여기에서 New Relic 빠른 시작을 검색](https://newrelic.com/instant-observability/) 할 수 있습니다.
+* 다른 New Relic 도구를 비활성화하는 방법은 해당 문서를 참조하십시오. [여기에서 New Relic 솔루션을 검색](https://newrelic.com/instant-observability/) 할 수 있습니다.
 
-## 다운그레이드 조직 [#downgrading]
+## 에디션 다운그레이드 [#downgrading]
 
-New Relic 조직을 다운그레이드하는 옵션은 가격 에디션에 따라 다릅니다.
-
-<CollapserGroup>
-  <Collapser
-    id="downgrade-pro-enterprise"
-    title="Pro 또는 Enterprise 에디션 다운그레이드"
-  >
-    Pro 또는 Enterprise 조직을 다운그레이드하려면 New Relic 계정 담당자에게 문의하십시오.
-  </Collapser>
-
-  <Collapser
-    id="downgrade-standard"
-    title="스탠다드 에디션 다운그레이드"
-  >
-    Standard 에디션의 다운그레이드 옵션:
-
-    * 요금이 청구되고 다운그레이드하려는 경우: [one.newrelic.com](https://one.newrelic.com/) 에서 [계정 드롭다운](/docs/using-new-relic/welcome-new-relic/get-started/glossary#account-dropdown) 을 클릭하고 **플랜 관리** 를 클릭한 다음 **계정 다운그레이드** 를 클릭합니다. 다운그레이드된 후에도 로그인 페이지를 통해 New Relic에 계속 액세스할 수 있습니다.
-    * 요금이 청구되지 않고 신용 카드를 입력하지 않은 경우 다운그레이드할 필요가 없으며 New Relic을 무료 수준으로 계속 사용할 수 있습니다.
-  </Collapser>
-</CollapserGroup>
-
-## 조직 취소 [#cancel]
-
-실수로 New Relic에 가입했고 해당 계정을 삭제하려면 [단순 조직 삭제](#cancel-simple-org) 를 참조하세요.
-
-조직을 취소하는 다른 옵션은 가격 책정 버전에 따라 다릅니다.
+사용한 만큼만 지불하는지 여부에 따라 [버전을](/docs/accounts/accounts-billing/new-relic-one-pricing-billing/new-relic-one-pricing-billing/#editions)다운그레이드할 수 있는 두 가지 옵션이 있습니다.
 
 <CollapserGroup>
   <Collapser
-    id="cancel-pro-enterprise"
-    title="Pro 또는 Enterprise 에디션 취소"
+    id="payg-downgrade"
+    title="종량제 조직"
   >
-    Pro 또는 Enterprise 조직을 취소하려면 New Relic 계정 담당자에게 문의하세요.
+    Standard 또는 Pro [종량제](/docs/accounts/accounts-billing/new-relic-one-pricing-billing/new-relic-one-pricing-billing/#usage-plans) 조직을 다운그레이드하려면:
+
+    1. [사용자 메뉴](/docs/accounts/accounts-billing/general-account-settings/intro-account-settings)에서 **요금제 관리를**클릭합니다.
+    2. **요금제 및 가격 을**클릭합니다.
+    3. **무료** 가격 옵션에서 **무료로 다운그레이드** 위에 마우스를 놓고 표시되는 버튼을 클릭합니다.
+    4. 표시되는 창에서 하단으로 스크롤하여 취소 사유를 입력합니다.
+    5. 서비스 약관에 동의한다는 상자를 클릭합니다.
+    6. **제출을 클릭합니다.**
   </Collapser>
 
   <Collapser
-    id="cancel-simple-org"
-    title="Standard Edition: 단순 구성 취소"
+    id="contract-downgrade"
+    title="계약이 있는 조직"
   >
-    필요하지 않은 새 New Relic 조직을 생성하고 일부 요구 사항(아래)을 충족하는 경우 다음 단계에 따라 해당 조직을 삭제할 수 있습니다.
-
-    1. [계정 드롭다운](/docs/using-new-relic/welcome-new-relic/get-started/glossary#account-dropdown) 에서 **관리** 를 클릭합니다.
-    2. 그런 다음 **조직 및 액세스를** 클릭합니다.
-    3. **조직 삭제 를** 클릭합니다.
-
-    자신의 조직을 삭제할 수 있는 요구 사항:
-
-    * 조직에는 단일 계정과 단일 사용자가 있습니다.
-    * 새로운 [가격 책정 모델](/docs/accounts/original-accounts-billing/original-product-based-pricing/overview-changes-pricing-user-model#pricing-plans) 과 [New Relic One 사용자 모델](/docs/accounts/original-accounts-billing/original-product-based-pricing/overview-changes-pricing-user-model#user-models) 모두에 있습니다.
-  </Collapser>
-
-  <Collapser
-    id="cancel-standard"
-    title="Standard Edition: 다른 조직 취소"
-  >
-    먼저 [모니터링 도구를 제거](#remove-tools) [하거나](#downgrade-standard) . 여전히 질문이 있는 경우 [지원팀](/docs/using-new-relic/welcome-new-relic/get-started/find-help-use-support-portal) 에 문의하세요.
+    [장기 계약이](/docs/accounts/accounts-billing/new-relic-one-pricing-billing/new-relic-one-pricing-billing/#usage-plans) 있는 Pro 또는 Enterprise 에디션을 가지고 있고 다운그레이드를 원하는 경우 New Relic 계정 담당자에게 문의하십시오.
   </Collapser>
 </CollapserGroup>
+
+## 조직 또는 계정 삭제 [#cancel]
+
+조직에서 하나 이상의 계정을 삭제하려고 하지만 조직과 하나 이상의 다른 계정은 유지하려는 경우 [지원팀](/docs/using-new-relic/welcome-new-relic/get-started/find-help-use-support-portal)에 문의하십시오.
+
+New Relic 조직 내 모든 계정을 포함하여 전체를 삭제하려는 경우 조직은 다음 요구 사항을 충족해야 합니다.
+
+* 하나의 계정과 하나의 사용자만 있습니다.
+
+  * 조직에 둘 이상의 계정이 있는 경우 [지원팀](/docs/using-new-relic/welcome-new-relic/get-started/find-help-use-support-portal)에 문의하십시오.
+  * 사용자가 두 명 이상인 경우 [사용자 관리 UI](/docs/accounts/accounts-billing/new-relic-one-user-management/user-management-ui-and-tasks/#delete-users) 또는 [Nerdgraph를](/docs/apis/nerdgraph/examples/nerdgraph-manage-users/#delete-users)통해 사용자를 삭제할 수 있습니다.
+
+* 최신 가격 책정 모델에 있습니다.
+
+  * 대부분의 조직이 그러하지만 확실하지 않은 경우 이를 결정하는 방법은 [가격 책정 모델을](/docs/accounts/original-accounts-billing/original-product-based-pricing/overview-pricing-models/#determine-pricing) 참조하세요. 이전 가격 책정 모델을 사용 중인 경우 [지원팀](/docs/using-new-relic/welcome-new-relic/get-started/find-help-use-support-portal)에 문의하세요.
+
+* 활성 유료 구독이 없어야 합니다.
+
+  * 활성 유료 구독이 있는 경우 이 문서 위의 [에디션 다운그레이드](#downgrading) 섹션을 참조하십시오.
+
+### 조직을 삭제하려면 다음 단계를 따르세요.
+
+1. [사용자 메뉴](/docs/accounts/accounts-billing/general-account-settings/intro-account-settings) 에서 **관리** 를 클릭합니다.
+2. **Access management**클릭합니다.
+3. **Delete organization**클릭합니다. 해당 옵션이 표시되지 않으면 위의 요구 사항을 충족하는지 확인하세요. 추가 도움이 필요하면 [지원팀](/docs/using-new-relic/welcome-new-relic/get-started/find-help-use-support-portal)에 문의하십시오.

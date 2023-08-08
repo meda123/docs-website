@@ -4,6 +4,10 @@ metaDescription: Browser allows you to upload source maps to "decode" minified J
 translationType: machine
 ---
 
+import browserErrorInstanceSourceMap from 'images/browser_screenshot-full_error-instance-source-map.webp'
+
+import browserReleaseIds from 'images/browser_screenshot-full_release-ids.webp'
+
 [ブラウザ監視](/docs/browser/new-relic-browser/getting-started/introduction-new-relic-browser) は、ソースマップのアップロードに対応しています。
 
 ソースマップのサポートは、主に"最小化された" JavaScript のデコードに役立ちます。最小化された JavaScript は、ブラウザの [JS エラーページ](/docs/browser/new-relic-browser/browser-pro-features/javascript-errors-page-examining-errors-over-time) において、ほとんど役に立たないエラーのスタックトレースとなります。ソースマップをアップロードすると、これらのエラーがコードラインへの有用な参照を含む理解可能なスタックトレースに変換されます。この機能は、バンドルまたはトランスパイルされた JavaScript コードにも有用です。
@@ -23,7 +27,7 @@ translationType: machine
 
 ソースマップとエラースタックトレースを関連付けるには、 [JSのエラーページ](/docs/browser/new-relic-browser/browser-pro-features/javascript-errors-page-examining-errors-over-time):
 
-1. **[one.newrelic.com](https://one.newrelic.com) > Browser> (select an app)> [JS Errors](/docs/browser/new-relic-browser/browser-pro-features/javascript-errors-page-examining-errors-over-time)** にアクセスし、JSエラーグループを選択します。( **Errors without a stack trace** グループは選択しないでください）。
+1. **[one.newrelic.com](https://one.newrelic.com/all-capabilities) > Browser > (アプリを選択) > [JS Errors](/docs/browser/new-relic-browser/browser-pro-features/javascript-errors-page-examining-errors-over-time)**に移動し、JS エラー グループを選択します。(**スタック トレース グループのないエラーを**選択しないでください。)
 
 2. 選択したJSエラーグループから、エラーインスタンスの詳細タブ（ **Summary** タブの隣）を選択します。
 
@@ -39,11 +43,11 @@ translationType: machine
   <thead>
     <tr>
       <th style={{ width: "200px" }}>
-        **以下を行う場合...**
+        **あなたがしたい場合は...**
       </th>
 
       <th>
-        **操作...**
+        **これを行う...**
       </th>
     </tr>
   </thead>
@@ -55,7 +59,7 @@ translationType: machine
       </td>
 
       <td>
-        `Show 10 more lines above/below` を選択すると、スタックトレース内のコードの前または後のコードが表示されます。
+        `Show 10 more lines above/below`を選択して、スタック トレース内のコードの前または後のコードを表示します。
       </td>
     </tr>
 
@@ -115,7 +119,11 @@ New Relic にソースマップをアップロードしたにもかかわらず�
       <td>
         スタックトレースの各フレームは、特定のJavaScriptのURLに関連付けられています。このURLは、ソースマップの公開時に使用されたJavaScriptのURLと一致する必要があります。これらのURLが正確に一致するようにしてください。
 
-        ![ブラウザソースマップ-ui-ss.png](./images/browser-source-map-ui-ss.png "ブラウザソースマップ-ui-ss.png")
+        <img
+          title="browser-source-map-ui-ss.png"
+          alt="browser-source-map-ui-ss.png"
+          src={browserErrorInstanceSourceMap}
+        />
       </td>
     </tr>
 
@@ -125,15 +133,19 @@ New Relic にソースマップをアップロードしたにもかかわらず�
       </td>
 
       <td>
-        フロントエンドのアセットをデプロイする際に、JavaScriptのURLがバージョン管理されていない場合は、 [newrelic.addRelease APIメソッド](/docs/browser-api-newrelicaddrelease) を使用して、また、ソースマップを公開する際に、リリース名とリリースIDを指定する必要があります。これらの文字列が正確に一致するようにしてください。
+        フロント エンド アセットをデプロイするときに JavaScript URL がバージョン管理されていない場合は、 [`newrelic.addRelease` API メソッド](/docs/browser-api-newrelicaddrelease)を使用して、またソース マップを公開するときに、リリース名とリリース ID を指定する必要があります。これらの文字列が正確に一致していることを確認してください。
 
-        ![ブラウザのリリースID ss.png](./images/browser-release-id-ss.png "ブラウザのリリースID ss.png")
+        <img
+          title="browser release id ss.png"
+          alt="browser release id ss.png"
+          src={browserReleaseIds}
+        />
       </td>
     </tr>
 
     <tr>
       <td>
-        409 error: `javascriptUrl, releaseName, releaseId の組み合わせは一意でなければなりません。`
+        409 エラー: `Combination of javascriptUrl, releaseName, and releaseId must be unique`
       </td>
 
       <td>
@@ -145,13 +157,13 @@ New Relic にソースマップをアップロードしたにもかかわらず�
 
     <tr>
       <td>
-        Missing `SourcesContent` component
+        `SourcesContent`コンポーネントがありません
       </td>
 
       <td>
-        New Relic がスタックトレースをアンマイニングするためには、マッピングファイルに `SourcesContent` コンポーネントが含まれている必要があります。マップのアップロードに成功したにもかかわらず、簡略化されたコードが表示されない場合は、このコンポーネントのオリジナルのソースマップを確認してください。見つからない場合は、このコンポーネントが含まれるようにソースマップを再生成し、マップをNew Relicにアップロードしてください。
+        マッピング ファイルには、New Relic がスタック トレースの縮小を解除するための`SourcesContent`コンポーネントが含まれている必要があります。マップを正常にアップロードしても縮小されていないコードが表示されない場合は、このコンポーネントの元のソース マップを確認してください。見つからない場合は、コンポーネントが含まれるようにソース マップを再生成し、マップを New Relic にアップロードします。
 
-        `SourcesContent` コンポーネントが追加されていない場合、 `のようなエラーが表示されます。 Whoops, that was the wrong file.Please try again.` のようなエラーが表示されます。
+        `SourcesContent`コンポーネントが追加されていない場合、&#x7B; `Whoops, that was the wrong file. Please try again.`のようなエラーが表示されます。
       </td>
     </tr>
   </tbody>
@@ -170,7 +182,7 @@ New Relic にソースマップをアップロードしたにもかかわらず�
 
     バージョンv3.12.5からスタートします。
 
-    ```
+    ```bash
     uglifyjs [source files]   \ 
          -o bundle.min.js   \ 
          -c -m
@@ -179,7 +191,7 @@ New Relic にソースマップをアップロードしたにもかかわらず�
 
     古いバージョンの場合
 
-    ```
+    ```bash
     uglifyjs [source files]   \ 
          -o bundle.min.js   \ 
          --source-map bundle.min.js.map   \ 
@@ -192,9 +204,9 @@ New Relic にソースマップをアップロードしたにもかかわらず�
     id="generate-example"
     title="webpackによるソースマップの生成"
   >
-    **[Webpack を使用したソースマップの生成](https://webpack.github.io/docs/configuration.html#devtool):** 本番の Webpack の設定では、config.devtool プロパティに `source-map` を指定するだけです。config.output の sourceMapFilename プロパティはオプションで、デフォルトは `[name].js.map` です。
+    **[Webpack](https://webpack.github.io/docs/configuration.html#devtool)を使用してソース マップを生成する:**本番環境の Webpack 構成で、 `config.devtool`プロパティに`source-map`を指定するだけです。`config.output`の`sourceMapFilename`プロパティはオプションで、デフォルトは`[name].js.map`です。
 
-    ```
+    ```js
     devtool: 'source-map', 
     output: { 
          path: path.join(__dirname, 'dist'), 

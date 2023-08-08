@@ -4,153 +4,167 @@ metaDescription: Here are links to help you get started with distributed tracing
 translationType: machine
 ---
 
-import clogo from './images/clogo.png'
+import distributedtracingHighLevelDistTr from 'images/distributed-tracing_diagram_high-level-dist-tr.webp'
 
-import gologo from './images/gologo.png'
+import distributedtracingDistributedTracingMap from 'images/distributed-tracing_screenshot-full_distributed-tracing-map.webp'
 
-import javalogo from './images/javalogo.png'
+import distributedtracingC from 'images/distributed-tracing_logo_c.webp'
 
-import dotnetlogo from './images/dotnetlogo.png'
+import distributedtracingGo from 'images/distributed-tracing_logo_go.webp'
 
-import nodejslogo from './images/nodejslogo.png'
+import distributedtracingJava from 'images/distributed-tracing_logo_java.webp'
 
-import pythonlogo from './images/pythonlogo.png'
+import distributedtracingDotnet from 'images/distributed-tracing_logo_dotnet.webp'
 
-import phplogo from './images/phplogo.png'
+import distributedtracingNodejs from 'images/distributed-tracing_logo_nodejs.webp'
 
-import rubylogo from './images/rubylogo.png'
+import distributedtracingPython from 'images/distributed-tracing_logo_python.webp'
 
-import browserlogo from './images/browserlogo.png'
+import distributedtracingPhp from 'images/distributed-tracing_logo_php.webp'
 
-import mobilelogo from './images/mobilelogo.png'
+import distributedtracingRuby from 'images/distributed-tracing_logo_ruby.webp'
 
-import awslambdalogo from './images/awslambdalogo.png'
+import distributedtracingBrowser from 'images/distributed-tracing_logo_browser.webp'
 
-import kamonlogo from './images/kamonlogo.png'
+import distributedtracingMobilemonitoring from 'images/distributed-tracing_logo_mobilemonitoring.webp'
 
-import opentelemetrylogo from './images/opentelemetrylogo.png'
+import distributedtracingAwsLambda from 'images/distributed-tracing_logo_aws-lambda.webp'
 
-import awsxraylogo from './images/awsxraylogo.png'
+import distributedtracingKamon from 'images/distributed-tracing_logo_kamon.webp'
 
-import zipkinlogo from './images/zipkinlogo.png'
+import distributedtracingOpenTelemetry from 'images/distributed-tracing_logo_open-telemetry.webp'
 
-import newreliclogo from './images/newreliclogo.png'
+import distributedtracingAwsXray from 'images/distributed-tracing_logo_aws-xray.webp'
 
-分散トレーシングの初期設定を行い、必要なデータが得られない場合は、上級者向けの [Infinite Tracing](/docs/distributed-tracing/infinite-tracing/introduction-infinite-tracing) 機能を検討することをお勧めします。また、現在New Relic APMエージェントを使用していて、分散トレーシングを有効にしたい場合は、 [プランニングガイド](/docs/distributed-tracing/concepts/distributed-tracing-planning-guide) をご覧ください。
+import distributedtracingZipkin from 'images/zipkinlogo.webp'
 
-始める準備はできていますか？まだお持ちでない場合は、[New Relicアカウントにサインアップしてください](https://newrelic.com/signup)。永久無料です。
+import distributedtracingNewRelicOld from 'images/distributed-tracing_logo_new-relic-old-.webp'
+
+開始する前に、 [サンプリング タイプに関するドキュメントを](/docs/distributed-tracing/concepts/how-new-relic-distributed-tracing-works) 参照して、標準の分散トレースまたは [無限トレース](/docs/distributed-tracing/infinite-tracing/introduction-infinite-tracing)を使用するかどうかを判断することをお勧めします。また、現在 New Relic を使用している場合は、 <InlinePopover type="apm"/>エージェントであり、分散トレースを有効にしたい場合は、 [計画ガイド を](/docs/distributed-tracing/concepts/distributed-tracing-planning-guide)参照してください。
+
+始める準備はできましたか？まだお持ちでない場合は、以下で無料の New Relic アカウントを作成して、今すぐデータの監視を開始してください。
+
+<InlineSignup/>
 
 ディストリビューショントレースを設定するには、一般的に3つのステップを行います。
 
-![分散型トレースを設定するための3つのステップを示す図](./images/arrow-step-diagram-trans.png "分散型トレースを設定するための3つのステップを示す図。")
+<img
+  title="Diagram showing the three steps to set up distributed tracing."
+  alt="Diagram showing the three steps to set up distributed tracing"
+  src={distributedtracingHighLevelDistTr}
+/>
 
 1. **Identify services:** このリクエストを完了するために使用されているエンドポイント、サービス、言語、システムを特定して書き留めます（この情報は次のステップで必要になります）。以下のような環境図があれば、それを使ってリクエストを処理するサービスのリストを作成することができます。
 
-![サービスの識別方法を示した環境図の例です。](./images/identify-services.png "サービスの識別方法を示した環境図の例です。")
+<img
+  title="A sample environment diagram showing how you might identify services."
+  alt="A sample environment diagram showing how you might identify services."
+  src={distributedtracingDistributedTracingMap}
+/>
 
-2. **サービスをインストゥルメントする：** トレースデータを送信できるように、指定した各サービスをインストゥルメントします。APM エージェントのように、サービスを自動的にインスツルメンテーションするツールもあれば、サービスに何らかのコードを挿入する必要があるツールもあります。インスツルメンテーションの手順については、以下のアイコンをクリックしてください。
+2. **サービスの計測:** 特定した各サービスを計測して、トレース データを送信できるようにします。次のようないくつかのツール <InlinePopover type="apm"/>エージェントはサービスを自動的に計測しますが、他のツールではサービスにコードを挿入する必要があります。インストルメンテーションの手順については、下のアイコンをクリックしてください。
 
    <TechTileGrid>
      <TechTile
        name="Android mobile monitoring"
-       to="/docs/mobile-monitoring/new-relic-mobile-android/get-started/new-relic-mobile-and-dt/"
-       icon={<img src={mobilelogo} alt="New Relic Android Mobile"/>}
+       to="/docs/mobile-monitoring/new-relic-mobile-android/get-started/new-relic-mobile-and-dt"
+       icon={<img src={distributedtracingMobilemonitoring} alt="New Relic Android Mobile"/>}
      />
 
      <TechTile
        name="APM: C"
-       to="/docs/distributed-tracing/enable-configure/language-agents-enable-distributed-tracing"
-       icon={<img src={clogo} alt="C"/>}
+       to="/docs/apm/agents/c-sdk/instrumentation/distributed-tracing-c-sdk"
+       icon={<img src={distributedtracingC} alt="C"/>}
      />
 
      <TechTile
        name="APM: Golang"
-       to="/docs/distributed-tracing/enable-configure/language-agents-enable-distributed-tracing"
-       icon={<img src={gologo} alt="Golang"/>}
+       to="/docs/apm/agents/go-agent/configuration/distributed-tracing-go-agent"
+       icon={<img src={distributedtracingGo} alt="Golang"/>}
      />
 
      <TechTile
        name="APM: Java"
-       to="/docs/distributed-tracing/enable-configure/language-agents-enable-distributed-tracing"
-       icon={<img src={javalogo} alt="Java"/>}
+       to="/docs/apm/agents/java-agent/configuration/distributed-tracing-java-agent"
+       icon={<img src={distributedtracingJava} alt="Java"/>}
      />
 
      <TechTile
        name="APM: .NET"
-       to="/docs/distributed-tracing/enable-configure/language-agents-enable-distributed-tracing"
-       icon={<img src={dotnetlogo} alt=".NET"/>}
+       to="/docs/apm/agents/net-agent/configuration/distributed-tracing-net-agent"
+       icon={<img src={distributedtracingDotnet} alt=".NET"/>}
      />
 
      <TechTile
        name="APM: Node.js"
-       to="/docs/distributed-tracing/enable-configure/language-agents-enable-distributed-tracing"
-       icon={<img src={nodejslogo} alt="Node.js"/>}
+       to="/docs/apm/agents/nodejs-agent/installation-configuration/distributed-tracing-nodejs-agent"
+       icon={<img src={distributedtracingNodejs} alt="Node.js"/>}
      />
 
      <TechTile
        name="APM: PHP"
-       to="/docs/distributed-tracing/enable-configure/language-agents-enable-distributed-tracing"
-       icon={<img src={phplogo} alt="PHP"/>}
+       to="/docs/apm/agents/php-agent/configuration/distributed-tracing-php-agent"
+       icon={<img src={distributedtracingPhp} alt="PHP"/>}
      />
 
      <TechTile
        name="APM: Python"
-       to="/docs/distributed-tracing/enable-configure/language-agents-enable-distributed-tracing"
-       icon={<img src={pythonlogo} alt="Python"/>}
+       to="/docs/apm/agents/python-agent/configuration/distributed-tracing-python-agent"
+       icon={<img src={distributedtracingPython} alt="Python"/>}
      />
 
      <TechTile
        name="APM: Ruby"
-       to="/docs/distributed-tracing/enable-configure/language-agents-enable-distributed-tracing"
-       icon={<img src={rubylogo} alt="Ruby"/>}
+       to="/docs/apm/agents/ruby-agent/configuration/distributed-tracing-ruby-agent"
+       icon={<img src={distributedtracingRuby} alt="Ruby"/>}
      />
 
      <TechTile
        name="AWS Lambda Functions"
        to="/docs/serverless-function-monitoring/aws-lambda-monitoring/enable-lambda-monitoring/configure-serverless-monitoring-aws-lambda"
-       icon={<img src={awslambdalogo} alt="AWS Lambda Functions"/>}
+       icon={<img src={distributedtracingAwsLambda} alt="AWS Lambda Functions"/>}
      />
 
      <TechTile
        name="AWS X-Ray"
        to="/docs/integrations/amazon-integrations/aws-integrations-list/aws-x-ray-monitoring-integration"
-       icon={<img src={awsxraylogo} alt="AWS X-Ray"/>}
+       icon={<img src={distributedtracingAwsXray} alt="AWS X-Ray"/>}
      />
 
      <TechTile
        name="Browser monitoring"
        to="/docs/browser/new-relic-browser/browser-pro-features/browser-data-distributed-tracing"
-       icon={<img src={browserlogo} alt="New Relic Browser"/>}
+       icon={<img src={distributedtracingBrowser} alt="New Relic Browser"/>}
      />
 
      <TechTile
        name="iOS mobile monitoring"
        to="/docs/mobile-monitoring/new-relic-mobile-ios/get-started/new-relic-ios-and-dt"
-       icon={<img src={mobilelogo} alt="New Relic iOS Mobile"/>}
+       icon={<img src={distributedtracingMobilemonitoring} alt="New Relic iOS Mobile"/>}
      />
 
      <TechTile
        name="Kamon"
        to="/docs/integrations/open-source-telemetry-integrations/kamon/kamon-reporter"
-       icon={<img src={kamonlogo} alt="Kamon"/>}
+       icon={<img src={distributedtracingKamon} alt="Kamon"/>}
      />
 
      <TechTile
        name="OpenTelemetry"
        to="/docs/integrations/open-source-telemetry-integrations/opentelemetry/opentelemetry-quick-start"
-       icon={<img src={opentelemetrylogo} alt="OpenTelemetry"/>}
+       icon={<img src={distributedtracingOpenTelemetry} alt="OpenTelemetry"/>}
      />
 
      <TechTile
        name="Trace API: generic format"
        to="/docs/understand-dependencies/distributed-tracing/trace-api/report-new-relic-format-traces-trace-api"
-       icon={<img src={newreliclogo} alt="New Relic format: use your own integration"/>}
+       icon={<img src={distributedtracingNewRelicOld} alt="New Relic format: use your own integration"/>}
      />
 
      <TechTile
        name="Trace API: Zipkin format"
        to="/docs/understand-dependencies/distributed-tracing/trace-api/report-zipkin-format-traces-trace-api"
-       icon={<img src={zipkinlogo} alt="Zipkin format custom integration"/>}
+       icon={<img src={distributedtracingZipkin} alt="Zipkin format custom integration"/>}
      />
    </TechTileGrid>
 

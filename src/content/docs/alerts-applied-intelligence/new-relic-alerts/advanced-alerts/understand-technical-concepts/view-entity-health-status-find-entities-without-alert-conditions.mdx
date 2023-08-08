@@ -13,13 +13,25 @@ redirects:
   - /docs/alerts-applied-intelligence/new-relic-alerts/alert-conditions/view-entity-health-status-find-entities-without-alert-conditions
 ---
 
+import accountsAlertsGreen from 'images/accounts_icon_alerts-green.webp'
+
+import accountsAlertsYellow from 'images/accounts_icon_alerts-yellow.webp'
+
+import accountsAlertsRed from 'images/accounts_icon_alerts-red.webp'
+
+import accountsAlertsGray from 'images/accounts_logo_alerts-gray.webp'
+
+import accountsEventAlerts from 'images/accounts_icon_event-alerts-.webp'
+
+import accountsCropAlertEventsGreen from 'images/accounts_icon_crop-alert-events-green.webp'
+
 With alerts you can easily tell whether an entity (the target for the notification) has one or more conditions associated with it:
 
-* If **yes**, its health status indicator on the selected index (APM, browser, etc.) will be color-coded to the current state. To view a summary of current alert violations, mouse over its health status indicator.
+* If **yes**, its health status indicator on the selected index (APM, browser, etc.) will be color-coded to the current state. To view a summary of current alert incidents, mouse over its health status indicator.
 * If **no**, its health status indicator on the selected index will appear grey.
 
 <Callout variant="important">
-  To learn more about how conditions and policies work together, see [Introduction to important concepts](/docs/alerts/new-relic-alerts/getting-started/alert-policy-workflow#terminology).
+  To learn more about how conditions and policies work together, see [alerting concepts and terms](/docs/alerts-applied-intelligence/applied-intelligence/incident-intelligence/basic-alerting-concepts/).
 </Callout>
 
 ## Exceptions
@@ -32,7 +44,7 @@ The health status indicator doesn't apply for:
 
 ## Color-coded health status [#colors]
 
-The index automatically appears when you select the product from the New Relic menu bar. For example, to view the index of APM apps, go to **[one.newrelic.com](https://one.newrelic.com)**, then click **APM**. The **Applications** index lists all APM product entities and their current health status.
+Entities in New Relic are automatically color-coded with their health status. For example, to view the health of your <InlinePopover type="apm" /> apps, go to **[one.newrelic.com](https://one.newrelic.com/all-capabilities)**, then click **APM**. The **Applications** index lists all <InlinePopover type="apm" /> product entities and their current health status.
 
 <table>
   <thead>
@@ -50,17 +62,17 @@ The index automatically appears when you select the product from the New Relic m
   <tbody>
     <tr>
       <td>
-        ![icon-alerts-green.png](./images/icon-alerts-green.png "Alerts v3: alert icons") Green
+        <img title="Alerts v3: alert icons" alt="icon-alerts-green.png" src={accountsAlertsGreen}/> Green
       </td>
 
       <td>
-        The entity is operational. We are collecting data that you can view in the appropriate UI. No alert violations are currently reported for it.
+        The entity is operational. We are collecting data that you can view in the appropriate UI. No alert incidents are currently reported for it.
       </td>
     </tr>
 
     <tr>
       <td>
-        ![icon-alerts-yellow.png](./images/icon-alerts-yellow.png "Alerts v3: alert icons") Yellow
+        <img title="Alerts v3: alert icons" alt="icon-alerts-yellow.png" src={accountsAlertsYellow}/> Yellow
       </td>
 
       <td>
@@ -70,7 +82,7 @@ The index automatically appears when you select the product from the New Relic m
 
     <tr>
       <td>
-        ![icon-alerts-red.png](./images/icon-alerts-red.png "Alerts v3: alert icons") Red
+        <img title="Alerts v3: alert icons" alt="icon-alerts-red.png" src={accountsAlertsRed}/> Red
       </td>
 
       <td>
@@ -83,7 +95,7 @@ The index automatically appears when you select the product from the New Relic m
 
     <tr>
       <td>
-        ![icon-alerts-gray.png](./images/icon-alerts-gray.png "Alerts v3: alert icons") Gray
+        <img title="Alerts v3: alert icons" alt="icon-alerts-gray.png" src={accountsAlertsGray}/> Gray
       </td>
 
       <td>
@@ -117,27 +129,27 @@ The following table describes the different health status transitions an entity 
   <tbody>
     <tr>
       <td>
-        ![icon-alerts-gray.png](./images/icon-alerts-gray.png "Alerts v3: alert icons") Gray
+        <img title="Alerts v3: alert icons" alt="icon-alerts-gray.png" src={accountsAlertsGray}/> Gray
       </td>
 
       <td>
-        ![icon-alerts-green.png](./images/icon-alerts-green.png "Alerts v3: alert icons") Green
+        <img title="Alerts v3: alert icons" alt="icon-alerts-green.png" src={accountsAlertsGreen}/> Green
       </td>
 
       <td>
-        The entity is evaluated for at least one condition, and the results show there are no violations present.
+        The entity is evaluated for at least one condition, and the results show there are no incidents present.
       </td>
     </tr>
 
     <tr>
       <td>
-        ![icon-alerts-green.png](./images/icon-alerts-green.png "Alerts v3: alert icons") Green /
+        <img title="Alerts v3: alert icons" alt="icon-alerts-green.png" src={accountsAlertsGreen}/> Green /
 
-        ![icon-alerts-red.png](./images/icon-alerts-red.png "Alerts v3: alert icons") Red
+        <img title="Alerts v3: alert icons" alt="icon-alerts-red.png" src={accountsAlertsRed}/> Red
       </td>
 
       <td>
-        ![icon-alerts-gray.png](./images/icon-alerts-gray.png "Alerts v3: alert icons") Gray
+        <img title="Alerts v3: alert icons" alt="icon-alerts-gray.png" src={accountsAlertsGray}/> Gray
       </td>
 
       <td>
@@ -152,33 +164,33 @@ The following table describes the different health status transitions an entity 
 
     <tr>
       <td>
-        ![icon-alerts-green.png](./images/icon-alerts-green.png "Alerts v3: alert icons") Green
+        <img title="Alerts v3: alert icons" alt="icon-alerts-green.png" src={accountsAlertsGreen}/> Green
       </td>
 
       <td>
-        ![icon-alerts-yellow.png](./images/icon-alerts-yellow.png "Alerts v3: alert icons") Yellow /
+        <img title="Alerts v3: alert icons" alt="icon-alerts-yellow.png" src={accountsAlertsYellow}/> Yellow /
 
-        ![icon-alerts-red.png](./images/icon-alerts-red.png "Alerts v3: alert icons") Red
+        <img title="Alerts v3: alert icons" alt="icon-alerts-red.png" src={accountsAlertsRed}/> Red
       </td>
 
       <td>
-        There's at least one open violation at the time the entity is undergoing the evaluation.
+        There's at least one open incident at the time the entity is undergoing the evaluation.
       </td>
     </tr>
 
     <tr>
       <td>
-        ![icon-alerts-yellow.png](./images/icon-alerts-yellow.png "Alerts v3: alert icons") Yellow /
+        <img title="Alerts v3: alert icons" alt="icon-alerts-yellow.png" src={accountsAlertsYellow}/> Yellow /
 
-        ![icon-alerts-red.png](./images/icon-alerts-red.png "Alerts v3: alert icons") Red
+        <img title="Alerts v3: alert icons" alt="icon-alerts-red.png" src={accountsAlertsRed}/> Red
       </td>
 
       <td>
-        ![icon-alerts-green.png](./images/icon-alerts-green.png "Alerts v3: alert icons") Green
+        <img title="Alerts v3: alert icons" alt="icon-alerts-green.png" src={accountsAlertsGreen}/> Green
       </td>
 
       <td>
-        The last open violation associated to the entity has been closed.
+        The last open incident associated to the entity has been closed.
       </td>
     </tr>
   </tbody>
@@ -186,26 +198,34 @@ The following table describes the different health status transitions an entity 
 
 ## Example: App without conditions [#example-v3-no-policies]
 
-Here's an example of an app listed on the APM index that **is not** associated with any conditions. Its color-coded health status is light grey, which indicates no alert conditions are set up for that entity.
+Here's an example of an app listed on the <InlinePopover type="apm" /> index that **is not** associated with any conditions. Its color-coded health status is light grey, which indicates no alert conditions are set up for that entity.
 
-![032715crop-events-no-v3.png](./images/032715crop-events-no-v3_0.png "032715crop-events-no-v3.png")
+<img
+  title="032715crop-events-no-v3.png"
+  alt="032715crop-events-no-v3.png"
+  src={accountsEventAlerts}
+/>
 
 <figcaption>
-  Go to **[one.newrelic.com](https://one.newrelic.com/)**, then click **Explorer**: This example shows an app that currently isn't associated with any alerts conditions. Its grey status icon means it doesn't have any conditions.
+  Go to **[one.newrelic.com](https://one.newrelic.com/all-capabilities)**, then click **Explorer**: This example shows an app that currently isn't associated with any alerts conditions. Its grey status icon means it doesn't have any conditions.
 </figcaption>
 
-Follow [standard procedures](/docs/alerts/new-relic-alerts/getting-started/alert-policy-workflow#workflow) to add it to an existing condition or to create a new condition for it.
+Follow [standard procedures](/docs/alerts-applied-intelligence/new-relic-alerts/alert-conditions/create-alert-conditions) to add it to an existing condition or to create a new condition for it.
 
 ## Example: App with conditions [#example-v3-yes-policies]
 
-Here's an example of an app listed on the APM index that **is** associated with one or more conditions. Its color-coded health status is green, because we are collecting data for it, and currently there are no Warning (yellow) or Critical (red) violations.
+Here's an example of an app listed on the <InlinePopover type="apm" /> index that **is** associated with one or more conditions. Its color-coded health status is green, because we are collecting data for it, and currently there are no Warning (yellow) or Critical (red) incidents.
 
-![032715crop-events-green.png](./images/032715crop-events-green_0.png "032715crop-events-green.png")
+<img
+  title="032715crop-events-green.png"
+  alt="032715crop-events-green.png"
+  src={accountsCropAlertEventsGreen}
+/>
 
 <figcaption>
-  Go to **[one.newrelic.com](https://one.newrelic.com)**, then click **Explorer**: This example shows an app that has one or more conditions. Its color-coded health status (green) shows the app hasn't reached any threshold violations.
+  Go to **[one.newrelic.com](https://one.newrelic.com/all-capabilities)**, then click **Explorer**: This example shows an app that has one or more conditions. Its color-coded health status (green) shows the app hasn't reached any threshold violations.
 </figcaption>
 
 <Callout variant="tip">
-  To view the index listing currently [open incidents](/docs/alerts/new-relic-alerts-beta/reviewing-alert-incidents/explore-incident-history) across all products, not just this entity, select **View all violations**.
+  To view the index listing currently [open incidents](/docs/alerts/new-relic-alerts-beta/reviewing-alert-incidents/explore-incident-history) across all products, not just this entity, select **View all incidents**.
 </Callout>

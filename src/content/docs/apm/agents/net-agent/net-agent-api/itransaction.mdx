@@ -24,7 +24,7 @@ Provides access to transaction-specific methods in the New Relic API.
 
 Provides access to transaction-specific methods in the New Relic .NET agent API. To obtain a reference to `ITransaction`, use the current transaction method available on [`IAgent`](/docs/agents/net-agent/net-agent-api/iagent).
 
-This section contains descriptions and parameters of three ITransaction methods:
+The following methods are available on `ITransaction`:
 
 <table>
   <thead>
@@ -42,7 +42,7 @@ This section contains descriptions and parameters of three ITransaction methods:
   <tbody>
     <tr>
       <td>
-        [AcceptDistributedTraceHeaders](#acceptdistributedtraceheaders)
+        [`AcceptDistributedTraceHeaders`](#acceptdistributedtraceheaders)
       </td>
 
       <td>
@@ -52,7 +52,7 @@ This section contains descriptions and parameters of three ITransaction methods:
 
     <tr>
       <td>
-        [InsertDistributedTraceHeaders](#insertdistributedtraceheaders)
+        [`InsertDistributedTraceHeaders`](#insertdistributedtraceheaders)
       </td>
 
       <td>
@@ -62,7 +62,7 @@ This section contains descriptions and parameters of three ITransaction methods:
 
     <tr>
       <td>
-        [AcceptDistributedTracePayload (obsolete)](#acceptdistributedtracepayload)
+        [`AcceptDistributedTracePayload` (obsolete)](#acceptdistributedtracepayload)
       </td>
 
       <td>
@@ -72,7 +72,7 @@ This section contains descriptions and parameters of three ITransaction methods:
 
     <tr>
       <td>
-        [CreateDistributedTracePayload (obsolete)](#createdistributedtracepayload)
+        [`CreateDistributedTracePayload` (obsolete)](#createdistributedtracepayload)
       </td>
 
       <td>
@@ -82,7 +82,7 @@ This section contains descriptions and parameters of three ITransaction methods:
 
     <tr>
       <td>
-        [AddCustomAttribute](#addcustomattribute)
+        [`AddCustomAttribute`](#addcustomattribute)
       </td>
 
       <td>
@@ -92,11 +92,21 @@ This section contains descriptions and parameters of three ITransaction methods:
 
     <tr>
       <td>
-        [CurrentSpan](#currentspan)
+        [`CurrentSpan`](#currentspan)
       </td>
 
       <td>
         Provides access to the currently executing [span](/docs/agents/net-agent/net-agent-api/ispan), which provides access to span-specific methods in the New Relic API.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        [`SetUserId`](#setuserid)
+      </td>
+
+      <td>
+        Associates a User Id to the current transaction.
       </td>
     </tr>
   </tbody>
@@ -109,7 +119,7 @@ This section contains descriptions and parameters of three ITransaction methods:
 ### Syntax
 
 ```cs
-void AcceptDistributedHeaders(carrier, getter, transportType)
+void AcceptDistributedTraceHeaders(carrier, getter, transportType)
 ```
 
 ### Parameters
@@ -252,6 +262,7 @@ currentTransaction.InsertDistributedTraceHeaders(requestMessage, setter);
 ```
 
 ## AcceptDistributedTracePayload [#acceptdistributedtracepayload]
+
 <Callout variant="caution">
   This API is not available in the .NET agent v9.0 or higher. Please use [`AcceptDistributedTraceHeaders`](/docs/agents/net-agent/net-agent-api/itransaction/#acceptdistributedtraceheaders) instead.
 </Callout>
@@ -297,7 +308,7 @@ void AcceptDistributedPayload(payload, transportType)
         `transportType`
 
         _TransportType_  
-        _enum_
+                                _enum_
       </td>
 
       <td>
@@ -329,9 +340,11 @@ transaction.AcceptDistributedTracePayload(metadata.Value, TransportType.Queue);
 ```
 
 ## CreateDistributedTracePayload (obsolete) [#createdistributedtracepayload]
+
 <Callout variant="caution">
   This API is not available in the .NET agent v9.0 or higher. Please use [`InsertDistributedTraceHeaders`](/docs/agents/net-agent/net-agent-api/itransaction/#insertdistributedtraceheaders) instead.
 </Callout>
+
 Creates a distributed trace payload for inclusion in an outgoing request to a downstream system.
 
 ### Syntax
@@ -409,6 +422,101 @@ ITransaction AddCustomAttribute(string key, object value)
 
       <td>
         The value being reported.
+        
+        **Note**: `null` values will not be recorded.
+        
+        <table>
+          <thead>
+            <tr>
+              <th>
+                .NET type
+              </th>
+
+              <th>
+                How the value will be represented
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>
+                `byte`, `Int16`, `Int32`, `Int64`
+
+                `sbyte`, `UInt16`, `UInt32`, `UInt64`
+              </td>
+
+              <td>
+                As an integral value.
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                `float`, `double`, `decimal`
+              </td>
+
+              <td>
+                A decimal-based number.
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                `string`
+              </td>
+
+              <td>
+                A string truncated after 255-bytes.
+
+                Empty strings are supported.
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                `bool`
+              </td>
+
+              <td>
+                True or false.
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                `DateTime`
+              </td>
+
+              <td>
+                A string representation following the ISO-8601 format, including time zone information:
+
+                Example: `2020-02-13T11:31:19.5767650-08:00`
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                `TimeSpan`
+              </td>
+
+              <td>
+                A decimal-based number representing number of seconds.
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                everything else
+              </td>
+
+              <td>
+                The `ToString()` method will be applied. Custom types must have an implementation of `Object.ToString()` or they will throw an exception.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
       </td>
     </tr>
   </tbody>
@@ -445,6 +553,55 @@ ITransaction transaction = agent.CurrentTransaction;
 ISpan currentSpan = transaction.CurrentSpan;
 ```
 
-## Examples
+## SetUserId
 
-See [Parameters section](#parameters).
+Associates a User Id with the current transaction.
+
+This method requires .NET agent and .NET agent API [version 10.9.0](/docs/release-notes/agent-release-notes/net-release-notes/net-agent-1090) or higher.
+
+### Syntax
+
+```cs
+ITransaction SetUserId(string userId)
+```
+
+### Parameters
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        Parameter
+      </th>
+
+      <th>
+        Description
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        `userId`
+
+        _string_
+      </td>
+
+      <td>
+        The User Id to be associated with this transaction.
+
+        * `null`, empty and whitespace values will be ignored.
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+### Example
+
+```cs
+IAgent agent = NewRelic.Api.Agent.NewRelic.GetAgent(); 
+ITransaction transaction = agent.CurrentTransaction; 
+transaction.SetUserId("BobSmith123");
+```

@@ -18,7 +18,7 @@ To enable the AWS X-Ray integration, follow standard procedures to [connect AWS 
 
 When you've successfully connected your AWS account with New Relic:
 
-1. Go to [**one.newrelic.com**](http://one.newrelic.com) **> Infrastructure**, and then click **AWS**.
+1. Go to **[one.newrelic.com](https://one.newrelic.com/all-capabilities) > Infrastructure**, and then click **AWS**.
 2. Click **Manage Services** to select the AWS integration you want to activate.
 3. Check the checkbox next to **AWS X-Ray**.
 4. Click **Save**.
@@ -47,14 +47,16 @@ To filter your spans, you can use the `newRelic.ingestPoint` attribute. This att
 
 Here's an example NRQL query to verify X-Ray ingest:
 
-```
+```sql
 SELECT count(*) FROM Span WHERE newRelic.ingestPoint = 'xray.polling' TIMESERIES
 ```
 
 Here's an example NRQL query to correlate X-Ray data with specific API performance:
 
-```
-SELECT average(duration.ms) FROM Span WHERE newRelic.ingestPoint ='xray.polling' AND http.url LIKE 'https://yourdomanin.com/api/v1/endpoint%' since 1 month ago LIMIT MAX TIMESERIES 1 day
+```sql
+SELECT average(duration.ms) FROM Span WHERE newRelic.ingestPoint = 'xray.polling' 
+AND http.url LIKE 'https://yourdomanin.com/api/v1/endpoint%' since 1 month ago 
+LIMIT MAX TIMESERIES 1 day
 ```
 
 ## Using custom IAM policies [#use-iam]
